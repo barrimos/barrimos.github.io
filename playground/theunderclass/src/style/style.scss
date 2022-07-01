@@ -1,0 +1,306 @@
+.show{
+    display: block !important;
+    animation: fadein ease-in-out 0.5s;
+}
+.secret{
+    display: block !important;
+}
+@keyframes fadein{
+    0%{
+        opacity: 0;
+    }
+    100%{
+        opacity: 1;
+    }
+}
+a{
+    text-decoration: none !important;
+    list-style: none !important;
+}
+.blackSheep{
+    right: 0;
+}
+.studentCounsil{
+    left: 0;
+}
+.blackSheep,
+.studentCounsil{
+    display: none;
+    position: absolute;
+    width: 40px;
+    margin: 10px;
+    top: 0;
+}
+.fade{
+    opacity: 0.13;
+}
+.pdd-20{
+    padding: 0 20px;
+}
+.section-left,
+.section-right{
+    background-image: url(../img/The-Underclass.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center bottom;
+    width: 100%;
+    height: 100vh;
+    top: 0;
+    padding: 10px;
+}
+.section-left iframe{
+    width: 100%;
+}
+.bg{
+    background-image: url(../img/bg2-04.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center top;
+    width: 100%;
+}
+.page{
+    display: none;
+}
+.row{
+    margin: 0 !important;
+}
+.section-center{
+    background-color: rgb(233, 233, 233);
+}
+.firstP,
+.rulesP,
+.chk1P,
+.chk2P,
+.chk3P,
+.finalP{
+    margin: 0 auto;
+}
+.rulesP .btn-Close,
+.txtRules{
+    color: #666;
+}
+.txtRules,
+.fieldChk,
+.btn-Exit,
+.btn-Save,
+.btn-Share{
+    font-size: 0.9em;
+    text-align: center;
+}
+.txtRules h2,
+.fieldChk h1,
+.fieldChk h2{
+    margin-top: 10px;
+}
+.txtRules h4{
+    margin-top: 10px;
+}
+.logoLL{
+    width: 80%;
+}
+.btn-Scan{
+    padding: 15px 0;
+    text-align: center;
+    opacity: 0.6;
+    animation: wipwup infinite 2s;
+}
+@keyframes wipwup{
+    0%{
+        opacity: 0.5;
+    }
+    50%{
+        opacity: 1;
+    }
+    100%{
+        opacity: 0.5;
+    }
+}
+.txtScan{
+    font-size: 0.7em;
+    color: #666;
+}
+.chk1P .btn-Close,
+.chk2P .btn-Close,
+.chk3P .btn-Close,
+.fieldChk,
+.btn-Submit,
+.btn-Next,
+.btn-Prev,
+.btn-Reset,
+.btn-finish,
+.btn-Exit,
+.btn-Save,
+.btn-Share,
+.finalName,
+.finalScoreHead,
+.finalScore,
+.ss{
+    color: #fff;
+}
+.btn-Close{
+    padding: 15px;
+}
+input::-webkit-inner-spin-button,
+input::-webkit-outer-spin-button{
+    display: none;
+}
+[class*=input-]{
+    padding: 15px 0;
+    margin: 5px;
+    outline: none;
+    border: none;
+    text-align: center;
+    border-radius: 5px;
+}
+[class*=btn-],
+.preIMG,
+.uploadIMG,
+.logoBtn{
+    cursor: pointer;
+    outline: none;
+    border: none;
+    background-color: transparent;
+}
+.label{
+    display: block;
+    margin-top: 30px;
+}
+.input-M,
+.input-D,
+.input-Y,
+.input-H,
+.input-W{
+    width: 70px;
+}
+.input-N,
+.input-T{
+    width: 160px;
+}
+.btn-Reset,
+.btn-Prev{
+    bottom: -150px;
+    outline: none;
+    border: none;
+    background-color: transparent;
+    padding: 15px;
+}
+.btn-Next,
+.btn-finish{
+    font-size: 1.5em;
+    font-weight: 600;
+}
+.preIMG,
+.uploadIMG{
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    background-color: #fff;
+    overflow: hidden;
+    text-align: center;
+}
+.formChk{
+    margin: 10px;
+}
+.preIMG,
+.preIMGfinal{
+    border: 4px solid rgb(85, 1, 1);
+}
+.uploadIMG{
+    position: absolute;
+    opacity: 0;
+}
+.uploadIMG:focus{
+    border: none;
+    outline: none;
+}
+.btn-Exit,
+.btn-Save,
+.btn-Share{
+    margin-bottom: 20px;
+}
+.finalbgNav{
+    background-image: linear-gradient(to right, #33bfc7, #467cbb, #ffbcb7);
+    height: 50px;
+    border-radius: 5px;
+    margin-bottom: 5px;
+}
+.finalNav{
+    width: 100%;
+    margin-top: -10px;
+}
+.preIMGfinal{
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    background-color: #fff;
+    overflow: hidden;
+}
+.realIMG{
+    width: 100%;
+}
+.finalBlock{
+    text-align: center;
+}
+.finalName{
+    font-size: 2.5em;
+    font-weight: 600;
+    margin-bottom: 5px;
+}
+.finalScoreHead{
+    margin-bottom: 5px;
+}
+.finalScoreHead,
+.finalScore{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+.finalScore div{
+    margin: 5px 0;
+}
+.finalScore div+div{
+    border-left: 1px solid #fff;
+}
+.finalScoreHead p,
+.finalScore p{
+    width: 90px;
+}
+.finalScore p{
+    line-height: 40px;
+    height: 40px;
+}
+.finalScoreHead p,
+.ss{
+    font-size: 0.8em;
+}
+.ss{
+    text-align: center;
+    margin-bottom: 5px;
+}
+.finalScore p,
+.ScoreSUM{
+    font-size: 3em;
+    font-weight: 700;
+}
+.totalBlock{
+    position: relative;
+    text-align: center;
+    width: 100%;
+    background-color: #fff;
+    border-radius: 10px;
+}
+.bottomIcon{
+    width: 100%;
+}
+.black{
+    background-color: rgba(0, 0, 0, 0.9);
+    padding: 25px;
+    border-radius: 10px;
+    color: #fff;
+    font-weight: 200;
+    font-size: 0.9em;
+    display: block;
+}
+.black p+p{
+    margin-top: 10px;
+}
