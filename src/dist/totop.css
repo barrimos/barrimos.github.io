@@ -1,7 +1,6 @@
 .toTopBtn {
   position: fixed;
-  bottom: 60px;
-  right: 30px;
+  bottom: 0;
   margin: 10px;
   width: 35px;
   height: 35px;

@@ -140,7 +140,7 @@
 }
 .carousel .prevBtn,
 .carousel .nextBtn {
-  z-index: 0;
+  z-index: 2;
   width: 50px;
   height: 100%;
   outline: none;

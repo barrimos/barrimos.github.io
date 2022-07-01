@@ -88,18 +88,18 @@ section {
   color: white;
 }
 
-#banner-section {
-  margin-top: 40px;
-  margin-bottom: 40px;
-}
 #banner-section .dashboard {
   width: 100%;
   height: 400px;
   padding: 20px;
   overflow: hidden;
   border-radius: 10px;
-  color: white;
   position: relative;
+  margin-bottom: 20px;
+  z-index: 1;
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
 }
 #banner-section .dashboard::after {
   display: block;
@@ -117,16 +117,18 @@ section {
   z-index: -999;
 }
 #banner-section .dashboard .titlehead {
+  color: #ffa600;
+  bottom: 10px;
   cursor: pointer;
   font-size: 1em;
 }
 #banner-section .dashboard .titlehead h1 {
   font-size: 3em;
-  line-height: 1em;
+  line-height: 0.8em;
 }
 #banner-section .dashboard .titlehead span {
   font-weight: 500;
-  font-size: 1.5em;
+  font-size: 2em;
 }
 
 [class*=-title] h2 {
@@ -169,28 +171,36 @@ section {
   line-height: 1.5em;
 }
 
-#social-section .socials {
-  min-height: 90px;
-  max-height: 90px;
-  border-radius: 10px;
-  background-color: #fff;
-  box-shadow: 0 0 15px -5px rgba(139, 139, 139, 0.3);
-}
 #social-section .socials .social-link {
-  color: #666;
+  height: 170px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 #social-section .socials .social-link .icon-socials {
   font-size: 2em;
   display: block;
-  padding: 10px;
   cursor: pointer;
-  color: #666;
+  color: white;
+  transition: 0.2s ease-in-out;
 }
 #social-section .socials .social-link .icon-socials:visited {
-  color: #666;
+  color: white;
 }
-#social-section .socials .social-link .icon-socials:hover {
-  color: red;
+#social-section .socials.facebook {
+  background-color: #006bc2;
+}
+#social-section .socials.github {
+  background-color: #505050;
+}
+#social-section .socials.linkedin {
+  background-color: #004680;
+}
+#social-section .socials.wordpress {
+  background-color: #009be2;
+}
+#social-section .socials.facebook:hover .icon-socials, #social-section .socials.github:hover .icon-socials, #social-section .socials.linkedin:hover .icon-socials, #social-section .socials.wordpress:hover .icon-socials {
+  transform: scale(1.4);
 }
 
 #project-section .backgroundProject .projectLink {
@@ -287,9 +297,6 @@ footer .footer-copy, footer .footer-team {
   main {
     margin-left: 65px;
   }
-  main .social-link {
-    margin: 0 15px;
-  }
 
   footer {
     margin-left: 65px;
@@ -297,5 +304,14 @@ footer .footer-copy, footer .footer-team {
   }
   footer .footer-copy, footer .footer-team {
     margin: 10px;
+  }
+}
+@media screen and (min-width: 992px) {
+  #topNav-section {
+    margin-bottom: 20px;
+  }
+
+  #banner-section .dashboard {
+    margin-bottom: 0;
   }
 }

@@ -5,7 +5,6 @@ const linkIcon = document.querySelectorAll('.nav-icon');
 const linkText = document.querySelectorAll('.nav-text');
 const sideDropdown = document.getElementsByClassName('btnDropmenu');
 const dropDown = document.getElementsByClassName('iconArrowdrop');
-const iconArrow = document.getElementsByClassName('iconArrowdrop')[0].children;
 let touchX = 0;
 let deltaX = 0;
 const Default = {
@@ -120,7 +119,7 @@ for(let i=0; i<sideDropdown.length; i++){
     });
 }
 const curPage = (() => {
-    const currentPage = window.location.pathname.slice(1).split('.')[0];
+    const currentPage = window.location.pathname.slice(1).split('/')[0].split('.')[0];
     const allLinks = document.querySelectorAll('.nav-link');
     for(let i=0; i<allLinks.length; i++){
         const linkUrl = allLinks[i].getAttribute('href').split('.')[0];
@@ -142,6 +141,6 @@ const curPage = (() => {
         allLinks[6].classList.toggle('curpage')
         linkIcon[6].style.filter = 'invert(1)';
         linkText[6].style.filter = 'invert(1)';
-        iconArrow[0].style.filter = 'invert(1)';
+        dropDown[0].children[0].style.filter = 'invert(1)';
     }
 })();
