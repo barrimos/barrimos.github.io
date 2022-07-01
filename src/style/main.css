@@ -111,6 +111,12 @@ img{
     display: block;
     clear: both;
 }
+.bg-light{
+    color: rgb(26, 26, 26);
+}
+.bg-dark{
+    color: white;
+}
 .posRe{
     position: relative;
 }

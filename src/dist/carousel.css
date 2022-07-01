@@ -1,0 +1,199 @@
+.pointer-event {
+  -ms-touch-action: pan-y;
+  touch-action: pan-y;
+}
+
+.carousel {
+  overflow: hidden;
+  position: relative;
+}
+.carousel .carousel-inner {
+  position: relative;
+  width: 100%;
+}
+.carousel .carousel-inner .carousel-item {
+  position: relative;
+  display: none;
+  float: left;
+  width: 100%;
+  height: 400px;
+  margin-right: -100%;
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+  flex-shrink: 0;
+  transition: -webkit-transform 600ms ease-in-out;
+  transition: transform 600ms ease-in-out;
+  transition: transform 600ms ease-in-out, -webkit-transform 600ms ease-in-out;
+  transition-duration: 600ms;
+  transition-delay: 280ms;
+}
+.carousel .carousel-inner .carousel-item .carousel-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.carousel .carousel-inner .carousel-item .carousel-img:active {
+  cursor: grab;
+}
+.carousel .carousel-inner .carousel-item .caption {
+  background-color: red;
+  text-align: center;
+  position: absolute;
+  width: 100%;
+  height: 70px;
+  display: none;
+  opacity: 0;
+  transition: 0.5s ease-in;
+}
+.carousel .carousel-inner .carousel-item .caption.animToTop {
+  animation-name: toTop;
+  animation-duration: 1s;
+  display: block;
+  bottom: 0;
+  opacity: 1;
+}
+@keyframes toTop {
+  from {
+    display: none;
+    bottom: -40px;
+    opacity: 0;
+  }
+  to {
+    display: block;
+    bottom: 0;
+    opacity: 1;
+  }
+}
+.carousel .carousel-inner .carousel-item .caption.animToDown {
+  animation-name: toDown;
+  animation-duration: 1s;
+  display: block;
+  bottom: 0;
+  opacity: 1;
+}
+@keyframes toDown {
+  from {
+    display: none;
+    bottom: 40px;
+    opacity: 0;
+  }
+  to {
+    display: block;
+    bottom: 0;
+    opacity: 1;
+  }
+}
+.carousel .carousel-inner .carousel-item .caption .caption-Head {
+  font-weight: bolder;
+}
+.carousel .carousel-inner .carousel-item .caption .caption-Detail {
+  font-weight: lighter;
+}
+@media screen and (max-width: 576px) {
+  .carousel .carousel-inner .carousel-item {
+    height: 200px;
+  }
+}
+.carousel .carousel-inner::after {
+  content: "";
+  clear: both;
+  display: block;
+}
+.carousel .carousel-inner .carousel-item.active, .carousel .carousel-inner .carousel-item-prev, .carousel .carousel-inner .carousel-item-next {
+  display: block;
+}
+.carousel .carousel-inner .carousel-item-next:not(.carousel-item-left), .carousel .carousel-inner .active.carousel-item-right {
+  -webkit-transform: translateX(100%);
+  transform: translateX(100%);
+}
+.carousel .carousel-inner .carousel-item-prev:not(.carousel-item-right), .carousel .carousel-inner .active.carousel-item-left {
+  -webkit-transform: translateX(-100%);
+  transform: translateX(-100%);
+}
+.carousel .carousel-indicators {
+  display: flex;
+  justify-content: center;
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  padding: 10px 0;
+  z-index: 99;
+}
+.carousel .carousel-indicators li {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  margin: 0 5px;
+  cursor: pointer;
+  background-color: rgba(143, 143, 143, 0.5);
+  transition: ease 0.2s;
+}
+.carousel .carousel-indicators li.active {
+  opacity: 1;
+  width: 20px;
+  border-radius: 10px;
+  background-color: #008cff;
+}
+.carousel .carousel-indicators li:hover {
+  background-color: #008cff;
+}
+.carousel .prevBtn,
+.carousel .nextBtn {
+  z-index: 0;
+  width: 50px;
+  height: 100%;
+  outline: none;
+  border: none;
+  position: absolute;
+  top: 0;
+  justify-content: center;
+  align-items: center;
+  display: flex;
+  transition: 0.2s ease-in-out;
+}
+.carousel .prevBtn .circleBG,
+.carousel .nextBtn .circleBG {
+  width: 30px;
+  height: 30px;
+  background-color: rgba(255, 255, 255, 0.2);
+  border-radius: 50%;
+  transition: 0.05s ease-in-out;
+}
+.carousel .prevBtn .circleBG svg,
+.carousel .nextBtn .circleBG svg {
+  width: 30px;
+  height: 30px;
+}
+.carousel .prevBtn:hover .circleBG,
+.carousel .nextBtn:hover .circleBG {
+  background-color: white;
+}
+.carousel .prevBtn:hover .circleBG path,
+.carousel .nextBtn:hover .circleBG path {
+  fill-opacity: 1;
+}
+.carousel .prevBtn:active .circleBG,
+.carousel .nextBtn:active .circleBG {
+  transform: scale(0.7);
+}
+@media screen and (max-width: 576px) {
+  .carousel .prevBtn,
+.carousel .nextBtn {
+    display: none;
+  }
+}
+.carousel .prevBtn {
+  left: 0;
+}
+.carousel .nextBtn {
+  right: 0;
+}
+@media (prefers-reduced-motion: reduce) {
+  .carousel .prevBtn,
+.carousel .nextBtn,
+.carousel .carousel-indicators li,
+.carousel .carousel-item {
+    transition: none;
+  }
+}

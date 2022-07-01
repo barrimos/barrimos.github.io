@@ -1,0 +1,21 @@
+.toTopBtn {
+  position: fixed;
+  bottom: 60px;
+  right: 30px;
+  margin: 10px;
+  width: 35px;
+  height: 35px;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  border-radius: 5px;
+  background-color: #c4c4c4;
+  opacity: 0.4;
+  display: none;
+  z-index: 999999;
+}
+
+.toTopBtn svg {
+  height: 35px;
+  width: 35px;
+}
