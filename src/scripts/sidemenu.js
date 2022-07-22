@@ -5,6 +5,9 @@ const linkIcon = document.querySelectorAll('.nav-icon');
 const linkText = document.querySelectorAll('.nav-text');
 const sideDropdown = document.getElementsByClassName('btnDropmenu');
 const dropDown = document.getElementsByClassName('iconArrowdrop');
+const currentPage = window.location.pathname.slice(1).split('/')[0].split('.')[0];
+const allLinks = document.querySelectorAll('.nav-link');
+
 let touchX = 0;
 let deltaX = 0;
 const Default = {
@@ -107,7 +110,7 @@ function _mouseSwipe(){
         return mouseEnd(e);
     });
 };
-for(let i=0; i<sideDropdown.length; i++){
+for(let i = 0; i < sideDropdown.length; i++){
     sideDropdown[i].addEventListener('click', function(){
         this.parentElement.querySelector('.iconArrowdrop').classList.toggle('open');
         const dropdownContent = this.nextElementSibling;
@@ -119,28 +122,28 @@ for(let i=0; i<sideDropdown.length; i++){
     });
 }
 const curPage = (() => {
-    const currentPage = window.location.pathname.slice(1).split('/')[0].split('.')[0];
-    const allLinks = document.querySelectorAll('.nav-link');
-    for(let i=0; i<allLinks.length; i++){
+    for(let i = 0; i < allLinks.length; i++){
         const linkUrl = allLinks[i].getAttribute('href').split('.')[0];
         if(currentPage === ''){
             allLinks[0].classList.add('curpage');
             linkIcon[0].style.filter = 'invert(1)';
             linkText[0].style.filter = 'invert(1)';
         }
-        if(linkUrl === currentPage && linkUrl !== 'hired'){
+        if(linkUrl === currentPage && linkUrl !== ''){
             allLinks[i].classList.add('curpage');
             linkIcon[i].style.filter = 'invert(1)';
             linkText[i].style.filter = 'invert(1)';
             allLinks[allLinks.length-1].classList.remove('curpage');
             linkIcon[allLinks.length-1].style.filter = 'invert(0)';
             linkText[allLinks.length-1].style.filter = 'invert(0)';
+            if(allLinks[i].parentElement.classList.contains('list-treeview')){
+                allLinks[i].parentNode.parentNode.parentNode.children[0].classList.add('curpage');
+                linkIcon[i].parentNode.parentNode.parentNode.parentNode.children[0].children[0].style.filter = 'invert(1)';
+                linkText[i].parentNode.parentNode.parentNode.parentNode.children[0].children[1].style.filter = 'invert(1)';
+                allLinks[i].classList.remove('curpage');
+                linkIcon[i].style.filter = 'invert(0)';
+                linkText[i].style.filter = 'invert(0)';
+            }
         }
-    }
-    if(currentPage === 'hired'){
-        allLinks[6].classList.toggle('curpage')
-        linkIcon[6].style.filter = 'invert(1)';
-        linkText[6].style.filter = 'invert(1)';
-        dropDown[0].children[0].style.filter = 'invert(1)';
     }
 })();
