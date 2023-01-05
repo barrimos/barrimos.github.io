@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Matrix calculator</title>
+    <link rel="stylesheet" href="../../src/style/main.css" />
+    <link rel="stylesheet" href="../../src/dist/matrix.css" />
+    <!-- <link rel="stylesheet" href="./src/pyscript.css">
+    <script defer src="https://pyscript.net/latest/pyscript.js"></script> -->
+</head>
+<body>
+    <div class="container">
+        <span class="credit">Inspiration design from <a href="https://matrixcalc.org/">matrixcalc</a></span>
+        <div class="row">
+            <div class="col-12 col-md-5">
+                <!--Header-->
+                <div class="header">
+                    <h4>Matrix A</h4>
+                </div>
+                <!--Matrices-->
+                <div class="matrices" data-ride="matrices" data-id="A" data-size="2 2">
+                    <!--Form-->
+                    <form action="#" class="matrix" data-form="A">
+                        <!----------------Data matrix---------------->
+                        <div class="table" data-table="A"></div>
+                        <textarea name="table_area" class="table_area hide" data-area="table_area"></textarea>
+                        <!----------------Data matrix---------------->
+
+                        <!-----------------Controls----------------->
+                        <div class="control_wrapper d-flex justify-content-center align-items-center mt-10 mb-10">
+                            <button type="button" class="control_button" data-control="clear">Clear</button>
+                            <button type="button" class="control_button" data-control="switch">Switch</button>
+                            <button type="button" class="control_button" data-control="increase" value="1">&plus;</button>
+                            <button type="button" class="control_button" data-control="decrease" value="0">&minus;</button>
+                        </div>
+                        <!-----------------Controls----------------->
+
+                        <!-----------------Methods----------------->
+                        <div class="method_wrapper">
+                            <div class="method_box">
+                                <button type="submit" class="method_button" data-method="determinant">Determinant</button>
+                            </div>
+                            <div class="method_box">
+                                <button type="submit" class="method_button" data-method="transpose">Transpose</button>
+                            </div>
+                            <div class="method_box">
+                                <button type="submit" class="method_button" data-method="identity">Identity</button>
+                            </div>
+                            <div class="method_box">
+                                <button type="submit" class="method_button" data-method="inverse">Inverse</button>
+                            </div>
+                            <div class="method_box">
+                                <button type="submit" class="method_button constant" data-method="scalar">Scalar</button>
+                                <input type="text" class="constant_value" value="0" placeholder="0">
+                            </div>
+                            <div class="method_box">
+                                <button type="submit" class="method_button constant" data-method="exponent">Exponent</button>
+                                <input type="number" class="constant_value" value="0" placeholder="0">
+                            </div>
+                            <div class="method_box">
+                                <button type="submit" class="method_button constant" data-method="shift">Shift</button>
+                                <input type="number" class="constant_value" value="0" placeholder="0">
+                            </div>
+                            <div class="method_box">
+                                <button type="submit" class="method_button constant axis" data-method="minor">Minor</button>
+                                <input type="number" class="constant_value axis_i" value="" placeholder="i">
+                                <input type="number" class="constant_value axis_j" value="" placeholder="j">
+                            </div>
+                            <div class="method_box">
+                                <button type="submit" class="method_button constant axis" data-method="cofactor">Cofactor</button>
+                                <input type="number" class="constant_value axis_i" value="" placeholder="i">
+                                <input type="number" class="constant_value axis_j" value="" placeholder="j">
+                            </div>
+                            <div class="method_box">
+                                <button type="submit" class="method_button" data-method="diagonal">Diagonal</button>
+                            </div>
+                            <div class="method_box">
+                                <button type="submit" class="method_button" data-method="lower_triangular">Lower triangular</button>
+                            </div>
+                            <div class="method_box">
+                                <button type="submit" class="method_button" data-method="upper_triangular">Upper triangular</button>
+                            </div>
+                            <div class="method_box">
+                                <button type="submit" class="method_button" data-method="trace">Trace</button>
+                            </div>
+                            <div class="method_box">
+                                <button type="submit" class="method_button constant" data-method="padding">Padding</button>
+                                <input type="number" class="constant_value" value="0" placeholder="0">
+                            </div>
+                            <div class="method_box">
+                                <button type="submit" class="method_button" data-method="to_square">To square</button>
+                            </div>
+                            <div class="method_box">
+                                <button type="submit" class="method_button" data-method="is_square">Is square</button>
+                            </div>
+                            <div class="method_box">
+                                <button type="submit" class="method_button" data-method="add_zeroes">Add zeros</button>
+                            </div>
+                            <div class="method_box">
+                                <button type="submit" class="method_button" data-method="rank">Rank</button>
+                            </div>
+                        </div>
+                        <!-----------------Methods----------------->
+                    </form>
+                </div>
+            </div>
+            <div class="col-12 col-md-2 mt-10 mb-10 mt-md-0 mb-md-0">
+                <div class="operation_wrapper">
+                    <div class="operation_box">
+                        <button type="button" class="operation_button" data-operation="swap">Swap</button>
+                    </div>
+                    <div class="operation_box">
+                        <button type="button" class="operation_button" data-operation="multiply">A x B</button>
+                    </div>
+                    <div class="operation_box">
+                        <button type="button" class="operation_button" data-operation="plus">A + B</button>
+                    </div>
+                    <div class="operation_box">
+                        <button type="button" class="operation_button" data-operation="minus">A - B</button>
+                    </div>
+                    <div class="operation_box">
+                        <button type="button" class="operation_button" data-operation="convolution">Convolution</button>
+                    </div>
+                    <div class="operation_box">
+                        <button type="button" class="operation_button" data-operation="convolution_edge">Convolution with edge</button>
+                    </div>
+                </div>
+            </div>
+            <div class="col-12 col-md-5">
+                <!--Header-->
+                <div class="header">
+                    <h4>Matrix B</h4>
+                </div>
+                <!--Matrices-->
+                <div class="matrices" data-id="B" data-ride="matrices" data-size="3 3">
+                    <form action="#" data-form="B" class="matrix">
+                        <div class="table" data-table="B"></div>
+                        <textarea name="table_area" class="table_area hide" data-area="table_area"></textarea>
+                        <div class="control_wrapper d-flex justify-content-center align-items-center mt-10 mb-10">
+                            <button type="button" class="control_button" data-control="clear">Clear</button>
+                            <button type="button" class="control_button" data-control="switch">Switch</button>
+                            <button type="button" class="control_button" data-control="increase" value="1">&plus;</button>
+                            <button type="button" class="control_button" data-control="decrease" value="0">&minus;</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <div class="col-12">
+                <div class="result" id="result">
+                    <h4>Result</h4>
+                    <table>
+                        <tr>
+                            <td>1</td>
+                            <td>2</td>
+                            <td>3</td>
+                        </tr>
+                        <tr>
+                            <td>4</td>
+                            <td>5</td>
+                            <td>6</td>
+                        </tr>
+                        <tr>
+                            <td>7</td>
+                            <td>8</td>
+                            <td>9</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="./js/control.js"></script>
+    <py-script>
+
+    </py-script>
+</body>
+</html>

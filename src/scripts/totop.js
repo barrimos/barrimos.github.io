@@ -5,8 +5,8 @@ const topFunction = () => {
 
 window.addEventListener('scroll', () => {
     if(this.scrollY > 720){
-        document.getElementById('toTopBtn').style.display = 'block';
+        document.getElementById('buttonToTop').style.display = 'block';
     } else {
-        document.getElementById('toTopBtn').style.display = 'none';
+        document.getElementById('buttonToTop').style.display = 'none';
     }
 })

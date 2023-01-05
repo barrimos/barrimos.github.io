@@ -6,10 +6,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>zixma - All the sum</title>
     <link rel="shortcut icon" href="./src/img/icon/zmlogo-page-03.png" type="image/x-icon">
-    <link rel="stylesheet" href="src/style/main.css">
-    <link rel="stylesheet" href="src/dist/style.css">
-    <link rel="stylesheet" href="src/dist/carousel.css">
-    <link rel="stylesheet" href="src/dist/sidemenu.css">
+    <link rel="stylesheet" href="./src/style/main.css">
+    <link rel="stylesheet" href="./src/dist/style.css">
+    <link rel="stylesheet" href="./src/dist/sidemenu.css">
+    <link rel="stylesheet" href="./src/dist/totop.css">
+    <link rel="stylesheet" href="./src/dist/stylingtag.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
 <body>
@@ -23,20 +24,20 @@
             </div>
             <div class="nav-side-menu" id="sideNav-left">
                 <ul class="underlist">
-                    <li class="list-item">
-                        <a href="index.html" class="nav-link" title="Home">
-                            <div class="nav-icon">
-                                <img src="src/img/icon/social-23.svg" alt="Home">
+                    <li class="list-item data-list-url">
+                        <a href="./index.html" class="nav-link" title="Home" id="index">
+                            <div class="nav-icon" data-icon="index">
+                                <img src="./src/img/icon/social-23.svg" alt="Home">
                             </div>
-                            <span class="nav-text">HOME</span>
+                            <span class="nav-text" data-text="index">HOME</span>
                         </a>
                     </li>
-                    <!-- <li class="list-item has-treeview">
-                        <a href="javascript:void(0)" class="nav-link btnDropmenu" title="Service">
-                            <div class="nav-icon">
-                                <img src="src/img/icon/social-35.svg" alt="Service">
+                    <!-- <li class="list-item has-treeview data-list-url">
+                        <a href="javascript:void(0)" class="nav-link btnDropmenu" title="Service" id="hired">
+                            <div class="nav-icon" data-icon="hired">
+                                <img src="./src/img/icon/social-35.svg" alt="Service">
                             </div>
-                            <span class="nav-text">SERVICE</span>
+                            <span class="nav-text" data-text="hired">SERVICE</span>
                             <div class="iconArrowdrop">
                                 <svg viewbox="0 0 40 40" width="15" heigth="15">
                                     <path
@@ -49,75 +50,75 @@
                         </a>
                         <ul class="underlist">
                             <li class="list-item list-treeview">
-                                <a href="hired.html?sv=graphic" class="nav-link" title="Graphic">
+                                <a href="./hired.html?sv=graphic" class="nav-link" title="Graphic">
                                     <div class="nav-icon">
-                                        <img src="src/img/icon/zmlogo-page-03.png" alt="Graphic">
+                                        <img src="./src/img/icon/zmlogo-page-03.png" alt="Graphic">
                                     </div>
                                     <span class="nav-text">GRAPHIC</span>
                                 </a>
                             </li>
                             <li class="list-item list-treeview">
-                                <a href="hired.html?sv=uxui" class="nav-link" title="UI Design">
+                                <a href="./hired.html?sv=uxui" class="nav-link" title="UI Design">
                                     <div class="nav-icon">
-                                        <img src="src/img/icon/zmlogo-page-03.png" alt="UI Design">
+                                        <img src="./src/img/icon/zmlogo-page-03.png" alt="UI Design">
                                     </div>
                                     <span class="nav-text">UI DESIGN</span>
                                 </a>
                             </li>
                             <li class="list-item list-treeview">
-                                <a href="hired.html?sv=frontend" class="nav-link" title="Front-end Develop">
+                                <a href="./hired.html?sv=frontend" class="nav-link" title="Front-end Develop">
                                     <div class="nav-icon">
-                                        <img src="src/img/icon/zmlogo-page-03.png" alt="Front-end Develop">
+                                        <img src="./src/img/icon/zmlogo-page-03.png" alt="Front-end Develop">
                                     </div>
                                     <span class="nav-text">FRONT-END DEV</span>
                                 </a>
                             </li>
                         </ul>
-                    </li>
-                    <li class="list-item">
-                        <a href="profile.html" class="nav-link" title="Profile">
-                            <div class="nav-icon">
-                                <img src="src/img/icon/social-09.svg" alt="Profile">
+                    </li> -->
+                    <li class="list-item data-list-url">
+                        <a href="./profile.html" class="nav-link" title="Profile" id="profile">
+                            <div class="nav-icon" data-icon="profile">
+                                <img src="./src/img/icon/social-09.svg" alt="Profile">
                             </div>
-                            <span class="nav-text">PROFILE</span>
+                            <span class="nav-text" data-text="profile">PROFILE</span>
                         </a>
                     </li>
-                    <li class="list-item">
-                        <a href="zxsandbox.html" class="nav-link" title="Zxsandbox">
-                            <div class="nav-icon">
-                                <img src="src/img/icon/social-37.svg" alt="Zxsandbox">
+                    <!-- <li class="list-item data-list-url">
+                        <a href="./zxsandbox.html" class="nav-link" title="Zxsandbox" id="zxsandbox">
+                            <div class="nav-icon" data-icon="zxsandbox">
+                                <img src="./src/img/icon/social-37.svg" alt="Zxsandbox">
                             </div>
-                            <span class="nav-text">ZXSANDBOX</span>
+                            <span class="nav-text" data-text="zxsandbox">ZXSANDBOX</span>
                         </a>
                     </li>
-                    <li class="list-item">
-                        <a href="portfolio.html" class="nav-link" title="Portfolio">
-                            <div class="nav-icon">
-                                <img src="src/img/icon/social-29.svg" alt="Portfolio">
+                    <li class="list-item data-list-url">
+                        <a href="./portfolio.html" class="nav-link" title="Portfolio" id="portfolio">
+                            <div class="nav-icon" data-icon="portfolio">
+                                <img src="./src/img/icon/social-29.svg" alt="Portfolio">
                             </div>
-                            <span class="nav-text">PORTFOLIO</span>
+                            <span class="nav-text" data-text="portfolio">PORTFOLIO</span>
                         </a>
                     </li>
-                    <li class="list-item">
-                        <a href="shop.html" class="nav-link" title="Shop">
-                            <div class="nav-icon">
-                                <img src="src/img/icon/social-27.svg" alt="Shop">
+                    <li class="list-item data-list-url">
+                        <a href="./shop.html" class="nav-link" title="Shop" id="shop">
+                            <div class="nav-icon" data-icon="shop">
+                                <img src="./src/img/icon/social-27.svg" alt="Shop">
                             </div>
-                            <span class="nav-text">SHOP</span>
+                            <span class="nav-text" data-text="shop">SHOP</span>
+                        </a>
+                    </li> -->
+                    <li class="list-item data-list-url">
+                        <a href="./blog.html" class="nav-link" title="Blog" id="blog">
+                            <div class="nav-icon" data-icon="blog">
+                                <img src="./src/img/icon/social-33.svg" alt="Blog">
+                            </div>
+                            <span class="nav-text" data-text="blog">BLOG</span>
                         </a>
                     </li>
-                    <li class="list-item">
-                        <a href="blog.html" class="nav-link" title="Blog">
+                    <li class="list-item has-treeview data-list-url">
+                        <a href="javascript:void(0)" class="nav-link btnDropmenu" title="Resume">
                             <div class="nav-icon">
-                                <img src="src/img/icon/social-33.svg" alt="Blog">
-                            </div>
-                            <span class="nav-text">BLOG</span>
-                        </a>
-                    </li>
-                    <li class="list-item has-treeview">
-                        <a href="javascript:void(0)" class="nav-link btnDropmenu" title="Rsume">
-                            <div class="nav-icon">
-                                <img src="src/img/icon/social-31.svg" alt="Service">
+                                <img src="./src/img/icon/social-31.svg" alt="Service">
                             </div>
                             <span class="nav-text">RESUME</span>
                             <div class="iconArrowdrop">
@@ -134,7 +135,7 @@
                             <li class="list-item list-treeview">
                                 <a href="./src/download/Prapas - Resume_EN_2022.pdf" title="Download Resume" class="nav-link dlbtn-wraper" download>
                                     <div class="nav-icon">
-                                        <img src="src/img/icon/zmlogo-page-03.png" alt="Resume EN">
+                                        <img src="./src/img/icon/zmlogo-page-03.png" alt="Resume EN">
                                     </div>
                                     <span class="nav-text">RESUME EN</span>
                                 </a>
@@ -142,16 +143,17 @@
                             <li class="list-item list-treeview">
                                 <a href="./src/download/Prapas - Resume_TH_2022.pdf" title="Download Resume" class="nav-link dlbtn-wraper" download>
                                     <div class="nav-icon">
-                                        <img src="src/img/icon/zmlogo-page-03.png" alt="Resume TH">
+                                        <img src="./src/img/icon/zmlogo-page-03.png" alt="Resume TH">
                                     </div>
                                     <span class="nav-text">RESUME TH</span>
                                 </a>
                             </li>
                         </ul>
-                    </li> -->
+                    </li>
                 </ul>
-                <button class="toTopBtn" onclick="topFunction()" id="toTopBtn">
-                    <svg viewbox="0 0 35 35" aria-hidden="true" alt="backTop">
+                <div class="buttonToTop" id="buttonToTop" onclick="topFunction()">
+                    <input type="button" class="toTopBtn" id="toTopBtn">
+                    <svg class="arrowTop" viewbox="0 0 35 35" aria-hidden="true" alt="backTop">
                         <path
                             d = "M10 22 L 18 13 L 25 22"
                             fill = "none"
@@ -159,7 +161,7 @@
                             stroke-width = "3"
                         />
                     </svg>
-                </button>
+                </div>
             </div>
         </nav>
         <main class="main">
@@ -169,14 +171,7 @@
                         <div class="col-12">
                             <div class="nav-menu">
                                 <div class="topLogo">
-                                    <img src="src/img/icon/zmlogo-page-15.png" alt="logo zixma">
-                                </div>
-                                <div class="nav-list d-none d-md-block">
-                                    <ul class="nav-items">
-                                        <li class="menu-list"><a href="#experience-section">Experiences</a></li>
-                                        <li class="menu-list"><a href="#project-section">Projects</a></li>
-                                        <li class="menu-list"><a href="#education-section">Education</a></li>
-                                    </ul>
+                                    <img src="./src/img/icon/zmlogo-page-15.png" alt="logo zixma">
                                 </div>
                                 <div class="btn d-none d-md-block">
                                     <a href="./src/download/Prapas - Resume_EN_2022.pdf" class="Downloadresume" download>Download Resume</a>
@@ -186,7 +181,263 @@
                     </div>
                 </div>
             </div>
-            <!-- START BELOW HERE -->
+            <!-- start here -->
+            <section class="profile-section" id="profile-section">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-12 col-sm-6 col-lg-3">
+                            <div class="hero-img posSticky">
+                                <img src="https://scontent.fbkk2-5.fna.fbcdn.net/v/t31.18172-8/30073536_10215960594717532_6094550274771899716_o.jpg?_nc_cat=110&ccb=1-7&_nc_sid=09cbfe&_nc_eui2=AeEg4_-7LQPwCvlq7wGlV78qXg6JC4UriQpeDokLhSuJCt2nRkDMFYjqMEjUB9fm8h0&_nc_ohc=99_REmHL9IgAX_snkEt&_nc_ht=scontent.fbkk2-5.fna&oh=00_AT_k4EtyCAfKI7joGDBL4Lb2xG2lFUTfq1XK1b1m39EQOQ&oe=632F55D3" alt="prapas-k">
+                            </div>
+                        </div>
+                        <div class="col-12 col-sm-6 col-lg-9">
+                            <div class="row">
+                                <div class="col-12 hero-text">
+                                    <h3>Hi, There</h3>
+                                    <p>
+                                        I'm a learner in love with knowledge and wisdom.<br/>
+                                        A passionate to Artificial Intelligence Machine Learning.<br/>
+                                        My name is Prapas Khong-attagarn, 33 years old<br/>
+                                        my background is graphic designer for 7 years the most of the works are print media.<br/>
+                                        I am ambitious and curious new things, not to good talker but good to listener<br/>
+                                    </p>
+                                </div>
+                                <div class="col-12 hero-text">
+                                    <h3>My Inspires</h3>
+                                    <p>Dexter's Labratory / Ironman / Rick Sanchez / Nam Do-san</p>
+                                </div>
+                                <div class="col-12 hero-text">
+                                    <h3>My Passion</h3>
+                                    <p>Create innovations that will make people more comfortable. Mix of technology and design</p>
+                                </div>
+                                <div class="col-12 hero-text">
+                                    <h3>My Future</h3>
+                                    <p>Develop knowledge and abilities to support team and pass on knowledge to teams and organizations.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <section class="social-section" id="social-section">
+                <div class="container">
+                    <div class="row no-gutters">
+                        <div class="col-6 col-md-3 socials facebook">
+                            <a href="https://www.facebook.com/ping.hkr" class="social-link"><i class="fa-brands fa-facebook-f icon-socials"></i></a>
+                        </div>
+                        <div class="col-6 col-md-3 socials github">
+                            <a href="https://github.com/barrimos" class="social-link"><i class="fa-brands fa-github icon-socials"></i></a>
+                        </div>
+                        <div class="col-6 col-md-3 socials linkedin">
+                            <a href="https://www.linkedin.com/in/prapas-k/" class="social-link"><i class="fa-brands fa-linkedin icon-socials"></i></a>
+                        </div>
+                        <div class="col-6 col-md-3 socials wordpress">
+                            <a href="https://prapask.wordpress.com/" class="social-link"><i class="fa-brands fa-wordpress icon-socials"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <section class="experience-section" id="experience-section">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-12 col-md-3">
+                            <div class="experience-title posSticky">
+                                <h2>WORK EXPERIENCES</h2>
+                                <a href="https://prapask.wordpress.com/">Portfolio Graphic</a>
+                            </div>
+                        </div>
+                        <div class="col-12 col-md-9">
+                            <ul class="experience-unorderList">
+                                <li>
+                                    <h2>Feb '20 - Present</h2>
+                                    <h3>Preparation for developer jobs (unemployment)</h3>
+                                    <h4>Pratice Coding and Learning</h4>
+                                    <p>
+                                        • Learning javascript<br/>
+                                        • Build web application<br/>
+                                        • Learning concept shortest path algorithm<br/>
+                                        • Pratice coding algorithm calculate matrix<br/>
+                                        • Learning Java OOP<br/>
+                                        • Take course basic game develop and design : unity, c++, blender
+                                    </p>
+                                </li>
+                                <li>
+                                    <h2>Dec '19 - Feb '20</h2>
+                                    <h3>Oscar Graphic</h3>
+                                    <h4>Graphic Designer - contract</h4>
+                                    <p>
+                                        Responsibilities<br/>
+                                        • Design, edit and develop an artwork offline media like banner, poster, sticker label and namecard.<br/>
+                                        • Produce some work pieces as well.
+                                    </p>
+                                </li>
+                                <li>
+                                    <h2>Nov '18 - Mar '19</h2>
+                                    <h3>DKSH Thailand</h3>
+                                    <h4>Coordinator Designer - probation</h4>
+                                    <p>
+                                        Responsibilities<br/>
+                                        • Design space management events area to set position of furniture.<br/>
+                                        • Control the installation before the event day.<br/>
+                                        • Supports senior designer.
+                                    </p>
+                                </li>
+                                <li>
+                                    <h2>Jun '12 - Apr '18</h2>
+                                    <h3>Siam Paragon Development</h3>
+                                    <h4>Graphic Designer - officer</h4>
+                                    <p>
+                                        Responsibilities<br/>
+                                        • Design, edit and develop an artwork offline media like banner, poster and photo backdrop.<br/>
+                                        • Production control check pantone colour before produce.
+                                    </p>
+                                </li>
+                            </ul>
+                            <ul class="tagLists">
+                                Graphic, Designer, กราฟฟิก, ดีไซน์เนอร์, Illustrator, Photoshop
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <section class="course-section" id="course-section">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-12 col-md-3">
+                            <div class="course-title posSticky">
+                                <h2>COURSE APPLIED</h2>
+                            </div>
+                        </div>
+                        <div class="col-12 col-md-9">
+                            <ul class="course-unorderList">
+                                <li>
+                                    <h2>Computer Game Design and Development</h2>
+                                    <h4>Pathum Wan Institute of Technology</h4>
+                                    <p>
+                                        In progress - Learn about game making history, genres, game goals.<br/>
+                                        The thought process of creating a game Player's target audience.<br/>
+                                        Game creation and customization by pygame.<br/>
+                                        • Text-based adventure game with <em>Python</em><br/>
+                                    </p>
+                                </li>
+                                <li>
+                                    <h2>Junior Software Developer</h2>
+                                    <h4>Generation Bootcamp</h4>
+                                    <p>
+                                        Start to be a learner at bootcamp of Generation Thailand to be Junior software developer,<br/>
+                                        At bootcamp we learnt about technical technique and behavioral skills, agile and scrum.<br/>
+                                        The instructor taught we how to be a good full-stack developer for organization for the future.<br/>
+                                        Responsibilities<br/>
+                                        • Final project Web application activities record <em><a href="https://goaltofitapp.vercel.app">Goal to fit</a></em> with <em>MERN</em> technology<br>
+                                    </p>
+                                </li>
+                                <li>
+                                    <h2>Basic 3D Modeling</h2>
+                                    <h4>ZLA Digital Arts</h4>
+                                    <p>
+                                        The basic sculpting 3D sculpting with zbrush.<br/>
+                                        Learnt frequently used tools.<br/>
+                                        UVs paint, UVs unwrap.<br/>
+                                        Retopology technique.
+                                    </p>
+                                </li>
+                                <li>
+                                    <h2>Basic Web Develop</h2>
+                                    <h4>TutorTong</h4>
+                                    <p>
+                                        How to design a page with the box technique.<br/>
+                                        And how to styling website with Bootstrap framework.<br/>
+                                        And make it responsive for all screen sizes.<br/>
+                                        Management and design database with PHP and SQL
+                                    </p>
+                                </li>
+                                <li>
+                                    <h2>Basic 3DS Max</h2>
+                                    <h4>Utahtd 3D</h4>
+                                    <p>
+                                        Learnt basic tools for 3D modeling and lighting interior design for architecture.
+                                    </p>
+                                </li>
+                            </ul>
+                            <ul class="tagLists">
+                                Generation Thailand, ZLA Digital Arts, TutorTong, Utahtd 3D, Computer Game Design and Development, Game, 3D, Coding
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <section class="education-section" id="education-section">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-12 col-md-3">
+                            <div class="education-title posSticky">
+                                <h2>EDUCATIONS</h2>
+                            </div>
+                        </div>
+                        <div class="col-12 col-md-9">
+                            <ul class="education-unorderList">
+                                <li>
+                                    <h2>Bangkok University</h2>
+                                    <h4>Bachelor of fine and applied arts : Communication design</h4>
+                                </li>
+                                <li>
+                                    <h2>Lasalle College School</h2>
+                                    <h4>Maths - Arts</h4>
+                                </li>
+                            </ul>
+                            <ul class="tagLists">
+                                Bangkok University, Lasalle College
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <section class="certification-section" id="certification-section">
+                <div class="modalEnlarge" onclick="closeModal()">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-12 d-flex justify-content-center align-items-center">
+                                <img src="#" alt="#" class="enlargeImg projectLink" name="Frontend_React">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="container">
+                    <div class="row">
+                        <div class="col-12 col-md-3">
+                            <div class="education-title posSticky">
+                                <h2>CERTIFICATES</h2>
+                            </div>
+                        </div>
+                        <div class="col-12 col-md-9">
+                            <div class="row">
+                                <div class="col-12 col-md-6 col-lg-4">
+                                    <img src="#" alt="Certificate Codecademy React" class="certImg projectLink" name="Frontend_React" onclick="enlarge(this)">
+                                </div>
+                                <div class="col-12 col-md-6 col-lg-4">
+                                    <img src="#" alt="Certificate Generation_Thailand Junior_software_dev" class="certImg projectLink" name="Generation_Thailand" onclick="enlarge(this)">
+                                </div>
+                                <div class="col-12 col-md-6 col-lg-4">
+                                    <img src="#" alt="Certificate ChulaMooc First_step_coding" class="certImg projectLink" name="First_Step_Coding" onclick="enlarge(this)">
+                                </div>
+                                <div class="col-12 col-md-6 col-lg-4">
+                                    <img src="#" alt="Certificate Freecodecamp Responsive" class="certImg projectLink" name="Responsive" onclick="enlarge(this)">
+                                </div>
+                                <div class="col-12 col-md-6 col-lg-4">
+                                    <img src="#" alt="Certificate Sololearn Python_Beginners" class="certImg projectLink" name="Python_Beginners" onclick="enlarge(this)">
+                                </div>
+                                <div class="col-12 col-md-6 col-lg-4">
+                                    <img src="#" alt="Certificate Codecademy NodeJS" class="certImg projectLink" name="NodeJS" onclick="enlarge(this)">
+                                </div>
+                            </div>
+                            <ul class="tagLists pt-20">
+                                Codecademy, Generation Thailand, Sololearn, Freecodecamp, NodeJS, Responsive, Python, React, Coding
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <!-- end here -->
         </main>
         <div class="push"></div>
     </div>
@@ -201,5 +452,7 @@
     </footer>
     <script src="./src/scripts/scripts.js"></script>
     <script src="./src/scripts/sidemenu.js"></script>
+    <script src="./src/scripts/totop.js"></script>
+    <script src="./src/scripts/stylingtag.js"></script>
 </body>
 </html>

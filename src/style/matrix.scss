@@ -1,0 +1,180 @@
+$widthMethodButton: calc(50% - 12px);
+.hide{
+    display: none !important;
+}
+.matrix{
+    .table{
+        min-height: 102px;
+        display: grid;
+        align-content: center;
+        gap: 5px;
+        .rows{
+            display: flex;
+            justify-content: center;
+            gap: 5px;
+            .cols{
+                display: block;
+            }
+            .cell{
+                height: 30px;
+                min-width: 20px;
+                max-width: 50px;
+                width: 100%;
+                padding: 3px;
+            }
+        }
+    }
+    .table_area{
+        display: flex;
+        min-width: 230px;
+        min-height: 102px;
+        margin: 0 auto;
+    }
+    .table, .table_area{
+        justify-content: center;
+        align-items: center;
+    }
+    .control_wrapper{
+        .control_button{
+            min-width: 50px;
+            padding: 5px;
+            margin: 5px;
+            font-size: .7em;
+        }
+    }
+    .method_wrapper{
+        display: flex;
+        justify-content: center;
+        flex-wrap: wrap;
+        .method_box{
+            width: $widthMethodButton;
+            height: 30px;
+            position: relative;
+            margin: 2px 3px;
+            .method_button{
+                display: block;
+                background-color: rgb(245, 245, 245);
+                width: 100%;
+                height: 100%;
+                padding: 5px;
+                &.constant{
+                    width: calc(100% - 30px);
+                    &.axis{
+                        width: calc(100% - 60px);
+                    }
+                }
+            }
+            .constant_value{
+                position: absolute;
+                right: 0;
+                top: 0;
+                padding: 0 5px;
+                width: 30px;
+                height: 100%;
+                &.axis_i{
+                    right: 30px;
+                }
+            }
+    
+        }
+    }
+}
+.header{
+    margin: 10px 0;
+    padding: 5px 0;
+    display: flex;
+    align-items: center;
+    .specific_value{
+        width: 100px;
+        height: 20px;
+        display: block;
+        padding: 5px;
+        margin-left: 10px;
+        &::placeholder{
+            opacity: .4;
+        }
+    }
+}
+.cell,
+.table_area,
+.method_button,
+.operation_button,
+.constant_value,
+.specific_value,
+.control_button{
+    border: .5px solid rgb(216, 216, 216);
+    border-radius: 4px;
+}
+.method_button,
+.operation_button,
+.control_button{
+    &:hover{
+        opacity: .7;
+    }
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+/* Firefox */
+input[type=number] {
+  -moz-appearance: textfield;
+}
+
+.operation_wrapper{
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    .operation_box{
+        margin: 2px 0;
+        .operation_button{
+            display: block;
+            background-color: rgb(245, 245, 245);
+            width: 80px;
+            max-height: 100%;
+            min-height: 30px;
+            padding: 5px;
+            margin: 1px 0;
+            @media screen and (max-width: 767px){
+                margin: 0 2px;
+                min-width: 80px;
+                width: calc(100% - 4px);
+            }
+        }
+    }
+    @media screen and (max-width: 767px){
+        flex-direction: row;
+        // margin: 15px 0;
+    }
+}
+
+.credit{
+    display: inline-block;
+    margin: 10px 0;
+    width: calc(100% - 20px);
+    font-size: 1em;
+    font-weight: 300;
+}
+.result{
+    margin: 20px 0;
+    table{
+        border: none;
+        width: 100%;
+        tr{
+            width: 120px;
+            height: 30px;
+            padding: 0;
+            td{
+                padding: 0;
+                border: none;
+                width: 40px;
+                height: 30px;
+            }
+        }
+    }
+}

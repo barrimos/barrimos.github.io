@@ -1,12 +1,10 @@
 const sideMenu = document.getElementById('sideMenu');
 const btnToggle = document.getElementById('btnToggle');
 const toggler = document.querySelector('.toggler');
-const linkIcon = document.querySelectorAll('.nav-icon');
-const linkText = document.querySelectorAll('.nav-text');
 const sideDropdown = document.getElementsByClassName('btnDropmenu');
 const dropDown = document.getElementsByClassName('iconArrowdrop');
-const currentPage = window.location.pathname.slice(1).split('/')[0].split('.')[0];
-const allLinks = document.querySelectorAll('.nav-link');
+const currentPage = window.location.pathname.substring(window.location.pathname.indexOf('/') + 1).split(/[.\/]/g)[0];
+
 
 let touchX = 0;
 let deltaX = 0;
@@ -122,28 +120,19 @@ for(let i = 0; i < sideDropdown.length; i++){
     });
 }
 const curPage = (() => {
-    for(let i = 0; i < allLinks.length; i++){
-        const linkUrl = allLinks[i].getAttribute('href').split('.')[0];
-        if(currentPage === ''){
-            allLinks[0].classList.add('curpage');
-            linkIcon[0].style.filter = 'invert(1)';
-            linkText[0].style.filter = 'invert(1)';
-        }
-        if(linkUrl === currentPage && linkUrl !== ''){
-            allLinks[i].classList.add('curpage');
-            linkIcon[i].style.filter = 'invert(1)';
-            linkText[i].style.filter = 'invert(1)';
-            allLinks[allLinks.length-1].classList.remove('curpage');
-            linkIcon[allLinks.length-1].style.filter = 'invert(0)';
-            linkText[allLinks.length-1].style.filter = 'invert(0)';
-            if(allLinks[i].parentElement.classList.contains('list-treeview')){
-                allLinks[i].parentNode.parentNode.parentNode.children[0].classList.add('curpage');
-                linkIcon[i].parentNode.parentNode.parentNode.parentNode.children[0].children[0].style.filter = 'invert(1)';
-                linkText[i].parentNode.parentNode.parentNode.parentNode.children[0].children[1].style.filter = 'invert(1)';
-                allLinks[i].classList.remove('curpage');
-                linkIcon[i].style.filter = 'invert(0)';
-                linkText[i].style.filter = 'invert(0)';
-            }
-        }
+    let activePage;
+    let linkIcon;
+    let linkText;
+    if(currentPage === 'index' || currentPage.length === 0){
+        activePage = document.getElementById('index');
+        linkIcon = document.querySelector('[data-icon=index]');
+        linkText = document.querySelector('[data-text=index]');
+    } else {
+        activePage = document.getElementById(currentPage);
+        linkIcon = document.querySelector(`[data-icon=${currentPage}]`);
+        linkText = document.querySelector(`[data-text=${currentPage}]`);
     }
+    activePage.classList.add('curpage')
+    linkIcon.style.filter = 'invert(1)';
+    linkText.style.filter = 'invert(1)';
 })();

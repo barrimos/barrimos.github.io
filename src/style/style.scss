@@ -8,6 +8,10 @@ $secondary-text: #aaa;
 
 $bodyNavBG: hsl(0, 0%, 99%);
 
+.debug{
+    border: 1px solid red;
+}
+
 html{
     height: 100%;
     scroll-behavior: smooth;
@@ -240,15 +244,13 @@ section{
             box-shadow: 0 0 15px -8px rgba($color: #000000, $alpha: .8);
         }
         .projectTitle{
-            font-size: 1.2em;
-            font-weight: 900;
+            font-size: 1em;
             color: rgb(255, 255, 255);
-            background-color: hsl(200, 100%, 50%);
+            background-color: hsl(0, 0%, 11%);
             padding: 10px;
             margin: 0 -20px;
             display: inline-block;
             border-radius: 0 10px 10px 0;
-            box-shadow: -15px 15px 10px rgba($color: #000000, $alpha: .4);
         }
         .projectImage{
             width: 100%;
@@ -293,6 +295,13 @@ section{
 // #experience-section{
 
 // }
+
+#article-section{
+    .time_img{
+        width: 100%;
+    }
+}
+
 #portfolio-section{
     .portfolio-wrap{
         .portfolio-item{
@@ -351,6 +360,86 @@ $maxWidth_CerEnlarge: 800px;
         }
     }
 }
+
+
+#blog-section{
+    color: #333;
+    [class*=-content]{
+        margin: 15px 0;
+    }
+    .main-info{
+        .article-banner{
+            max-height: 300px;
+            width: 100%;
+            object-fit: cover;
+            object-position: center center;
+            margin-bottom: 20px;
+        }
+        .heading{
+            padding-bottom: 15px;
+        }
+        .heading{
+            font-size: 3em !important;
+        }
+        .sub-heading{
+            font-weight: 300;
+            color: #666;
+        }
+        .info-content,
+        .image-content,
+        .quote-content,
+        .code-centent{
+            line-height: 2em;
+            border-radius: 5px;
+        }
+        .info-content{
+            margin-top: 40px;
+        }
+        .image-content{
+            text-align: center;
+            img{
+                max-width: 100%;
+            }
+            figure{
+                padding: 5px 0;
+            }
+        }
+        .quote-content{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            .quote-text{
+                max-width: 80%;
+                text-align: center;
+                font-style: italic;
+                background-color: hsl(0, 0%, 97%);
+                padding: 25px;
+                .referral{
+                    font-weight: bold;
+                }
+            }
+        }
+        .code-content{
+            font-size: 1.2em;
+            background-color: #222;
+            color: #ccc;
+        }
+    }
+    .sideArticle{
+        .author{
+            
+        }
+        .relate-articles{
+
+        }
+        .aside-banner{
+
+        }
+    }
+}
+
+
+
 footer{
     height: 48px;
     font-size: .7em;

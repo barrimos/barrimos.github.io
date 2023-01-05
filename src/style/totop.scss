@@ -1,19 +1,25 @@
-.toTopBtn {
-    position: fixed;
-    bottom: 0;
-    margin: 10px;
-    width: 35px;
-    height: 35px;
-    border: none;
-    outline: none;
-    cursor: pointer;
-    border-radius: 5px;
-    background-color: #c4c4c4;
-    opacity: .4;
+.buttonToTop{
+    position: absolute;
+    bottom: 10px;
+    left: 15px;
     display: none;
-    z-index: 999999;
-}
-.toTopBtn svg{
-    height: 35px;
-    width: 35px;
+    opacity: .4;
+    cursor: pointer;
+    .toTopBtn{
+        position: absolute;
+        width: 35px;
+        height: 35px;
+        border: none;
+        background-color: transparent;
+        border-radius: 5px;
+        z-index: 2;
+    }
+    .arrowTop{
+        background-color: #c4c4c4;
+        border-radius: 5px;
+        position: absolute;
+        bottom: 0;
+        width: 35px;
+        height: 35px;
+    }
 }
