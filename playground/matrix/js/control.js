@@ -548,13 +548,13 @@
         let method = e.target.attributes[NAME_DATA_CONTROL].value;
         let id = e.target.parentElement.parentElement.attributes[NAME_DATA_FORM].value;
         let table = document.querySelector(`[${NAME_DATA_TABLE}="${id}"]`);
-        if(method === 'increase' || method === 'decrease'){
+        if(method === BUTTON_NAME_INCREASE || method === BUTTON_NAME_DECREASE){
           updateCell(table, id, e.target.value);
         }
-        if(method === 'clear'){
+        if(method === BUTTON_NAME_CLEAR){
           clearCell(table, id);
         }
-        if(method === 'switch'){
+        if(method === BUTTON_NAME_SWITCH){
           switchCell(table, id);
         }
       });

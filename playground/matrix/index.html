@@ -38,7 +38,7 @@
                         <!-----------------Controls----------------->
 
                         <!-----------------Methods----------------->
-                        <div class="method_wrapper">
+                        <!-- <div class="method_wrapper">
                             <div class="method_box">
                                 <button type="submit" class="method_button" data-method="determinant">Determinant</button>
                             </div>
@@ -101,7 +101,7 @@
                             <div class="method_box">
                                 <button type="submit" class="method_button" data-method="rank">Rank</button>
                             </div>
-                        </div>
+                        </div> -->
                         <!-----------------Methods----------------->
                     </form>
                 </div>
@@ -173,6 +173,11 @@
     </div>
 
     <script src="./js/control.js"></script>
+    <script>
+        Array.from(document.querySelectorAll('[data-operation]')).forEach(elem => {
+            elem.setAttribute('disabled', '')
+        });
+    </script>
     <py-script>
 
     </py-script>
