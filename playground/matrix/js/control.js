@@ -155,7 +155,7 @@
   const getConfig = matrices => {
     // get data-size
     matrices.forEach((elem, i) => {
-      let key_idx = Config[i] === undefined ? i : Config[i] === 'length' ? i : getKeyConfig(elem.attributes[NAME_DATA_ID].value);
+      let key_idx = Config[i] === undefined ? i : getKeyConfig(elem.attributes[NAME_DATA_ID].value);
       Config[key_idx] = {};
       let err;
       
@@ -567,5 +567,5 @@
   
   createStartMatrix(matrix);
   addEventListeners();
-  Config.length = matrix.length;
+  Config.length = matrix.length; // Array-like Object
 })));
