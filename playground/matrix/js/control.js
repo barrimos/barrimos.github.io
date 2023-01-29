@@ -100,6 +100,7 @@
   const BUTTON_NAME_CONVOLUTION_EDGE = 'convolution_edge';
   
   const REQUIRED = 'required';
+  let buttons = document.getElementsByTagName('button');
   
   // default
   const Default = {
@@ -225,7 +226,7 @@
     });
   }
   
-  const getKeyConfig = (id) => {
+  const getKeyConfig = id => {
     let key_idx;
     Object.keys(Config).forEach(key => {
       if(Config[key].id === id){
@@ -309,9 +310,9 @@
             curr_cols.setAttribute('placeholder', '0');
             curr_cols.setAttribute(NAME_DATA_COLS, k);
             curr_cols.setAttribute(NAME_DATA_CELL, `${j}-${k}-${Config[key_idx].id}`);
-            if(j === 0 && k === 0){
-              curr_cols.setAttribute(REQUIRED, '');
-            }
+            // if(j === 0 && k === 0){
+            //   curr_cols.setAttribute(REQUIRED, '');
+            // }
             table.children[j].appendChild(curr_cols);
           }
         }
@@ -540,22 +541,21 @@
   // control ------------>
   
   
-  const addEventListeners = () => {
+  const clickHandler = () => {
     // closure callback event
-    let buttons = document.getElementsByTagName('button');
     Array.from(buttons).forEach(btn => {
       btn.addEventListener('click', e => {
-        let method = e.target.attributes[NAME_DATA_CONTROL].value;
-        let id = e.target.parentElement.parentElement.attributes[NAME_DATA_FORM].value;
+        let method = e.target.attributes[`data-${Object.keys(e.target.dataset)[0]}`].value;
+        let id = e.target.closest('.matrices').attributes[NAME_DATA_ID].value;
         let table = document.querySelector(`[${NAME_DATA_TABLE}="${id}"]`);
         if(method === BUTTON_NAME_INCREASE || method === BUTTON_NAME_DECREASE){
           updateCell(table, id, e.target.value);
-        }
-        if(method === BUTTON_NAME_CLEAR){
+        } else if(method === BUTTON_NAME_CLEAR){
           clearCell(table, id);
-        }
-        if(method === BUTTON_NAME_SWITCH){
+        } else if(method === BUTTON_NAME_SWITCH){
           switchCell(table, id);
+        } else {
+          getData(Config[getKeyConfig(id)], table);
         }
       });
     });
@@ -566,6 +566,6 @@
   const matrix = [].concat(...Element.prototype.querySelectorAll.call(document.documentElement, SELECTOR_DATA_RIDE));
   
   createStartMatrix(matrix);
-  addEventListeners();
+  clickHandler();
   Config.length = matrix.length; // Array-like Object
 })));

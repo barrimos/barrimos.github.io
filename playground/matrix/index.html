@@ -7,9 +7,9 @@
     <title>Matrix calculator</title>
     <link rel="stylesheet" href="../../src/style/main.css" />
     <link rel="stylesheet" href="../../src/dist/matrix.css" />
-    <link rel="stylesheet" href="./src/pyscript.css">
+    <!-- <link rel="stylesheet" href="./src/pyscript.css">
     <script defer src="https://pyscript.net/latest/pyscript.js"></script>
-    <script src="https://cdn.jsdelivr.net/pyodide/v0.21.3/full/pyodide.js"></script>
+    <script src="https://cdn.jsdelivr.net/pyodide/v0.21.3/full/pyodide.js"></script> -->
     <!-- <script defer src="https://pyscript.net/alpha/pyscript.js"></script> -->
     <!-- <py-config>
         [[fetch]]
@@ -248,15 +248,9 @@
         //     elem.setAttribute('disabled', '')
         // });
         
-        [a, b] = [1 , 2];
-
         // ma = sessionStorage.getItem('A');
         // mb = sessionStorage.getItem('B');
     </script>
-    <py-script>
-        from js import a, b
-        print(a, b)
-    </py-script>
     <!-- <py-script>
         from js import ma, mb
         import matrix
