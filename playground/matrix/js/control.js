@@ -101,7 +101,7 @@
   
   const REQUIRED = 'required';
   let buttons = document.getElementsByTagName('button');
-  
+        
   // default
   const Default = {
     rows: 3,
@@ -310,15 +310,11 @@
             curr_cols.setAttribute('placeholder', '0');
             curr_cols.setAttribute(NAME_DATA_COLS, k);
             curr_cols.setAttribute(NAME_DATA_CELL, `${j}-${k}-${Config[key_idx].id}`);
-            // if(j === 0 && k === 0){
-            //   curr_cols.setAttribute(REQUIRED, '');
-            // }
             table.children[j].appendChild(curr_cols);
           }
         }
       } else {
         getData(Config[key_idx], table);
-        // break;
       }
       getData(Config[key_idx], table);
     });
@@ -541,13 +537,29 @@
   // control ------------>
   
   
-  const clickHandler = () => {
+  // <------------- operation
+  const swap = () => {
+    
+  }
+  // operation ------------->
+
+
+  const buttonHandler = () => {
     // closure callback event
     Array.from(buttons).forEach(btn => {
       btn.addEventListener('click', e => {
+        e.preventDefault();
+        if(Object.keys(e.target.dataset)[0] === 'operation'){
+          if(e.target.attributes[NAME_DATA_OPERATION].value === 'swap'){
+            swap();
+          }
+          sessionStorage.setItem('method', e.target.attributes[NAME_DATA_OPERATION].value);
+          return;
+        }
         let method = e.target.attributes[`data-${Object.keys(e.target.dataset)[0]}`].value;
         let id = e.target.closest('.matrices').attributes[NAME_DATA_ID].value;
         let table = document.querySelector(`[${NAME_DATA_TABLE}="${id}"]`);
+        // data-control
         if(method === BUTTON_NAME_INCREASE || method === BUTTON_NAME_DECREASE){
           updateCell(table, id, e.target.value);
         } else if(method === BUTTON_NAME_CLEAR){
@@ -555,17 +567,34 @@
         } else if(method === BUTTON_NAME_SWITCH){
           switchCell(table, id);
         } else {
-          getData(Config[getKeyConfig(id)], table);
+          // data-method
+          // getData(Config[getKeyConfig(id)], table);
+          let c;
+          if(method === BUTTON_NAME_SCALAR ||
+            method === BUTTON_NAME_EXPONENT ||
+            method === BUTTON_NAME_SHIFT ||
+            method === BUTTON_NAME_PADDING){
+              c = e.target.nextElementSibling.value || null;
+            }
+            sessionStorage.setItem('method', c !== null ? `${id}-${method}-${c}` : `${id}-${method}-${null}`);
         }
       });
     });
   }
-    
 
   // define how many '[data-ride="matrices"]' existing in html
   const matrix = [].concat(...Element.prototype.querySelectorAll.call(document.documentElement, SELECTOR_DATA_RIDE));
   
   createStartMatrix(matrix);
-  clickHandler();
+  buttonHandler();
+  let cells = document.querySelectorAll('[data-cell]');
+  Array.from(cells).forEach(cell => {
+    cell.onchange = function(){
+      let data_cell = cell.getAttribute('data-cell').split('-');
+      let matrix = JSON.parse(sessionStorage.getItem(data_cell[2]));
+      matrix[data_cell[0]][data_cell[1]] = Number(cell.value) || 0;
+      sessionStorage.setItem(data_cell[2], JSON.stringify(matrix));
+    }
+  });
   Config.length = matrix.length; // Array-like Object
 })));
