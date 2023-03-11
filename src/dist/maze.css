@@ -1,0 +1,183 @@
+body {
+  background-color: #f3f3f3;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.game {
+  max-width: 320px;
+  height: auto;
+  border-radius: 10px;
+  box-shadow: 0 0 10px 1px rgba(0, 0, 0, 0.1);
+  background-color: #f7f7f7;
+}
+.game nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  visibility: visible;
+  height: 71px;
+  width: 100%;
+  transition: ease 0.5s;
+  z-index: 9;
+}
+.game nav.hide {
+  top: -71px;
+  visibility: hidden;
+}
+.game nav .topOptionMenu {
+  background-color: #fff;
+  padding: 5px;
+}
+.game nav .topOptionMenu .size, .game nav .topOptionMenu .pathfinding {
+  width: 100%;
+  max-width: 300px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 5px auto;
+}
+.game nav .topOptionMenu .size p, .game nav .topOptionMenu .size .pixelValue {
+  font-size: 0.8em;
+}
+.game nav .topOptionMenu .size .closeBtn {
+  width: 15px;
+  height: 15px;
+  border: none;
+  background-color: #ddd;
+}
+.game nav .topOptionMenu .pathfinding .enableAuto {
+  margin-right: 10px;
+}
+.game nav .topOptionMenu .pathfinding .labelEnable {
+  margin-bottom: 0;
+  font-size: 0.8em;
+}
+.game nav .topOptionMenu .pathfinding .optMethod {
+  width: 100%;
+  max-width: 180px;
+  height: 25px;
+}
+.game .headTab {
+  width: 300px;
+  margin: 0 auto;
+}
+.game .headTab .headName {
+  font-size: 0.9em;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+.game .headTab .stopwatch {
+  font-size: 1em;
+}
+.game .headTab .status {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.game .headTab .status .hp {
+  color: red;
+  font-weight: 600;
+  font-size: 0.9em;
+}
+.game .display .frame {
+  width: 100%;
+  height: 300px;
+  max-height: 300px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+}
+.game .display .countdown {
+  width: 70px;
+  height: 70px;
+  font-size: 4em;
+  position: absolute;
+  text-align: center;
+  opacity: 0;
+  font-weight: 900;
+  -webkit-text-stroke: 2px black;
+  -webkit-text-fill-color: white;
+}
+.game .display .countdown.start {
+  opacity: 1;
+  animation-name: cd;
+  animation-duration: 1s;
+  overflow: hidden;
+}
+@keyframes cd {
+  0% {
+    transform: scale(1);
+  }
+  100% {
+    transform: scale(2);
+  }
+}
+.game .display #canvasPlayer {
+  position: absolute;
+}
+.game .display #canvas {
+  margin: 0 auto;
+  border: 1px solid gray;
+  background-color: #fff;
+}
+.game .display .controlButton, .game .display .upleft, .game .display .rightdown {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.game .display .controlButton {
+  width: 290px;
+  margin: 0 auto 20px;
+  margin-top: 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+@media screen and (max-width: 768px) {
+  .game .display .controlButton {
+    width: 100%;
+  }
+}
+.game .display .controlButton .upleft, .game .display .controlButton .rightdown {
+  height: 110px;
+  flex-direction: column;
+}
+.game .display .controlButton .ctrlBtn {
+  width: 50px;
+  height: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+  background-color: #64666d;
+  color: white;
+  opacity: 0.8;
+  cursor: pointer;
+}
+.game .display .controlButton .menu {
+  width: 120px;
+  text-align: center;
+}
+.game .display .controlButton .menu .btn {
+  width: 60px;
+  border: none;
+  border-radius: 5px;
+  padding: 5px;
+  margin: 5px;
+  font-weight: 600;
+}
+.game .display .controlButton .menu .startBtn {
+  color: #3f3f3f;
+  background-color: #5fff87;
+  width: 80px;
+}
+.game .display .controlButton .menu .resetBtn, .game .display .controlButton .menu .optionBtn {
+  background-color: #c9c9c9;
+  font-weight: 300;
+  color: #fff;
+}

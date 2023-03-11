@@ -1,0 +1,194 @@
+$topNavHeight: 71px;
+$bodyBgColor: #f3f3f3;
+$gameBgColor: #f7f7f7;
+$topMenuBgColor: #fff;
+$startBtnColor: #5fff87;
+$resetBtnColor: #c9c9c9;
+$optionBtnColor: #5fff87;
+$coltrolResetOptionBtnColor: #64666d;
+body{
+  background-color: $bodyBgColor;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.game{
+  max-width: 320px;
+  height: auto;
+  border-radius: 10px;
+  box-shadow: 0 0 10px 1px rgba($color: #000000, $alpha: .1);
+  background-color: $gameBgColor;
+  nav{
+    position: fixed;
+    top: 0;
+    left: 0;
+    visibility: visible;
+    height: $topNavHeight;
+    width: 100%;
+    transition: ease .5s;
+    z-index: 9;
+    &.hide{
+      top: -$topNavHeight;
+      visibility: hidden;
+    }
+    .topOptionMenu{
+      background-color: $topMenuBgColor;
+      padding: 5px;
+      .size, .pathfinding{
+        width: 100%;
+        max-width: 300px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin: 5px auto;
+      }
+      .size{
+        p, .pixelValue{
+          font-size: .8em;
+        }
+        .closeBtn{
+          width: 15px;
+          height: 15px;
+          border: none;
+          background-color: #ddd;
+        }
+      }
+      .pathfinding{
+        .enableAuto{
+          margin-right: 10px;
+        }
+        .labelEnable{
+          margin-bottom: 0;
+          font-size: .8em;
+        }
+        .optMethod{
+          width: 100%;
+          max-width: 180px;
+          height: 25px;
+        }
+      }
+    }
+  }
+  .headTab{
+    width: 300px;
+    margin: 0 auto;
+    .headName{
+      font-size: .9em;
+      margin-top: 10px;
+      margin-bottom: 10px;
+    }
+    .stopwatch{
+      font-size: 1em;
+    }
+    .status{
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      .hp{
+        color: red;
+        font-weight: 600;
+        font-size: .9em;
+      }
+    }
+  }
+  .display{
+    .frame{
+      width: 100%;
+      height: 300px;
+      max-height: 300px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      position: relative;
+    }
+    .countdown{
+      width: 70px;
+      height: 70px;
+      font-size: 4em;
+      position: absolute;
+      text-align: center;
+      opacity: 0;
+      font-weight: 900;
+      -webkit-text-stroke: 2px black;
+      -webkit-text-fill-color: rgb(255, 255, 255);
+      &.start{
+        opacity: 1;
+        animation-name: cd;
+        animation-duration: 1s;
+        overflow: hidden;
+        @keyframes cd {
+          0%{
+            transform: scale(1);
+          }
+          100%{
+            transform: scale(2);
+          }
+        }
+      }
+    }
+    #canvasPlayer{
+      position: absolute;
+    }
+    #canvas{
+      margin: 0 auto;
+      border: 1px solid gray;
+      background-color: #fff;
+    }
+    .controlButton, .upleft, .rightdown{
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .controlButton{
+      width: 290px;
+      margin: 0 auto 20px;
+      margin-top: 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      @media screen and (max-width: 768px){
+        width: 100%;
+      }
+      .upleft, .rightdown{
+        height: 110px;
+        flex-direction: column;
+      }
+      .ctrlBtn{
+        width: 50px;
+        height: 50px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border-radius: 50%;
+        background-color: $coltrolResetOptionBtnColor;
+        color: rgb(255, 255, 255);
+        opacity: .8;
+        cursor: pointer;
+      }
+      .menu{
+        width: 120px;
+        text-align: center;
+        .btn{
+          width: 60px;
+          border: none;
+          border-radius: 5px;
+          padding: 5px;
+          margin: 5px;
+          font-weight: 600;
+        }
+        .startBtn{
+          color: rgb(63, 63, 63);
+          background-color: $startBtnColor;
+          width: 80px;
+        }
+        .resetBtn, .optionBtn{
+          background-color: $resetBtnColor;
+          font-weight: 300;
+          color: #fff;
+        }
+      }
+    }
+  }
+}
