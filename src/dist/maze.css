@@ -181,3 +181,11 @@ body {
   font-weight: 300;
   color: #fff;
 }
+
+.credit {
+  position: absolute;
+  top: 0;
+  left: 0;
+  padding: 10px;
+  font-size: 0.8em;
+}

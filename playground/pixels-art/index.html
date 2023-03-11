@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <link rel="stylesheet" href="./assets/style/style.css">
+</head>
+<body>
+  <div class="container">
+    <div id="axis">0, 0</div>
+    <div class="canvas-container">
+      <canvas id="canvas"></canvas>
+      <canvas id="canvasGrid"></canvas>
+    </div>
+    <div class="menu">
+      <button name="clear" class="clearBtn" id="clearBtn">Clear</button>
+      <button name="save" class="saveBtn" id="saveBtn">Save</button>
+      <div class="switchType">
+        <input type="radio" name="saveType" id="savePng" value="png" class="typeImage">
+        <label for="savePng">png</label>
+      </div>
+      <div class="switchType">
+        <input type="radio" name="saveType" id="saveJpeg" value="jpeg" class="typeImage">
+        <label for="saveJpeg">jpeg</label>
+      </div>
+    </div>
+    <div class="pixelSize">
+      <p>Small</p>
+      <input type="range" name="pixelSize" id="pixelSize" value="15" min="5" max="30">
+      <p>Big</p>
+      <div class="chkgrid">
+        <input type="checkbox" name="switchGrid" id="switchGrid" checked>
+        <label for="switchGrid">Grid</label>
+      </div>
+    </div>
+    <p id="area-size"></p>
+  </div>
+  <div class="input-container">
+    <input type="number" name="canvasWidth" id="canvasWidth" class="canvasWidth" placeholder="width">
+    <input type="number" name="canvasHeight" id="canvasHeight" class="canvasHeight" placeholder="height">
+    <input type="color" name="colorPicker" id="colorPicker" class="colorPicker">
+    <button type="submit" name="submit" class="submitBtn" id="submitBtn">Submit</button>
+    <button type="reset" name="reset" class="resetBtn" id="resetBtn">Reset</button>
+  </div>
+  <div id="demo"></div>
+  <script src="./assets/script/script.js"></script>
+</body>
+</html>
