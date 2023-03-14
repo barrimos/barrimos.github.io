@@ -1,231 +1,267 @@
-let cell_color = '#000000';
-    let canvas_width = 300;
-    let canvas_height = 300;
-    let isDragging = false;
-    let isErase = false;
-    let size = 15;
-    let pixels = new Array(256);
+const axis = document.getElementById('axis');
+const widthInput = document.getElementById('canvasWidth');
+const heightInput = document.getElementById('canvasHeight');
+const colorPicker = document.getElementById('colorPicker');
+const submitBtn = document.getElementById('submitBtn');
+const resetBtn = document.getElementById('resetBtn');
+const clearBtn = document.getElementById('clearBtn');
+const saveBtn = document.getElementById('saveBtn');
+const switchGridBtn = document.getElementById('switchGrid');
+const pixelInput = document.getElementById('pixelSize');
+const inputTypePng = document.getElementById('savePng');
+const inputTypeJpeg = document.getElementById('saveJpeg');
+const typeImage = document.querySelectorAll('.typeImage');
 
-    const axis = document.getElementById('axis');
-    const grid = document.getElementById('grid');
-    const cell = document.querySelectorAll('.cell');
-    const width_size = document.getElementById('canvasWidth');
-    const height_size = document.getElementById('canvasHeight');
-    const color_picker = document.getElementById('colorPicker');
-    const submit_btn = document.getElementById('submitBtn');
-    const reset_btn = document.getElementById('resetBtn');
-    const clear_btn = document.getElementById('clearBtn');
-    const save_btn = document.getElementById('saveBtn');
-    const switch_grid_btn = document.getElementById('switchGrid');
-    const pixel_inp = document.getElementById('pixelSize');
-    const pixel_area = document.getElementById('pixel-area');
-    const typeImage = document.querySelectorAll('.typeImage');
-    
-    const canvas = document.getElementById('canvas');
-    const canvas_grid = document.getElementById('canvasGrid');
-    canvas.width = canvas_width;
-    canvas.height = canvas_height;
-    const ctx = canvas.getContext('2d');
-    const ctx_grid = canvas_grid.getContext('2d');
-    canvas_grid.width = canvas_width;
-    canvas_grid.height = canvas_height;
-    let type = 'png';
+const canvas = document.getElementById('canvas');
+const canvasGrid = document.getElementById('canvasGrid');
+const ctx = canvas.getContext('2d');
+const ctxGrid = canvasGrid.getContext('2d');
 
-    let cx, cy;
+// Default config
+let cellColor = '#000000';
+let canvasWidth = 300;
+let canvasHeight = 300;
+let isDragging = false;
+let isErase = false;
+let size = 15;
+let pixels = new Array(256);
+let type = 'png';
+let rows, cols, overflowCols, ofverflowRows, shiftStartCols, shiftStartRows;
 
-    const demo = document.getElementById('demo');
+// Set canvas size
+const setCanvasSize = () => {
+  canvas.width = canvasWidth;
+  canvas.height = canvasHeight;
+  canvasGrid.width = canvasWidth;
+  canvasGrid.height = canvasHeight;
+}
 
-    const drawPixel = (e) => {
-      let x = Math.floor(e.offsetX / size);
-      let y = Math.floor(e.offsetY / size);
+// Calculate canvas config
+const calculateCanvasConfig = () => {
+  setCanvasSize();
+  rows = Math.floor(canvasGrid.height / size);
+  cols = Math.floor(canvasGrid.width / size);
+  overflowCols = canvasGrid.width - (cols * size);
+  ofverflowRows = canvasGrid.height - (rows * size);
+  shiftStartCols = overflowCols / 2;
+  shiftStartRows = ofverflowRows / 2;
+}
 
-      if(isErase){
-        ctx.clearRect(x * size, y * size, size, size);
-        pixels[y][x] = null;
-      } else {
-        ctx.fillStyle = cell_color;
-        ctx.fillRect(x * size, y * size, size, size);
-        pixels[y][x] = cell_color;
-      }
+// Clear canvas
+const clearCanvas = () => {
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+  ctxGrid.clearRect(0, 0, canvasGrid.width, canvasGrid.height);
+
+  pixels = new Array(256);
+  for(let i = 0; i < pixels.length; i++){
+    pixels[i] = new Array(256);
+  }
+}
+
+// Draw grid
+const drawGrid = () => {
+  clearCanvas();
+  calculateCanvasConfig();
+  ctxGrid.beginPath();
+  // // Not reaching to border.
+  // for(let x = 0; x <= cols; x++){
+  //   ctxGrid.moveTo(x * size + shiftStartCols, 0 + shiftStartRows);
+  //   ctxGrid.lineTo(x * size + shiftStartCols, canvasHeight - ofverflowRows + shiftStartRows);
+  // }
+  // for(let y = 0; y <= rows; y++){
+  //   ctxGrid.moveTo(0 + shiftStartCols, y * size + shiftStartRows);
+  //   ctxGrid.lineTo(canvasWidth - overflowCols + shiftStartCols, y * size + shiftStartRows);
+  // }
+
+  // Reaching to border.
+  for(let x = 0; x <= cols; x++){
+    ctxGrid.moveTo(x * size + shiftStartCols, 0);
+    ctxGrid.lineTo(x * size + shiftStartCols, canvasHeight + shiftStartRows);
+  }
+  for(let y = 0; y <= rows; y++){
+    ctxGrid.moveTo(0, y * size + shiftStartRows);
+    ctxGrid.lineTo(canvasWidth + shiftStartCols, y * size + shiftStartRows);
+  }
+
+  // Initialize to array
+  pixels = [];
+  for(let y = 0; y < canvas.width / size; y++){
+    pixels[y] = [];
+    for(let x = 0; x < canvas.height / size; x++){
+      pixels[y][x] = null;
     }
+  }
 
-    const clearCanvas = () => {
-      ctx.clearRect(0, 0, canvas.width, canvas.height);
-      pixels = new Array(256);
+  ctxGrid.strokeStyle = '#ddd';
+  ctxGrid.stroke();
+}
 
-      for(let i = 0; i < pixels.length; i++){
-        pixels[i] = new Array(256);
-      }
+// Draw pixel
+const drawPixel = e => {
+  let x = Math.floor(e.offsetX / size);
+  let y = Math.floor(e.offsetY / size);
 
-      width_size.value = '';
-      height_size.value = '';
-      drawGrid();
+  if(isErase){
+    ctx.clearRect(x * size, y * size, size, size);
+    pixels[x][y] = null;
+  } else {
+    ctx.fillStyle = cellColor;
+    ctx.fillRect(x * size, y * size, size, size);
+    pixels[x][y] = cellColor;
+  }
+}
+
+
+// Change pixel's size
+pixelInput.addEventListener('input', e => {
+  size = parseInt(e.target.value);
+  drawGrid();
+});
+
+// Change canvas's size
+submitBtn.addEventListener('click', e => {
+  e.preventDefault();
+  canvasWidth = widthInput.value || canvasWidth;
+  canvasHeight = heightInput.value || canvasHeight;
+  canvas.width = parseInt(canvasWidth);
+  canvas.height = parseInt(canvasHeight);
+  canvasGrid.width = parseInt(canvasWidth);
+  canvasGrid.height = parseInt(canvasHeight);
+  drawGrid();
+});
+
+// Clear all canvas was drawn
+clearBtn.addEventListener('click', () => {
+  drawGrid();
+});
+
+// Change type image for save
+typeImage.forEach(btn => {
+  btn.addEventListener('input', e => {
+    if(btn.value === 'png'){
+      inputTypePng.setAttribute('checked', '');
+      inputTypePng.checked = true;
+      inputTypeJpeg.removeAttribute('checked');
+      inputTypeJpeg.checked = false;
+    } else {
+      inputTypeJpeg.setAttribute('checked', '');
+      inputTypeJpeg.checked = true;
+      inputTypePng.removeAttribute('checked');
+      inputTypePng.checked = false;
     }
+    type = e.target.value;
+  });
+});
 
-    const drawGrid = () => {
-      let step_width = Math.floor(canvas.width / size);
-      let step_height = Math.floor(canvas.height / size);
-      demo.innerHTML += `<br\>step_width ${step_width} <br\>
-      step_height ${step_height}`;
-      ctx_grid.beginPath();
-      for(let x = 0; x <= canvas.width; x += size){
-        ctx_grid.moveTo(x, 0);
-        ctx_grid.lineTo(x, canvas.height);
-      }
-      for(let y = 0; y <= canvas.height; y += size){
-        ctx_grid.moveTo(0, y);
-        ctx_grid.lineTo(canvas.width, y);
-      }
-      ctx_grid.strokeStyle = '#ddd';
-      ctx_grid.stroke();
+// Reset canvas to default config
+resetBtn.addEventListener('click', () => {
+  // Pixel's size
+  size = 15;
+  pixelInput.value = size;
 
-      pixels = [];
-      for(let y = 0; y < canvas.width / size; y++){
-        pixels[y] = [];
-        for(let x = 0; x < canvas.height / size; x++){
-          pixels[y][x] = null;
-        }
-      }
-    }
+  // Canvas's Size
+  canvasWidth = 300;
+  canvasHeight = 300;
+  widthInput.value = '';
+  heightInput.value = '';
 
-    const calculateCanvasSize = () => {
-      const numPixels = canvas_width / size * canvas_height / size;
-      const canvasArea = canvas_width * canvas_height;
-      const pixelArea = numPixels * size * size;
-      const scaleFactor = Math.sqrt(pixelArea / canvasArea);
-      canvas_width = Math.round(canvas_width * scaleFactor);
-      canvas_height = Math.round(canvas_height * scaleFactor);
-      canvas.width = canvas_width;
-      canvas.height = canvas_height;
-      canvas_grid.width = canvas_width;
-      canvas_grid.height = canvas_height;
+  // Color
+  colorPicker.value = '#000000';
+  cellColor = colorPicker.value;
 
-      demo.innerHTML = `numPixels ${numPixels}<br/>
-      canvasArea ${canvasArea}<br/>
-      pixelArea ${pixelArea}<br/>
-      scaleFactor ${scaleFactor}<br/>
-      size ${size}<br/>
-      canvas_width ${canvas_width}<br/>
-      canvas_height ${canvas_height}`;
-    }
+  // Get back grid
+  canvasGrid.classList.remove('hide');
+  switchGridBtn.setAttribute('checked', '');
+  switchGridBtn.checked = true;
 
-    pixel_inp.addEventListener('input', () => {
-      size = parseInt(pixel_inp.value);
-      calculateCanvasSize();
-      drawGrid();
-    });
+  // Change type image
+  type = 'png';
+  inputTypePng.setAttribute('checked', '');
+  inputTypePng.checked = true;
+  inputTypeJpeg.removeAttribute('checked');
+  inputTypeJpeg.checked = false;
 
-    submit_btn.addEventListener('click', e => {
+  // Clear and draw new grid
+  drawGrid();
+});
+
+// Save image
+saveBtn.addEventListener('click', () => {
+  const link = document.createElement('a');
+  link.download = `download.${type}`;
+  if(type === 'jpeg'){
+    ctxGrid.clearRect(0, 0, canvasGrid.width, canvasGrid.height);
+    ctxGrid.fillStyle = '#fff';
+    ctxGrid.fillRect(0, 0, canvasGrid.width, canvasGrid.height);
+    ctxGrid.drawImage(canvas, 0, 0);
+    link.href = canvasGrid.toDataURL(`image/${type}`, 1.0);
+  } else {
+    link.href = canvas.toDataURL(`image/${type}`, 1.0);
+  }
+  link.click();
+  link.delete;
+});
+
+// On/off grid to display
+switchGridBtn.addEventListener('click', () => {
+  if(switchGridBtn.checked){
+    canvasGrid.classList.remove('hide');
+    switchGridBtn.setAttribute('checked', '');
+    switchGridBtn.checked = true;
+  } else {
+    canvasGrid.classList.add('hide');
+    switchGridBtn.removeAttribute('checked');
+  }
+});
+
+// Change pixel's color
+colorPicker.addEventListener('input', e => {
+  cellColor = e.target.value;
+});
+
+// Mouse event
+canvas.addEventListener('mousedown', e => {
+  // Prevent right click
+  if(e.button === 2){
+    canvas.oncontextmenu = e => {
       e.preventDefault();
-      canvas_width = width_size.value || canvas_width;
-      canvas_height = height_size.value || canvas_height;
-      ctx.clearRect(0, 0, canvas.width, canvas.height);
-      canvas.width = parseInt(canvas_width);
-      canvas.height = parseInt(canvas_height);
-      canvas_grid.width = parseInt(canvas_width);
-      canvas_grid.height = parseInt(canvas_height);
-      calculateCanvasSize();
-      drawGrid();
-    });
+      e.stopPropagation();
+    }
+    return;
+  }
+  if(e.offsetX < 0 || e.offsetX >= canvas.width || e.offsetY < 0 || e.offsetY >= canvas.height){
+    return; 
+  }
+  if(pixels[Math.floor(e.offsetY / size)][Math.floor(e.offsetX / size)] !== null){
+    isErase = true;
+    isDragging = false;
+  } else {
+    isErase = false;
+    isDragging = true;
+  }
+  drawPixel(e);
+});
 
+canvas.addEventListener('mouseleave', () => {
+  isDragging = false;
+  isErase = false;
+});
 
-    canvas.addEventListener('mousedown', e => {
-      // Prevent right click
-      if(e.button === 2){
-        canvas.oncontextmenu = e => {
-          e.preventDefault();
-          e.stopPropagation();
-        }
-        return;
-      }
-      if(e.offsetX < 0 || e.offsetX >= canvas.width || e.offsetY < 0 || e.offsetY >= canvas.height){
-        return; 
-      }
-      if(pixels[Math.floor(e.offsetY / size)][Math.floor(e.offsetX / size)] !== null){
-        isErase = true;
-        isDragging = false;
-      } else {
-        isErase = false;
-        isDragging = true;
-      }
-      drawPixel(e);
-    });
+canvas.addEventListener('mousemove', e => {
+  axis.innerHTML = `${Math.floor((e.offsetX))}, ${Math.floor((e.offsetY))}`;
+  if(e.offsetX < 0 || e.offsetX >= canvas.width || e.offsetY < 0 || e.offsetY >= canvas.height){
+    return; 
+  }
+  if(!isDragging && isErase){
+    drawPixel(e);
+  } else if(isDragging && !isErase){
+    drawPixel(e);
+  }
+});
 
-    canvas.addEventListener('mouseleave', () => {
-      isDragging = false;
-      isErase = false;
-    });
+canvas.addEventListener('mouseup', () => {
+  isDragging = false;
+  isErase = false;
+});
 
-    canvas.addEventListener('mousemove', e => {
-      axis.innerHTML = `${Math.floor((e.offsetX))}, ${Math.floor((e.offsetY))}`;
-      if(e.offsetX < 0 || e.offsetX >= canvas.width || e.offsetY < 0 || e.offsetY >= canvas.height){
-        return; 
-      }
-      if(!isDragging && isErase){
-        drawPixel(e);
-      } else if(isDragging && !isErase){
-        drawPixel(e);
-      }
-    });
-
-    canvas.addEventListener('mouseup', () => {
-      isDragging = false;
-      isErase = false;
-    });
-
-    clear_btn.addEventListener('click', () => {
-      clearCanvas();
-    });
-
-    reset_btn.addEventListener('click', () => {
-      size = 15;
-      canvas_width = 300;
-      canvas_height = 300;
-      pixel_inp.value = size;
-      color_picker.value = '#000000';
-      canvas_grid.classList.remove('hide');
-      switch_grid_btn.setAttribute('checked', '');
-      switch_grid_btn.checked = true;
-      calculateCanvasSize();
-      clearCanvas();
-    });
-
-    color_picker.addEventListener('input', e => {
-      cell_color = e.target.value;
-    });
-
-    typeImage.forEach(btn => {
-      btn.addEventListener('input', e => {
-        type = e.target.value;
-      });
-    });
-
-    save_btn.addEventListener('click', () => {
-      const link = document.createElement('a');
-      link.download = `download.${type}`;
-      if(type === 'jpeg'){
-        ctx_grid.clearRect(0, 0, canvas_grid.width, canvas_grid.height);
-        ctx_grid.fillStyle = '#fff';
-        ctx_grid.fillRect(0, 0, canvas_grid.width, canvas_grid.height);
-        ctx_grid.drawImage(canvas, 0, 0);
-        link.href = canvas_grid.toDataURL(`image/${type}`, 1.0);
-      } else {
-        link.href = canvas.toDataURL(`image/${type}`, 1.0);
-      }
-      link.click();
-      link.delete;
-    });
-
-    switch_grid_btn.addEventListener('click', () => {
-      if(switch_grid_btn.checked){
-        canvas_grid.classList.remove('hide');
-        switch_grid_btn.setAttribute('checked', '');
-        switch_grid_btn.checked = true;
-      } else {
-        canvas_grid.classList.add('hide');
-        switch_grid_btn.removeAttribute('checked');
-      }
-    });
-
-    calculateCanvasSize();
-    drawGrid();
+drawGrid();
