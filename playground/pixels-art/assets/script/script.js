@@ -26,7 +26,7 @@ let isErase = false;
 let size = 15;
 let pixels = new Array(256);
 let type = 'png';
-let rows, cols, overflowCols, ofverflowRows, shiftStartCols, shiftStartRows;
+let rows, cols, overflowCols, overflowRows, shiftStartCols, shiftStartRows;
 
 // Set canvas size
 const setCanvasSize = () => {
@@ -42,9 +42,11 @@ const calculateCanvasConfig = () => {
   rows = Math.floor(canvasGrid.height / size);
   cols = Math.floor(canvasGrid.width / size);
   overflowCols = canvasGrid.width - (cols * size);
-  ofverflowRows = canvasGrid.height - (rows * size);
+  overflowRows = canvasGrid.height - (rows * size);
   shiftStartCols = overflowCols / 2;
-  shiftStartRows = ofverflowRows / 2;
+  shiftStartRows = overflowRows / 2;
+  canvas.width -= overflowCols;
+  canvas.height -= overflowRows;
 }
 
 // Clear canvas
@@ -63,32 +65,32 @@ const drawGrid = () => {
   clearCanvas();
   calculateCanvasConfig();
   ctxGrid.beginPath();
-  // // Not reaching to border.
-  // for(let x = 0; x <= cols; x++){
-  //   ctxGrid.moveTo(x * size + shiftStartCols, 0 + shiftStartRows);
-  //   ctxGrid.lineTo(x * size + shiftStartCols, canvasHeight - ofverflowRows + shiftStartRows);
-  // }
-  // for(let y = 0; y <= rows; y++){
-  //   ctxGrid.moveTo(0 + shiftStartCols, y * size + shiftStartRows);
-  //   ctxGrid.lineTo(canvasWidth - overflowCols + shiftStartCols, y * size + shiftStartRows);
-  // }
-
-  // Reaching to border.
+  // Not reaching to border.
   for(let x = 0; x <= cols; x++){
-    ctxGrid.moveTo(x * size + shiftStartCols, 0);
-    ctxGrid.lineTo(x * size + shiftStartCols, canvasHeight + shiftStartRows);
+    ctxGrid.moveTo(x * size + shiftStartCols, 0 + shiftStartRows);
+    ctxGrid.lineTo(x * size + shiftStartCols, canvasHeight - overflowRows + shiftStartRows);
   }
   for(let y = 0; y <= rows; y++){
-    ctxGrid.moveTo(0, y * size + shiftStartRows);
-    ctxGrid.lineTo(canvasWidth + shiftStartCols, y * size + shiftStartRows);
+    ctxGrid.moveTo(0 + shiftStartCols, y * size + shiftStartRows);
+    ctxGrid.lineTo(canvasWidth - overflowCols + shiftStartCols, y * size + shiftStartRows);
   }
+
+  // // Reaching to border.
+  // for(let x = 0; x <= cols; x++){
+  //   ctxGrid.moveTo(x * size + shiftStartCols, 0);
+  //   ctxGrid.lineTo(x * size + shiftStartCols, canvasHeight + shiftStartRows);
+  // }
+  // for(let y = 0; y <= rows; y++){
+  //   ctxGrid.moveTo(0, y * size + shiftStartRows);
+  //   ctxGrid.lineTo(canvasWidth + shiftStartCols, y * size + shiftStartRows);
+  // }
 
   // Initialize to array
   pixels = [];
-  for(let y = 0; y < canvas.width / size; y++){
-    pixels[y] = [];
-    for(let x = 0; x < canvas.height / size; x++){
-      pixels[y][x] = null;
+  for(let x = 0; x < rows; x++){
+    pixels[x] = [];
+    for(let y = 0; y < cols; y++){
+      pixels[x][y] = null;
     }
   }
 
@@ -103,11 +105,11 @@ const drawPixel = e => {
 
   if(isErase){
     ctx.clearRect(x * size, y * size, size, size);
-    pixels[x][y] = null;
+    pixels[y][x] = null;
   } else {
     ctx.fillStyle = cellColor;
     ctx.fillRect(x * size, y * size, size, size);
-    pixels[x][y] = cellColor;
+    pixels[y][x] = cellColor;
   }
 }
 
