@@ -5,15 +5,23 @@ const colorPicker = document.getElementById('colorPicker');
 const submitBtn = document.getElementById('submitBtn');
 const resetBtn = document.getElementById('resetBtn');
 const clearBtn = document.getElementById('clearBtn');
-const saveBtn = document.getElementById('saveBtn');
+const exportBtn = document.getElementById('exportBtn');
 const switchGridBtn = document.getElementById('switchGrid');
 const pixelInput = document.getElementById('pixelSize');
 const inputTypePng = document.getElementById('savePng');
 const inputTypeJpeg = document.getElementById('saveJpeg');
+const menuBtn = document.getElementById('menuBtn');
+const menuDropdown = document.querySelector('.menuDropdown');
+const selectFile = document.getElementById('selectFile');
+const openFileBtn = document.getElementById('openFileBtn');
+const saveFileBtn = document.getElementById('saveFileBtn');
 const typeImage = document.querySelectorAll('.typeImage');
+const detail = document.getElementById('detail');
 
+const canvasBorder = document.getElementById('canvasBorder');
 const canvas = document.getElementById('canvas');
 const canvasGrid = document.getElementById('canvasGrid');
+const ctxBorder = canvasBorder.getContext('2d');
 const ctx = canvas.getContext('2d');
 const ctxGrid = canvasGrid.getContext('2d');
 
@@ -23,13 +31,19 @@ let canvasWidth = 300;
 let canvasHeight = 300;
 let isDragging = false;
 let isErase = false;
+let isEnter = false;
+let menu = false;
 let size = 15;
 let pixels = new Array(256);
 let type = 'png';
-let rows, cols, overflowCols, overflowRows, shiftStartCols, shiftStartRows;
+let altPress = false;
+let scale = 1;
+let rows, cols, overflowCols, overflowRows, shiftStartCols, shiftStartRows, fileUpload;
 
 // Set canvas size
 const setCanvasSize = () => {
+  canvasBorder.width = canvasWidth;
+  canvasBorder.height = canvasHeight;
   canvas.width = canvasWidth;
   canvas.height = canvasHeight;
   canvasGrid.width = canvasWidth;
@@ -113,11 +127,129 @@ const drawPixel = e => {
   }
 }
 
+// Write detail
+const detailDisplay = () => {
+  detail.innerHTML = `artwork area size: ${canvasGrid.width}, ${canvasGrid.height} px<br/>
+  draw area size: ${canvas.width}, ${canvas.height} px<br/>
+  pixel size: ${size} px<br/>
+  rows: ${rows}<br/>
+  cols: ${cols}<br/>
+  grids: ${(canvas.width / size) * (canvas.height / size)}`;
+}
+
+// Check input
+const checkInput = () => {
+  try{
+    if(canvasWidth > 1000 || canvasHeight > 1000){
+      throw new Error('Canvas\'s size is too large.');
+    }
+    if(canvasWidth < 100 || canvasHeight < 100){
+      throw new Error('Canvas\'s size is too small.');
+    }
+    return true;
+  } catch(e){
+      alert(e);
+      return false;
+  }
+}
+
+// Open/close menu
+menuBtn.addEventListener('click', e => {
+  e.preventDefault();
+  menuDropdown.classList.toggle('open');
+  menu = true;
+});
+document.addEventListener('click', e => {
+  if(!menuBtn.contains(e.target) && menu){
+    menuDropdown.classList.remove('open');
+    menu = false;
+  }
+});
+
+
+// Open and read file
+openFileBtn.addEventListener('click', async e => {
+  e.preventDefault();
+  selectFile.click();
+});
+selectFile.addEventListener('change', function() {
+  try{
+    if(selectFile.files[0].type !== 'text/plain'){
+      throw new Error('File type is cannot read.');
+    } else {
+      // reader.readyState 0; EMPTY
+      let fileUpload = selectFile.files[0];
+      let reader = new FileReader();
+
+      // reader.readyState 1; LOADING
+      reader.readAsText(fileUpload);
+
+      // reader.readyState 2; DONE
+      reader.onload = () => {
+        let dataObj = JSON.parse(reader.result);
+        resetBtn.click();
+        rows = dataObj.rows;
+        cols = dataObj.cols;
+        canvasWidth = dataObj.width;
+        canvasHeight = dataObj.height;
+        size = dataObj.size;
+        pixelInput.value = size;
+        drawGrid();
+        pixels = dataObj.pixels;
+        const image = new Image();
+        image.src = dataObj.canvas;
+        image.onload = function() {
+          ctx.drawImage(image, 0, 0);
+        };
+        detailDisplay();
+      }
+    }
+  } catch(e){
+    alert(e);
+  }
+})
+
+
+// Read and save file
+saveFileBtn.addEventListener('click', e => {
+  e.preventDefault();
+  // Create element with <a> tag
+  const link = document.createElement("a");
+
+  // Prepare file
+  let dataObj = {
+    pixels: pixels,
+    rows: rows,
+    cols: cols,
+    width: canvasWidth,
+    height: canvasHeight,
+    size: size,
+    switchGridBtn,
+    canvas: canvas.toDataURL(),
+  }
+
+  // Create a blog object with the file content which you want to add to the file
+  const file = new Blob([JSON.stringify(dataObj)], {type: 'text/plain'});
+
+  // Add file content in the object URL
+  link.href = URL.createObjectURL(file);
+
+  // Add file name
+  link.download = 'dataObj.txt';
+
+  // Add click event to <a> tag to save file.
+  link.click();
+  URL.revokeObjectURL(link.href);
+});
 
 // Change pixel's size
 pixelInput.addEventListener('input', e => {
   size = parseInt(e.target.value);
+
   drawGrid();
+
+  // Display canvas's details
+  detailDisplay();
 });
 
 // Change canvas's size
@@ -125,16 +257,35 @@ submitBtn.addEventListener('click', e => {
   e.preventDefault();
   canvasWidth = widthInput.value || canvasWidth;
   canvasHeight = heightInput.value || canvasHeight;
+  
+  if(!checkInput()){
+    canvasWidth = canvasGrid.width;
+    canvasHeight = canvasGrid.height;
+    return;
+  };
+
+  canvasBorder.width = parseInt(canvasWidth);
+  canvasBorder.height = parseInt(canvasHeight);
   canvas.width = parseInt(canvasWidth);
   canvas.height = parseInt(canvasHeight);
   canvasGrid.width = parseInt(canvasWidth);
   canvasGrid.height = parseInt(canvasHeight);
+
+  widthInput.value = '';
+  heightInput.value = '';
+
   drawGrid();
+
+  // Display canvas's details
+  detailDisplay();
 });
 
 // Clear all canvas was drawn
 clearBtn.addEventListener('click', () => {
   drawGrid();
+
+  // Display canvas's details
+  detailDisplay();
 });
 
 // Change type image for save
@@ -183,23 +334,31 @@ resetBtn.addEventListener('click', () => {
   inputTypeJpeg.removeAttribute('checked');
   inputTypeJpeg.checked = false;
 
+  // Reset upload file
+  selectFile.value = '';
+
   // Clear and draw new grid
   drawGrid();
+
+  // Display canvas's details
+  detailDisplay();
 });
 
-// Save image
-saveBtn.addEventListener('click', () => {
+// Save exporte
+exportBtn.addEventListener('click', () => {
+  const cloneCanvas = document.createElement('canvas');
+  const cloneContext = cloneCanvas.getContext('2d');
+  cloneCanvas.width = canvasWidth;
+  cloneCanvas.height = canvasHeight;
   const link = document.createElement('a');
   link.download = `download.${type}`;
   if(type === 'jpeg'){
-    ctxGrid.clearRect(0, 0, canvasGrid.width, canvasGrid.height);
-    ctxGrid.fillStyle = '#fff';
-    ctxGrid.fillRect(0, 0, canvasGrid.width, canvasGrid.height);
-    ctxGrid.drawImage(canvas, 0, 0);
-    link.href = canvasGrid.toDataURL(`image/${type}`, 1.0);
-  } else {
-    link.href = canvas.toDataURL(`image/${type}`, 1.0);
+    cloneContext.clearRect(0, 0, canvasGrid.width, canvasGrid.height);
+    cloneContext.fillStyle = '#fff';
+    cloneContext.fillRect(0, 0, canvasGrid.width, canvasGrid.height);
   }
+  cloneContext.drawImage(canvas, 0 + shiftStartCols, 0 + shiftStartRows);
+  link.href = cloneCanvas.toDataURL(`image/${type}`, 1.0);
   link.click();
   link.delete;
 });
@@ -267,3 +426,4 @@ canvas.addEventListener('mouseup', () => {
 });
 
 drawGrid();
+detailDisplay();

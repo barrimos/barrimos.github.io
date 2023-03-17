@@ -4,19 +4,32 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
+  <title>Pixels Art</title>
   <link rel="stylesheet" href="./assets/style/style.css">
 </head>
 <body>
+  <nav id="topMenu" class="topMenu">
+    <button type="menu" name="menuBtn" id="menuBtn" class="menuBtn">Menu</button>
+    <ul class="menuDropdown">
+      <li class="menuItem">
+        <input type="file" id="selectFile" name="selectFile" class="selectFile">
+        <button type="submit" id="openFileBtn" name="openFileBtn" class="openFileBtn">Open</button>
+      </li>
+      <li class="menuItem">
+        <button type="submit" id="saveFileBtn" name="saveFileBtn" class="saveFileBtn">Save</button>
+      </li>
+    </ul>
+    <div id="axis" class="axis">0, 0</div>
+  </nav>
   <div class="container">
-    <div id="axis">0, 0</div>
     <div class="canvas-container">
+      <canvas id="canvasBorder"></canvas>
       <canvas id="canvas"></canvas>
       <canvas id="canvasGrid"></canvas>
     </div>
     <div class="menu">
       <button name="clear" class="clearBtn" id="clearBtn">Clear</button>
-      <button name="save" class="saveBtn" id="saveBtn">Save</button>
+      <button name="export" class="exportBtn" id="exportBtn">export</button>
       <div class="switchType">
         <input type="radio" name="saveType" id="savePng" value="png" class="typeImage" checked>
         <label for="savePng">png</label>
@@ -26,9 +39,9 @@
         <label for="saveJpeg">jpeg</label>
       </div>
     </div>
-    <div class="pixelSize">
+    <div class="controlPixel">
       <p>Small</p>
-      <input type="range" name="pixelSize" id="pixelSize" value="15" min="10" max="30">
+      <input type="range" name="pixelSize" id="pixelSize" class="pixelSize" value="15" min="10" max="30">
       <p>Big</p>
       <div class="chkgrid">
         <input type="checkbox" name="switchGrid" id="switchGrid" checked>
@@ -38,13 +51,13 @@
     <p id="area-size"></p>
   </div>
   <div class="input-container">
-    <input type="number" name="canvasWidth" id="canvasWidth" class="canvasWidth" placeholder="width">
-    <input type="number" name="canvasHeight" id="canvasHeight" class="canvasHeight" placeholder="height">
+    <input type="number" name="canvasWidth" id="canvasWidth" class="canvasWidth" min="100" max="1000" placeholder="width">
+    <input type="number" name="canvasHeight" id="canvasHeight" class="canvasHeight" min="100" max="1000" placeholder="height">
     <input type="color" name="colorPicker" id="colorPicker" class="colorPicker">
     <button type="submit" name="submit" class="submitBtn" id="submitBtn">Submit</button>
     <button type="reset" name="reset" class="resetBtn" id="resetBtn">Reset</button>
   </div>
-  <div id="demo"></div>
+  <div id="detail" class="detail"></div>
   <script src="./assets/script/script.js"></script>
 </body>
 </html>
