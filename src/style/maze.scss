@@ -1,4 +1,4 @@
-$topNavHeight: 71px;
+$topNavHeight: 91px;
 $bodyBgColor: #f3f3f3;
 $gameBgColor: #f7f7f7;
 $topMenuBgColor: #fff;
@@ -37,6 +37,7 @@ body{
       background-color: $topMenuBgColor;
       padding: 5px;
       .size, .pathfinding{
+        padding: 5px;
         width: 100%;
         max-width: 300px;
         display: flex;
@@ -193,9 +194,6 @@ body{
   }
 }
 .credit{
-  position: absolute;
-  top: 0;
-  left: 0;
-  padding: 10px;
+  padding: 5px;
   font-size: .8em;
 }

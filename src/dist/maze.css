@@ -19,13 +19,13 @@ body {
   top: 0;
   left: 0;
   visibility: visible;
-  height: 71px;
+  height: 91px;
   width: 100%;
   transition: ease 0.5s;
   z-index: 9;
 }
 .game nav.hide {
-  top: -71px;
+  top: -91px;
   visibility: hidden;
 }
 .game nav .topOptionMenu {
@@ -33,6 +33,7 @@ body {
   padding: 5px;
 }
 .game nav .topOptionMenu .size, .game nav .topOptionMenu .pathfinding {
+  padding: 5px;
   width: 100%;
   max-width: 300px;
   display: flex;
@@ -183,9 +184,6 @@ body {
 }
 
 .credit {
-  position: absolute;
-  top: 0;
-  left: 0;
-  padding: 10px;
+  padding: 5px;
   font-size: 0.8em;
 }

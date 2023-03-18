@@ -7,19 +7,22 @@
     <title>Matrix calculator</title>
     <link rel="stylesheet" href="../../src/style/main.css" />
     <link rel="stylesheet" href="../../src/dist/matrix.css" />
-    <!-- <link rel="stylesheet" href="./src/pyscript.css">
+
+    <!---py-Script--->
+    <link rel="stylesheet" href="./src/pyscript.css">
     <script defer src="https://pyscript.net/latest/pyscript.js"></script>
-    <script src="https://cdn.jsdelivr.net/pyodide/v0.21.3/full/pyodide.js"></script> -->
-    <!-- <script defer src="https://pyscript.net/alpha/pyscript.js"></script> -->
-    <!-- <py-config>
+    <script src="https://cdn.jsdelivr.net/pyodide/v0.21.3/full/pyodide.js"></script>
+    <py-config>
         [[fetch]]
-        files = ["./matrix.py"]
-    </py-config> -->
+        files = ["../../src/scripts/matrix.py"]
+    </py-config>
+    <!---py-Script--->
 </head>
 <body>
     <div class="container">
         <span class="credit">Inspiration design from <a href="https://matrixcalc.org/">matrixcalc</a></span>
         <div class="row">
+            <!-----------------Left matrix----------------->
             <div class="col-12 col-md-5">
                 <!--Header-->
                 <div class="header">
@@ -30,7 +33,7 @@
                     <!--Form-->
                     <form action="#" class="matrix" data-form="A">
                         <!----------------Data matrix---------------->
-                        <div class="table" data-table="A"></div>
+                        <div class="table" data-table="A"></div> <!----matrix's cell create in this div---->
                         <textarea name="table_area" class="table_area hide" data-area="table_area"></textarea>
                         <!----------------Data matrix---------------->
 
@@ -71,13 +74,13 @@
                             </div>
                             <div class="method_box">
                                 <button type="submit" class="method_button constant axis" data-method="minor">Minor</button>
-                                <input type="number" class="constant_value axis_i" value="" placeholder="i">
-                                <input type="number" class="constant_value axis_j" value="" placeholder="j">
+                                <input type="number" class="constant_value axis_i" name="minor" value="" placeholder="i">
+                                <input type="number" class="constant_value axis_j" name="minor" value="" placeholder="j">
                             </div>
                             <div class="method_box">
                                 <button type="submit" class="method_button constant axis" data-method="cofactor">Cofactor</button>
-                                <input type="number" class="constant_value axis_i" value="" placeholder="i">
-                                <input type="number" class="constant_value axis_j" value="" placeholder="j">
+                                <input type="number" class="constant_value axis_i" name="cofactor" value="" placeholder="i">
+                                <input type="number" class="constant_value axis_j" name="cofactor" value="" placeholder="j">
                             </div>
                             <div class="method_box">
                                 <button type="submit" class="method_button" data-method="diagonal">Diagonal</button>
@@ -112,6 +115,9 @@
                     </form>
                 </div>
             </div>
+            <!-----------------Left matrix----------------->
+
+            <!-----------------Operation----------------->
             <div class="col-12 col-md-2 mt-10 mb-10 mt-md-0 mb-md-0">
                 <div class="operation_wrapper">
                     <div class="operation_box">
@@ -134,6 +140,9 @@
                     </div>
                 </div>
             </div>
+            <!-----------------Operation----------------->
+
+            <!-----------------Right matrix----------------->
             <div class="col-12 col-md-5">
                 <!--Header-->
                 <div class="header">
@@ -142,14 +151,21 @@
                 <!--Matrices-->
                 <div class="matrices" data-id="B" data-ride="matrices" data-size="3 3">
                     <form action="#" data-form="B" class="matrix">
-                        <div class="table" data-table="B"></div>
+                        <!----------------Data matrix---------------->
+                        <div class="table" data-table="B"></div> <!----matrix's cell create in this div---->
                         <textarea name="table_area" class="table_area hide" data-area="table_area"></textarea>
+                        <!----------------Data matrix---------------->
+                        
+                        <!-----------------Controls----------------->
                         <div class="control_wrapper d-flex justify-content-center align-items-center mt-10 mb-10">
                             <button type="button" class="control_button" data-control="clear">Clear</button>
                             <button type="button" class="control_button" data-control="switch">Switch</button>
                             <button type="button" class="control_button" data-control="increase" value="1">&plus;</button>
                             <button type="button" class="control_button" data-control="decrease" value="0">&minus;</button>
                         </div>
+                        <!-----------------Controls----------------->
+
+                        <!-----------------Methods----------------->
                         <div class="method_wrapper">
                             <div class="method_box">
                                 <button type="submit" class="method_button" data-method="determinant">Determinant</button>
@@ -177,13 +193,13 @@
                             </div>
                             <div class="method_box">
                                 <button type="submit" class="method_button constant axis" data-method="minor">Minor</button>
-                                <input type="number" class="constant_value axis_i" value="" placeholder="i">
-                                <input type="number" class="constant_value axis_j" value="" placeholder="j">
+                                <input type="number" class="constant_value axis_i" name="minor" value="" placeholder="i">
+                                <input type="number" class="constant_value axis_j" name="minor" value="" placeholder="j">
                             </div>
                             <div class="method_box">
                                 <button type="submit" class="method_button constant axis" data-method="cofactor">Cofactor</button>
-                                <input type="number" class="constant_value axis_i" value="" placeholder="i">
-                                <input type="number" class="constant_value axis_j" value="" placeholder="j">
+                                <input type="number" class="constant_value axis_i" name="cofactor" value="" placeholder="i">
+                                <input type="number" class="constant_value axis_j" name="cofactor" value="" placeholder="j">
                             </div>
                             <div class="method_box">
                                 <button type="submit" class="method_button" data-method="diagonal">Diagonal</button>
@@ -214,9 +230,13 @@
                                 <button type="submit" class="method_button" data-method="rank">Rank</button>
                             </div>
                         </div>
+                        <!-----------------Methods----------------->
                     </form>
                 </div>
             </div>
+            <!-----------------Right matrix----------------->
+
+            <!-----------------Result matrix----------------->
             <div class="col-12">
                 <div class="result" id="result">
                     <h4>Result</h4>
@@ -239,24 +259,54 @@
                     </table>
                 </div>
             </div>
+            <!-----------------Result matrix----------------->
         </div>
     </div>
 
-    <script src="./js/control.js"></script>
+
+    <script src="../../src/scripts/matrix.js"></script>
     <script>
-        ma = sessionStorage.getItem('A');
-        mb = sessionStorage.getItem('B');
+        const methodButton = document.querySelectorAll('[data-method]');
+        const operationButton = document.querySelectorAll('[data-operation]');
+
+        arrayMethodButton = Array.from(methodButton);
+
+        function getMethodName(e){
+            return e.target.attributes[`data-${Object.keys(e.target.dataset)[0]}`].value;
+        }
+
     </script>
-    <!-- <py-script>
-        from js import ma, mb
-        import matrix
+    <py-script>
+        import js
+        from js import document, getMethodName, arrayMethodButton, sessionStorage
+        from pyodide.ffi import create_proxy
+        import sys
         import ast
+        sys.path.append('../../src/scripts')
+        import matrix
 
+        def getDataCell(id):
+            return sessionStorage.getItem(f'{id}')
 
-        ma = ast.literal_eval(ma)
-        mb = ast.literal_eval(mb)
+        def mth(e):
+            id, method, constant = sessionStorage.getItem('method').split('-')
+            print(id, method, constant)
 
-        print(ma)
-    </py-script> -->
+            m = ast.literal_eval(getDataCell(id))
+
+            # method = getMethodName(e)
+            callMethod = getattr(matrix, method)
+            
+            if len(constant) == 2:
+                print(callMethod(m, int(constant[0]), int(constant[1])))
+            elif len(constant) == 0:
+                print(callMethod(m))
+            else:
+                print(callMethod(m, int(constant)))
+
+        for btn in arrayMethodButton:
+            btn.addEventListener("click", create_proxy(mth))
+
+    </py-script>
 </body>
 </html>

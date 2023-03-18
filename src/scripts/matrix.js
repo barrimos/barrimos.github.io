@@ -101,7 +101,7 @@
   
   const REQUIRED = 'required';
   let buttons = document.getElementsByTagName('button');
-        
+  let cells;
   // default
   const Default = {
     rows: 3,
@@ -327,7 +327,6 @@
   const updateCell = (table, id, n) => {
     let key_idx = getKeyConfig(id);
     if(n === '1'){
-  
       // if isHiding true it's mean decrease was clicked
       if(Config[key_idx].isHiding){
         // FIRST
@@ -447,6 +446,9 @@
       // update data
       getData(Config[key_idx], table);
     }
+    cells = document.querySelectorAll(SELECTOR_DATA_CELL);
+    table.setAttribute('data-size', `${Config[key_idx].rows} ${Config[key_idx].cols}`);
+    getCellData();
   }
   /**
    * clear data cell
@@ -539,7 +541,7 @@
   
   // <------------- operation
   const swap = () => {
-    
+    // 
   }
   // operation ------------->
 
@@ -549,35 +551,79 @@
     Array.from(buttons).forEach(btn => {
       btn.addEventListener('click', e => {
         e.preventDefault();
-        if(Object.keys(e.target.dataset)[0] === 'operation'){
-          if(e.target.attributes[NAME_DATA_OPERATION].value === 'swap'){
+        // Get dataset from button
+        let keyData = Object.keys(e.target.dataset)[0];
+
+        // Get id of table
+        let id;
+        try{
+          // Get id from closest table
+          id = e.target.closest('.matrices').attributes[NAME_DATA_ID].value;
+        } catch {
+          // If not closest table or it be null data-operation was click
+          id = 'A, B';
+        }
+
+        // Get method name
+        let method = e.target.attributes[`data-${keyData}`].value;
+
+        // Get table
+        let table = document.querySelector(`[${NAME_DATA_TABLE}="${id}"]`);
+
+        // For constant value if exist
+        let constantValue = [];
+
+        // Data-operation
+        if(keyData === 'operation'){
+          if(method === BUTTON_NAME_SWAP){
             swap();
           }
-          sessionStorage.setItem('method', e.target.attributes[NAME_DATA_OPERATION].value);
-          return;
         }
-        let method = e.target.attributes[`data-${Object.keys(e.target.dataset)[0]}`].value;
-        let id = e.target.closest('.matrices').attributes[NAME_DATA_ID].value;
-        let table = document.querySelector(`[${NAME_DATA_TABLE}="${id}"]`);
-        // data-control
-        if(method === BUTTON_NAME_INCREASE || method === BUTTON_NAME_DECREASE){
-          updateCell(table, id, e.target.value);
-        } else if(method === BUTTON_NAME_CLEAR){
-          clearCell(table, id);
-        } else if(method === BUTTON_NAME_SWITCH){
-          switchCell(table, id);
-        } else {
-          // data-method
-          // getData(Config[getKeyConfig(id)], table);
-          let c;
+
+
+        // Data-control
+        if(keyData === 'control'){
+          if(method === BUTTON_NAME_INCREASE || method === BUTTON_NAME_DECREASE){
+            updateCell(table, id, e.target.value);
+          } else if(method === BUTTON_NAME_CLEAR){
+            clearCell(table, id);
+          } else if(method === BUTTON_NAME_SWITCH){
+            switchCell(table, id);
+          }
+        }
+
+
+        // Data-method
+        if(keyData === 'method'){
+          // One value
           if(method === BUTTON_NAME_SCALAR ||
-            method === BUTTON_NAME_EXPONENT ||
-            method === BUTTON_NAME_SHIFT ||
-            method === BUTTON_NAME_PADDING){
-              c = e.target.nextElementSibling.value || null;
-            }
-            sessionStorage.setItem('method', c !== null ? `${id}-${method}-${c}` : `${id}-${method}-${null}`);
+          method === BUTTON_NAME_EXPONENT ||
+          method === BUTTON_NAME_SHIFT ||
+          method === BUTTON_NAME_PADDING){
+            constantValue.push(e.target.nextElementSibling.value);
+          }
+          // Expoenent -> multiply
+          if(method === BUTTON_NAME_EXPONENT){
+            method = 'multiply';
+          }
+          // Two value
+          if(method === BUTTON_NAME_MINOR || method === BUTTON_NAME_COFACTOR){
+            Array.from(document.querySelectorAll(`[data-id="${id}"] input[name="${method}"]`)).forEach(c => {
+              try{
+                if(isNaN(c.valueAsNumber)){
+                  throw new Error('Input is not a number.');
+                }
+              } catch(e){
+                alert(e);
+                return;
+              }
+              constantValue.push(c.valueAsNumber);
+            });
+            method = method + '-' + method[0];
+          }
         }
+        // Keep it to storage
+        sessionStorage.setItem('method', `[${id}]-[${method}]-[${constantValue}]`);
       });
     });
   }
@@ -587,14 +633,26 @@
   
   createStartMatrix(matrix);
   buttonHandler();
-  let cells = document.querySelectorAll('[data-cell]');
-  Array.from(cells).forEach(cell => {
-    cell.onchange = function(){
-      let data_cell = cell.getAttribute('data-cell').split('-');
-      let matrix = JSON.parse(sessionStorage.getItem(data_cell[2]));
-      matrix[data_cell[0]][data_cell[1]] = Number(cell.value) || 0;
-      sessionStorage.setItem(data_cell[2], JSON.stringify(matrix));
-    }
-  });
+  
+  cells = document.querySelectorAll(SELECTOR_DATA_CELL);
+  const getCellData = () => {
+    Array.from(cells).forEach(cell => {
+      cell.onchange = function(){
+        let data_cell = cell.getAttribute(`${NAME_DATA_CELL}`).split('-');
+        let matrix = JSON.parse(sessionStorage.getItem(data_cell[2]));
+        matrix[data_cell[0]][data_cell[1]] = Number(cell.value) || 0;
+        sessionStorage.setItem(data_cell[2], JSON.stringify(matrix));
+        cells = document.querySelectorAll(SELECTOR_DATA_CELL);
+        // After update data then call itself again for update cells if table has updated
+        getCellData();
+      }
+    });
+  }
+  // Call to get cell data once at start
+  getCellData();
   Config.length = matrix.length; // Array-like Object
+
+  window.onbeforeunload = function() {
+    sessionStorage.clear();
+  }
 })));

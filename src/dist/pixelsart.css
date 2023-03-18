@@ -1,0 +1,163 @@
+*, *::before, *::after {
+  -webkit-touch-callout: none;
+  /* iOS Safari */
+  -webkit-user-select: none;
+  /* Safari */
+  -khtml-user-select: none;
+  /* Konqueror HTML */
+  -moz-user-select: none;
+  /* Old versions of Firefox */
+  -ms-user-select: none;
+  /* Internet Explorer/Edge */
+  user-select: none;
+  /* Non-prefixed version, currently
+  supported by Chrome, Edge, Opera and Firefox */
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  color: #333333;
+}
+
+.topMenu {
+  background-color: #fcfcfc;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.topMenu .menuBtn {
+  width: 60px;
+  height: 20px;
+  margin: 0 10px;
+  border: transparent;
+}
+.topMenu .menuBtn:active {
+  background-color: #dddddd;
+}
+.topMenu .menuDropdown {
+  position: absolute;
+  top: 20px;
+  left: 10px;
+  height: auto;
+  background-color: #ffffff;
+  box-shadow: none;
+  z-index: 1;
+  border-radius: 5px;
+}
+.topMenu .menuDropdown.open {
+  box-shadow: 0px 5px 10px -5px rgba(0, 0, 0, 0.2);
+}
+.topMenu .menuDropdown.open .menuItem {
+  display: block;
+}
+.topMenu .menuDropdown .menuItem {
+  display: none;
+  margin: 5px;
+  height: 20px;
+  list-style: none;
+}
+.topMenu .menuDropdown .menuItem .selectFile {
+  position: relative;
+  visibility: hidden;
+  display: none;
+}
+.topMenu .menuDropdown .menuItem .openFileBtn {
+  position: absolute;
+  top: 5px;
+  left: 5px;
+}
+.topMenu .axis {
+  display: none;
+  width: 80px;
+}
+@media (min-width: 996px) {
+  .topMenu .axis {
+    display: block;
+  }
+}
+
+.container {
+  max-width: 800px;
+  margin: 0 auto;
+}
+.container .canvasContainer {
+  margin-top: 10px;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.container .canvasContainer #canvasBorder {
+  position: absolute;
+  border: 1px solid black;
+}
+.container .canvasContainer #canvas {
+  position: absolute;
+}
+.container .canvasContainer #canvas:hover {
+  cursor: crosshair;
+}
+.container .canvasContainer #canvasGrid {
+  z-index: -1;
+}
+
+.hide {
+  opacity: 0;
+  visibility: hidden;
+}
+
+.menu {
+  width: 300px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+.menu .switchType {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.menu .switchType .typeImage {
+  margin: 5px;
+}
+.controlPixel .chkgrid {
+  margin-left: 30px;
+}
+.inputContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 5px;
+  background-color: #f0f0f0;
+}
+.inputContainer .colorPicker {
+  width: 40px;
+  height: 30px;
+  border: none;
+  background-color: transparent;
+}
+.inputContainer .canvasWidth, .inputContainer .canvasHeight {
+  height: 20px;
+}
+
+.canvasWidth, .canvasHeight, .submitBtn, .resetBtn, .clearBtn, .exportBtn, .openFileBtn, .saveFileBtn {
+  width: 65px;
+  margin: 5px;
+  padding: 5px;
+}
+
+.submitBtn, .resetBtn, .clearBtn, .exportBtn, .controlPixel, .openFileBtn, .saveFileBtn {
+  height: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.clearBtn, .exportBtn, .controlPixel {
+  margin: 10px 0;
+}
+
+.selectFile, .pixelSize, .openFileBtn, .saveFileBtn, .axis, .detail {
+  margin: 0 10px;
+}

@@ -186,6 +186,8 @@ const createNewGame = (size) => {
   // Set default config
   gameBegin = false;
   canStart = true;
+
+  hp.innerHTML = game.pacman.hp;
 }
 
 // Calc pixel's size

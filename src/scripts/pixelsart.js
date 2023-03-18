@@ -31,14 +31,13 @@ let canvasWidth = 300;
 let canvasHeight = 300;
 let isDragging = false;
 let isErase = false;
-let isEnter = false;
 let menu = false;
 let size = 15;
 let pixels = new Array(256);
 let type = 'png';
-let altPress = false;
 let scale = 1;
 let rows, cols, overflowCols, overflowRows, shiftStartCols, shiftStartRows, fileUpload;
+
 
 // Set canvas size
 const setCanvasSize = () => {
@@ -379,6 +378,8 @@ switchGridBtn.addEventListener('click', () => {
 colorPicker.addEventListener('input', e => {
   cellColor = e.target.value;
 });
+
+
 
 // Mouse event
 canvas.addEventListener('mousedown', e => {
