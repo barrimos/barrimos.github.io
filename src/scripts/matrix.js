@@ -21,6 +21,7 @@
   
   // data
   const NAME_DATA_SIZE = 'data-size';
+  const NAME_DATA_TABLE_SIZE = 'data-table-size';
   const NAME_DATA_ROWS = 'data-rows';
   const NAME_DATA_COLS = 'data-cols';
   const NAME_DATA_ID = 'data-id';
@@ -53,6 +54,7 @@
   
   const SELECTOR_DATA_RIDE = `[data-ride="${NAME_ID}"]`;
   const SELECTOR_DATA_SIZE = `[${NAME_DATA_SIZE}]`;
+  const SELECTOR_DATA_TABLE_SIZE = `[${NAME_DATA_TABLE_SIZE}]`;
   const SELECTOR_DATA_ROWS = `[${NAME_DATA_ROWS}]`;
   const SELECTOR_DATA_COLS = `[${NAME_DATA_COLS}]`;
   const SELECTOR_DATA_ID = `[${NAME_DATA_ID}]`;
@@ -97,7 +99,6 @@
   const BUTTON_NAME_PLUS = 'plus';
   const BUTTON_NAME_MINUS = 'minus';
   const BUTTON_NAME_CONVOLUTION = 'convolution';
-  const BUTTON_NAME_CONVOLUTION_EDGE = 'convolution_edge';
   
   const REQUIRED = 'required';
   let buttons = document.getElementsByTagName('button');
@@ -282,7 +283,15 @@
       config.disabled = false;
     }
   }
+
+  const setDataSizeTable = (table, key_idx) => {
+    table.setAttribute('data-table-size', `${Config[key_idx].rows} ${Config[key_idx].cols}`);
+  }
   
+  const getTable = (id) => {
+    return document.querySelector(`[${NAME_DATA_TABLE}="${id}"]`);
+  }
+
   // This function will execute only one time at start page.
   // then save config and matrix on local storage.
   const createStartMatrix = elems => {
@@ -296,7 +305,7 @@
       Config[key_idx].limit = 0;
       Config[key_idx].disabled = false;
   
-      let table = document.querySelector(`[${NAME_DATA_TABLE}="${Config[key_idx].id}"]`), curr_rows, curr_cols;
+      let table = getTable(Config[key_idx].id), curr_rows, curr_cols;
       if(table.children.length === 0){
         for(let j = 0; j < Config[key_idx].rows; j++){
           curr_rows = document.createElement('div');
@@ -317,6 +326,7 @@
         getData(Config[key_idx], table);
       }
       getData(Config[key_idx], table);
+      setDataSizeTable(table, key_idx);
     });
   }
   
@@ -350,6 +360,7 @@
   
         // update data
         getData(Config[key_idx], table);
+        setDataSizeTable(table, key_idx);
         return;
       }
   
@@ -447,8 +458,8 @@
       getData(Config[key_idx], table);
     }
     cells = document.querySelectorAll(SELECTOR_DATA_CELL);
-    table.setAttribute('data-size', `${Config[key_idx].rows} ${Config[key_idx].cols}`);
     getCellData();
+    setDataSizeTable(table, key_idx);
   }
   /**
    * clear data cell
@@ -483,9 +494,9 @@
     // if switch from table to table_area
     if(!table.classList.contains(NAME_HIDE)){
   
+      // save data table to sessionStorage
       getData(Config[key_idx], table);
   
-      // save data table to sessionStorage
       curr_data = sessionStorage.getItem(Config[key_idx].id);
       // table_area get data from sessionStorage
       table_area.value = curr_data;
@@ -541,7 +552,36 @@
   
   // <------------- operation
   const swap = () => {
-    // 
+    let aRows = Config[0].rows;
+    let bRows = Config[1].rows;
+    let tRows;
+    let table;
+    // Diff size of cell, this value will determine how each table add or remove cells
+    let n = Math.abs(aRows - bRows);
+
+    // If positive that mean add and vice versa
+    for(let c = 0; c < Config.length; c++){
+      for(let i = 0; i < n; i++){
+        table = getTable(Config[c].id);
+        if(aRows < bRows){
+          updateCell(table, Config[c].id, '1');
+        } else {
+          updateCell(table, Config[c].id, '-1');
+        }
+      }
+    }
+
+
+    // Swap method is process like switchCell() method but have to swap Config each other first
+    [Config[0], Config[1]] = [Config[1], Config[0]];
+    Config[0].id = 'A';
+    Config[1].id = 'B';
+
+    // Then swap data in sessionStorage
+    let mA = sessionStorage.getItem('B');
+    let mB = sessionStorage.getItem('A');
+    sessionStorage.setItem('A', mA);
+    sessionStorage.setItem('B', mB);
   }
   // operation ------------->
 
@@ -561,14 +601,14 @@
           id = e.target.closest('.matrices').attributes[NAME_DATA_ID].value;
         } catch {
           // If not closest table or it be null data-operation was click
-          id = 'A, B';
+          id = `${'A\', \'B'}`;
         }
 
         // Get method name
         let method = e.target.attributes[`data-${keyData}`].value;
 
         // Get table
-        let table = document.querySelector(`[${NAME_DATA_TABLE}="${id}"]`);
+        let table = getTable(id);
 
         // For constant value if exist
         let constantValue = [];
@@ -578,6 +618,13 @@
           if(method === BUTTON_NAME_SWAP){
             swap();
           }
+          if(method === 'plus_minus' || method === 'convolution_edge'){
+            constantValue.push(`'${e.target.value}'`);
+            if(method === 'convolution_edge'){
+              method = 'convolution';
+            }
+          }
+          method = `'${method}'`;
         }
 
 
@@ -590,23 +637,24 @@
           } else if(method === BUTTON_NAME_SWITCH){
             switchCell(table, id);
           }
+          method = `'${method}'`;
         }
 
 
         // Data-method
         if(keyData === 'method'){
-          // One value
+          // One value constant
           if(method === BUTTON_NAME_SCALAR ||
           method === BUTTON_NAME_EXPONENT ||
           method === BUTTON_NAME_SHIFT ||
           method === BUTTON_NAME_PADDING){
             constantValue.push(e.target.nextElementSibling.value);
           }
-          // Expoenent -> multiply
-          if(method === BUTTON_NAME_EXPONENT){
-            method = 'multiply';
+          // Get constant triangular from element value, 1 for lower and 0 for upper
+          if(method === 'triangular'){
+            constantValue.push(e.target.value);
           }
-          // Two value
+          // Two value constant
           if(method === BUTTON_NAME_MINOR || method === BUTTON_NAME_COFACTOR){
             Array.from(document.querySelectorAll(`[data-id="${id}"] input[name="${method}"]`)).forEach(c => {
               try{
@@ -619,11 +667,13 @@
               }
               constantValue.push(c.valueAsNumber);
             });
-            method = method + '-' + method[0];
+            method = `'minor_cofactor', '${method[0]}'`;
+          } else {
+            method = `'${method}'`;
           }
         }
         // Keep it to storage
-        sessionStorage.setItem('method', `[${id}]-[${method}]-[${constantValue}]`);
+        sessionStorage.setItem('method', `['${id}']-[${method}]-[${constantValue}]`);
       });
     });
   }

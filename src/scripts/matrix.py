@@ -217,11 +217,11 @@ def convolution(matrix, kernel, edge = False, stride = 1, padding = 0):
   if edge:
     if k_r_odd != k_c_odd:
       return ["Kernel is not odd-size"]
-    else: addPadding(matrix, kernel, p)
+    else: addPadding(matrix, kernel, padding = p)
   else:
     # if dimension of matrix smaller than kernel filter
     if len(matrix) + (2 * p) < input_kernel_rows or len(matrix[0]) + (2 * p) < input_kernel_cols:
-      addPadding(matrix, kernel, p)
+      addPadding(matrix, kernel, padding = p)
 
   input_matrix_cols = len(matrix[0])
   input_matrix_rows = len(matrix)
@@ -419,7 +419,7 @@ def triangular(matrix, dir = 1):
   """
   dir:\n
   1 is lower triangular\n
-  -1 is upper triangular
+  0 is upper triangular
   """
 
   if dir not in [1, -1]:
@@ -438,7 +438,7 @@ def triangular(matrix, dir = 1):
       for j in range(i, len(matrix[0])):
         if i - j < 0:
           matrix[i][j] = 0
-    if dir == -1:
+    if dir == 0:
       for j in range(0, i + 1):
         if i - j > 0:
           matrix[i][j] = 0
@@ -574,7 +574,7 @@ def inverse(matrix):
     for j in range(cols):
       cof_matrix[i][j] = minor_cofactor(matrix, i, j, "c")
 
-  inverse_matrix = multiplyScalar(transpose(cof_matrix), 1 / det_matrix)
+  inverse_matrix = scalar(transpose(cof_matrix), 1 / det_matrix)
   return inverse_matrix
 
 def trace(matrix):
