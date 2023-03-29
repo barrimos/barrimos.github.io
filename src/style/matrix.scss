@@ -157,24 +157,49 @@ input[type=number] {
     display: inline-block;
     margin: 10px 0;
     width: calc(100% - 20px);
-    font-size: 1em;
+    font-size: .7em;
     font-weight: 300;
 }
 .result{
-    margin: 20px 0;
-    table{
-        border: none;
-        width: 100%;
-        tr{
-            width: 120px;
-            height: 30px;
-            padding: 0;
-            td{
-                padding: 0;
-                border: none;
-                width: 40px;
-                height: 30px;
+    border-top: .5px solid rgb(224, 224, 224);
+    margin: 30px 0;
+    padding-top: 30px;
+    .uList{
+        .list_items{
+            display: none;
+            justify-content: space-between;
+            align-items: center;
+            &.show{
+                min-height: 120px;
+                display: flex;
+                animation-name: up;
+                animation-duration: 600ms;
+                opacity: 1;
+                transform: translateY(0);
+                @keyframes up {
+                    0%{
+                        opacity: 0;
+                        display: none;
+                        transform: translateY(40%);
+                    }
+                    100%{
+                        opacity: 1;
+                        display: flex;
+                        transform: translateY(0);
+                    }
+                }
+                &+.list_items.show{
+                    border-top: .5px solid rgb(224, 224, 224);
+                }
             }
+            .mWrapper{
+                display: inline-flex;
+                align-items: center;
+            }
+        }
+        .clearResult{
+            width: 60px;
+            height: 25px;
         }
     }
 }

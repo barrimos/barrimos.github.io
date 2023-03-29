@@ -157,25 +157,48 @@ input[type=number] {
   display: inline-block;
   margin: 10px 0;
   width: calc(100% - 20px);
-  font-size: 1em;
+  font-size: 0.7em;
   font-weight: 300;
 }
 
 .result {
-  margin: 20px 0;
+  border-top: 0.5px solid #e0e0e0;
+  margin: 30px 0;
+  padding-top: 30px;
 }
-.result table {
-  border: none;
-  width: 100%;
+.result .uList .list_items {
+  display: none;
+  justify-content: space-between;
+  align-items: center;
 }
-.result table tr {
-  width: 120px;
-  height: 30px;
-  padding: 0;
+.result .uList .list_items.show {
+  min-height: 120px;
+  display: flex;
+  animation-name: up;
+  animation-duration: 600ms;
+  opacity: 1;
+  transform: translateY(0);
 }
-.result table tr td {
-  padding: 0;
-  border: none;
-  width: 40px;
-  height: 30px;
+@keyframes up {
+  0% {
+    opacity: 0;
+    display: none;
+    transform: translateY(40%);
+  }
+  100% {
+    opacity: 1;
+    display: flex;
+    transform: translateY(0);
+  }
+}
+.result .uList .list_items.show + .list_items.show {
+  border-top: 0.5px solid #e0e0e0;
+}
+.result .uList .list_items .mWrapper {
+  display: inline-flex;
+  align-items: center;
+}
+.result .uList .clearResult {
+  width: 60px;
+  height: 25px;
 }

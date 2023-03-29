@@ -3,7 +3,7 @@
 }(this, (function(){
   'use strict';
 
-  // name
+  // Name
   const NAME_ID = 'matrices';
   const NAME_FORM = 'matrix';
   const NAME_TABLE = 'table';
@@ -12,6 +12,9 @@
   const NAME_COLS = 'cols';
   const NAME_CELL = 'cell';
   const NAME_HIDE = 'hide';
+  const NAME_METHOD = 'method';
+  const NAME_CONTROL = 'control';
+  const NAME_OPERATION = 'operation';
   const NAME_CONTROL_WRAPPER = 'control_wrapper';
   const NAME_METHOD_WRAPPER = 'method_wrapper';
   const NAME_OPERATION_WRAPPER = 'operation_wrapper';
@@ -19,7 +22,7 @@
   const NAME_METHOD_BUTTON = 'method_button';
   const NAME_OPERATION_BUTTON = 'operation_button';
   
-  // data
+  // Dataset
   const NAME_DATA_SIZE = 'data-size';
   const NAME_DATA_TABLE_SIZE = 'data-table-size';
   const NAME_DATA_ROWS = 'data-rows';
@@ -28,12 +31,13 @@
   const NAME_DATA_FORM = 'data-form';
   const NAME_DATA_TABLE = 'data-table';
   const NAME_DATA_AREA = 'data-area';
+  const NAME_DATA_AREA_ID = 'data-area-id';
   const NAME_DATA_CELL = 'data-cell';
   const NAME_DATA_CONTROL = 'data-control';
   const NAME_DATA_METHOD = 'data-method';
   const NAME_DATA_OPERATION = 'data-operation';
   
-  // selector
+  // Selector
   const SELECTOR_MATRICES = `.${NAME_ID}`;
   const SELECTOR_FORM = `.${NAME_FORM}`;
   const SELECTOR_TABLE = `.${NAME_TABLE}`;
@@ -61,19 +65,20 @@
   const SELECTOR_DATA_FORM = `[${NAME_DATA_FORM}]`;
   const SELECTOR_DATA_TABLE = `[${NAME_DATA_TABLE}]`;
   const SELECTOR_DATA_AREA = `[${NAME_DATA_AREA}]`;
+  const SELECTOR_DATA_AREA_ID = `[${NAME_DATA_AREA_ID}]`;
   const SELECTOR_DATA_CELL = `[${NAME_DATA_CELL}]`;
   
   const SELECTOR_DATA_CONTROL = `[${NAME_DATA_CONTROL}]`;
   const SELECTOR_DATA_METHOD = `[${NAME_DATA_METHOD}]`;
   const SELECTOR_DATA_OPERATION = `[${NAME_DATA_OPERATION}]`;
   
-  // control buttons
+  // Control buttons
   const BUTTON_NAME_CLEAR = 'clear';
   const BUTTON_NAME_SWITCH = 'switch';
   const BUTTON_NAME_INCREASE = 'increase';
   const BUTTON_NAME_DECREASE = 'decrease';
   
-  // method buttons
+  // Method buttons
   const BUTTON_NAME_DETERMINANT = 'determinant';
   const BUTTON_NAME_TRANSPOSE = 'transpose';
   const BUTTON_NAME_IDENTITY = 'identity';
@@ -85,58 +90,67 @@
   const BUTTON_NAME_COFACTOR = 'cofactor';
   const BUTTON_NAME_DIAGONAL = 'diagonal';
   const BUTTON_NAME_TRACE = 'trace';
-  const BUTTON_NAME_UPPER_TRIANGULAR = 'upper_triangular';
-  const BUTTON_NAME_LOWER_TRIANGULAR = 'lower_triangular';
-  const BUTTON_NAME_PADDING = 'padding';
-  const BUTTON_NAME_TO_SQUARE = 'to_square';
-  const BUTTON_NAME_IS_SQUARE = 'is_square';
-  const BUTTON_NAME_ADD_ZEROES = 'add_zeroes';
+  const BUTTON_NAME_TRIANGULAR = 'triangular';
+  const BUTTON_NAME_PADDING = 'addPadding';
+  const BUTTON_NAME_SQUARE_MATRIX = 'squareMatrix';
+  const BUTTON_NAME_IS_SQUARE = 'isSquareMatrix';
+  const BUTTON_NAME_ADD_ZEROS = 'addzeros';
   const BUTTON_NAME_RANK = 'rank';
   
-  // operation buttons
+  // Operation buttons
   const BUTTON_NAME_SWAP = 'swap';
   const BUTTON_NAME_MULTIPLY = 'multiply';
-  const BUTTON_NAME_PLUS = 'plus';
-  const BUTTON_NAME_MINUS = 'minus';
+  const BUTTON_NAME_PLUS_MINUS = 'plus_minus';
   const BUTTON_NAME_CONVOLUTION = 'convolution';
+  const BUTTON_NAME_CONVOLUTION_EDGE = 'convolution_edge';
   
   const REQUIRED = 'required';
-  let buttons = document.getElementsByTagName('button');
+  const BUTTONS = document.querySelectorAll('button[name="matrix"]');
   let cells;
-  // default
+
+  // Default config's value
   const Default = {
     rows: 3,
     cols: 3,
     id: 65,
     value: 0,
+    axis: {
+      rows: [],
+      cols: [],
+    },
+    maxPoint: {
+      rows: 0,
+      cols: 0,
+    },
+    limit: 0,
+    isHiding: false,
+    oldRows: 0,
+    oldCols: 0,
   }
   
-  // config
+  // Config
   const Config = {}
   
   const ConfigType = {
     rows: 'number',
     cols: 'number',
     id: 'string',
+    axis: 'object',
+    maxPoint: 'object',
+    limit: 'number',
+    isHiding: 'boolean',
+    oldRows: 'number',
+    oldCols: 'number',
   }
-  
-  // result
-  const Result = {
-    rows: null,
-    cols: null,
-    data: null,
-  }
-  
   
   const toType = obj => {
     if(obj === null || obj === undefined){
       return `${obj}`;
     }
-  
     return {}.toString.call(obj).match(/\s([a-z]+)/i)[1].toLowerCase();
   };
   
-  const isElement = (obj) => {
+  const isElement = obj => {
     if(!obj || typeof obj !== 'object'){
       return false;
     }
@@ -153,31 +167,45 @@
       }
     });
   }
-  
+
+  const cleanConfigs = key_idx => {
+    Config[key_idx]['axis'] = {};
+    Config[key_idx]['axis']['rows'] = [];
+    Config[key_idx]['axis']['cols'] = [];
+    Config[key_idx]['axis']['matrix'] = [];
+    Config[key_idx]['oldRows'] = 0;
+    Config[key_idx]['oldCols'] = 0;
+    Config[key_idx]['maxPoint'] = {};
+    Config[key_idx]['maxPoint']['rows'] = 0;
+    Config[key_idx]['maxPoint']['cols'] = 0;
+    Config[key_idx].isHiding = false;
+    Config[key_idx].limit = 0;
+  }
+
   const getConfig = matrices => {
-    // get data-size
+    // Get data-size
     matrices.forEach((elem, i) => {
       let key_idx = Config[i] === undefined ? i : getKeyConfig(elem.attributes[NAME_DATA_ID].value);
       Config[key_idx] = {};
       let err;
       
-      // get size by counting html elements
+      // Get size by counting html elements
       if(elem.children[0].children[0].children.length !== 0){
         Config[key_idx].rows = elem.children[0].children[0].children.length;
         Config[key_idx].cols = elem.children[0].children[0].children[0].children.length;
       } else {
         try{
-          // get size from html if not exist use data-size
-          // get size from data-size if not exist or empty string or undefined throw TypeError
+          // Get size from html if not exist use data-size
+          // Get size from data-size if not exist or empty string or undefined throw TypeError
           [Config[key_idx].rows, Config[key_idx].cols] = elem.attributes[NAME_DATA_SIZE].value.match(/\d+/g).map(n => {return parseInt(n)});
     
     
-          if(Config[key_idx].rows === undefined || Config[key_idx].cols === undefined || Config[key_idx].rows !== Config[key_idx].cols){
+          if(Config[key_idx].rows === undefined || Config[key_idx].cols === undefined){
             err = [Config[key_idx].rows, Config[key_idx].cols];
             throw new TypeError;
           }
         } catch(e){
-          // set rows and cols by Default
+          // Set rows and cols by Default
           Config[key_idx].rows = Default.rows;
           Config[key_idx].cols = Default.cols;
           console.error(`${e}\n• HTML elements "DOESN'T EXIST" so Config will use the data-size instead.\n`+
@@ -187,32 +215,32 @@
       }
   
       try{
-        // get id from data-id if data-id not exist throw TypeError
+        // Get id from data-id if data-id not exist throw TypeError
         Config[key_idx].id = elem.attributes[NAME_DATA_ID].value;
         if(Config[key_idx].id === ''){
           throw new TypeError;
         }
       } catch(e){
-        // set data-id by Default
+        // Set data-id by Default
         Config[key_idx].id = String.fromCharCode(Default.id + key_idx);
         elem.setAttribute(NAME_DATA_ID, Config[key_idx].id)
         console.error(`${e}\n• The data-id "DOESN'T EXIST ?" so Config will use "DEFAULT" value instead.`);
       }
   
       try{
-        // if data-form not equal to data-id or data-form attribute not exist throw TypeError
+        // If data-form not equal to data-id or data-form attribute not exist throw TypeError
         if(!document.querySelector(`[${NAME_DATA_FORM}="${Config[key_idx].id}"]`)){
           throw new TypeError;
         }
       } catch(e){
-        // set attribute data-table
+        // Set attribute data-table
         elem.children[0].setAttribute(NAME_DATA_FORM, Config[key_idx].id);
         console.error(`${e}\n• The data-form maybe it's "DOESN'T EXIST ?" or\n• The data-form's value is "NOT AS SAME AS" the data-id.\n`+
         '• The data-form will use the data-id instead.');
       }
   
       try{
-        // if data-table not equal to data-id or data-table attribute not exist throw TypeError
+        // If data-table not equal to data-id or data-table attribute not exist throw TypeError
         if(!document.querySelector(`[${NAME_DATA_TABLE}="${Config[key_idx].id}"]`)){
           throw new TypeError;
         }
@@ -222,11 +250,11 @@
         console.error(`${e}\n• The data-table maybe it's "DOESN'T EXIST ?" or\n• The data-table's value is "NOT AS SAME AS" the data-id.\n`+
         '• The data-table will use the data-id instead.');
       }
-  
+      cleanConfigs(key_idx);
       checkConfigType(Config[key_idx], ConfigType);
     });
   }
-  
+
   const getKeyConfig = id => {
     let key_idx;
     Object.keys(Config).forEach(key => {
@@ -236,160 +264,275 @@
     });
     return key_idx;
   }
-  
-  const getData = (config, table) => {
-    let matrix = [];
-    for(let i = 0; i < config.rows; i++){
-      matrix.push([]);
-      for(let j = 0; j < config.cols; j++){
-        let data = table.children[i].children[j].value;
-        if(!data){
-          matrix[i].push(Default.value);
-        } else {
-          if(isNaN(data)){
-            matrix[i].push(data);
-          } else {
-            matrix[i].push(Number(data));
-          }
-        }
-      }
-    }
-    sessionStorage.setItem(config.id, JSON.stringify(matrix));
-  }
-  
-  
-  const isSquare = (elem) => {
-    let arr;
-    if(typeof elem === 'string'){
-      arr = JSON.parse(elem);
-    }
-    for(let i = 0; i < arr.length; i++){
-      if(arr.length !== arr[i].length){
-        return false;
-      }
-    }
-    return true;
-  }
-  
-  const isActiveButton = (config, increase_btn, decrease_btn) => {
-    // disabled increase and decrease button when table_area active
-    if(!config.disabled){
-      increase_btn.setAttribute('disabled', '');
-      decrease_btn.setAttribute('disabled', '');
-      config.disabled = true;
-    } else {
-      increase_btn.removeAttribute('disabled');
-      decrease_btn.removeAttribute('disabled');
-      config.disabled = false;
-    }
-  }
 
-  const setDataSizeTable = (table, key_idx) => {
-    table.setAttribute('data-table-size', `${Config[key_idx].rows} ${Config[key_idx].cols}`);
-  }
-  
-  const getTable = (id) => {
+  const getTable = id => {
     return document.querySelector(`[${NAME_DATA_TABLE}="${id}"]`);
   }
 
-  // This function will execute only one time at start page.
-  // then save config and matrix on local storage.
-  const createStartMatrix = elems => {
-    // get and set Config
-    getConfig(elems);
-    // create start element
-    elems.forEach((elem, i) => {
-      let key_idx = Config[i] === undefined ? i : getKeyConfig(elem.attributes[NAME_DATA_ID].value);
-      // set specific some config
-      Config[key_idx].isHiding = false;
-      Config[key_idx].limit = 0;
-      Config[key_idx].disabled = false;
-  
-      let table = getTable(Config[key_idx].id), curr_rows, curr_cols;
-      if(table.children.length === 0){
-        for(let j = 0; j < Config[key_idx].rows; j++){
-          curr_rows = document.createElement('div');
-          curr_rows.setAttribute('class', NAME_ROWS);
-          curr_rows.setAttribute(NAME_DATA_ROWS, j);
-          table.appendChild(curr_rows);
-          for(let k = 0; k < Config[key_idx].cols; k++){
-            curr_cols = document.createElement('input');
-            curr_cols.setAttribute('type', 'text');
-            curr_cols.setAttribute('class', `${NAME_COLS} ${NAME_CELL}`);
-            curr_cols.setAttribute('placeholder', '0');
-            curr_cols.setAttribute(NAME_DATA_COLS, k);
-            curr_cols.setAttribute(NAME_DATA_CELL, `${j}-${k}-${Config[key_idx].id}`);
-            table.children[j].appendChild(curr_cols);
-          }
-        }
-      } else {
-        getData(Config[key_idx], table);
+  // Max column
+  const maxcol = matrix => {
+    let max = 0;
+    for(let i = 0; i < matrix.length; i++){
+      max = Math.max(max, matrix[i].length);
+    }
+    return max;
+  }
+
+  // Generate to N x M matrix by adding zeros make all columns to be equal.
+  const addzeros = matrix =>{
+    let max = maxcol(matrix);
+    // Check each rows that which columns are not equal to maxcol.
+    for(let j = 0; j < matrix.length; j++){
+      let n = max - matrix[j].length;
+      for(let k = 0; k < n; k++){
+        matrix[j].push(0);
       }
-      getData(Config[key_idx], table);
-      setDataSizeTable(table, key_idx);
-    });
+    }
+    return matrix
+  }
+
+  const setDataSizeTable = (table, key_idx) => {
+    table.setAttribute(NAME_DATA_TABLE_SIZE, `${Config[key_idx].rows} ${Config[key_idx].cols}`);
+  }
+
+  const isActiveButton = key_idx => {
+    // Disabled increase and decrease button when table_area active
+    let increase_btn = document.querySelector(`[${NAME_DATA_FORM}="${Config[key_idx].id}"] [${NAME_DATA_CONTROL}="${BUTTON_NAME_INCREASE}"]`);
+    let decrease_btn = document.querySelector(`[${NAME_DATA_FORM}="${Config[key_idx].id}"] [${NAME_DATA_CONTROL}="${BUTTON_NAME_DECREASE}"]`);
+  
+    if(!Config[key_idx].isTableArea){
+      increase_btn.setAttribute('disabled', '');
+      decrease_btn.setAttribute('disabled', '');
+      Config[key_idx].isTableArea = true;
+    } else {
+      increase_btn.removeAttribute('disabled');
+      decrease_btn.removeAttribute('disabled');
+      Config[key_idx].isTableArea = false;
+    }
   }
   
-  // <------------- control
+  const compareDecimals = (a, b) => {
+    if(a === b){
+      return 0;
+    }
+    return a < b ? 1 : -1;
+  }
+
+  // <------------- Control
   /**
-   * increase or decrease matrix
+   * Clear data cell
+   */
+  const clearCell = (table, id) => {
+    let key_idx = getKeyConfig(id);
+    Array.from(table.children).forEach(rows => {
+      Array.from(rows.children).forEach(cols => {
+        cols.value = '';
+      })
+    });
+    sessionStorage.removeItem(id);
+    if(Config[key_idx].isTableArea){
+      let clear_data = sessionStorage.getItem(Config[key_idx].id);
+      document.querySelector(`[${NAME_DATA_FORM}="${Config[key_idx].id}"] ${SELECTOR_TABLE_AREA}`).value = clear_data;
+    }
+    cleanConfigs(key_idx);
+  }
+
+
+  /**
+   * Switch between cell and text area
+   */
+  const switchCell = (table, id) => {
+    let key_idx = getKeyConfig(id);
+    Config[key_idx].isTableArea === false ? true : false;
+    let table_area = document.querySelector(`[${NAME_DATA_FORM}="${Config[key_idx].id}"] ${SELECTOR_TABLE_AREA}`);
+    let curr_data;
+
+    // Disabled increase/decrease button
+    isActiveButton(key_idx);
+
+    // If switch from table to table_area
+    if(Config[key_idx].isTableArea){
+      // Set oldRows/oldCols for compare later
+      Config[key_idx].oldRows = Config[key_idx].rows;
+      Config[key_idx].oldCols = Config[key_idx].cols;
+
+      // If sessionStorage have data from table
+      // Tabel_area shown data from table
+      if(sessionStorage.getItem(Config[key_idx].id) !== null){
+        curr_data = JSON.parse(sessionStorage.getItem(Config[key_idx].id));
+
+        let txt = '';
+        for(let i = 0; i < curr_data.length; i++){
+          for(let j = 0; j < curr_data[i].length; j++){
+            txt += curr_data[i][j] + ' ';
+          }
+          txt += '\r\n';
+        }
+        // Push data to table_area
+        table_area.value = txt;
+      } else {
+        // Get data table_area to sessionStorage
+        getAreaData();
+      }
+    }
+
+    // If switch from table_area to table
+    if(!Config[key_idx].isTableArea){
+      // If table_area have a data
+      if(table_area.value !== ''){
+        // Use updateCell to update tabel data cell
+
+        // Get data from table_area that saved in sessionStorage
+        let data_table_area = JSON.parse(sessionStorage.getItem(Config[key_idx].id));
+
+        // ------------------------------- CREATE NEW TABLE CELL ------------------------------- //
+        // Update Config                                                                         //
+        Config[key_idx].rows = data_table_area.length;                                           //
+        Config[key_idx].cols = data_table_area[0].length;                                        //
+                                          
+        // Clear all innerHTML before                                                            //
+        table.innerHTML = '';                                                                    //
+
+        // Create new table cell                                                                 //
+        createCellTable(table, key_idx);                                                         //
+        Config[key_idx].isHiding = false;                                                        //
+        Config[key_idx].limit = 0;                                                               //
+
+        // getMaxPoint(table, id);                                                                //
+        // ------------------------------------------------------------------------------------- //
+
+
+        // ---------------------USE UPDATECELL FUNCTION (NOT WORKING JUST NOW)------------------------------- //
+        // // Have 2 reason why not use updateCell function                                                   //
+        // // 1. updateCell function have to execute twice time by separating rows and columns operations     //
+        // // 2. if table_area data rows or cols less than old data                                           //
+        // // whatever rows or cols updated first updateCell will set Config isHiding to true                 //
+        // // Then function will be bugs e.g. data cell is 2*2, table_area is 1*3                             //
+        // // - first step updateCell will decrease (n = '0') to hide 1 row                                   //
+        // // - second step operation will increase (n = '1') 1 column BUT will be bugs                       //
+        // // algorithm will execute if-else statement to show the element that hiding                        //
+        // // exactly it's mean row that just hiding                                                          //
+        // // including table_area larger old table data cell                                                 //
+
+        // // Create tabel cell that equals to data_table_area                                                //
+        // // Get new rows/cols                                                                               //
+        // let newRows = data_table_area.length;                                                              //
+        // let newCols = data_table_area[0].length;                                                           //
+                                                                                                           
+        // // Find n from oldRows with current rows and oldCols with current cols are increase or decrease    //
+        // let nRows = Config[key_idx]['oldRows'] < newRows ? '1' : '0';                                      //
+        // let nCols = Config[key_idx]['oldCols'] < newCols ? '1' : '0';                                      //
+        // // Then find how diff of length oldRows with current rows and oldCols with current cols            //
+        // // If diff is 0 that mean nothing to do                                                            //
+        // let diffRows = Math.abs(Config[key_idx]['oldRows'] - newRows);                                     //
+        // let diffCols = Math.abs(Config[key_idx]['oldCols'] - newCols);                                     //
+
+        // // update table cell                                                                               //
+        // while(diffRows > 0){                                                                               //
+        //   updateCell(table, Config[key_idx].id, nRows, 'rows');                                            //
+        //   diffRows--;                                                                                      //
+        // }                                                                                                  //
+        // while(diffCols > 0){                                                                               //
+        //   updateCell(table, Config[key_idx].id, nCols, 'cols');                                            //
+        //   diffCols--;                                                                                      //
+        // }                                                                                                  //
+        // // Update Config                                                                                   //
+        // Config[key_idx].rows = data_table_area.length;                                                     //
+        // Config[key_idx].cols = data_table_area[0].length;                                                  //
+        // -------------------------------------------------------------------------------------------------- //
+
+
+        // Table get new data entering to cell
+        data_table_area.forEach((rows, i) => {
+          rows.forEach((cols, j) => {
+            document.querySelector(`[${NAME_DATA_CELL}="${i}-${j}-${Config[key_idx].id}"]`).value = cols === 0 ? '' : cols;
+          })
+        });
+        getCellData();
+      } else {
+        Config[key_idx].oldRows = Default.oldRows;
+        Config[key_idx].oldCols = Default.oldCols;
+      }
+    }
+
+    // Switch class .hide
+    [table, table_area].forEach(t => {
+      if(t.classList.contains(NAME_HIDE)){
+        t.classList.remove(NAME_HIDE);
+      } else {
+        t.classList.add(NAME_HIDE);
+      }
+    });
+    // Cell change then call function to get cell data again
+    getCellData();
+  }
+
+
+
+  /**
+   * Increase or decrease matrix
    */
   const updateCell = (table, id, n) => {
     let key_idx = getKeyConfig(id);
     if(n === '1'){
-      // if isHiding true it's mean decrease was clicked
+      // If isHiding true it's mean decrease was clicked
       if(Config[key_idx].isHiding){
         // FIRST
-        // show last rows
+        // Show last rows
         document.querySelector(`[${NAME_DATA_TABLE}="${Config[key_idx].id}"] [${NAME_DATA_ROWS}="${Config[key_idx].rows}"]`).classList.remove(NAME_HIDE);
-        // update Config[key_idx].rows
+        // Update Config[key_idx].rows
         Config[key_idx].rows++;
-  
-        // show last cols
+
+        // Show last cols
         for(let i = 0; i < Config[key_idx].rows; i++){
           document.querySelector(`[${NAME_DATA_TABLE}="${Config[key_idx].id}"] [${NAME_DATA_ROWS}="${i}"] [${NAME_DATA_COLS}="${Config[key_idx].cols}"]`).classList.remove(NAME_HIDE);
         }
-        // update Config[key_idx].cols
+        // Update Config[key_idx].cols
         Config[key_idx].cols++;
-  
-        // update Config[key_idx].limit
+
+        // Update Config[key_idx].limit
         Config[key_idx].limit--;
-  
-        // update Config[key_idx].isHiding
+
+        // Update Config[key_idx].isHiding
         Config[key_idx].isHiding = Config[key_idx].limit === 0 ? false : true;
-  
-        // update data
-        getData(Config[key_idx], table);
+
+        // Set maxPoint
+        Config[key_idx]['maxPoint']['rows']++;
+        Config[key_idx]['maxPoint']['cols']++;
+        
+        // Update data
+        saveData(table, key_idx);
+
+        // Update data_table_size
         setDataSizeTable(table, key_idx);
         return;
       }
-  
+
       // FIRST
-      // loop into each rows add cols by copy last column element
-      // how many rows check in Config[key_idx].rows
+      // Loop into each rows add cols by copy last column element
+      // How many rows check in Config[key_idx].rows
       for(let i = 0; i < Config[key_idx].rows; i++){
-        // copy last column each cell
+        // Copy last column each cell
         let clone = table.children[i].lastChild.cloneNode(true);
-  
-        // change data-cols and data-cell and value to empty
+
+        // Change data-cols and data-cell and value to empty
         clone.setAttribute(NAME_DATA_COLS, Config[key_idx].cols); // zero-based index so Config[key_idx].cols is n + 1
         clone.setAttribute(NAME_DATA_CELL, `${i}-${Config[key_idx].cols}-${id}`);
         clone.value = '';
-  
-        // table.children[i] (rows) appendChild clone node cols
+
+        // Table.children[i] (rows) appendChild clone node cols
         table.children[i].appendChild(clone);
-  
+
       }
-      // after added clone node update Config[key_idx].cols
+      // After added clone node update Config[key_idx].cols
       Config[key_idx].cols++;
-  
-  
-  
+
+
       // SECOND
-      // add rows by copy last rows element
-      // copy last rows
+      // Add rows by copy last rows element
+      // Copy last rows
       let clone = table.lastChild.cloneNode(true);
-      // change data-rows
+      // Change data-rows
       clone.setAttribute(NAME_DATA_ROWS, Config[key_idx].rows); // zero-based index so Config[key_idx].rows is n + 1
       // change data-cell each children(cols) at first value iterator by Config[key_idx].cols and empty value
       for(let i = 0; i < Config[key_idx].cols; i++){
@@ -403,233 +546,357 @@
         clone.children[i].setAttribute(NAME_DATA_CELL, new_data_cell);
         clone.children[i].value = '';
         
-        // table appendChild clone node rows
+        // Table appendChild clone node rows
         table.appendChild(clone);
       }
-      // after added clone node update Config[key_idx].rows
+      // After added clone node update Config[key_idx].rows
       Config[key_idx].rows++;
-  
-      // update data
-      getData(Config[key_idx], table);
     }
-  
+
     if(n === '0'){
-      // if Config[key_idx].rows or Config[key_idx].cols === 0
-      // generate new table by use Default.rows and Default.cols and data use Default.value
+      // If Config[key_idx].rows or Config[key_idx].cols === 0
+      // Generate new table by use Default.rows and Default.cols and data use Default.value
       if(Config[key_idx].rows - 1 === 0 || Config[key_idx].cols - 1 === 0){
         if(confirm('All data will be reset, Are you sure ?')){
-          // clear all innerHTML before
+          // Clear all innerHTML before
           table.innerHTML = '';
-  
-          // create start matrix that mean reset all to Default
+
+          // Create start matrix that mean reset all to Default
           createStartMatrix([table.parentElement.parentElement]);
+          sessionStorage.removeItem(Config[key_idx].id);
           return;
         } else {
           return
         }
       }
-  
-      /** change hide item by add style display: none. change at class .cols
-      *   if matrix have a data and click decrease the data will should not delete but just hide.
-      *   beacause it will not waste the time entering data again.
-      *   when click increase again the data that hide will show up again.
+
+      /** Change hide item by add style display: none. change at class .cols
+      *   If matrix have a data and click decrease the data will should not delete but just hide.
+      *   Beacause it will not waste the time entering data again.
+      *   When click increase again the data that hide will show up again.
       **/
-  
+
+
       // FIRST
-      // hide last rows
+      // Hide last rows
       document.querySelector(`[${NAME_DATA_TABLE}="${Config[key_idx].id}"] [${NAME_DATA_ROWS}="${Config[key_idx].rows - 1}"]`).classList.add(NAME_HIDE);
-      // update Config[key_idx].rows
+      // Update Config[key_idx].rows
       Config[key_idx].rows--;
-  
-      // hide last cols
+      // Hide last cols
       for(let i = 0; i < Config[key_idx].rows; i++){
         document.querySelector(`[${NAME_DATA_TABLE}="${Config[key_idx].id}"] [${NAME_DATA_ROWS}="${i}"] [${NAME_DATA_COLS}="${Config[key_idx].cols - 1}"]`).classList.add(NAME_HIDE);
       }
-      // update Config[key_idx].cols
+      // Update Config[key_idx].cols
       Config[key_idx].cols--;
-  
-      // update Config[key_idx].limit
+
+      // Update Config[key_idx].limit
       Config[key_idx].limit++;
       
-      // update Config[key_idx].isHiding
+      // Update Config[key_idx].isHiding
       Config[key_idx].isHiding = true;
-  
-      // update data
-      getData(Config[key_idx], table);
+      
+      // Set maxPoint
+      Config[key_idx]['maxPoint']['rows']--;
+      Config[key_idx]['maxPoint']['cols']--;
+      
+      // Update data
+      saveData(table, key_idx);
     }
     cells = document.querySelectorAll(SELECTOR_DATA_CELL);
+    
+    // After update data then call itself again for update cells if table has updated
     getCellData();
+
+    // Update data_table_size
     setDataSizeTable(table, key_idx);
   }
-  /**
-   * clear data cell
-   */
-  const clearCell = (table, id) => {
-    let key_idx = getKeyConfig(id);
-    Array.from(table.children).forEach(rows => {
-      Array.from(rows.children).forEach(cols => {
-        cols.value = '';
-      })
-    });
-    getData(Config[key_idx], table);
-    if(Config[key_idx].disabled){
-      let clear_data = sessionStorage.getItem(Config[key_idx].id);
-      document.querySelector(`[${NAME_DATA_FORM}="${Config[key_idx].id}"] ${SELECTOR_TABLE_AREA}`).value = clear_data;
-    }
-  }
-  
-  /**
-   * switch between cell and text area
-   */
-  const switchCell = (table, id) => {
-    let key_idx = getKeyConfig(id);
-    let table_area = document.querySelector(`[${NAME_DATA_FORM}="${Config[key_idx].id}"] ${SELECTOR_TABLE_AREA}`);
-    let curr_data;
-    let increase_btn = document.querySelector(`[${NAME_DATA_FORM}="${Config[key_idx].id}"] [${NAME_DATA_CONTROL}="${BUTTON_NAME_INCREASE}"]`);
-    let decrease_btn = document.querySelector(`[${NAME_DATA_FORM}="${Config[key_idx].id}"] [${NAME_DATA_CONTROL}="${BUTTON_NAME_DECREASE}"]`);
-  
-    // disabled button
-    isActiveButton(Config[key_idx], increase_btn, decrease_btn);
-  
-    // if switch from table to table_area
-    if(!table.classList.contains(NAME_HIDE)){
-  
-      // save data table to sessionStorage
-      getData(Config[key_idx], table);
-  
-      curr_data = sessionStorage.getItem(Config[key_idx].id);
-      // table_area get data from sessionStorage
-      table_area.value = curr_data;
-    }
-  
-    // if switch from table_area to table
-    if(!table_area.classList.contains(NAME_HIDE)){
-      // check data is square or not before if not then try again and not change to table
-      if(!isSquare(table_area.value)){
-        alert(ReferenceError + 'The matrix is not square.');
-        return;
-      }
-  
-      // get data table from sessionStorage to compare table_area.value
-      curr_data = sessionStorage.getItem(Config[key_idx].id);
-  
-      // if not as same as, update new data table_area.value to sessionStorage
-      if(JSON.stringify(table_area.value) !== JSON.stringify(curr_data)){
-        // check new data from table_area more or less compare to old data.
-        let n = JSON.parse(table_area.value).length < Config[key_idx].rows ? '0' : '1';
-        // difference from old
-        let diff = Math.abs(JSON.parse(table_area.value).length - Config[key_idx].rows);
+  // Control -------------->
 
-        // update table
-        while(diff > 0){
-          updateCell(table, Config[key_idx].id, n);
-          diff--;
-        }
-
-        // set new data
-        sessionStorage.setItem(Config[key_idx].id, table_area.value);
-        
-        // table get new data entering to cell
-        JSON.parse(table_area.value).forEach((rows, i) => {
-          rows.forEach((cols, j) => {
-            document.querySelector(`[${NAME_DATA_CELL}="${i}-${j}-${Config[key_idx].id}"]`).value = cols;
-          })
-        });
-      }
-    }
-  
-    // switch class .hide
-    [table, table_area].forEach(t => {
-      if(t.classList.contains(NAME_HIDE)){
-        t.classList.remove(NAME_HIDE);
-      } else {
-        t.classList.add(NAME_HIDE);
-      }
-    });
-  }
-  // control ------------>
-  
-  
-  // <------------- operation
+  // <------------- Operation
   const swap = () => {
-    let aRows = Config[0].rows;
-    let bRows = Config[1].rows;
-    let tRows;
-    let table;
-    // Diff size of cell, this value will determine how each table add or remove cells
-    let n = Math.abs(aRows - bRows);
+    // Get elements
+    let formA = document.querySelector(`[${NAME_DATA_FORM}="A"]`);
+    let tableA = document.querySelector(`[${NAME_DATA_TABLE}="A"]`);
+    let tableAreaA = document.querySelector(`[${NAME_DATA_AREA_ID}="A"]`);
+    let inSessionA = sessionStorage.getItem('A');
+    let formB = document.querySelector(`[${NAME_DATA_FORM}="B"]`);
+    let tableB = document.querySelector(`[${NAME_DATA_TABLE}="B"]`);
+    let tableAreaB = document.querySelector(`[${NAME_DATA_AREA_ID}="B"]`);
+    let inSessionB = sessionStorage.getItem('B');
 
-    // If positive that mean add and vice versa
-    for(let c = 0; c < Config.length; c++){
-      for(let i = 0; i < n; i++){
-        table = getTable(Config[c].id);
-        if(aRows < bRows){
-          updateCell(table, Config[c].id, '1');
+    // Data
+    [[tableA, tableAreaA], [tableB, tableAreaB]].forEach((list, idx) => {
+      list.forEach((table, i) => {
+        if(i === 0){
+          table.setAttribute(NAME_DATA_TABLE, idx === 0 ? 'B' : 'A');
+        }
+        if(i === 1){
+          table.setAttribute(NAME_DATA_AREA_ID, idx === 0 ? 'B' : 'A');
+        }
+        Array.from(table.childNodes).forEach((rows, i) => {
+          Array.from(rows.childNodes).forEach((cols, j) => {
+            cols.setAttribute(NAME_DATA_CELL, `${i}-${j}-${idx === 0 ? 'B' : 'A'}`);
+          });
+        });
+      });
+    });
+
+    // Session data
+    [inSessionA, inSessionB] = [inSessionB, inSessionA];
+    [inSessionA, inSessionB].forEach((sessionData, i) => {
+      if(sessionData !== null){
+        sessionStorage.setItem(i === 0 ? 'A' : 'B', sessionData);
+      } else {
+        sessionStorage.removeItem(i === 0 ? 'A' : 'B');
+      }
+    })
+
+    // Insert
+    formA.insertBefore(tableB, formA.children[0]);
+    formA.insertBefore(tableAreaB, formA.children[1]);
+    formB.insertBefore(tableA, formB.children[0]);
+    formB.insertBefore(tableAreaA, formB.children[1]);
+
+    // Config
+    [Config[0], Config[1]] = [Config[1], Config[0]];
+    [Config[0].id, Config[1].id] = [Config[1].id, Config[0].id];
+  }
+  // Operation ------------->
+
+  const getAreaData = () => {
+    // For table area
+    let txt = [];
+    let isTextDown = false;
+    let rows = 0;
+    let cols = 0;
+    let textAreas = document.querySelectorAll(SELECTOR_DATA_AREA);
+    Array.from(textAreas).forEach(area => {
+      area.addEventListener('input', e => {
+        let key_idx = getKeyConfig(e.target.dataset.areaId);
+        // If insert between number (number whitespace (insert) whitespace number) or
+        // Separate into its own column 111 -> [1, 11] or [11, 1] or [1, 1, 1]
+        if(e.inputType === 'insertText' && e.data === ' ' && isTextDown === false){
+          isTextDown = true;
+        }
+        // Copy paste data
+        if(e.inputType === 'insertFromPaste' && e.data === null){
+          rows = 0;
+          cols = 0;
+          isTextDown = true;
+        }
+        // Delete oen or more or whitespace
+        if(e.inputType === 'deleteContentBackward' || e.inputType === 'deleteWordBackward' && e.data === null || /^\s*$/.test(e.target.value)){
+          // Every delete will reset rows cols then counting again
+          rows = 0;
+          cols = 0;
+          // If data is nothing or whitespace
+          if(e.target.value === null || e.target.value === '' || /^\s*$/.test(e.target.value)){
+            txt = [];
+            sessionStorage.removeItem(Config[key_idx].id);
+            Config[key_idx]['axis']['rows'] = [];
+            Config[key_idx]['axis']['cols'] = [];
+            Config[key_idx]['axis']['matrix'] = [];
+            isTextDown = false;
+            return;
+          } else {
+            isTextDown = true;
+          }
+        }
+        // If data input (all characters)
+        if(e.inputType === 'insertText' && e.data !== null && e.data !== ' '){
+          isTextDown = true;
+        }
+        if(isTextDown){
+          Config[key_idx]['axis']['matrix'] = [];
+          Config[key_idx]['axis']['rows'] = [];
+          Config[key_idx]['axis']['cols'] = [];
+
+          // Firse trim every whitespace leading and trailing of data
+          // txt = e.target.value.trim().replace(/^\s+|\s+$/g, '');
+          txt = e.target.value.trim();
+          // Split \n between data to separate to be rows
+          txt = txt.split(/\n+/g).map(t => {
+  
+            // Whitespace between digits to one whitespace
+            t = t.replace(/\s+/g, ' ');
+    
+            // If too many \n change it to only one
+            t = t.replace(/\n+/g, '\n');
+    
+            // Whitespace with new line or whitespace at end line change to empty
+            t = t.replace(/\s+\n+|\s+$/g, '');
+    
+            return t.trim();
+          }).map(t => {
+            t = t.replace(/\s+/g, ',');
+            isTextDown = false;
+            return t.split(',');
+          }).map((t, i) => {
+            return t.map((n, j) => {
+              if(isNaN(n)){
+                if(!Config[key_idx]['axis']['matrix'].includes(`[${i},${j}]`)){
+                  Config[key_idx]['axis']['matrix'].push(`[${i},${j}]`);
+                  Config[key_idx]['axis']['rows'].push(i);
+                  Config[key_idx]['axis']['cols'].push(j);
+                }
+                return n;
+              } else {
+                if(!Config[key_idx]['axis']['matrix'].includes(`[${i},${j}]`)){
+                  Config[key_idx]['axis']['matrix'].push(`[${i},${j}]`);
+                  Config[key_idx]['axis']['rows'].push(i);
+                  Config[key_idx]['axis']['cols'].push(j);
+                }
+                return parseInt(n);
+              }
+            });
+          });
+        }
+        getMaxPoint(key_idx);
+        // Add zero make all column as same as length
+        txt = addzeros(txt);
+        sessionStorage.setItem(e.target.dataset.areaId, JSON.stringify(txt));
+        isTextDown = false;
+      });
+    });
+  }
+
+
+
+  const getCellData = () => {
+    cells = document.querySelectorAll(SELECTOR_DATA_CELL);
+    let isErase = false;
+    Array.from(cells).forEach(cell => {
+      cell.onchange = () => {
+        let data_cell = cell.getAttribute(NAME_DATA_CELL).split('-');
+        let rows = parseInt(data_cell[0]);
+        let cols = parseInt(data_cell[1]);
+        let key_idx = getKeyConfig(data_cell[2]);
+
+        if(cell.value === ''){
+          isErase = true;
+        }
+        
+        if(!isErase){
+          if(!Config[key_idx]['axis']['matrix'].includes(`[${rows},${cols}]`)){
+            Config[key_idx]['axis']['rows'].push(rows);
+            Config[key_idx]['axis']['cols'].push(cols);
+            Config[key_idx]['axis']['matrix'].push(`[${rows},${cols}]`);
+          }
         } else {
-          updateCell(table, Config[c].id, '-1');
+          if(!Config[key_idx]['axis']['matrix'].includes(`[${rows},${cols}]`)){
+            return;
+          }
+          [rows, cols].forEach((axis, i) => {
+            let configAxis = i === 0 ? Config[key_idx]['axis']['rows'] : Config[key_idx]['axis']['cols'];
+            if(configAxis.indexOf(axis) !== -1){
+              configAxis.splice(configAxis.indexOf(axis), 1);
+            }
+          });
+          if(Config[key_idx]['axis']['matrix'].indexOf(`[${rows},${cols}]`) !== -1){
+            Config[key_idx]['axis']['matrix'].splice(Config[key_idx]['axis']['matrix'].indexOf(`[${rows},${cols}]`), 1);
+          }
+        }
+        if(Config[key_idx]['axis']['matrix'].length === 0){
+          sessionStorage.removeItem(Config[key_idx].id);
+        } else {
+          // Get maxPoint and update data into sessionStorage
+          getMaxPoint(key_idx, isErase);
+          saveData(getTable(data_cell[2]), key_idx);
+        }
+        // After update data then call itself again for update cells if table has updated
+        getCellData();
+      }
+    });
+  }
+
+  const getMaxPoint = (key_idx, isErase = false) => {
+    // Last axis added
+    let lastElemAxisRows = Config[key_idx]['axis']['rows'][Config[key_idx]['axis']['rows'].length - 1];
+    let lastElemAxisCols = Config[key_idx]['axis']['cols'][Config[key_idx]['axis']['cols'].length - 1];
+
+    if(isErase){
+      Config[key_idx]['axis']['rows'].sort(compareDecimals);
+      Config[key_idx]['axis']['cols'].sort(compareDecimals);
+
+      [Config[key_idx]['maxPoint']['rows'], Config[key_idx]['maxPoint']['cols']] = [Config[key_idx]['axis']['rows'][0], Config[key_idx]['axis']['cols'][0]];
+      if(Config[key_idx]['maxPoint']['rows'] === undefined){
+        Config[key_idx]['maxPoint']['rows'] = -1;
+      }
+      if(Config[key_idx]['maxPoint']['cols'] === undefined){
+        Config[key_idx]['maxPoint']['cols'] = -1;
+      }
+    } else {
+    // If last axis > max point change
+      [Config[key_idx]['maxPoint']['rows'], Config[key_idx]['maxPoint']['cols']] = [
+        lastElemAxisRows > Config[key_idx]['maxPoint']['rows'] ? lastElemAxisRows : Config[key_idx]['maxPoint']['rows'],
+        lastElemAxisCols > Config[key_idx]['maxPoint']['cols'] ? lastElemAxisCols : Config[key_idx]['maxPoint']['cols']];
+    }
+  }
+
+  const saveData = (table, key_idx) => {
+    let matrix = [];
+    for(let i = 0; i <= Config[key_idx]['maxPoint']['rows']; i++){
+      matrix.push([]);
+      for(let j = 0; j <= Config[key_idx]['maxPoint']['cols']; j++){
+        let data = table.children[i].children[j].value;
+        if(!data){
+          matrix[i].push(Default.value);
+        } else {
+          if(isNaN(data)){
+            matrix[i].push(data);
+          } else {
+            matrix[i].push(Number(data));
+          }
         }
       }
     }
-
-
-    // Swap method is process like switchCell() method but have to swap Config each other first
-    [Config[0], Config[1]] = [Config[1], Config[0]];
-    Config[0].id = 'A';
-    Config[1].id = 'B';
-
-    // Then swap data in sessionStorage
-    let mA = sessionStorage.getItem('B');
-    let mB = sessionStorage.getItem('A');
-    sessionStorage.setItem('A', mA);
-    sessionStorage.setItem('B', mB);
+    sessionStorage.setItem(Config[key_idx].id, JSON.stringify(matrix));
   }
-  // operation ------------->
-
 
   const buttonHandler = () => {
-    // closure callback event
-    Array.from(buttons).forEach(btn => {
+    // Closure callback event
+    Array.from(BUTTONS).forEach(btn => {
       btn.addEventListener('click', e => {
         e.preventDefault();
         // Get dataset from button
         let keyData = Object.keys(e.target.dataset)[0];
-
+  
         // Get id of table
         let id;
         try{
           // Get id from closest table
-          id = e.target.closest('.matrices').attributes[NAME_DATA_ID].value;
+          id = e.target.closest(SELECTOR_MATRICES).attributes[NAME_DATA_ID].value;
         } catch {
           // If not closest table or it be null data-operation was click
           id = `${'A\', \'B'}`;
         }
-
+  
         // Get method name
         let method = e.target.attributes[`data-${keyData}`].value;
-
+  
         // Get table
         let table = getTable(id);
-
+  
         // For constant value if exist
         let constantValue = [];
-
+  
         // Data-operation
-        if(keyData === 'operation'){
+        if(keyData === NAME_OPERATION){
           if(method === BUTTON_NAME_SWAP){
             swap();
           }
-          if(method === 'plus_minus' || method === 'convolution_edge'){
+          else if(method === BUTTON_NAME_PLUS_MINUS || method === BUTTON_NAME_CONVOLUTION || method === BUTTON_NAME_CONVOLUTION_EDGE){
             constantValue.push(`'${e.target.value}'`);
-            if(method === 'convolution_edge'){
-              method = 'convolution';
+            if(method === BUTTON_NAME_CONVOLUTION_EDGE){
+              method = BUTTON_NAME_CONVOLUTION;
             }
           }
           method = `'${method}'`;
         }
-
-
+  
+  
         // Data-control
-        if(keyData === 'control'){
+        if(keyData === NAME_CONTROL){
           if(method === BUTTON_NAME_INCREASE || method === BUTTON_NAME_DECREASE){
             updateCell(table, id, e.target.value);
           } else if(method === BUTTON_NAME_CLEAR){
@@ -639,23 +906,31 @@
           }
           method = `'${method}'`;
         }
-
-
+  
+  
         // Data-method
-        if(keyData === 'method'){
+        if(keyData === NAME_METHOD){
           // One value constant
           if(method === BUTTON_NAME_SCALAR ||
           method === BUTTON_NAME_EXPONENT ||
           method === BUTTON_NAME_SHIFT ||
+          method === BUTTON_NAME_TRIANGULAR ||
           method === BUTTON_NAME_PADDING){
-            constantValue.push(e.target.nextElementSibling.value);
-          }
-          // Get constant triangular from element value, 1 for lower and 0 for upper
-          if(method === 'triangular'){
-            constantValue.push(e.target.value);
-          }
-          // Two value constant
-          if(method === BUTTON_NAME_MINOR || method === BUTTON_NAME_COFACTOR){
+            if(method === BUTTON_NAME_TRIANGULAR){
+              // Get constant triangular from element value, 1 for lower and 0 for upper
+              constantValue.push(e.target.value);
+            } else {
+              constantValue.push(e.target.nextElementSibling.value);
+            }
+            if(method === BUTTON_NAME_PADDING){
+              method = `'${BUTTON_NAME_PADDING}', '${e.target.value}'`;
+            } else if(method === BUTTON_NAME_EXPONENT){
+              method = `'${BUTTON_NAME_MULTIPLY}'`;
+            } else {
+              method = `'${method}'`;
+            }
+          } else if(method === BUTTON_NAME_MINOR || method === BUTTON_NAME_COFACTOR){
+            // Two value constant
             Array.from(document.querySelectorAll(`[data-id="${id}"] input[name="${method}"]`)).forEach(c => {
               try{
                 if(isNaN(c.valueAsNumber)){
@@ -678,30 +953,57 @@
     });
   }
 
-  // define how many '[data-ride="matrices"]' existing in html
-  const matrix = [].concat(...Element.prototype.querySelectorAll.call(document.documentElement, SELECTOR_DATA_RIDE));
-  
-  createStartMatrix(matrix);
-  buttonHandler();
-  
-  cells = document.querySelectorAll(SELECTOR_DATA_CELL);
-  const getCellData = () => {
-    Array.from(cells).forEach(cell => {
-      cell.onchange = function(){
-        let data_cell = cell.getAttribute(`${NAME_DATA_CELL}`).split('-');
-        let matrix = JSON.parse(sessionStorage.getItem(data_cell[2]));
-        matrix[data_cell[0]][data_cell[1]] = Number(cell.value) || 0;
-        sessionStorage.setItem(data_cell[2], JSON.stringify(matrix));
-        cells = document.querySelectorAll(SELECTOR_DATA_CELL);
-        // After update data then call itself again for update cells if table has updated
-        getCellData();
+
+  const createCellTable = (table, key_idx) => {
+    let curr_rows, curr_cols;
+    for(let j = 0; j < Config[key_idx].rows; j++){
+      curr_rows = document.createElement('div');
+      curr_rows.setAttribute('class', NAME_ROWS);
+      curr_rows.setAttribute(NAME_DATA_ROWS, j);
+      table.appendChild(curr_rows);
+      for(let k = 0; k < Config[key_idx].cols; k++){
+        curr_cols = document.createElement('input');
+        curr_cols.setAttribute('type', 'text');
+        curr_cols.setAttribute('class', `${NAME_COLS} ${NAME_CELL}`);
+        curr_cols.setAttribute('placeholder', '0');
+        curr_cols.setAttribute(NAME_DATA_COLS, k);
+        curr_cols.setAttribute(NAME_DATA_CELL, `${j}-${k}-${Config[key_idx].id}`);
+        table.children[j].appendChild(curr_cols);
+      }
+    }
+    // Update data_table_size
+    setDataSizeTable(table, key_idx);
+  }
+
+  // This function will execute only one time at start page.
+  // Then save config and matrix on local storage.
+  const createStartMatrix = elems => {
+    // Get and set Config
+    getConfig(elems);
+    // Create start element
+    elems.forEach((elem, i) => {
+      let key_idx = Config[i] === undefined ? i : getKeyConfig(elem.attributes[NAME_DATA_ID].value);
+      // Set specific some config
+      Config[key_idx].isTableArea = false;
+
+      let table = getTable(Config[key_idx].id)
+
+      if(table.children.length === 0){
+        createCellTable(table, key_idx);
       }
     });
   }
-  // Call to get cell data once at start
-  getCellData();
-  Config.length = matrix.length; // Array-like Object
 
+  // Define how many '[data-ride="matrices"]' existing in html
+  const MATRIX = [].concat(...Element.prototype.querySelectorAll.call(document.documentElement, SELECTOR_DATA_RIDE));
+
+  createStartMatrix(MATRIX);
+  buttonHandler();
+  Config.length = MATRIX.length; // Array-like Object
+  getCellData();
+  getAreaData();
+  
+  // Clear sessionStorge every refresh page
   window.onbeforeunload = function() {
     sessionStorage.clear();
   }

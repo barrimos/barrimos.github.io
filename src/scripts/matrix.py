@@ -1,8 +1,10 @@
 import random
-import re
+from fractions import Fraction
+import copy
+from js import logError
 
 class Matrix:
-  def __init__(self, name = 'unnamed', is_randoms = False, rows = 3, cols = 3, nums = 0) -> None:
+  def __init__(self, name = "unnamed", is_randoms = False, rows = 3, cols = 3, nums = 0) -> None:
     self.name = name
     self.rows = rows
     self.cols = cols
@@ -18,15 +20,6 @@ class Matrix:
           self.matrix[i].append(randNum)
         else:
           self.matrix[i].append(self.nums)
-
-# Error
-def error():
-  try:
-    pass
-  except:
-    pass
-  finally:
-    pass
 
 # Max column
 def maxcol(matrix):
@@ -124,7 +117,7 @@ def squareMatrix(matrix):
 # # Generate matrix to identity matrix.
 def identity(matrix):
   # Identity matrix shound be square matrix
-  if not isSquareMatrix(matrix): return ["The matrix is not square."]
+  if not isSquareMatrix(matrix): return logError("The matrix is not square.")
   size = maxDimension(squareMatrix(matrix))
 
   identity_matrix = [[1 if i == j else 0 for j in range(size)] for i in range(size)]
@@ -136,7 +129,7 @@ def plus_minus(matrixA, matrixB, operator):
   plus, (+), p or minus, (-), m
   """
   # Check the matrix size is equal
-  if not isMatrixEqual(matrixA, matrixB, "plusminus"): return ["1st matrix is NOT EQUAL to 2nd matrix"]
+  if not isMatrixEqual(matrixA, matrixB, "plusminus"): return logError("1st matrix is NOT EQUAL to 2nd matrix")
 
   res_matrix = [[0 for j in range(len(matrixA[0]))] for i in range(len(matrixA))]
 
@@ -199,11 +192,11 @@ def addPadding(matrix, kernel, edge = False, padding = 0):
       matrix[i].insert(0, 0)
       matrix[i].append(0)
   matrix_size_cols = len(matrix[0])
-  
+
   return matrix
 
 def convolution(matrix, kernel, edge = False, stride = 1, padding = 0):
-  if isinstance(padding, int) and padding < 0: return ["Padding parameter should be whole number"]
+  if isinstance(padding, int) and padding < 0: return logError("Padding parameter should be whole number")
 
   p = 0 or padding
   s = stride or 1
@@ -214,15 +207,21 @@ def convolution(matrix, kernel, edge = False, stride = 1, padding = 0):
 
   k_r_odd = input_kernel_rows % 2 == 1
   k_c_odd = input_kernel_cols % 2 == 1
+
+  matrixIsSmaller = len(matrix) + (2 * p) < input_kernel_rows or len(matrix[0]) + (2 * p) < input_kernel_cols
   if edge:
     if k_r_odd != k_c_odd:
-      return ["Kernel is not odd-size"]
-    else: addPadding(matrix, kernel, padding = p)
+      return logError("Kernel is not odd-size")
+    else:
+      # if dimension of matrix smaller than kernel filter
+      if matrixIsSmaller:
+        addPadding(matrix, kernel, edge, padding = abs(len(matrix) + (2 * p) - input_kernel_rows))
   else:
     # if dimension of matrix smaller than kernel filter
-    if len(matrix) + (2 * p) < input_kernel_rows or len(matrix[0]) + (2 * p) < input_kernel_cols:
-      addPadding(matrix, kernel, padding = p)
+    if matrixIsSmaller:
+      return logError("Matrix smaller than kernel filter then determine edge argument as True")
 
+  # get len of matrix after add padding
   input_matrix_cols = len(matrix[0])
   input_matrix_rows = len(matrix)
 
@@ -249,11 +248,17 @@ def convolution(matrix, kernel, edge = False, stride = 1, padding = 0):
 
 
 def scalar(matrix, scalar):
-  for i in range(len(matrix)):
-    for j in range(len(matrix[i])):
-      matrix[i][j] = round(scalar * matrix[i][j], 3)
+  new_list = copy.deepcopy(matrix)
+  for i in range(len(new_list)):
+    for j in range(len(new_list[i])):
+      fraction = Fraction(int(round(scalar * new_list[i][j], 3) * 1000), 1000)
+      if (int(scalar) != scalar):
+        new_list[i][j] = [[], fraction.numerator, fraction.denominator]
+      else:
+        new_list[i][j] = int(scalar) * new_list[i][j]
+      # matrix[i][j] = round(scalar * matrix[i][j], 3)
 
-  return matrix
+  return new_list
 
 # use for exponent too
 def multiply(matrixA, matrixB):
@@ -265,7 +270,7 @@ def multiply(matrixA, matrixB):
   complex_number = False
 
   # Check if multiplication is Possible.
-  if not isMatrixEqual(matrixA, matrixB, "multiply"): return ["Rows of 1st matrix is NOT EQUAL to Columns of 2nd matrix"]
+  if not isMatrixEqual(matrixA, matrixB, "multiply"): return logError("Rows of 1st matrix is NOT EQUAL to Columns of 2nd matrix")
 
   # Create zero matrix to store result matrix based on number row of 1st matrix with number column of 2nd matrix
   multiply_matrix = [[0 for i in range(len(matrixB[0]))] for z in range(len(matrixA))]
@@ -318,7 +323,7 @@ def multiply(matrixA, matrixB):
 def determinant(matrix):
   # use Bareiss algorithm
   # determinant matrix should be square
-  if not isSquareMatrix(matrix): return ["The matrix is not square."]
+  if not isSquareMatrix(matrix): return logError("The matrix is not square.")
 
   # the value of the support element in the previous step
   prev_sup_val = 1
@@ -393,8 +398,8 @@ def minor_cofactor(matrix, posI, posJ, sel = "m"):
   select = ["m", "c"]
 
   if sel not in select: return "m or c"
-  if not isSquareMatrix(matrix): return ["The matrix is not square."]
-  if posI not in range(rows) or posJ not in range(cols): return [f"Out of range of rows or cols.\nProperties of the matrix is\n{checkProps(matrix)}"]
+  if not isSquareMatrix(matrix): return logError("The matrix is not square.")
+  if posI not in range(rows) or posJ not in range(cols): return logError(f"Out of range of rows or cols.\nProperties of the matrix is\n{checkProps(matrix)}")
   
   # Copy the matrix to avoid damaging the original matrix.
   # because parameter of matrix is reference to orginal
@@ -416,14 +421,15 @@ def minor_cofactor(matrix, posI, posJ, sel = "m"):
 
 
 def triangular(matrix, dir = 1):
+  new_list = copy.deepcopy(matrix)
   """
   dir:\n
   1 is lower triangular\n
   0 is upper triangular
   """
 
-  if dir not in [1, -1]:
-    return ["dir argument is wrong it's must to be 1 or -1"]
+  if dir not in [1, 0]:
+    return logError("dir argument is wrong it's must to be 1 or 0")
 
   # [0 -1 -2]
   # [1 0 -1]
@@ -433,17 +439,17 @@ def triangular(matrix, dir = 1):
   # [[1, 0], [1, 1], [1, 2]]
   # [[2, 0], [2, 1], [2, 2]]
 
-  for i in range(len(matrix)):
+  for i in range(len(new_list)):
     if dir == 1:
-      for j in range(i, len(matrix[0])):
+      for j in range(i, len(new_list[0])):
         if i - j < 0:
-          matrix[i][j] = 0
+          new_list[i][j] = 0
     if dir == 0:
       for j in range(0, i + 1):
         if i - j > 0:
-          matrix[i][j] = 0
+          new_list[i][j] = 0
 
-  return matrix
+  return new_list
 
 
 def diagonal(matrix):
@@ -540,32 +546,32 @@ def spiralOrder(matrix, clockwise = True):
 
   return ans
 
-def shift(matrix, rev = False, k = 1):
+def shift(matrix, k = 1, rev = False):
   rows = len(matrix)
-
+  new_list = copy.deepcopy(matrix)
   while k > 0:
     if not rev:
       for i in range(rows):
-        first = matrix[i].pop(-(len(matrix[i])))
-        matrix[i].append(first)
+        first = new_list[i].pop(-(len(new_list[i])))
+        new_list[i].append(first)
     else:
       for i in range(rows):
-        last = matrix[i].pop()
-        matrix[i].insert(0, last)
+        last = new_list[i].pop()
+        new_list[i].insert(0, last)
 
     k -= 1
 
-  return matrix
+  return new_list
 
 def inverse(matrix):
-  if not isSquareMatrix(matrix): return ["The matrix is not square."]
+  if not isSquareMatrix(matrix): return logError("The matrix is not square.")
 
   rows = len(matrix)
   cols = maxcol(matrix)
   det_matrix = determinant(matrix)
 
   # if determinant equal 0 the matrix is not invertible
-  if det_matrix == 0: return ["The determinant is 0 the matrix is not invertible."]
+  if det_matrix == 0: return logError("The determinant is 0 the matrix is not invertible.")
 
   # Copy matrix for storing new value
   cof_matrix = [x[:] for x in matrix]
@@ -579,7 +585,7 @@ def inverse(matrix):
 
 def trace(matrix):
   trace_matrix = 0
-  if not isSquareMatrix(matrix): return ["The matrix is not square."]
+  if not isSquareMatrix(matrix): return logError("The matrix is not square.")
   for i in range(len(matrix)):
     trace_matrix += matrix[i][i]
   return trace_matrix
