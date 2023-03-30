@@ -127,6 +127,10 @@ const curPage = (() => {
         activePage = document.getElementById('index');
         linkIcon = document.querySelector('[data-icon=index]');
         linkText = document.querySelector('[data-text=index]');
+    } else if(currentPage === 'playground'){
+        activePage = document.getElementById('zxsandbox');
+        linkIcon = document.querySelector(`[data-icon="zxsandbox"]`);
+        linkText = document.querySelector(`[data-text="zxsandbox"]`);
     } else {
         activePage = document.getElementById(currentPage);
         linkIcon = document.querySelector(`[data-icon=${currentPage}]`);

@@ -11,172 +11,178 @@
   padding: 0;
   color: #333333;
 }
-.topMenu{
-  background-color: rgb(252, 252, 252);
-  width: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  .menuBtn{
-    width: 60px;
-    height: 20px;
-    margin: 0 10px;
-    border: transparent;
-    &:active{
-      background-color: rgb(221, 221, 221);
-    }
+.wrapper{
+  margin: 0;
+  @media screen and (min-width: 768px){
+    margin: 0 60px;
   }
-  .menuDropdown{
-    position: absolute;
-    top: 20px;
-    left: 10px;
-    height: auto;
-    background-color: #ffffff;
-    box-shadow: none;
-    z-index: 1;
-    border-radius: 5px;
-    &.open{
-      box-shadow: 0px 5px 10px -5px rgba(0, 0, 0, .2);
+  .topMenu{
+    background-color: rgb(252, 252, 252);
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    .menuBtn{
+      width: 60px;
+      height: 20px;
+      margin: 0 10px;
+      border: transparent;
+      &:active{
+        background-color: rgb(221, 221, 221);
+      }
+    }
+    .menuDropdown{
+      position: absolute;
+      top: 20px;
+      left: 10px;
+      height: auto;
+      background-color: #ffffff;
+      box-shadow: none;
+      z-index: 1;
+      border-radius: 5px;
+      &.open{
+        box-shadow: 0px 5px 10px -5px rgba(0, 0, 0, .2);
+        .menuItem{
+          display: block;
+        }
+      }
       .menuItem{
+        display: none;
+        margin: 5px;
+        height: 20px;
+        list-style: none;
+        .selectFile{
+          position: relative;
+          visibility: hidden;
+          display: none;
+        }
+        .openFileBtn{
+          position: absolute;
+          top: 5px;
+          left: 5px;
+        }
+        .saveFileBtn{
+  
+        }
+      }
+    }
+    .axis{
+      display: none;
+      width: 80px;
+      @media (min-width: 996px){
         display: block;
       }
     }
-    .menuItem{
-      display: none;
-      margin: 5px;
-      height: 20px;
-      list-style: none;
-      .selectFile{
-        position: relative;
-        visibility: hidden;
-        display: none;
-      }
-      .openFileBtn{
+  }
+  .container{
+    max-width: 800px;
+    margin: 0 auto;
+    .canvasContainer{
+      margin-top: 10px;
+      position: relative;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      #canvasBorder{
         position: absolute;
-        top: 5px;
-        left: 5px;
+        border: 1px solid black;
       }
-      .saveFileBtn{
-
+      #canvas{
+        position: absolute;
+        &:hover{
+          cursor: crosshair;
+        }
+      }
+      #canvasGrid{
+        z-index: -1;
       }
     }
   }
-  .axis{
-    display: none;
-    width: 80px;
-    @media (min-width: 996px){
-      display: block;
+  .hide{
+    opacity: 0;
+    visibility: hidden;
+  }
+  .menu{
+    width: 300px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    .clearBtn{
+  
+    }
+    .exportBtn{
+  
+    }
+    .switchType{
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      .typeImage{
+        margin: 5px;
+      }
+      label{
+  
+      }
     }
   }
-}
-.container{
-  max-width: 800px;
-  margin: 0 auto;
-  .canvasContainer{
-    margin-top: 10px;
-    position: relative;
+  .controlPixel{
+    .pixelSize{
+  
+    }
+    .chkgrid{
+      margin-left: 30px;
+      .switchGrid{
+  
+      }
+      label{
+  
+      }
+    }
+  }
+  .inputContainer{
     display: flex;
     justify-content: center;
     align-items: center;
-    #canvasBorder{
-      position: absolute;
-      border: 1px solid black;
+    padding: 5px;
+    background-color: rgb(240, 240, 240);
+    .canvasWidth{
+  
     }
-    #canvas{
-      position: absolute;
-      &:hover{
-        cursor: crosshair;
-      }
+    .canvasHeight{
+  
     }
-    #canvasGrid{
-      z-index: -1;
+    .colorPicker{
+      width: 40px;
+      height: 30px;
+      border: none;
+      background-color: transparent;
     }
-  }
-}
-.hide{
-  opacity: 0;
-  visibility: hidden;
-}
-.menu{
-  width: 300px;
-  margin: 0 auto;
-  display: flex;
-  justify-content: space-around;
-  align-items: center;
-  .clearBtn{
-
-  }
-  .exportBtn{
-
-  }
-  .switchType{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    .typeImage{
-      margin: 5px;
+    .submitBtn{
+  
     }
-    label{
-
+    .resetBtn{
+  
+    }
+    .canvasWidth, .canvasHeight{
+      height: 20px;
     }
   }
-}
-.controlPixel{
-  .pixelSize{
-
+  .canvasWidth, .canvasHeight, .submitBtn, .resetBtn, .clearBtn, .exportBtn, .openFileBtn, .saveFileBtn, .homeBtn{
+    width: 65px;
+    margin: 5px;
+    padding: 5px;
   }
-  .chkgrid{
-    margin-left: 30px;
-    .switchGrid{
-
-    }
-    label{
-
-    }
-  }
-}
-.inputContainer{
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 5px;
-  background-color: rgb(240, 240, 240);
-  .canvasWidth{
-
-  }
-  .canvasHeight{
-
-  }
-  .colorPicker{
-    width: 40px;
-    height: 30px;
-    border: none;
-    background-color: transparent;
-  }
-  .submitBtn{
-
-  }
-  .resetBtn{
-
-  }
-  .canvasWidth, .canvasHeight{
+  .submitBtn, .resetBtn, .clearBtn, .exportBtn, .controlPixel, .openFileBtn, .saveFileBtn, .homeBtn{
     height: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
   }
-}
-.canvasWidth, .canvasHeight, .submitBtn, .resetBtn, .clearBtn, .exportBtn, .openFileBtn, .saveFileBtn{
-  width: 65px;
-  margin: 5px;
-  padding: 5px;
-}
-.submitBtn, .resetBtn, .clearBtn, .exportBtn, .controlPixel, .openFileBtn, .saveFileBtn{
-  height: 20px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-.clearBtn, .exportBtn, .controlPixel{
-  margin: 10px 0;
-}
-.selectFile, .pixelSize, .openFileBtn, .saveFileBtn, .axis, .detail{
-  margin: 0 10px;
+  .clearBtn, .exportBtn, .controlPixel{
+    margin: 10px 0;
+  }
+  .selectFile, .pixelSize, .openFileBtn, .saveFileBtn, .homeBtn, .axis, .detail{
+    margin: 0 10px;
+  }
 }

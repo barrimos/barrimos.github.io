@@ -18,23 +18,31 @@
   color: #333333;
 }
 
-.topMenu {
+.wrapper {
+  margin: 0;
+}
+@media screen and (min-width: 768px) {
+  .wrapper {
+    margin: 0 60px;
+  }
+}
+.wrapper .topMenu {
   background-color: #fcfcfc;
   width: 100%;
   display: flex;
   align-items: center;
   justify-content: space-between;
 }
-.topMenu .menuBtn {
+.wrapper .topMenu .menuBtn {
   width: 60px;
   height: 20px;
   margin: 0 10px;
   border: transparent;
 }
-.topMenu .menuBtn:active {
+.wrapper .topMenu .menuBtn:active {
   background-color: #dddddd;
 }
-.topMenu .menuDropdown {
+.wrapper .topMenu .menuDropdown {
   position: absolute;
   top: 20px;
   left: 10px;
@@ -44,120 +52,113 @@
   z-index: 1;
   border-radius: 5px;
 }
-.topMenu .menuDropdown.open {
+.wrapper .topMenu .menuDropdown.open {
   box-shadow: 0px 5px 10px -5px rgba(0, 0, 0, 0.2);
 }
-.topMenu .menuDropdown.open .menuItem {
+.wrapper .topMenu .menuDropdown.open .menuItem {
   display: block;
 }
-.topMenu .menuDropdown .menuItem {
+.wrapper .topMenu .menuDropdown .menuItem {
   display: none;
   margin: 5px;
   height: 20px;
   list-style: none;
 }
-.topMenu .menuDropdown .menuItem .selectFile {
+.wrapper .topMenu .menuDropdown .menuItem .selectFile {
   position: relative;
   visibility: hidden;
   display: none;
 }
-.topMenu .menuDropdown .menuItem .openFileBtn {
+.wrapper .topMenu .menuDropdown .menuItem .openFileBtn {
   position: absolute;
   top: 5px;
   left: 5px;
 }
-.topMenu .axis {
+.wrapper .topMenu .axis {
   display: none;
   width: 80px;
 }
 @media (min-width: 996px) {
-  .topMenu .axis {
+  .wrapper .topMenu .axis {
     display: block;
   }
 }
-
-.container {
+.wrapper .container {
   max-width: 800px;
   margin: 0 auto;
 }
-.container .canvasContainer {
+.wrapper .container .canvasContainer {
   margin-top: 10px;
   position: relative;
   display: flex;
   justify-content: center;
   align-items: center;
 }
-.container .canvasContainer #canvasBorder {
+.wrapper .container .canvasContainer #canvasBorder {
   position: absolute;
   border: 1px solid black;
 }
-.container .canvasContainer #canvas {
+.wrapper .container .canvasContainer #canvas {
   position: absolute;
 }
-.container .canvasContainer #canvas:hover {
+.wrapper .container .canvasContainer #canvas:hover {
   cursor: crosshair;
 }
-.container .canvasContainer #canvasGrid {
+.wrapper .container .canvasContainer #canvasGrid {
   z-index: -1;
 }
-
-.hide {
+.wrapper .hide {
   opacity: 0;
   visibility: hidden;
 }
-
-.menu {
+.wrapper .menu {
   width: 300px;
   margin: 0 auto;
   display: flex;
   justify-content: space-around;
   align-items: center;
 }
-.menu .switchType {
+.wrapper .menu .switchType {
   display: flex;
   justify-content: center;
   align-items: center;
 }
-.menu .switchType .typeImage {
+.wrapper .menu .switchType .typeImage {
   margin: 5px;
 }
-.controlPixel .chkgrid {
+.wrapper .controlPixel .chkgrid {
   margin-left: 30px;
 }
-.inputContainer {
+.wrapper .inputContainer {
   display: flex;
   justify-content: center;
   align-items: center;
   padding: 5px;
   background-color: #f0f0f0;
 }
-.inputContainer .colorPicker {
+.wrapper .inputContainer .colorPicker {
   width: 40px;
   height: 30px;
   border: none;
   background-color: transparent;
 }
-.inputContainer .canvasWidth, .inputContainer .canvasHeight {
+.wrapper .inputContainer .canvasWidth, .wrapper .inputContainer .canvasHeight {
   height: 20px;
 }
-
-.canvasWidth, .canvasHeight, .submitBtn, .resetBtn, .clearBtn, .exportBtn, .openFileBtn, .saveFileBtn {
+.wrapper .canvasWidth, .wrapper .canvasHeight, .wrapper .submitBtn, .wrapper .resetBtn, .wrapper .clearBtn, .wrapper .exportBtn, .wrapper .openFileBtn, .wrapper .saveFileBtn, .wrapper .homeBtn {
   width: 65px;
   margin: 5px;
   padding: 5px;
 }
-
-.submitBtn, .resetBtn, .clearBtn, .exportBtn, .controlPixel, .openFileBtn, .saveFileBtn {
+.wrapper .submitBtn, .wrapper .resetBtn, .wrapper .clearBtn, .wrapper .exportBtn, .wrapper .controlPixel, .wrapper .openFileBtn, .wrapper .saveFileBtn, .wrapper .homeBtn {
   height: 20px;
   display: flex;
   justify-content: center;
   align-items: center;
 }
-
-.clearBtn, .exportBtn, .controlPixel {
+.wrapper .clearBtn, .wrapper .exportBtn, .wrapper .controlPixel {
   margin: 10px 0;
 }
-
-.selectFile, .pixelSize, .openFileBtn, .saveFileBtn, .axis, .detail {
+.wrapper .selectFile, .wrapper .pixelSize, .wrapper .openFileBtn, .wrapper .saveFileBtn, .wrapper .homeBtn, .wrapper .axis, .wrapper .detail {
   margin: 0 10px;
 }

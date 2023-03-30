@@ -15,6 +15,7 @@ const menuDropdown = document.querySelector('.menuDropdown');
 const selectFile = document.getElementById('selectFile');
 const openFileBtn = document.getElementById('openFileBtn');
 const saveFileBtn = document.getElementById('saveFileBtn');
+const homeBtn = document.getElementById('homeBtn');
 const typeImage = document.querySelectorAll('.typeImage');
 const detail = document.getElementById('detail');
 

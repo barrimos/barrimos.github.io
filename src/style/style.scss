@@ -263,6 +263,19 @@ section{
             bottom: 0;
             left: 0;
             padding: 15px;
+            .stylingTags{
+                font-size: .8em;
+                color: hsl(0, 0%, 100%);
+                font-weight: 600;
+                margin-right: 4px;
+                margin-top: 5px;
+                background-color: hsl(0, 0%, 80%);
+                display: inline-block;
+                padding: 3px 10px !important;
+                border-radius: 15px;
+                cursor: pointer;
+                box-shadow: 0 3px 6px -2px rgba($color: #000000, $alpha: .3);
+            }
         }
     }
 }
