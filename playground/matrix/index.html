@@ -308,12 +308,8 @@
                                 <button type="submit" class="method_button" data-method="trace" name="matrix">Trace</button>
                             </div>
                             <div class="method_box">
-                                <button type="submit" class="method_button constant" data-method="addPadding" value="False" name="matrix" disabled>Padding</button>
-                                <input type="number" class="constant_value" value="0" placeholder="0" disabled>
-                            </div>
-                            <div class="method_box">
-                                <button type="submit" class="method_button constant" data-method="addPadding" value="True" name="matrix" disabled>Padding edge</button>
-                                <input type="number" class="constant_value" value="0" placeholder="0" disabled>
+                                <button type="submit" class="method_button constant" data-method="addPadding" value="False" name="matrix">Padding</button>
+                                <input type="number" class="constant_value" value="0" placeholder="0">
                             </div>
                             <div class="method_box">
                                 <button type="submit" class="method_button" data-method="rank" name="matrix" disabled>Rank</button>
@@ -344,7 +340,7 @@
                         <button type="button" class="operation_button" data-operation="convolution" value="False" name="matrix">Convolution</button>
                     </div>
                     <div class="operation_box">
-                        <button type="button" class="operation_button" data-operation="convolution_edge" value="True" name="matrix" disabled>Convolution with edge</button>
+                        <button type="button" class="operation_button" data-operation="convolution_edge" value="True" name="matrix">Convolution with edge</button>
                     </div>
                 </div>
             </div>
@@ -422,12 +418,8 @@
                                 <button type="submit" class="method_button" data-method="trace" name="matrix">Trace</button>
                             </div>
                             <div class="method_box">
-                                <button type="submit" class="method_button constant" data-method="addPadding" value="False" name="matrix" disabled>Padding</button>
-                                <input type="number" class="constant_value" value="0" placeholder="0" disabled>
-                            </div>
-                            <div class="method_box">
-                                <button type="submit" class="method_button constant" data-method="addPadding" value="True" name="matrix" disabled>Padding edge</button>
-                                <input type="number" class="constant_value" value="0" placeholder="0" disabled>
+                                <button type="submit" class="method_button constant" data-method="addPadding" value="False" name="matrix">Padding</button>
+                                <input type="number" class="constant_value" value="0" placeholder="0">
                             </div>
                             <div class="method_box">
                                 <button type="submit" class="method_button" data-method="rank" name="matrix" disabled>Rank</button>
@@ -437,6 +429,7 @@
                     </form>
                 </div>
             </div>
+            <h6 style="margin-top: 30px;">*If use convolution : matrix A will be source and matrix B will be kernel.</h6>
             <!-----------------Right matrix----------------->
 
             <!-----------------Result matrix----------------->

@@ -15,8 +15,13 @@ const end = '\\end{bmatrix}';
 
 function getConfigResult(matrices, result){
   // Convert to Array
-  let mat = JSON.parse(matrices);
-  let matRes = JSON.parse(result);
+  let mat, matRes;
+  try{
+    mat = JSON.parse(matrices);
+    matRes = JSON.parse(result);
+  } catch {
+    return
+  }
 
   // Determine how many matrix in use
   if(mat.length === 2){
@@ -139,12 +144,12 @@ const display = () => {
     liContainer.classList.add('show');
     if(method[0] === 'minor_cofactor'){
       head.innerHTML = `Result - ${method[1] === 'm' ? 'Minor' : 'Cofactor'} ${constant[0]}, ${constant[1]}`;
-    }
-    if(method[0] === 'triangular'){
+    } else if(method[0] === 'triangular'){
       head.innerHTML = `Result - ${constant[0] === '1' ? 'Lower Triangular' : 'Upper Triangular'}`;
-    }
-    if(method[0] === 'plus_minus'){
+    } else if(method[0] === 'plus_minus'){
       head.innerHTML = `Result - ${constant[0] === 'plus' ? 'plus' : 'minus'}`;
+    } else if(method[0] === 'convolution'){
+      head.innerHTML = `Result - ${method[0]} with edge : ${constant[0]}`;
     } else {
       head.innerHTML = `Result - ${method[0]}`;
     }

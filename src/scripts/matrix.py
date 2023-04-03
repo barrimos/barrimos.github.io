@@ -169,72 +169,66 @@ def transpose(matrix):
   return transpose_matrix
 
 
-def addPadding(matrix, kernel, edge = False, padding = 0):
-  kernel_size_rows = len(kernel)
-  matrix_size_rows = len(matrix)
-  matrix_size_cols = len(matrix[0])
-
-  if edge:
-    padding_size = padding or (kernel_size_rows - 1) // 2
-  else:
-    padding_size = padding
+def addPadding(matrix, padding = 0):
+  if not isinstance(padding, int) or padding < 0: return logError("Padding parameter should be whole number")
+  new_list = copy.deepcopy(matrix)
+  matrix_size_rows = len(new_list)
+  matrix_size_cols = len(new_list[0])
+  
   zero_padding = [0] * matrix_size_cols
 
   # add rows
-  for i in range(padding_size):
-    matrix.insert(0, list(zero_padding))
-    matrix.append(list(zero_padding))
-  matrix_size_rows = len(matrix)
+  for i in range(padding):
+    new_list.insert(0, list(zero_padding))
+    new_list.append(list(zero_padding))
+  matrix_size_rows = len(new_list)
 
   # add cols
   for i in range(matrix_size_rows):
-    for j in range(padding_size):
-      matrix[i].insert(0, 0)
-      matrix[i].append(0)
-  matrix_size_cols = len(matrix[0])
+    for j in range(padding):
+      new_list[i].insert(0, 0)
+      new_list[i].append(0)
+  matrix_size_cols = len(new_list[0])
 
-  return matrix
+  return new_list
 
-def convolution(matrix, kernel, edge = False, stride = 1, padding = 0):
-  if isinstance(padding, int) and padding < 0: return logError("Padding parameter should be whole number")
+def convolution(matrix, kernel, edge = False, padding = 1, stride = 1):
+  """
+  edge = True: The center of kernel will start fit to top left coner of matrix\n
+      \tMatrix will add padding by 0 value following difference with kernel size at least 1 round\n
+      \t= (DEFAULT) False: Both of top left will fit together\n
+      \tIf matrix smaller than kernel: matrix will add padding\n
+  padding = Use when edge is True\n
+  stride = Move's step each rows and columns\n
+  """
+  if padding < 0 or type(padding) != int or stride < 1 or type(stride) != int: return logError("Your put wrong stride or padding parameter value")
 
-  p = 0 or padding
-  s = stride or 1
+  if edge:
+    if len(kernel) != len(kernel[0]) and len(kernel) % 2 != 1: return logError("When parameter edge is True, The kernel's rows and columns should be same size and odd size")
+  else:
+    if len(matrix) < len(kernel) or len(matrix[0]) < len(kernel[0]): return logError("Matrix is smaller than kernel then set parameter edge as True or change your matrix")
+
   input_kernel_rows = len(kernel)
   input_kernel_cols = len(kernel[0])
 
   value = 0
 
-  k_r_odd = input_kernel_rows % 2 == 1
-  k_c_odd = input_kernel_cols % 2 == 1
-
-  matrixIsSmaller = len(matrix) + (2 * p) < input_kernel_rows or len(matrix[0]) + (2 * p) < input_kernel_cols
   if edge:
-    if k_r_odd != k_c_odd:
-      return logError("Kernel is not odd-size")
-    else:
-      # if dimension of matrix smaller than kernel filter
-      if matrixIsSmaller:
-        addPadding(matrix, kernel, edge, padding = abs(len(matrix) + (2 * p) - input_kernel_rows))
-  else:
-    # if dimension of matrix smaller than kernel filter
-    if matrixIsSmaller:
-      return logError("Matrix smaller than kernel filter then determine edge argument as True")
+    p = max(abs(len(matrix) - input_kernel_rows), abs(len(matrix[0]) - input_kernel_cols))
+    if p == 0:
+      p = padding
+    if padding > 1:
+      p = padding
+    matrix = addPadding(matrix, padding = p)
 
   # get len of matrix after add padding
   input_matrix_cols = len(matrix[0])
   input_matrix_rows = len(matrix)
 
-  if not isSquareMatrix(kernel): addzeros(kernel)
-  if not isSquareMatrix(matrix): addzeros(matrix)
+  move_rows = abs((input_matrix_rows - input_kernel_rows) // stride) + 1
+  move_cols = abs((input_matrix_cols - input_kernel_cols) // stride) + 1
 
-  output_size_rows = abs((input_matrix_rows - input_kernel_rows + (2 * p)) // s) + 1
-  output_size_cols = abs((input_matrix_cols - input_kernel_cols + (2 * p)) // s) + 1
-  
-  move_rows = input_matrix_rows + (2 * p) - input_kernel_rows + 1
-  move_cols = input_matrix_cols + (2 * p) - input_kernel_cols + 1
-
-  conv2D = [[0] * output_size_cols] * output_size_rows
+  conv2D = [[0] * move_cols] * move_rows
 
   for i in range(move_rows):
     for j in range(move_cols):

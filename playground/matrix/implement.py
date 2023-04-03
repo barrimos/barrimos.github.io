@@ -62,24 +62,22 @@ def callMethod(e):
 
     elif method[0] == "convolution":
       """
-      convolution(matrixData[0], matrixData[1], edge = False, stride = 1, padding = 0)
+      convolution(matrixData[0], matrixData[1], edge = False)
       """
       callbackMethod = getattr(matrix, method[0])
 
       # # call method with send parameter
-      res = callbackMethod(matrixData[0], matrixData[1], edge = bool(constantValue[0]), padding = 0)
+      res = callbackMethod(matrixData[0], matrixData[1], edge = True if constantValue[0] == 'True' else False)
 
   elif len(matrixData) == 1:
     if method[0] == "addPadding":
       """
-      addPadding(matrixData[0], matrixData[1], edge = False, padding = 0)
+      addPadding(matrixData[0], padding = 0)
       """
       callbackMethod = getattr(matrix, method[0])
 
-      mB = ast.literal_eval(sessionStorage.getItem(f"{'B' if mId[0] == 'A' else 'A'}"))
-
       # # call method with send parameter
-      res = callbackMethod(matrixData[0], mB, method[1], constantValue[0])
+      res = callbackMethod(matrixData[0], constantValue[0])
   
     elif method[0] == "multiply":
       """
