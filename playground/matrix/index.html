@@ -233,224 +233,234 @@
         </div>
     </nav>
     <div class="container">
-        <span class="credit">Inspiration & Copy design from <a href="https://matrixcalc.org/">matrixcalc</a> for practice and learning</span>
-        <div class="row no-gutters">
-            <!-----------------Left matrix----------------->
-            <div class="col-12 col-md-5">
-                <!--Header-->
-                <div class="header">
-                    <h4>Matrix A</h4>
+        <div class="wrapper">
+            <span class="credit">Inspiration & Copy design from <a href="https://matrixcalc.org/">matrixcalc</a> for practice and learning</span>
+            <div class="row">
+                <!-----------------Left matrix----------------->
+                <div class="col-12 col-md-5">
+                    <!--Header-->
+                    <div class="header">
+                        <h4>Matrix A</h4>
+                    </div>
+                    <!--Matrices-->
+                    <div class="matrices" data-ride="matrices" data-id="A" data-size="2 2">
+                        <!--Form-->
+                        <form action="#" class="matrix" data-form="A">
+                            <!----------------Data matrix---------------->
+                            <div class="table" data-table="A"></div> <!----matrix's cell create in this div---->
+                            <textarea name="table_area" class="table_area hide" data-area="table_area" data-area-id="A" placeholder="0 0 0&#10;1 1 1&#10;2 2 2"></textarea>
+                            <!----------------Data matrix---------------->
+    
+                            <!-----------------Controls----------------->
+                            <div class="control_wrapper d-flex justify-content-center align-items-center mt-10 mb-10">
+                                <button type="button" class="control_button" data-control="clear" name="matrix">Clear</button>
+                                <button type="button" class="control_button" data-control="switch" name="matrix">Switch</button>
+                                <button type="button" class="control_button" data-control="increase" value="1" name="matrix">&plus;</button>
+                                <button type="button" class="control_button" data-control="decrease" value="0" name="matrix">&minus;</button>
+                            </div>
+                            <!-----------------Controls----------------->
+    
+                            <!-----------------Methods----------------->
+                            <div class="method_wrapper">
+                                <div class="method_box">
+                                    <button type="submit" class="method_button" data-method="determinant" name="matrix">Determinant</button>
+                                </div>
+                                <div class="method_box">
+                                    <button type="submit" class="method_button" data-method="transpose" name="matrix">Transpose</button>
+                                </div>
+                                <div class="method_box">
+                                    <button type="submit" class="method_button" data-method="identity" name="matrix">Identity</button>
+                                </div>
+                                <div class="method_box">
+                                    <button type="submit" class="method_button" data-method="inverse" name="matrix">Inverse</button>
+                                </div>
+                                <div class="method_box">
+                                    <button type="submit" class="method_button constant" data-method="scalar" name="matrix">Scalar</button>
+                                    <input type="text" class="constant_value" value="0" placeholder="0">
+                                </div>
+                                <div class="method_box">
+                                    <button type="submit" class="method_button constant" data-method="exponent" name="matrix">Exponent</button>
+                                    <input type="number" class="constant_value" value="0" placeholder="0">
+                                </div>
+                                <div class="method_box">
+                                    <button type="submit" class="method_button constant" data-method="shift" name="matrix">Shift</button>
+                                    <input type="number" class="constant_value" value="0" placeholder="0">
+                                </div>
+                                <div class="method_box">
+                                    <button type="submit" class="method_button constant axis" data-method="minor" name="matrix">Minor</button>
+                                    <input type="number" class="constant_value axis_i" name="minor" value="0" placeholder="i">
+                                    <input type="number" class="constant_value axis_j" name="minor" value="0" placeholder="j">
+                                </div>
+                                <div class="method_box">
+                                    <button type="submit" class="method_button constant axis" data-method="cofactor" name="matrix">Cofactor</button>
+                                    <input type="number" class="constant_value axis_i" name="cofactor" value="0" placeholder="i">
+                                    <input type="number" class="constant_value axis_j" name="cofactor" value="0" placeholder="j">
+                                </div>
+                                <div class="method_box">
+                                    <button type="submit" class="method_button" data-method="diagonal" name="matrix">Diagonal</button>
+                                </div>
+                                <div class="method_box">
+                                    <button type="submit" class="method_button" data-method="triangular" value="1" name="matrix">Lower triangular</button>
+                                </div>
+                                <div class="method_box">
+                                    <button type="submit" class="method_button" data-method="triangular" value="0" name="matrix">Upper triangular</button>
+                                </div>
+                                <div class="method_box">
+                                    <button type="submit" class="method_button" data-method="trace" name="matrix">Trace</button>
+                                </div>
+                                <div class="method_box">
+                                    <button type="submit" class="method_button constant" data-method="addPadding" value="False" name="matrix">Padding</button>
+                                    <input type="number" class="constant_value" value="0" placeholder="0">
+                                </div>
+                                <div class="method_box">
+                                    <button type="submit" class="method_button" data-method="rank" name="matrix" disabled>Rank</button>
+                                </div>
+                                <div class="method_box">
+                                    <button type="submit" class="method_button" data-method="rotate" name="matrix" disabled>Rotate</button>
+                                    <input type="number" class="constant_value" value="0" placeholder="0" disabled>
+                                </div>
+                            </div>
+                            <!-----------------Methods----------------->
+                        </form>
+                    </div>
                 </div>
-                <!--Matrices-->
-                <div class="matrices" data-ride="matrices" data-id="A" data-size="2 2">
-                    <!--Form-->
-                    <form action="#" class="matrix" data-form="A">
-                        <!----------------Data matrix---------------->
-                        <div class="table" data-table="A"></div> <!----matrix's cell create in this div---->
-                        <textarea name="table_area" class="table_area hide" data-area="table_area" data-area-id="A" placeholder="0 0 0&#10;1 1 1&#10;2 2 2"></textarea>
-                        <!----------------Data matrix---------------->
-
-                        <!-----------------Controls----------------->
-                        <div class="control_wrapper d-flex justify-content-center align-items-center mt-10 mb-10">
-                            <button type="button" class="control_button" data-control="clear" name="matrix">Clear</button>
-                            <button type="button" class="control_button" data-control="switch" name="matrix">Switch</button>
-                            <button type="button" class="control_button" data-control="increase" value="1" name="matrix">&plus;</button>
-                            <button type="button" class="control_button" data-control="decrease" value="0" name="matrix">&minus;</button>
+                <!-----------------Left matrix----------------->
+    
+                <!-----------------Operation----------------->
+                <div class="col-12 col-md-2 mt-10 mb-10 mt-md-0 mb-md-0">
+                    <div class="operation_wrapper">
+                        <div class="operation_box">
+                            <button type="button" class="operation_button" data-operation="swap" name="matrix">Swap</button>
                         </div>
-                        <!-----------------Controls----------------->
-
-                        <!-----------------Methods----------------->
-                        <div class="method_wrapper">
-                            <div class="method_box">
-                                <button type="submit" class="method_button" data-method="determinant" name="matrix">Determinant</button>
-                            </div>
-                            <div class="method_box">
-                                <button type="submit" class="method_button" data-method="transpose" name="matrix">Transpose</button>
-                            </div>
-                            <div class="method_box">
-                                <button type="submit" class="method_button" data-method="identity" name="matrix">Identity</button>
-                            </div>
-                            <div class="method_box">
-                                <button type="submit" class="method_button" data-method="inverse" name="matrix">Inverse</button>
-                            </div>
-                            <div class="method_box">
-                                <button type="submit" class="method_button constant" data-method="scalar" name="matrix">Scalar</button>
-                                <input type="text" class="constant_value" value="0" placeholder="0">
-                            </div>
-                            <div class="method_box">
-                                <button type="submit" class="method_button constant" data-method="exponent" name="matrix">Exponent</button>
-                                <input type="number" class="constant_value" value="0" placeholder="0">
-                            </div>
-                            <div class="method_box">
-                                <button type="submit" class="method_button constant" data-method="shift" name="matrix">Shift</button>
-                                <input type="number" class="constant_value" value="0" placeholder="0">
-                            </div>
-                            <div class="method_box">
-                                <button type="submit" class="method_button constant axis" data-method="minor" name="matrix">Minor</button>
-                                <input type="number" class="constant_value axis_i" name="minor" value="0" placeholder="i">
-                                <input type="number" class="constant_value axis_j" name="minor" value="0" placeholder="j">
-                            </div>
-                            <div class="method_box">
-                                <button type="submit" class="method_button constant axis" data-method="cofactor" name="matrix">Cofactor</button>
-                                <input type="number" class="constant_value axis_i" name="cofactor" value="0" placeholder="i">
-                                <input type="number" class="constant_value axis_j" name="cofactor" value="0" placeholder="j">
-                            </div>
-                            <div class="method_box">
-                                <button type="submit" class="method_button" data-method="diagonal" name="matrix">Diagonal</button>
-                            </div>
-                            <div class="method_box">
-                                <button type="submit" class="method_button" data-method="triangular" value="1" name="matrix">Lower triangular</button>
-                            </div>
-                            <div class="method_box">
-                                <button type="submit" class="method_button" data-method="triangular" value="0" name="matrix">Upper triangular</button>
-                            </div>
-                            <div class="method_box">
-                                <button type="submit" class="method_button" data-method="trace" name="matrix">Trace</button>
-                            </div>
-                            <div class="method_box">
-                                <button type="submit" class="method_button constant" data-method="addPadding" value="False" name="matrix">Padding</button>
-                                <input type="number" class="constant_value" value="0" placeholder="0">
-                            </div>
-                            <div class="method_box">
-                                <button type="submit" class="method_button" data-method="rank" name="matrix" disabled>Rank</button>
-                            </div>
+                        <div class="operation_box">
+                            <button type="button" class="operation_button" data-operation="multiply" name="matrix">A x B</button>
                         </div>
-                        <!-----------------Methods----------------->
-                    </form>
-                </div>
-            </div>
-            <!-----------------Left matrix----------------->
-
-            <!-----------------Operation----------------->
-            <div class="col-12 col-md-2 mt-10 mb-10 mt-md-0 mb-md-0">
-                <div class="operation_wrapper">
-                    <div class="operation_box">
-                        <button type="button" class="operation_button" data-operation="swap" name="matrix">Swap</button>
-                    </div>
-                    <div class="operation_box">
-                        <button type="button" class="operation_button" data-operation="multiply" name="matrix">A x B</button>
-                    </div>
-                    <div class="operation_box">
-                        <button type="button" class="operation_button" data-operation="plus_minus" value="plus" name="matrix">A + B</button>
-                    </div>
-                    <div class="operation_box">
-                        <button type="button" class="operation_button" data-operation="plus_minus" value="minus" name="matrix">A - B</button>
-                    </div>
-                    <div class="operation_box">
-                        <button type="button" class="operation_button" data-operation="convolution" value="False" name="matrix">Convolution</button>
-                    </div>
-                    <div class="operation_box">
-                        <button type="button" class="operation_button" data-operation="convolution_edge" value="True" name="matrix">Convolution with edge</button>
-                    </div>
-                </div>
-            </div>
-            <!-----------------Operation----------------->
-
-            <!-----------------Right matrix----------------->
-            <div class="col-12 col-md-5">
-                <!--Header-->
-                <div class="header">
-                    <h4>Matrix B</h4>
-                </div>
-                <!--Matrices-->
-                <div class="matrices" data-id="B" data-ride="matrices" data-size="3 3">
-                    <form action="#" data-form="B" class="matrix">
-                        <!----------------Data matrix---------------->
-                        <div class="table" data-table="B"></div> <!----matrix's cell create in this div---->
-                        <textarea name="table_area" class="table_area hide" data-area="table_area" data-area-id="B" placeholder="0 0 0&#10;1 1 1&#10;2 2 2"></textarea>
-                        <!----------------Data matrix---------------->
-                        
-                        <!-----------------Controls----------------->
-                        <div class="control_wrapper d-flex justify-content-center align-items-center mt-10 mb-10">
-                            <button type="button" class="control_button" data-control="clear" name="matrix">Clear</button>
-                            <button type="button" class="control_button" data-control="switch" name="matrix">Switch</button>
-                            <button type="button" class="control_button" data-control="increase" value="1" name="matrix">&plus;</button>
-                            <button type="button" class="control_button" data-control="decrease" value="0" name="matrix">&minus;</button>
+                        <div class="operation_box">
+                            <button type="button" class="operation_button" data-operation="plus_minus" value="plus" name="matrix">A + B</button>
                         </div>
-                        <!-----------------Controls----------------->
-
-                        <!-----------------Methods----------------->
-                        <div class="method_wrapper">
-                            <div class="method_box">
-                                <button type="submit" class="method_button" data-method="determinant" name="matrix">Determinant</button>
-                            </div>
-                            <div class="method_box">
-                                <button type="submit" class="method_button" data-method="transpose" name="matrix">Transpose</button>
-                            </div>
-                            <div class="method_box">
-                                <button type="submit" class="method_button" data-method="identity" name="matrix">Identity</button>
-                            </div>
-                            <div class="method_box">
-                                <button type="submit" class="method_button" data-method="inverse" name="matrix">Inverse</button>
-                            </div>
-                            <div class="method_box">
-                                <button type="submit" class="method_button constant" data-method="scalar" name="matrix">Scalar</button>
-                                <input type="text" class="constant_value" value="0" placeholder="0">
-                            </div>
-                            <div class="method_box">
-                                <button type="submit" class="method_button constant" data-method="exponent" name="matrix">Exponent</button>
-                                <input type="number" class="constant_value" value="0" placeholder="0">
-                            </div>
-                            <div class="method_box">
-                                <button type="submit" class="method_button constant" data-method="shift" name="matrix">Shift</button>
-                                <input type="number" class="constant_value" value="0" placeholder="0">
-                            </div>
-                            <div class="method_box">
-                                <button type="submit" class="method_button constant axis" data-method="minor" name="matrix">Minor</button>
-                                <input type="number" class="constant_value axis_i" name="minor" value="0" placeholder="i">
-                                <input type="number" class="constant_value axis_j" name="minor" value="0" placeholder="j">
-                            </div>
-                            <div class="method_box">
-                                <button type="submit" class="method_button constant axis" data-method="cofactor" name="matrix">Cofactor</button>
-                                <input type="number" class="constant_value axis_i" name="cofactor" value="0" placeholder="i">
-                                <input type="number" class="constant_value axis_j" name="cofactor" value="0" placeholder="j">
-                            </div>
-                            <div class="method_box">
-                                <button type="submit" class="method_button" data-method="diagonal" name="matrix">Diagonal</button>
-                            </div>
-                            <div class="method_box">
-                                <button type="submit" class="method_button" data-method="triangular" value="1" name="matrix">Lower triangular</button>
-                            </div>
-                            <div class="method_box">
-                                <button type="submit" class="method_button" data-method="triangular" value="0" name="matrix">Upper triangular</button>
-                            </div>
-                            <div class="method_box">
-                                <button type="submit" class="method_button" data-method="trace" name="matrix">Trace</button>
-                            </div>
-                            <div class="method_box">
-                                <button type="submit" class="method_button constant" data-method="addPadding" value="False" name="matrix">Padding</button>
-                                <input type="number" class="constant_value" value="0" placeholder="0">
-                            </div>
-                            <div class="method_box">
-                                <button type="submit" class="method_button" data-method="rank" name="matrix" disabled>Rank</button>
-                            </div>
+                        <div class="operation_box">
+                            <button type="button" class="operation_button" data-operation="plus_minus" value="minus" name="matrix">A - B</button>
                         </div>
-                        <!-----------------Methods----------------->
-                    </form>
+                        <div class="operation_box">
+                            <button type="button" class="operation_button" data-operation="convolution" value="False" name="matrix">Convolution</button>
+                        </div>
+                        <div class="operation_box">
+                            <button type="button" class="operation_button" data-operation="convolution_edge" value="True" name="matrix">Convolution with edge</button>
+                        </div>
+                    </div>
                 </div>
-            </div>
-            <h6 style="margin-top: 30px;">*If use convolution : matrix A will be source and matrix B will be kernel.</h6>
-            <!-----------------Right matrix----------------->
-
-            <!-----------------Result matrix----------------->
-            <div class="col-12">
-                <div class="result" id="result">
-                    <h4 id="head4">Result</h4>
-                    <ul class="uList">
-                        <li class="list_items show">
-                            <p class="mWrapper" data-result="[[25,8],[48,33]]">
-                                $$\begin{bmatrix}1 & 2\\12 & 3\end{bmatrix}^{(2)}$$=\begin{bmatrix}25 & 8\\48 & 33\end{bmatrix}
-                            </p>
-                            <div class="buttonContainer">
-                                <button name="cellsResult" class="insertToCell" value="A">Insert to A</button>
-                                <button name="cellsResult" class="insertToCell" value="B">Insert to B</button>
-                                <button name="cellsResult" class="clearResult" value="clear">Clear</button>
+                <!-----------------Operation----------------->
+    
+                <!-----------------Right matrix----------------->
+                <div class="col-12 col-md-5">
+                    <!--Header-->
+                    <div class="header">
+                        <h4>Matrix B</h4>
+                    </div>
+                    <!--Matrices-->
+                    <div class="matrices" data-id="B" data-ride="matrices" data-size="3 3">
+                        <form action="#" data-form="B" class="matrix">
+                            <!----------------Data matrix---------------->
+                            <div class="table" data-table="B"></div> <!----matrix's cell create in this div---->
+                            <textarea name="table_area" class="table_area hide" data-area="table_area" data-area-id="B" placeholder="0 0 0&#10;1 1 1&#10;2 2 2"></textarea>
+                            <!----------------Data matrix---------------->
+                            
+                            <!-----------------Controls----------------->
+                            <div class="control_wrapper d-flex justify-content-center align-items-center mt-10 mb-10">
+                                <button type="button" class="control_button" data-control="clear" name="matrix">Clear</button>
+                                <button type="button" class="control_button" data-control="switch" name="matrix">Switch</button>
+                                <button type="button" class="control_button" data-control="increase" value="1" name="matrix">&plus;</button>
+                                <button type="button" class="control_button" data-control="decrease" value="0" name="matrix">&minus;</button>
                             </div>
-                        </li>
-                    </ul>
+                            <!-----------------Controls----------------->
+    
+                            <!-----------------Methods----------------->
+                            <div class="method_wrapper">
+                                <div class="method_box">
+                                    <button type="submit" class="method_button" data-method="determinant" name="matrix">Determinant</button>
+                                </div>
+                                <div class="method_box">
+                                    <button type="submit" class="method_button" data-method="transpose" name="matrix">Transpose</button>
+                                </div>
+                                <div class="method_box">
+                                    <button type="submit" class="method_button" data-method="identity" name="matrix">Identity</button>
+                                </div>
+                                <div class="method_box">
+                                    <button type="submit" class="method_button" data-method="inverse" name="matrix">Inverse</button>
+                                </div>
+                                <div class="method_box">
+                                    <button type="submit" class="method_button constant" data-method="scalar" name="matrix">Scalar</button>
+                                    <input type="text" class="constant_value" value="0" placeholder="0">
+                                </div>
+                                <div class="method_box">
+                                    <button type="submit" class="method_button constant" data-method="exponent" name="matrix">Exponent</button>
+                                    <input type="number" class="constant_value" value="0" placeholder="0">
+                                </div>
+                                <div class="method_box">
+                                    <button type="submit" class="method_button constant" data-method="shift" name="matrix">Shift</button>
+                                    <input type="number" class="constant_value" value="0" placeholder="0">
+                                </div>
+                                <div class="method_box">
+                                    <button type="submit" class="method_button constant axis" data-method="minor" name="matrix">Minor</button>
+                                    <input type="number" class="constant_value axis_i" name="minor" value="0" placeholder="i">
+                                    <input type="number" class="constant_value axis_j" name="minor" value="0" placeholder="j">
+                                </div>
+                                <div class="method_box">
+                                    <button type="submit" class="method_button constant axis" data-method="cofactor" name="matrix">Cofactor</button>
+                                    <input type="number" class="constant_value axis_i" name="cofactor" value="0" placeholder="i">
+                                    <input type="number" class="constant_value axis_j" name="cofactor" value="0" placeholder="j">
+                                </div>
+                                <div class="method_box">
+                                    <button type="submit" class="method_button" data-method="diagonal" name="matrix">Diagonal</button>
+                                </div>
+                                <div class="method_box">
+                                    <button type="submit" class="method_button" data-method="triangular" value="1" name="matrix">Lower triangular</button>
+                                </div>
+                                <div class="method_box">
+                                    <button type="submit" class="method_button" data-method="triangular" value="0" name="matrix">Upper triangular</button>
+                                </div>
+                                <div class="method_box">
+                                    <button type="submit" class="method_button" data-method="trace" name="matrix">Trace</button>
+                                </div>
+                                <div class="method_box">
+                                    <button type="submit" class="method_button constant" data-method="addPadding" value="False" name="matrix">Padding</button>
+                                    <input type="number" class="constant_value" value="0" placeholder="0">
+                                </div>
+                                <div class="method_box">
+                                    <button type="submit" class="method_button" data-method="rank" name="matrix" disabled>Rank</button>
+                                </div>
+                                <div class="method_box">
+                                    <button type="submit" class="method_button" data-method="rotate" name="matrix" disabled>Rotate</button>
+                                    <input type="number" class="constant_value" value="0" placeholder="0" disabled>
+                                </div>
+                            </div>
+                            <!-----------------Methods----------------->
+                        </form>
+                    </div>
                 </div>
+                <h6 style="margin-top: 30px;">*If use convolution : matrix A will be source and matrix B will be kernel.</h6>
+                <!-----------------Right matrix----------------->
+    
+                <!-----------------Result matrix----------------->
+                <div class="col-12">
+                    <div class="result" id="result">
+                        <h4 id="head4">Result</h4>
+                        <ul class="uList">
+                            <li class="list_items show">
+                                <p class="mWrapper" data-result="[[25,8],[48,33]]">
+                                    $$\begin{bmatrix}1 & 2\\12 & 3\end{bmatrix}^{(2)}$$=\begin{bmatrix}25 & 8\\48 & 33\end{bmatrix}
+                                </p>
+                                <div class="buttonContainer">
+                                    <button name="cellsResult" class="insertToCell" value="A">Insert to A</button>
+                                    <button name="cellsResult" class="insertToCell" value="B">Insert to B</button>
+                                    <button name="cellsResult" class="clearResult" value="clear">Clear</button>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <!-----------------Result matrix----------------->
             </div>
-            <!-----------------Result matrix----------------->
         </div>
     </div>
 

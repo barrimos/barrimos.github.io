@@ -2,6 +2,27 @@
   display: none !important;
 }
 
+@media screen and (max-width: 576px) {
+  .wrapper {
+    margin: 0 0;
+  }
+}
+@media screen and (min-width: 768px) {
+  .wrapper {
+    margin: 0 50px;
+  }
+}
+@media screen and (min-width: 992px) {
+  .wrapper {
+    margin: 0 40px;
+  }
+}
+@media screen and (min-width: 1200px) {
+  .wrapper {
+    margin: 0 20px;
+  }
+}
+
 .matrix .table {
   min-height: 102px;
   display: grid;
