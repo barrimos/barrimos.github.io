@@ -16,17 +16,19 @@ const begin = '\\begin{bmatrix}';
 const end = '\\end{bmatrix}';
 
 // Call by implement.py
-function getConfigResult(matrices, result, fraction = false){
+function getConfigResult(matrices, result){
   // Convert to Array
   try{
     mat = JSON.parse(matrices);
   } catch(e){
     alert(e);
+    return;
   }
   try{
     matRes = JSON.parse(result);
   } catch(e){
     alert(e);
+    return;
   }
 
   // Determine how many matrix in use
@@ -165,10 +167,9 @@ const display = () => {
     mRegex = mRegex.replace(/^\[\[|\]\]$/g, '');
     mRegex = mRegex.split(/(?<=\])\],\[(?=\[)/g);
     mRegex = mRegex.map(x => {
-      return x.replace(/\[|\]|\/1/g, '').split(',');
+      return x.replace(/\[|\]/g, '').split(',');
     });
-    mRegex = JSON.stringify(mRegex).replace(/[^\d\[\]\-\/\,](?!\-?\d+\/\d+)(?![\"\]])/g, '');
-    mRegex = mRegex.replace(/['"]-?\d+\/\d+['"]/g, n => {
+    mRegex = JSON.stringify(mRegex).replace(/['"]-?\d+\/\d+['"]/g, n => {
       if(/-?\d+\/\d+/.test(n)){
         let _ = n.replace(/"/g, '').split('/');
         let num = parseInt(_[0], 10) / parseInt(_[1], 10);

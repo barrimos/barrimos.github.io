@@ -134,10 +134,7 @@ def callMethod(e):
       # # call method with send parameter
       res = callbackMethod(matrixData[0])
 
-  if method[0] == 'inverse':  
-    getConfigResult(matrixData, res, 'true')
-  else:
-    getConfigResult(matrixData, res)
+  getConfigResult(matrixData, res)
 
 # Implement event listener
 for btn in arrayMethodButton:
