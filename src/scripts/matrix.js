@@ -1,6 +1,6 @@
 (function(global, factory){
-  typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory() : typeof define === 'function' && define.amd ? define(factory) : (global.matrices = factory());
-}(this, (function(){
+  typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory() : typeof define === 'function' && define.amd ? define(factory) : global.matrices = factory();
+}(typeof self !== 'undefined' ? self : this, (function(){
   'use strict';
 
   // Name
@@ -21,6 +21,9 @@
   const NAME_CONTROL_BUTTON = 'control_button';
   const NAME_METHOD_BUTTON = 'method_button';
   const NAME_OPERATION_BUTTON = 'operation_button';
+  const NAME_CELLS_RESULT = 'cellsResult';
+  const NAME_INSERT_TO_CELL = 'insertToCell';
+  const NAME_CLEAR_RESULT = 'clearResult'
   
   // Dataset
   const NAME_DATA_SIZE = 'data-size';
@@ -46,6 +49,8 @@
   const SELECTOR_ROWS = `.${NAME_ROWS}`;
   const SELECTOR_COLS = `.${NAME_COLS}`;
   const SELECTOR_HIDE = `.${NAME_HIDE}`;
+  const SELECTOR_CELLS_RESULT = `.${NAME_CELLS_RESULT}`;
+  const SELECTOR_INSERT_TO_CELL = `.${NAME_INSERT_TO_CELL}`;
   
   const SELECTOR_CONTROL_WRAPPER = `.${NAME_CONTROL_WRAPPER}`;
   const SELECTOR_CONTROL_BUTTON = `.${NAME_CONTROL_BUTTON}`;
@@ -106,7 +111,7 @@
   
   const REQUIRED = 'required';
   const BUTTONS = document.querySelectorAll('button[name="matrix"]');
-  let cells;
+  let cells, insertBtn;
 
   // Default config's value
   const Default = {
@@ -345,7 +350,6 @@
     let key_idx = getKeyConfig(id);
     Config[key_idx].isTableArea === false ? true : false;
     let table_area = document.querySelector(`[${NAME_DATA_FORM}="${Config[key_idx].id}"] ${SELECTOR_TABLE_AREA}`);
-    let curr_data;
 
     // Disabled increase/decrease button
     isActiveButton(key_idx);
@@ -359,17 +363,8 @@
       // If sessionStorage have data from table
       // Tabel_area shown data from table
       if(sessionStorage.getItem(Config[key_idx].id) !== null){
-        curr_data = JSON.parse(sessionStorage.getItem(Config[key_idx].id));
+        writeToTableArea(table_area, key_idx, JSON.parse(sessionStorage.getItem(Config[key_idx].id)));
 
-        let txt = '';
-        for(let i = 0; i < curr_data.length; i++){
-          for(let j = 0; j < curr_data[i].length; j++){
-            txt += curr_data[i][j] + ' ';
-          }
-          txt += '\r\n';
-        }
-        // Push data to table_area
-        table_area.value = txt;
       } else {
         // Get data table_area to sessionStorage
         getAreaData();
@@ -380,74 +375,8 @@
     if(!Config[key_idx].isTableArea){
       // If table_area have a data
       if(table_area.value !== ''){
-        // Use updateCell to update tabel data cell
+        clearAndCreateTable(table, key_idx, JSON.parse(sessionStorage.getItem(Config[key_idx].id)))
 
-        // Get data from table_area that saved in sessionStorage
-        let data_table_area = JSON.parse(sessionStorage.getItem(Config[key_idx].id));
-
-        // ------------------------------- CREATE NEW TABLE CELL ------------------------------- //
-        // Update Config                                                                         //
-        Config[key_idx].rows = data_table_area.length;                                           //
-        Config[key_idx].cols = data_table_area[0].length;                                        //
-                                          
-        // Clear all innerHTML before                                                            //
-        table.innerHTML = '';                                                                    //
-
-        // Create new table cell                                                                 //
-        createCellTable(table, key_idx);                                                         //
-        Config[key_idx].isHiding = false;                                                        //
-        Config[key_idx].limit = 0;                                                               //
-
-        // getMaxPoint(table, id);                                                                //
-        // ------------------------------------------------------------------------------------- //
-
-
-        // ---------------------USE UPDATECELL FUNCTION (NOT WORKING JUST NOW)------------------------------- //
-        // // Have 2 reason why not use updateCell function                                                   //
-        // // 1. updateCell function have to execute twice time by separating rows and columns operations     //
-        // // 2. if table_area data rows or cols less than old data                                           //
-        // // whatever rows or cols updated first updateCell will set Config isHiding to true                 //
-        // // Then function will be bugs e.g. data cell is 2*2, table_area is 1*3                             //
-        // // - first step updateCell will decrease (n = '0') to hide 1 row                                   //
-        // // - second step operation will increase (n = '1') 1 column BUT will be bugs                       //
-        // // algorithm will execute if-else statement to show the element that hiding                        //
-        // // exactly it's mean row that just hiding                                                          //
-        // // including table_area larger old table data cell                                                 //
-
-        // // Create tabel cell that equals to data_table_area                                                //
-        // // Get new rows/cols                                                                               //
-        // let newRows = data_table_area.length;                                                              //
-        // let newCols = data_table_area[0].length;                                                           //
-                                                                                                           
-        // // Find n from oldRows with current rows and oldCols with current cols are increase or decrease    //
-        // let nRows = Config[key_idx]['oldRows'] < newRows ? '1' : '0';                                      //
-        // let nCols = Config[key_idx]['oldCols'] < newCols ? '1' : '0';                                      //
-        // // Then find how diff of length oldRows with current rows and oldCols with current cols            //
-        // // If diff is 0 that mean nothing to do                                                            //
-        // let diffRows = Math.abs(Config[key_idx]['oldRows'] - newRows);                                     //
-        // let diffCols = Math.abs(Config[key_idx]['oldCols'] - newCols);                                     //
-
-        // // update table cell                                                                               //
-        // while(diffRows > 0){                                                                               //
-        //   updateCell(table, Config[key_idx].id, nRows, 'rows');                                            //
-        //   diffRows--;                                                                                      //
-        // }                                                                                                  //
-        // while(diffCols > 0){                                                                               //
-        //   updateCell(table, Config[key_idx].id, nCols, 'cols');                                            //
-        //   diffCols--;                                                                                      //
-        // }                                                                                                  //
-        // // Update Config                                                                                   //
-        // Config[key_idx].rows = data_table_area.length;                                                     //
-        // Config[key_idx].cols = data_table_area[0].length;                                                  //
-        // -------------------------------------------------------------------------------------------------- //
-
-
-        // Table get new data entering to cell
-        data_table_area.forEach((rows, i) => {
-          rows.forEach((cols, j) => {
-            document.querySelector(`[${NAME_DATA_CELL}="${i}-${j}-${Config[key_idx].id}"]`).value = cols === 0 ? '' : cols;
-          })
-        });
         getCellData();
       } else {
         Config[key_idx].oldRows = Default.oldRows;
@@ -466,7 +395,6 @@
     // Cell change then call function to get cell data again
     getCellData();
   }
-
 
 
   /**
@@ -1007,4 +935,26 @@
   window.onbeforeunload = function() {
     sessionStorage.clear();
   }
+
+  // Export Config to use outer module
+  function exportConfig(){
+    return [
+      Config,
+      createCellTable,
+      getKeyConfig,
+      getTable,
+      getMaxPoint,
+      cleanConfigs,
+      NAME_DATA_CELL,
+      NAME_CELLS_RESULT,
+      NAME_INSERT_TO_CELL,
+      NAME_CLEAR_RESULT,
+      NAME_DATA_FORM,
+      NAME_TABLE,
+      NAME_TABLE_AREA,
+      SELECTOR_TABLE,
+      SELECTOR_TABLE_AREA,
+    ];
+  }
+  return exportConfig;
 })));

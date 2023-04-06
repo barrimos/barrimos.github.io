@@ -173,6 +173,8 @@ input[type=number] {
 }
 .result .uList .list_items.show {
   min-height: 120px;
+  padding-top: 20px;
+  padding-bottom: 20px;
   display: flex;
   animation-name: up;
   animation-duration: 600ms;
@@ -198,7 +200,12 @@ input[type=number] {
   display: inline-flex;
   align-items: center;
 }
-.result .uList .clearResult {
-  width: 60px;
+.result .uList .list_items .buttonContainer {
+  display: flex;
+  flex-direction: column;
+}
+.result .uList .list_items .buttonContainer .insertToCell, .result .uList .list_items .buttonContainer .clearResult {
+  width: 80px;
   height: 25px;
+  margin: 2px 0;
 }

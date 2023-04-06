@@ -171,6 +171,8 @@ input[type=number] {
             align-items: center;
             &.show{
                 min-height: 120px;
+                padding-top: 20px;
+                padding-bottom: 20px;
                 display: flex;
                 animation-name: up;
                 animation-duration: 600ms;
@@ -196,10 +198,15 @@ input[type=number] {
                 display: inline-flex;
                 align-items: center;
             }
-        }
-        .clearResult{
-            width: 60px;
-            height: 25px;
+            .buttonContainer{
+                display: flex;
+                flex-direction: column;
+                .insertToCell, .clearResult{
+                    width: 80px;
+                    height: 25px;
+                    margin: 2px 0;
+                }
+            }
         }
     }
 }

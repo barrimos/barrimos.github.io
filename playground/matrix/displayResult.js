@@ -1,9 +1,11 @@
 const uList = document.querySelector('.uList');
 const listItem = document.getElementById('list_items');
 const head = document.getElementById('head4');
+// Import specific functions and variables required to use from matrix.js
+const [Config, createCellTable, getKeyConfig, getTable, getMaxPoint, cleanConfigs, NAME_DATA_CELL, NAME_CELLS_RESULT, NAME_INSERT_TO_CELL, NAME_CLEAR_RESULT, NAME_DATA_FORM, NAME_TABLE, NAME_TABLE_AREA, SELECTOR_TABLE, SELECTOR_TABLE_AREA,] = matrices();
 
 // Constantly variable
-let clearResultBtn, id, method, constant, exponent, frac, numer, denom, mA, mO, mB, mRes, mJoint;
+let cellsResultBtn, id, method, constant, exponent, frac, numer, denom, mA, mO, mB, mRes, mJoint, mat, matRes, tempRes = [];
 
 // Object for storing all matrix
 const matrix = {}
@@ -13,14 +15,18 @@ const $$ = '$$';
 const begin = '\\begin{bmatrix}';
 const end = '\\end{bmatrix}';
 
-function getConfigResult(matrices, result){
+// Call by implement.py
+function getConfigResult(matrices, result, fraction = false){
   // Convert to Array
-  let mat, matRes;
   try{
     mat = JSON.parse(matrices);
+  } catch(e){
+    alert(e);
+  }
+  try{
     matRes = JSON.parse(result);
-  } catch {
-    return
+  } catch(e){
+    alert(e);
   }
 
   // Determine how many matrix in use
@@ -62,7 +68,11 @@ const convertArrayToMathJax = arr => {
   // Find and replace string array 
   mJax = mJax.replace(/\[(\[\],\-?\d+,\d+)\]/g, n => {
     [frac, numer, denom] = JSON.parse(n);
-    return `\\frac{${numer}}{${denom}}`;
+    if(denom === 1){
+      return numer
+    } else {
+      return `\\frac{${numer}}{${denom}}`;
+    }
   });
   mJax = mJax.replace(/\]\,\[/g, '\\\\');
   mJax = mJax.replace(/,/g, ' & ');
@@ -72,18 +82,32 @@ const convertArrayToMathJax = arr => {
 }
 
 const display = () => {
-  // Create element list_items / mWrapper
+  // Create element list_items / mWrapper / buttonContainer
   let liContainer = document.createElement('li');
   liContainer.setAttribute('class', 'list_items');
   let mWrapper = document.createElement('p');
   mWrapper.setAttribute('class', 'mWrapper');
+  let buttonContainer = document.createElement('div');
+  buttonContainer.setAttribute('class', 'buttonContainer');
 
   // Create element clear button
   let clearBtn = document.createElement('button');
-  clearBtn.setAttribute('name', 'clearResult');
-  clearBtn.setAttribute('class', 'clearResult');
+  clearBtn.setAttribute('name', NAME_CELLS_RESULT);
+  clearBtn.setAttribute('class', NAME_CLEAR_RESULT);
+  clearBtn.setAttribute('value', 'clear');
   clearBtn.innerHTML = 'Clear';
+  let insertA = document.createElement('button');
+  insertA.setAttribute('name', NAME_CELLS_RESULT);
+  insertA.setAttribute('class', NAME_INSERT_TO_CELL);
+  insertA.setAttribute('value', 'A');
+  insertA.innerHTML = 'Insert to A';
+  let insertB = document.createElement('button');
+  insertB.setAttribute('name', NAME_CELLS_RESULT);
+  insertB.setAttribute('class', NAME_INSERT_TO_CELL);
+  insertB.setAttribute('value', 'B');
+  insertB.innerHTML = 'Insert to B';
 
+  // Convert to MathJax format
   mA = convertArrayToMathJax(matrix['A']);
   mRes = convertArrayToMathJax(matrix['result']);
 
@@ -133,12 +157,40 @@ const display = () => {
   }
 
   mWrapper.innerHTML = `\\(${mJoint}\\)`;
-  
+
+  if(method[0] === 'inverse'){
+    let strMat = JSON.stringify(matRes);
+    let mRegex = strMat.replace(/[[][\]][,]/g, '');
+    mRegex = mRegex.replace(/(?<=\d),(?=\d)/g, '\/');
+    mRegex = mRegex.replace(/^\[\[|\]\]$/g, '');
+    mRegex = mRegex.split(/(?<=\])\],\[(?=\[)/g);
+    mRegex = mRegex.map(x => {
+      return x.replace(/\[|\]|\/1/g, '').split(',');
+    });
+    mRegex = JSON.stringify(mRegex).replace(/[^\d\[\]\-\/\,](?!\-?\d+\/\d+)(?![\"\]])/g, '');
+    mRegex = mRegex.replace(/['"]-?\d+\/\d+['"]/g, n => {
+      if(/-?\d+\/\d+/.test(n)){
+        let _ = n.replace(/"/g, '').split('/');
+        let num = parseInt(_[0], 10) / parseInt(_[1], 10);
+        return num;
+      }
+    });
+    mWrapper.setAttribute('data-result', mRegex);
+  } else {
+    mWrapper.setAttribute('data-result', JSON.stringify(matRes));
+  }
+
   liContainer.appendChild(mWrapper);
-  liContainer.appendChild(clearBtn);
+  insertA.addEventListener('click', insertResultToCell);
+  insertB.addEventListener('click', insertResultToCell);
+  buttonContainer.appendChild(insertA);
+  buttonContainer.appendChild(insertB);
+  buttonContainer.appendChild(clearBtn);
+  liContainer.appendChild(buttonContainer);
   
   uList.insertBefore(liContainer, uList.children[0]);
-  
+
+
   setTimeout(() => {
     MathJax.Hub.Queue(['Typeset', MathJax.Hub, mWrapper]);
     liContainer.classList.add('show');
@@ -154,17 +206,109 @@ const display = () => {
       head.innerHTML = `Result - ${method[0]}`;
     }
   }, 1000);
-  clear();
+  cellsResult();
 }
 
-const clear = () => {
-  clearResultBtn = document.querySelectorAll('.clearResult');
-  Array.from(clearResultBtn).forEach(btn => {
+const cellsResult = () => {
+  cellsResultBtn = document.querySelectorAll(`button[name=${NAME_CELLS_RESULT}][value="clear"]`);
+  cellsResultBtn.forEach(btn => {
     btn.addEventListener('click', e => {
-      e.target.parentElement.remove();
+      e.preventDefault();
+      e.stopPropagation();
+      e.target.parentElement.parentElement.remove();
     });
   });
-};
+}
+
+
+/**
+ * Clear table and create new table
+ */
+const clearAndCreateTable = (table, key_idx, data) => {
+  // Get data from table_area that saved in sessionStorage
+  let data_table_area = data
+
+  // Update Config
+  Config[key_idx].rows = data_table_area.length;
+  Config[key_idx].cols = data_table_area[0].length;
+                                    
+  // Clear all innerHTML before
+  table.innerHTML = '';
+
+  // Create new table cell
+  createCellTable(table, key_idx);
+  Config[key_idx].isHiding = false;
+  Config[key_idx].limit = 0;
+
+  // Table get new data entering to cell
+  data_table_area.forEach((rows, i) => {
+    rows.forEach((cols, j) => {
+      document.querySelector(`[${NAME_DATA_CELL}="${i}-${j}-${Config[key_idx].id}"]`).value = cols === 0 ? '' : cols;
+    })
+  });
+}
+
+const writeToTableArea = (table_area, key_idx, data, isInsertResult = false) => {
+  let txt = '';
+  for(let i = 0; i < data.length; i++){
+    for(let j = 0; j < data[i].length; j++){
+      if(!isInsertResult){
+        txt += data[i][j] + ' ';
+      }
+      if(isInsertResult){
+        Config[key_idx]['axis']['rows'].push(i);
+        Config[key_idx]['axis']['cols'].push(j);
+        Config[key_idx]['axis']['matrix'].push(`[${i},${j}]`);
+      }
+    }
+    if(!isInsertResult){
+      txt += '\r\n';
+    }
+  }
+  if(!isInsertResult){
+    // Push data to table_area
+    table_area.value = txt;
+  }
+}
+
+
+// Add event listener for new button insert
+const insertResultToCell = e => {
+  e.preventDefault();
+  e.stopPropagation();
+  let id = e.target.value;
+
+  let res = JSON.parse(e.target.parentElement.previousElementSibling.dataset.result);
+
+  let key_idx = getKeyConfig(id);
+  let table_area = document.querySelector(`[${NAME_DATA_FORM}="${Config[key_idx].id}"] ${SELECTOR_TABLE_AREA}`);
+  let table = getTable(id);
+  cleanConfigs(key_idx);
+
+  if(Config[key_idx].isTableArea){
+
+    writeToTableArea(table_area, key_idx, res)
+    sessionStorage.setItem(id, JSON.stringify(res));
+
+    Config[key_idx].rows = res.length;
+    Config[key_idx].cols = res[0].length;
+    getMaxPoint(key_idx);
+  }
+
+  if(!Config[key_idx].isTableArea){
+    clearAndCreateTable(table, key_idx, res)
+    // Use for update Config
+    writeToTableArea(null, key_idx, res, true);
+    sessionStorage.setItem(id, JSON.stringify(res));
+    getMaxPoint(key_idx);
+  }
+}
+
+// Add event listener for existing button insert
+let btns = document.querySelectorAll(`.${NAME_INSERT_TO_CELL}`);
+btns.forEach(btn => {
+  btn.addEventListener('click', insertResultToCell);
+});
 
 
 function logError(e){
@@ -173,4 +317,4 @@ function logError(e){
 }
 
 
-clear();
+cellsResult();

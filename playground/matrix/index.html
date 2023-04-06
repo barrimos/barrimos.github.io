@@ -438,10 +438,14 @@
                     <h4 id="head4">Result</h4>
                     <ul class="uList">
                         <li class="list_items show">
-                            <p class="mWrapper">
+                            <p class="mWrapper" data-result="[[25,8],[48,33]]">
                                 $$\begin{bmatrix}1 & 2\\12 & 3\end{bmatrix}^{(2)}$$=\begin{bmatrix}25 & 8\\48 & 33\end{bmatrix}
                             </p>
-                            <button name="clearResult" class="clearResult">Clear</button>
+                            <div class="buttonContainer">
+                                <button name="cellsResult" class="insertToCell" value="A">Insert to A</button>
+                                <button name="cellsResult" class="insertToCell" value="B">Insert to B</button>
+                                <button name="cellsResult" class="clearResult" value="clear">Clear</button>
+                            </div>
                         </li>
                     </ul>
                 </div>
@@ -455,7 +459,7 @@
     <script src="../../src/scripts/sidemenu.js"></script>
     <script src="../../src/scripts/totop.js"></script>
     <script>
-        // import by implement.py
+        // All buttons data-method and data-control for implement.py
         arrayMethodButton = Array.from(document.querySelectorAll('button[name="matrix"]'));
     </script>
     <script src="./displayResult.js"></script>
