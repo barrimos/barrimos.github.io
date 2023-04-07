@@ -101,6 +101,7 @@
   const BUTTON_NAME_IS_SQUARE = 'isSquareMatrix';
   const BUTTON_NAME_ADD_ZEROS = 'addzeros';
   const BUTTON_NAME_RANK = 'rank';
+  const BUTTON_NAME_ROTATE = 'rotate';
   
   // Operation buttons
   const BUTTON_NAME_SWAP = 'swap';
@@ -843,6 +844,7 @@
           method === BUTTON_NAME_EXPONENT ||
           method === BUTTON_NAME_SHIFT ||
           method === BUTTON_NAME_TRIANGULAR ||
+          method === BUTTON_NAME_ROTATE ||
           method === BUTTON_NAME_PADDING){
             if(method === BUTTON_NAME_TRIANGULAR){
               // Get constant triangular from element value, 1 for lower and 0 for upper

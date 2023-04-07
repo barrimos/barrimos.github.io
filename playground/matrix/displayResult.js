@@ -123,7 +123,7 @@ const display = () => {
       mA = mA + `^{(${constant[0]})}`;
       mJoint = mA + '=' + mRes;
     }
-  } else if(['determinant', 'identity', 'transpose', 'inverse', 'diagonal', 'trace'].includes(method[0])){
+  } else if(['determinant', 'identity', 'transpose', 'inverse', 'diagonal', 'trace', 'rank'].includes(method[0])){
     // No constant value determinde itself
     if(method[0] === 'inverse'){
       mA = mA + `^{(-1)}`;
@@ -145,7 +145,7 @@ const display = () => {
     }
     mJoint = mA + mO + mB + '=' + mRes;
 
-  } else if(['shift', 'scalar', 'triangular', 'addPadding'].includes(method[0])){
+  } else if(['shift', 'scalar', 'triangular', 'addPadding', 'rotate'].includes(method[0])){
     // One constant value determinde itself
     if(method[0] === 'scalar'){
       mJoint = constant[0] + '⋅' + mA + '=' + mRes;

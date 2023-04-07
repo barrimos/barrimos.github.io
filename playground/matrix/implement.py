@@ -95,7 +95,7 @@ def callMethod(e):
           res = callbackMethod(res, matrixData[0])
           constantValue[0] -= 1
 
-    elif method[0] in ["scalar", "shift", "triangular"]:
+    elif method[0] in ["scalar", "shift", "triangular", "rotate"]:
       # # Take one argument
       callbackMethod = getattr(matrix, method[0])
 
@@ -103,6 +103,7 @@ def callMethod(e):
       scalar(matrixData[0], constantValue[0])
       triangular(matrixData[0], constantValue[0])
       shift(matrixData[0], constantValue[0], reverse[True(Counter-clockwise) / False(Clockwise): default value])
+      rotate(matrixData[0], steps: default = 1)
       """
       # # call method with send parameter
       res = callbackMethod(matrixData[0], constantValue[0])
@@ -132,7 +133,7 @@ def callMethod(e):
       rank(matrixData[0])
       """
       # # call method with send parameter
-      res = callbackMethod(matrixData[0])
+      res = callbackMethod(matrixData[0])[1]
 
   getConfigResult(matrixData, res)
 
