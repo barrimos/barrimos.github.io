@@ -27,8 +27,12 @@ function getConfigResult(matrices, result){
   try{
     matRes = JSON.parse(result);
   } catch(e){
-    alert(e);
-    return;
+    if(matRes){
+      alert(e);
+      return;
+    } else {
+      return;
+    }
   }
 
   // Get id, method, constant and convert to Array

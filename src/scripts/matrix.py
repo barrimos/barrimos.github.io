@@ -327,6 +327,11 @@ def multiply(matrixA, matrixB):
   return multiply_matrix
 
 def bareiss(matrix, rank = False):
+
+  # Swap between rows if pivot that rows is 0
+  def swapRow(m):
+    m[pivot], m[pivot + 1] = sparse_matrix[pivot + 1], sparse_matrix[pivot] if rank else scalar([sparse_matrix[pivot]], -1)[0]
+
   # Divisor is the value of previous matrix's pivot axis, start defualt is 1 for pivot [0, 0]
   divisor = 1
 
@@ -346,12 +351,16 @@ def bareiss(matrix, rank = False):
 
   while pivot < dim:
 
+    # In-case of first rows is 0
+    if sparse_matrix[pivot][pivot] == 0 and pivot == 0:
+      swapRow(sparse_matrix)
+      
     # In-case of pivot is not last rows and current pivot is 0
     if sparse_matrix[pivot][pivot] == 0 and pivot < len(sparse_matrix) - 1:
       # Swap between this rows and next rows
       # If method is rank just swap
       # If method is determinant next rows * -1 and swap
-      result_matrix[pivot], result_matrix[pivot + 1] = result_matrix[pivot + 1], result_matrix[pivot] if rank else scalar([result_matrix[pivot]], -1)[0]
+      swapRow(result_matrix)
       if rank:
         if result_matrix[pivot][pivot] == 0:
           break
