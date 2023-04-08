@@ -646,6 +646,9 @@
           // Split \n between data to separate to be rows
           txt = txt.split(/\n+/g).map(t => {
   
+            // Comma after digit
+            t = t.replace(/,/g, ' ');
+
             // Whitespace between digits to one whitespace
             t = t.replace(/\s+/g, ' ');
     
