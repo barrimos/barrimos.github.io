@@ -79,7 +79,7 @@ def callMethod(e):
       # # call method with send parameter
       res = callbackMethod(matrixData[0], constantValue[0])
   
-    elif method[0] == "multiply":
+    elif method[0] == "exponent":
       """
       multiply(matrixData[0], matrixData[0])
       """
@@ -133,7 +133,7 @@ def callMethod(e):
       rank(matrixData[0])
       """
       # # call method with send parameter
-      res = callbackMethod(matrixData[0])[1]
+      res = callbackMethod(matrixData[0])
 
   getConfigResult(matrixData, res)
 

@@ -377,7 +377,7 @@ def determinant(matrix):
 
   [det_matrix, det_value] = bareiss(matrix)
 
-  return [det_matrix, det_value]
+  return det_value
 
 def minor_cofactor(matrix, posI, posJ, sel = "m"):
   """
@@ -620,9 +620,20 @@ def spiralOrder(matrix, clockwise = True):
   return ans
 
 def shift(matrix, k = 1, rev = False):
+  # If matrix is not full add zeros
+  if not isFullMatrix(matrix):
+    matrix = addzeros(matrix)
+
   rows = len(matrix)
+  cols = len(matrix[0])
   new_list = copy.deepcopy(matrix)
-  while k > 0:
+
+  term = abs(k) % cols
+
+  if term == 0:
+    return matrix
+  
+  while term > 0:
     if not rev:
       for i in range(rows):
         first = new_list[i].pop(-(len(new_list[i])))
@@ -632,7 +643,7 @@ def shift(matrix, k = 1, rev = False):
         last = new_list[i].pop()
         new_list[i].insert(0, last)
 
-    k -= 1
+    term -= 1
 
   return new_list
 

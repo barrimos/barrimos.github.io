@@ -2,7 +2,7 @@ const uList = document.querySelector('.uList');
 const listItem = document.getElementById('list_items');
 const head = document.getElementById('head4');
 // Import specific functions and variables required to use from matrix.js
-const [Config, createCellTable, getKeyConfig, getTable, getMaxPoint, cleanConfigs, NAME_DATA_CELL, NAME_CELLS_RESULT, NAME_INSERT_TO_CELL, NAME_CLEAR_RESULT, NAME_DATA_FORM, NAME_TABLE, NAME_TABLE_AREA, SELECTOR_TABLE, SELECTOR_TABLE_AREA,] = matrices();
+const [Config, createCellTable, getKeyConfig, getTable, getMaxPoint, cleanConfigs, getAreaData, getCellData, NAME_DATA_CELL, NAME_CELLS_RESULT, NAME_INSERT_TO_CELL, NAME_CLEAR_RESULT, NAME_DATA_FORM, NAME_TABLE, NAME_TABLE_AREA, SELECTOR_TABLE, SELECTOR_TABLE_AREA,] = matrices();
 
 // Constantly variable
 let cellsResultBtn, id, method, constant, exponent, frac, numer, denom, mA, mO, mB, mRes, mJoint, mat, matRes, tempRes = [];
@@ -31,6 +31,17 @@ function getConfigResult(matrices, result){
     return;
   }
 
+  // Get id, method, constant and convert to Array
+  [id, method, constant] = sessionStorage.getItem('method').split('-').map(x => {
+    try{
+      // For constant
+      return JSON.parse(x);
+    } catch {
+      // For id and method
+      return x.replace(/\[\'|\'\]|\'/g, '').split(', ');
+    }
+  });
+
   // Determine how many matrix in use
   if(mat.length === 2){
     matrix['A'] = mat[0];
@@ -43,22 +54,16 @@ function getConfigResult(matrices, result){
   if(!Array.isArray(matRes)){
     matrix['result'] = matRes;
   } else {
-    matrix['result'] = matRes;
-    matrix['rows'] = matRes.length;;
-    matrix['cols'] = matRes[0].length;;
-  }
-	
-  // Get id, method, constant and convert to Array
-  [id, method, constant] = sessionStorage.getItem('method').split('-').map(x => {
-    try{
-      // For constant
-      return JSON.parse(x);
-    } catch {
-      // For id and method
-      return x.replace(/\[\'|\'\]|\'/g, '').split(', ');
+    if(method[0] === 'rank'){
+      matrix['result'] = matRes[1];
+      matrix['rows'] = matRes[0].length;
+      matrix['cols'] = matRes[0][0].length;
+    } else {
+      matrix['result'] = matRes;
+      matrix['rows'] = matRes.length;
+      matrix['cols'] = matRes[0].length;
     }
-  });
-
+  }
   // Call to display result
   display();
 }
@@ -114,15 +119,9 @@ const display = () => {
   mRes = convertArrayToMathJax(matrix['result']);
 
   if(method[0] === 'multiply'){
-    if(constant.length === 0){
-      // A x B
-      mB = convertArrayToMathJax(matrix['B']);
-      mJoint = mA + '⋅' + mB + '=' + mRes;
-    } else {
-      // A x A (exponent)
-      mA = mA + `^{(${constant[0]})}`;
-      mJoint = mA + '=' + mRes;
-    }
+    // A x B
+    mB = convertArrayToMathJax(matrix['B']);
+    mJoint = mA + '⋅' + mB + '=' + mRes;
   } else if(['determinant', 'identity', 'transpose', 'inverse', 'diagonal', 'trace', 'rank'].includes(method[0])){
     // No constant value determinde itself
     if(method[0] === 'inverse'){
@@ -130,6 +129,9 @@ const display = () => {
     }
     if(method[0] === 'transpose'){
       mA = mA + `^{(T)}`;
+    }
+    if(method[0] === 'rank'){
+      mA = mA + '=' + convertArrayToMathJax(matRes[0]);
     }
     mJoint = mA + '=' + mRes;
 
@@ -145,10 +147,14 @@ const display = () => {
     }
     mJoint = mA + mO + mB + '=' + mRes;
 
-  } else if(['shift', 'scalar', 'triangular', 'addPadding', 'rotate'].includes(method[0])){
+  } else if(['shift', 'scalar', 'triangular', 'addPadding', 'rotate', 'exponent'].includes(method[0])){
     // One constant value determinde itself
     if(method[0] === 'scalar'){
       mJoint = constant[0] + '⋅' + mA + '=' + mRes;
+    } else if(method[0] === 'exponent'){
+      // A x A (exponent)
+      mA = mA + `^{(${constant[0]})}`;
+      mJoint = mA + '=' + mRes;
     } else {
       mJoint = mA + '=' + mRes;
     }
@@ -196,13 +202,15 @@ const display = () => {
     MathJax.Hub.Queue(['Typeset', MathJax.Hub, mWrapper]);
     liContainer.classList.add('show');
     if(method[0] === 'minor_cofactor'){
-      head.innerHTML = `Result - ${method[1] === 'm' ? 'Minor' : 'Cofactor'} ${constant[0]}, ${constant[1]}`;
+      head.innerHTML = `Result - ${method[1] === 'm' ? 'minor' : 'cofactor'} ${constant[0]}, ${constant[1]}`;
     } else if(method[0] === 'triangular'){
-      head.innerHTML = `Result - ${constant[0] === '1' ? 'Lower Triangular' : 'Upper Triangular'}`;
+      head.innerHTML = `Result - ${constant[0] === '1' ? 'lower triangular' : 'upper triangular'}`;
     } else if(method[0] === 'plus_minus'){
       head.innerHTML = `Result - ${constant[0] === 'plus' ? 'plus' : 'minus'}`;
     } else if(method[0] === 'convolution'){
       head.innerHTML = `Result - ${method[0]} with edge : ${constant[0]}`;
+    } else if(method[0] === 'exponent'){
+      head.innerHTML = `Result - ${method[0]} of ${constant[0]}`;
     } else {
       head.innerHTML = `Result - ${method[0]}`;
     }
@@ -281,6 +289,11 @@ const insertResultToCell = e => {
 
   let res = JSON.parse(e.target.parentElement.previousElementSibling.dataset.result);
 
+  // If result is interger not an array e.g. rank, determinant
+  if(!Array.isArray(res)){
+    res = [[res]];
+  }
+
   let key_idx = getKeyConfig(id);
   let table_area = document.querySelector(`[${NAME_DATA_FORM}="${Config[key_idx].id}"] ${SELECTOR_TABLE_AREA}`);
   let table = getTable(id);
@@ -294,6 +307,7 @@ const insertResultToCell = e => {
     Config[key_idx].rows = res.length;
     Config[key_idx].cols = res[0].length;
     getMaxPoint(key_idx);
+    getAreaData();
   }
 
   if(!Config[key_idx].isTableArea){
@@ -302,6 +316,7 @@ const insertResultToCell = e => {
     writeToTableArea(null, key_idx, res, true);
     sessionStorage.setItem(id, JSON.stringify(res));
     getMaxPoint(key_idx);
+    getCellData();
   }
 }
 

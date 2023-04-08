@@ -854,8 +854,6 @@
             }
             if(method === BUTTON_NAME_PADDING){
               method = `'${BUTTON_NAME_PADDING}', '${e.target.value}'`;
-            } else if(method === BUTTON_NAME_EXPONENT){
-              method = `'${BUTTON_NAME_MULTIPLY}'`;
             } else {
               method = `'${method}'`;
             }
@@ -947,6 +945,8 @@
       getTable,
       getMaxPoint,
       cleanConfigs,
+      getAreaData,
+      getCellData,
       NAME_DATA_CELL,
       NAME_CELLS_RESULT,
       NAME_INSERT_TO_CELL,
