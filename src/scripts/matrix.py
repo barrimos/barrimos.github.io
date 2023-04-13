@@ -256,7 +256,7 @@ def scalar(matrix, scalar):
   for i in range(len(new_list)):
     for j in range(len(new_list[i])):
       fraction = Fraction(int(round(scalar * new_list[i][j], 3) * 1000), 1000)
-      if (int(scalar) != scalar):
+      if int(scalar) != scalar:
         new_list[i][j] = [[], fraction.numerator, fraction.denominator]
       else:
         new_list[i][j] = int(scalar) * new_list[i][j]
@@ -355,7 +355,7 @@ def bareiss(matrix, rank = False):
     if sparse_matrix[pivot][pivot] == 0 and pivot == 0:
       swapRow(sparse_matrix)
       
-    # In-case of pivot is not last rows and current pivot is 0
+    # In-case of pivot is not last rows and current value is 0
     if sparse_matrix[pivot][pivot] == 0 and pivot < len(sparse_matrix) - 1:
       # Swap between this rows and next rows
       # If method is rank just swap
@@ -367,8 +367,8 @@ def bareiss(matrix, rank = False):
       # Then sparse matrix
       sparse_matrix = [x[:] for x in result_matrix]
     else:
-      # In-case of pivot is last rows and current pivot is 0
-      if result_matrix[pivot][pivot] == 0 and pivot == len(sparse_matrix) - 1:
+      # In-case of pivot is last rows and current value is 0
+      if sparse_matrix[pivot][pivot] == 0 and pivot == len(sparse_matrix) - 1:
         break
 
     for i in range(len(sparse_matrix)):
