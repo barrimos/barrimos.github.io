@@ -127,22 +127,22 @@ const searchItem = (index) => {return [1, 'a', 2, 'b', 100000000][index]};</pre>
                             <p class="paragraph">
                                 Linear Time Complexity: The algorithm's running time grows linearly with the input size. The number of operations increases linearly with the input.
                             </p>
-                            <pre class="codePreview">for(let i = 0; i < 10; i++){ // length = 10
+                            <pre class="codePreview">for(let i = 0; i &lt; 10; i++){ // length = 10
     console.log(i) // 0 1 2 3 4 5 6 7 8 9
 }
 
 
-for(let i = 0; i ≤ 10; i++){ // length = 11
+for(let i = 0; i &lt;= 10; i++){ // length = 11
     console.log(i) // 0 1 2 3 4 5 6 7 8 9 10
 }
 
 
-for(let i = 1; i < 10; i++){ // length = 9
+for(let i = 1; i &lt; 10; i++){ // length = 9
     console.log(i) // 1 2 3 4 5 6 7 8 9
 }
 
 
-for(let i = 1; i ≤ 10; i++){ // length = 10
+for(let i = 1; i &lt;= 10; i++){ // length = 10
     console.log(i) // 1 2 3 4 5 6 7 8 9 10
 }</pre>
 <img src="./On.JPG" alt="O(n)" class="bigo"></img>
@@ -154,7 +154,7 @@ for(let i = 1; i ≤ 10; i++){ // length = 10
                             <pre class="codePreview">let n = 16;
 let count = 0;
 function logFunc(n){
-    if(n ≤ 1){
+    if(n &lt;= 1){
         return `Done in ${count} times`;
     }
     n = Math.floor(n / 2);
@@ -163,17 +163,8 @@ function logFunc(n){
 }
 console.log(logFunc(n));
 
-for(let i = 0; i < 10; i+=3){
+for(let i = 0; i &lt; 10; i+=3){
     console.log(i) // 0 3 6 9
-}
-
-i = 0;
-while(i < 10){
-    console.log(i);
-    if(i % 2 === 0){
-        console.log(i); // 0 2 4 8
-        i += 2;
-    }
 }</pre>
 <img src="./Ologn.JPG" alt="O(logn)" class="bigo"></img>
 <hr>
@@ -181,22 +172,22 @@ while(i < 10){
                             <p class="paragraph">
                                 Linearithmic Time Complexity: The algorithm's running time grows between linear and logarithmic. Common in many efficient sorting and searching algorithms like Merge Sort and Quick Sort.
                             </p>
-                            <pre class="codePreview">for(let i = 0; i < 5; i++){
-for(let j = 0; j < 5; j+=2){
+                            <pre class="codePreview">for(let i = 0; i &lt; 5; i++){
+for(let j = 1; j &lt; 5; j*=2){
     console.log(i, j)
-        // 0 0
+        // 0 1
         // 0 2
         // 0 4
-        // 1 0
+        // 1 1
         // 1 2
         // 1 4
-        // 2 0
+        // 2 1
         // 2 2
         // 2 4
-        // 3 0
+        // 3 1
         // 3 2
         // 3 4
-        // 4 0
+        // 4 1
         // 4 2
         // 4 4
     }
@@ -207,8 +198,8 @@ for(let j = 0; j < 5; j+=2){
                             <p class="paragraph">
                                 Quadratic Time Complexity: The algorithm's running time grows quadratically with the input size. It generally involves nested loops.
                             </p>
-                            <pre class="codePreview">for(let i = 0; i < 5; i++){
-for(let j = 0; j < 3; j++){
+                            <pre class="codePreview">for(let i = 0; i &lt; 5; i++){
+for(let j = 0; j &lt; 3; j++){
     console.log(i, j)
         // 0 0
         // 0 1
@@ -269,7 +260,7 @@ function nFactorial(n){
         return 1;
     };
 
-    for(let i = 1; i <= n; i++) {
+    for(let i = 1; i &lt;= n; i++) {
         num = n * nFactorial(n - 1);
     }
     return num;
@@ -335,7 +326,7 @@ nFactorial(7): 5040   12.75 milliseconds   5040 branches   execute 13700 times</
                                     </tr>
                                     <tr>
                                         <td>Comparing two numbers</td>
-                                        <td>1 < 2 , 1 === 2</td>
+                                        <td>1 &lt; 2 , 1 === 2</td>
                                         <td>1</td>
                                     </tr>
                                     <tr>
@@ -354,7 +345,7 @@ nFactorial(7): 5040   12.75 milliseconds   5040 branches   execute 13700 times</
                             <pre class="codePreview">let num = 0;               // POs is assignment = 1
 console.log(num)        // POs is only log = 1
 let sum = 1 + 2          // POs is arithmetic operations and assign = 2
-console.log(1 < 2)      // POs is comparison and log = 2</pre>
+console.log(1 &lt; 2)      // POs is comparison and log = 2</pre>
                             <h3 class="headline">Iteration loop</h3>
                             <p class="paragraph">has 3 tasks to processing <span style="color: #001deb">initial value</span>, <span style="color :#00bd06">condition</span>, <span style="color: #f27d07">updation</span></p>
                             <pre class="codePreview">for(initial value; condition; updation){
