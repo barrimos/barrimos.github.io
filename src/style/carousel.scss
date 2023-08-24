@@ -3,6 +3,10 @@ $TRANSFORM: $MILLISECOND ease-in-out;
 $TRANSDURATION: $MILLISECOND;
 $TRANSITIONDELAY: 280ms;
 $btnSize: 30px;
+
+$mdHeight: 300px;
+$lgHeight: 260px;
+
 @mixin centerer{
     left: 50%;
     transform: translateX(-50%);
@@ -22,7 +26,7 @@ $btnSize: 30px;
             display: none;
             float: left;
             width: 100%;
-            height: 400px;
+            height: $lgHeight;
             margin-right: -100%;
             -webkit-backface-visibility: hidden;
             backface-visibility: hidden;
@@ -41,7 +45,6 @@ $btnSize: 30px;
                 }
             }
             .caption{
-                background-color: red;
                 text-align: center;
                 position: absolute;
                 width: 100%;
@@ -95,7 +98,7 @@ $btnSize: 30px;
                 }
             }
             @media screen and(max-width: 576px){
-                height: 200px;
+                height: $mdHeight;
             }
         }
         &::after{

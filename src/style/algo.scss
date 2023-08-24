@@ -1,0 +1,535 @@
+$cardWidth: 30px;
+$cardHeight: 38px;
+$accept: rgb(0, 255, 0);
+$primaryBlue: blue;
+$secondBlue: #0763cc;
+$firstDeck: white;
+$secondDeck: blue;
+$bgColour: #a7e5ef;
+
+$contentAfterWidth: 90px;
+$contentAfterFontSize: .7em;
+$contentAfterCenterForLeftRight: calc(50% - #{$contentAfterFontSize});
+$contentAfterCenterForTopDown: calc(50% - (#{$contentAfterWidth} / 2));
+
+$mdBoardWidth: 480px;
+$lgBoardWidth: 550px;
+$sdLeftRightBoardHeight: 200px;
+$mdLeftRightBoardHeight: 280px;
+$xlLeftRightBoardHeight: 340px;
+
+$sdPosContentAfterLeftRight: 2px;
+$sdPosContentAfterTopDown: -20px;
+
+$mdPosContentAfterLeftRight: 10px;
+$mdPosContentAfterTopDown: -30px;
+
+$lgPosContentAfterLeftRight: 20px;
+$lgPosContentAfterTopDown: -30px;
+
+$xlPosContentAfterLeftRight: 25px;
+$xlPosContentAfterTopDown: -40px;
+
+
+body{
+  background-color: $bgColour;
+  min-height: 100vh;
+}
+.infoTopNav{
+  width: 100%;
+  padding-top: 10px;
+  padding-bottom: 0;
+  max-width: 300px;
+  margin: 0 auto;
+  .menuBtn{
+    font-size: .7em;
+    padding: 3px;
+    &#newGameBtn, &#hintBtn, &#resetGameBtn, &#rulesBtn{
+      width: 50px;
+    }
+  }
+  .checkResultBtn{
+    width: 50px;
+    height: 50px;
+    border-radius: 45px;
+    border: none;
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: ease-in-out .1s;
+    &.active{
+      &:hover{
+        transform: scale(1.1);
+      }
+      &:active{
+        transform: scale(1);
+      }
+      &::before{
+        content: "";
+        background-image: conic-gradient(
+            $accept 20deg,
+            transparent 120deg
+        );
+        width: 55px;
+        height: 55px;
+        position: absolute;
+        animation: rotate 2s linear infinite;
+      }
+      &::after{
+        content: "CHECK";
+        width: 40px;
+        height: 40px;
+        background: white;
+        position: absolute;
+        border-radius: 45px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        color: $accept;
+        font-size: .2em;
+        color: black;
+      }
+    }
+    @keyframes rotate {
+      0%{
+          transform: rotate(0deg);
+      }
+      100%{
+          transform: rotate(-360deg);
+      }
+  }
+  }
+}
+.side .slot, .title{
+  -webkit-tap-highlight-color: transparent;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+.algo{
+  .board{
+    margin: 20px auto;
+    position: relative;
+    .title{
+      position: absolute;
+      text-align: center;
+      left: 0;
+      right: 0;
+      top: 0;
+      bottom: 0;
+      margin-top: auto;
+      margin-bottom: auto;
+      margin-left: auto;
+      margin-right: auto;
+      width: 150px; /* Need a specific value to work */
+      height: 75px;
+      h1{
+        font-family: 'Darumadrop One', cursive;
+        font-size: 3em;
+        color: $secondBlue;
+        line-height: 1em;
+      }
+      #sub1{
+        font-family: 'Zen Kurenaido', sans-serif;
+      }
+    }
+    .side{
+      .slot{
+        width: $cardWidth;
+        height: $cardHeight;
+        border: .5px dashed gray;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        &.white{
+          background-color: white;
+          color: black;
+        }
+        &.blue{
+          background-color: $primaryBlue;
+          color: white;
+        }
+        .card{
+          &.underline{
+            text-decoration: underline;
+          }
+          &[data-hint]{
+            border: 2px solid rgb(255, 230, 0);
+          }
+        }
+      }
+      &[data-side]{
+        position: relative;
+        &::after{
+          position: absolute;
+          display: block;
+          content: "less > > > more";
+          text-align: center;
+          font-size: $contentAfterFontSize;
+        }
+      }
+      &[data-side=top], &[data-side=down], &[data-side=left], &[data-side=right]{
+        &::after{
+          width: $contentAfterWidth;
+          height: auto;
+        }
+      }
+      &[data-side=top], &[data-side=down]{
+        margin: 0 auto;
+        &::after{
+          top: $sdPosContentAfterTopDown;
+          left: $contentAfterCenterForTopDown;
+        }
+      }
+      &[data-side=left], &[data-side=right]{
+        .slot{
+          margin: -8px 0;
+        }
+        &::after{
+          top: $contentAfterCenterForLeftRight;
+        }
+      }
+      &[data-side=top]{
+        top: 0;
+        transform: rotate(180deg);
+      }
+      &[data-side=left]{
+        .slot{
+          transform: rotate(90deg);
+        }
+        &::after{
+          left: $sdPosContentAfterLeftRight;
+          transform: rotate(90deg);
+        }
+      }
+      &[data-side=right]{
+        .slot{
+          transform: rotate(270deg);
+        }
+        &::after{
+          right: $sdPosContentAfterLeftRight;
+          transform: rotate(270deg);
+        }
+      }
+      &[data-side=down]{
+        bottom: 0;
+      }
+    }
+    .lr{
+      margin: 0 auto;
+      display: flex;
+      flex-wrap: wrap;
+      height: $sdLeftRightBoardHeight;
+    }
+  }
+  .board .side .slot .card, .controlDeck .deck .card{
+    border-radius: 5px;
+    cursor: pointer;
+    width: $cardWidth;
+    height: $cardHeight;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    margin: 2px;
+  }
+
+  .controlDeck{
+    width: 100%;
+    max-width: 500px;
+    margin: 5px auto 10px;
+    .deck{
+      width: 50%;
+      justify-content: center;
+      align-items: center;
+      min-height: 50px;
+      height: 100%;
+      padding-top: 10px;
+      padding-bottom: 10px;
+      &[data-deck-colour=white]{
+        border-left: 10px solid $firstDeck;
+        background-color: rgb(162, 208, 212);
+        border-top-left-radius: 10px;
+        border-bottom-left-radius: 10px;
+        .card{
+          background-color: $firstDeck;
+        }
+        color: black;
+      }
+      &[data-deck-colour=blue]{
+        border-right: 10px solid $secondDeck;
+        background-color: rgb(125, 199, 206);
+        border-top-right-radius: 10px;
+        border-bottom-right-radius: 10px;
+        .card{
+          background-color: $secondDeck;
+        }
+        color: white;
+      }
+      .card{
+        &.underline{
+          text-decoration: underline;
+        }
+      }
+    }
+  }
+}
+.settingTab{
+  visibility: hidden;
+  position: absolute;
+  top: -50px;
+  left: 0;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: white;
+  transition: ease-in-out .5s;
+  .startSetting{
+    width: 100%;
+    max-width: 500px;
+    margin: 0 auto;
+    height: 50px;
+    padding-left: 10px;
+    padding-right: 10px;
+    .dropdownLevel{
+      width: 100%;
+      display: flex;
+      justify-content: flex-start;
+      .labelIsRandom{
+        font-size: .8em;
+        margin-bottom: 0;
+      }
+      .levelSelect, .submitSelectBtn{
+        width: 60px;
+        height: 20px;
+      }
+    }
+    .closeBtn{
+      margin-left: 50px;
+    }
+  }
+  &.active{
+    visibility: visible;
+    top: 0;
+  }
+}
+.modalAlgoRules{
+  visibility: hidden;
+  opacity: 0;
+  transition: ease-in-out .2s;
+  position: fixed;
+  width: 260px;
+  height: 80%;
+  z-index: 9999;
+  top: 50px;
+  left: calc(50% - 130px);
+  .algoRules{
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    background-color: white;
+    padding: 15px;
+    overflow-y: scroll;
+    font-size: .8em;
+    z-index: 1;
+    ol{
+      li{
+        margin-bottom: 10px;
+      }
+    }
+    .imageBox{
+      width: 100%;
+      .imageTuts{
+        object-fit: cover;
+        width: 100%;
+      }
+    }
+  }
+  &.active{
+    visibility: visible;
+    opacity: 1;
+    &::after{
+      content: "";
+      position: fixed;
+      width: 100%;
+      min-height: 100vh;
+      background-color: black;
+      opacity: .8;
+      top: 0;
+      left: 0;
+    }
+  }
+}
+.closeBtn{
+  border: none;
+  background-color: transparent;
+}
+
+@media screen and (min-width: 576px){
+  .algo{
+    .board{
+      margin-top: 30px;
+      .side{
+        &[data-side=top], &[data-side=down]{
+          &::after{
+            top: $mdPosContentAfterTopDown;
+          }
+        }
+        &[data-side=left], &[data-side=right]{
+          &::after{
+            top: $contentAfterCenterForLeftRight;
+          }
+        }
+        &[data-side=right]{
+          &::after{
+            right: $mdPosContentAfterLeftRight;
+          }
+        }
+        &[data-side=left]{
+          &::after{
+            left: $mdPosContentAfterLeftRight;
+          }
+        }
+        .slot{
+          width: $cardWidth * 1.2;
+          height: $cardHeight * 1.2;
+          margin: -10px 0 !important;
+          .card{
+            width: $cardWidth * 1.2;
+            height: $cardHeight * 1.2;
+          }
+        }
+      }
+      .lr{
+        height: $mdLeftRightBoardHeight;
+      }
+    }
+    .controlDeck{
+      margin-top: 20px;
+      .deck{
+        .card{
+          width: $cardWidth * 1.2;
+          height: $cardHeight * 1.2;
+        }
+      }
+    }
+  }
+  .modalAlgoRules{
+    .algoRules{
+      width: 400px;
+      left: calc(50% - 200px);
+    }
+  }
+}
+
+@media screen and (min-width: 768px){
+  .algo{
+    .board{
+      width: $mdBoardWidth;
+      .side{
+        &[data-side=left], &[data-side=right]{
+          &::after{
+            top: $contentAfterCenterForLeftRight;
+          }
+        }
+        &[data-side=right]{
+          &::after{
+            right: $lgPosContentAfterLeftRight;
+          }
+        }
+        &[data-side=left]{
+          &::after{
+            left: $lgPosContentAfterLeftRight;
+          }
+        }
+        .slot{
+          width: ($cardWidth * 1.2) * 1.2;
+          height: ($cardHeight * 1.2) * 1.2;
+          margin: -13px 0 !important;
+          .card{
+            width: $cardWidth * 1.2;
+            height: $cardHeight * 1.2;
+          }
+        }
+      }
+    }
+    .controlDeck{
+      .deck{
+        .card{
+          width: $cardWidth * 1.2;
+          height: $cardHeight * 1.2;
+        }
+      }
+    }
+  }
+  .modalAlgoRules{
+    .algoRules{
+      width: 500px;
+      left: calc(50% - 250px);
+      font-size: 1em;
+      h5{
+        font-size: 1.3em;
+      }
+    }
+  }
+}
+
+@media screen and (min-width: 992px){
+  .algo{
+    margin-top: 20px;
+    .board{
+      width: $lgBoardWidth;
+      margin-top: 50px;
+      margin-bottom: 60px;
+      .side{
+        &[data-side=top], &[data-side=down]{
+          &::after{
+            top: $xlPosContentAfterTopDown;
+          }
+        }
+        &[data-side=left], &[data-side=right]{
+          &::after{
+            top: $contentAfterCenterForLeftRight;
+          }
+        }
+        &[data-side=right]{
+          &::after{
+            right: $xlPosContentAfterLeftRight;
+          }
+        }
+        &[data-side=left]{
+          &::after{
+            left: $xlPosContentAfterLeftRight;
+          }
+        }new jeansillustar
+        .slot{
+          width: (($cardWidth * 1.2) * 1.2) * 1.2;
+          height: (($cardHeight * 1.2) * 1.2) * 1.2;
+          margin: -15px 0 !important;
+          .card{
+            width: ($cardWidth * 1.2) * 1.2;
+            height: ($cardHeight * 1.2) * 1.2;
+          }
+        }
+      }
+      .lr{
+        height: $xlLeftRightBoardHeight;
+      }
+    }
+    .controlDeck{
+      max-width: 600px;
+      .deck{
+        .card{
+          width: ($cardWidth * 1.2) * 1.2;
+          height: ($cardHeight * 1.2) * 1.2;
+        }
+      }
+    }
+  }
+}

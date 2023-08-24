@@ -1,0 +1,441 @@
+body {
+  background-color: #a7e5ef;
+  min-height: 100vh;
+}
+
+.infoTopNav {
+  width: 100%;
+  padding-top: 10px;
+  padding-bottom: 0;
+  max-width: 300px;
+  margin: 0 auto;
+}
+.infoTopNav .menuBtn {
+  font-size: 0.7em;
+  padding: 3px;
+}
+.infoTopNav .menuBtn#newGameBtn, .infoTopNav .menuBtn#hintBtn, .infoTopNav .menuBtn#resetGameBtn, .infoTopNav .menuBtn#rulesBtn {
+  width: 50px;
+}
+.infoTopNav .checkResultBtn {
+  width: 50px;
+  height: 50px;
+  border-radius: 45px;
+  border: none;
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: ease-in-out 0.1s;
+}
+.infoTopNav .checkResultBtn.active:hover {
+  transform: scale(1.1);
+}
+.infoTopNav .checkResultBtn.active:active {
+  transform: scale(1);
+}
+.infoTopNav .checkResultBtn.active::before {
+  content: "";
+  background-image: conic-gradient(lime 20deg, transparent 120deg);
+  width: 55px;
+  height: 55px;
+  position: absolute;
+  animation: rotate 2s linear infinite;
+}
+.infoTopNav .checkResultBtn.active::after {
+  content: "CHECK";
+  width: 40px;
+  height: 40px;
+  background: white;
+  position: absolute;
+  border-radius: 45px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: lime;
+  font-size: 0.2em;
+  color: black;
+}
+@keyframes rotate {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(-360deg);
+  }
+}
+
+.side .slot, .title {
+  -webkit-tap-highlight-color: transparent;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+.algo .board {
+  margin: 20px auto;
+  position: relative;
+}
+.algo .board .title {
+  position: absolute;
+  text-align: center;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  margin-top: auto;
+  margin-bottom: auto;
+  margin-left: auto;
+  margin-right: auto;
+  width: 150px;
+  /* Need a specific value to work */
+  height: 75px;
+}
+.algo .board .title h1 {
+  font-family: "Darumadrop One", cursive;
+  font-size: 3em;
+  color: #0763cc;
+  line-height: 1em;
+}
+.algo .board .title #sub1 {
+  font-family: "Zen Kurenaido", sans-serif;
+}
+.algo .board .side .slot {
+  width: 30px;
+  height: 38px;
+  border: 0.5px dashed gray;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.algo .board .side .slot.white {
+  background-color: white;
+  color: black;
+}
+.algo .board .side .slot.blue {
+  background-color: blue;
+  color: white;
+}
+.algo .board .side .slot .card.underline {
+  text-decoration: underline;
+}
+.algo .board .side .slot .card[data-hint] {
+  border: 2px solid #ffe600;
+}
+.algo .board .side[data-side] {
+  position: relative;
+}
+.algo .board .side[data-side]::after {
+  position: absolute;
+  display: block;
+  content: "less > > > more";
+  text-align: center;
+  font-size: 0.7em;
+}
+.algo .board .side[data-side=top]::after, .algo .board .side[data-side=down]::after, .algo .board .side[data-side=left]::after, .algo .board .side[data-side=right]::after {
+  width: 90px;
+  height: auto;
+}
+.algo .board .side[data-side=top], .algo .board .side[data-side=down] {
+  margin: 0 auto;
+}
+.algo .board .side[data-side=top]::after, .algo .board .side[data-side=down]::after {
+  top: -20px;
+  left: calc(50% - (90px / 2));
+}
+.algo .board .side[data-side=left] .slot, .algo .board .side[data-side=right] .slot {
+  margin: -8px 0;
+}
+.algo .board .side[data-side=left]::after, .algo .board .side[data-side=right]::after {
+  top: calc(50% - 0.7em);
+}
+.algo .board .side[data-side=top] {
+  top: 0;
+  transform: rotate(180deg);
+}
+.algo .board .side[data-side=left] .slot {
+  transform: rotate(90deg);
+}
+.algo .board .side[data-side=left]::after {
+  left: 2px;
+  transform: rotate(90deg);
+}
+.algo .board .side[data-side=right] .slot {
+  transform: rotate(270deg);
+}
+.algo .board .side[data-side=right]::after {
+  right: 2px;
+  transform: rotate(270deg);
+}
+.algo .board .side[data-side=down] {
+  bottom: 0;
+}
+.algo .board .lr {
+  margin: 0 auto;
+  display: flex;
+  flex-wrap: wrap;
+  height: 200px;
+}
+.algo .board .side .slot .card, .algo .controlDeck .deck .card {
+  border-radius: 5px;
+  cursor: pointer;
+  width: 30px;
+  height: 38px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  margin: 2px;
+}
+.algo .controlDeck {
+  width: 100%;
+  max-width: 500px;
+  margin: 5px auto 10px;
+}
+.algo .controlDeck .deck {
+  width: 50%;
+  justify-content: center;
+  align-items: center;
+  min-height: 50px;
+  height: 100%;
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+.algo .controlDeck .deck[data-deck-colour=white] {
+  border-left: 10px solid white;
+  background-color: #a2d0d4;
+  border-top-left-radius: 10px;
+  border-bottom-left-radius: 10px;
+  color: black;
+}
+.algo .controlDeck .deck[data-deck-colour=white] .card {
+  background-color: white;
+}
+.algo .controlDeck .deck[data-deck-colour=blue] {
+  border-right: 10px solid blue;
+  background-color: #7dc7ce;
+  border-top-right-radius: 10px;
+  border-bottom-right-radius: 10px;
+  color: white;
+}
+.algo .controlDeck .deck[data-deck-colour=blue] .card {
+  background-color: blue;
+}
+.algo .controlDeck .deck .card.underline {
+  text-decoration: underline;
+}
+
+.settingTab {
+  visibility: hidden;
+  position: absolute;
+  top: -50px;
+  left: 0;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: white;
+  transition: ease-in-out 0.5s;
+}
+.settingTab .startSetting {
+  width: 100%;
+  max-width: 500px;
+  margin: 0 auto;
+  height: 50px;
+  padding-left: 10px;
+  padding-right: 10px;
+}
+.settingTab .startSetting .dropdownLevel {
+  width: 100%;
+  display: flex;
+  justify-content: flex-start;
+}
+.settingTab .startSetting .dropdownLevel .labelIsRandom {
+  font-size: 0.8em;
+  margin-bottom: 0;
+}
+.settingTab .startSetting .dropdownLevel .levelSelect, .settingTab .startSetting .dropdownLevel .submitSelectBtn {
+  width: 60px;
+  height: 20px;
+}
+.settingTab .startSetting .closeBtn {
+  margin-left: 50px;
+}
+.settingTab.active {
+  visibility: visible;
+  top: 0;
+}
+
+.modalAlgoRules {
+  visibility: hidden;
+  opacity: 0;
+  transition: ease-in-out 0.2s;
+  position: fixed;
+  width: 260px;
+  height: 80%;
+  z-index: 9999;
+  top: 50px;
+  left: calc(50% - 130px);
+}
+.modalAlgoRules .algoRules {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  background-color: white;
+  padding: 15px;
+  overflow-y: scroll;
+  font-size: 0.8em;
+  z-index: 1;
+}
+.modalAlgoRules .algoRules ol li {
+  margin-bottom: 10px;
+}
+.modalAlgoRules .algoRules .imageBox {
+  width: 100%;
+}
+.modalAlgoRules .algoRules .imageBox .imageTuts {
+  object-fit: cover;
+  width: 100%;
+}
+.modalAlgoRules.active {
+  visibility: visible;
+  opacity: 1;
+}
+.modalAlgoRules.active::after {
+  content: "";
+  position: fixed;
+  width: 100%;
+  min-height: 100vh;
+  background-color: black;
+  opacity: 0.8;
+  top: 0;
+  left: 0;
+}
+
+.closeBtn {
+  border: none;
+  background-color: transparent;
+}
+
+@media screen and (min-width: 576px) {
+  .algo .board {
+    margin-top: 30px;
+  }
+  .algo .board .side[data-side=top]::after, .algo .board .side[data-side=down]::after {
+    top: -30px;
+  }
+  .algo .board .side[data-side=left]::after, .algo .board .side[data-side=right]::after {
+    top: calc(50% - 0.7em);
+  }
+  .algo .board .side[data-side=right]::after {
+    right: 10px;
+  }
+  .algo .board .side[data-side=left]::after {
+    left: 10px;
+  }
+  .algo .board .side .slot {
+    width: 36px;
+    height: 45.6px;
+    margin: -10px 0 !important;
+  }
+  .algo .board .side .slot .card {
+    width: 36px;
+    height: 45.6px;
+  }
+  .algo .board .lr {
+    height: 280px;
+  }
+  .algo .controlDeck {
+    margin-top: 20px;
+  }
+  .algo .controlDeck .deck .card {
+    width: 36px;
+    height: 45.6px;
+  }
+
+  .modalAlgoRules .algoRules {
+    width: 400px;
+    left: calc(50% - 200px);
+  }
+}
+@media screen and (min-width: 768px) {
+  .algo .board {
+    width: 480px;
+  }
+  .algo .board .side[data-side=left]::after, .algo .board .side[data-side=right]::after {
+    top: calc(50% - 0.7em);
+  }
+  .algo .board .side[data-side=right]::after {
+    right: 20px;
+  }
+  .algo .board .side[data-side=left]::after {
+    left: 20px;
+  }
+  .algo .board .side .slot {
+    width: 43.2px;
+    height: 54.72px;
+    margin: -13px 0 !important;
+  }
+  .algo .board .side .slot .card {
+    width: 36px;
+    height: 45.6px;
+  }
+  .algo .controlDeck .deck .card {
+    width: 36px;
+    height: 45.6px;
+  }
+
+  .modalAlgoRules .algoRules {
+    width: 500px;
+    left: calc(50% - 250px);
+    font-size: 1em;
+  }
+  .modalAlgoRules .algoRules h5 {
+    font-size: 1.3em;
+  }
+}
+@media screen and (min-width: 992px) {
+  .algo {
+    margin-top: 20px;
+  }
+  .algo .board {
+    width: 550px;
+    margin-top: 50px;
+    margin-bottom: 60px;
+  }
+  .algo .board .side[data-side=top]::after, .algo .board .side[data-side=down]::after {
+    top: -40px;
+  }
+  .algo .board .side[data-side=left]::after, .algo .board .side[data-side=right]::after {
+    top: calc(50% - 0.7em);
+  }
+  .algo .board .side[data-side=right]::after {
+    right: 25px;
+  }
+  .algo .board .side[data-side=left]::after {
+    left: 25px;
+  }
+  .algo .board .side new jeansillustar .slot {
+    width: 51.84px;
+    height: 65.664px;
+    margin: -15px 0 !important;
+  }
+  .algo .board .side new jeansillustar .slot .card {
+    width: 43.2px;
+    height: 54.72px;
+  }
+  .algo .board .lr {
+    height: 340px;
+  }
+  .algo .controlDeck {
+    max-width: 600px;
+  }
+  .algo .controlDeck .deck .card {
+    width: 43.2px;
+    height: 54.72px;
+  }
+}

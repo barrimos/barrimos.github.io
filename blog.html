@@ -4,209 +4,19 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Freelance, Graphic, Web application, Algorithm, Frontend, Backend, Full-Stack, Developer, MERN stack, MongoDB, Express, React, NodeJS, UXUI">
     <title>zixma - All the sum</title>
     <link rel="shortcut icon" href="./src/img/icon/zmlogo-page-03.png" type="image/x-icon">
     <link rel="stylesheet" href="./src/style/main.css">
     <link rel="stylesheet" href="./src/dist/style.css">
     <link rel="stylesheet" href="./src/dist/sidemenu.css">
     <link rel="stylesheet" href="./src/dist/totop.css">
-    <link rel="stylesheet" href="./src/dist/stylingtag.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
 </head>
 <body>
     <div class="wrapper">
-        <nav class="sideMenu noSelect" id="sideMenu">
-            <div class="hamburger">
-                <input type="checkbox" class="toggler" id="btnToggle" autocomplete="off">
-                <div class="bars">
-                    <div class="ham-icon" id="ham-icon"></div>
-                </div>
-            </div>
-            <div class="nav-side-menu" id="sideNav-left">
-                <ul class="underlist">
-                    <li class="list-item data-list-url">
-                        <a href="/" class="nav-link" title="Home" id="index">
-                            <div class="nav-icon" data-icon="index">
-                                <img src="./src/img/icon/social-23.svg" alt="Home">
-                            </div>
-                            <span class="nav-text" data-text="index">HOME</span>
-                        </a>
-                    </li>
-                    <li class="list-item has-treeview data-list-url">
-                        <a href="javascript:void(0)" class="nav-link btnDropmenu" title="Service" id="hired">
-                            <div class="nav-icon" data-icon="hired">
-                                <img src="./src/img/icon/social-35.svg" alt="Service">
-                            </div>
-                            <span class="nav-text" data-text="hired">SERVICE</span>
-                            <div class="iconArrowdrop">
-                                <svg viewbox="0 0 40 40" width="15" heigth="15">
-                                    <path
-                                        d = "M0.5 10 L19 30 L35 10"
-                                        fill = "none"
-                                        stroke-width = "4"
-                                    />
-                                </svg>
-                            </div>
-                        </a>
-                        <ul class="underlist">
-                            <li class="list-item list-treeview">
-                                <a href="../../hired.html?sv=graphic" class="nav-link" title="Graphic">
-                                    <div class="nav-icon">
-                                        <img src="./src/img/icon/zmlogo-page-03.png" alt="Graphic">
-                                    </div>
-                                    <span class="nav-text">GRAPHIC</span>
-                                </a>
-                            </li>
-                            <li class="list-item list-treeview">
-                                <a href="../../hired.html?sv=uxui" class="nav-link" title="UI Design">
-                                    <div class="nav-icon">
-                                        <img src="./src/img/icon/zmlogo-page-03.png" alt="UI Design">
-                                    </div>
-                                    <span class="nav-text">UI DESIGN</span>
-                                </a>
-                            </li>
-                            <li class="list-item list-treeview">
-                                <a href="../../hired.html?sv=frontend" class="nav-link" title="Front-end Develop">
-                                    <div class="nav-icon">
-                                        <img src="./src/img/icon/zmlogo-page-03.png" alt="Front-end Develop">
-                                    </div>
-                                    <span class="nav-text">FRONT-END DEV</span>
-                                </a>
-                            </li>
-                        </ul>
-                    </li>
-                    <li class="list-item data-list-url">
-                        <a href="../../profile.html" class="nav-link" title="Profile" id="profile">
-                            <div class="nav-icon" data-icon="profile">
-                                <img src="./src/img/icon/social-09.svg" alt="Profile">
-                            </div>
-                            <span class="nav-text" data-text="profile">PROFILE</span>
-                        </a>
-                    </li>
-                    <li class="list-item has-treeview data-list-url">
-                        <a href="javascript:void(0)" class="nav-link btnDropmenu" title="Zxsandbox" id="zxsandbox">
-                            <div class="nav-icon" data-icon="zxsandbox">
-                                <img src="./src/img/icon/social-37.svg" alt="Service">
-                            </div>
-                            <span class="nav-text" data-text="zxsandbox">ZXSANDBOX</span>
-                            <div class="iconArrowdrop">
-                                <svg viewbox="0 0 40 40" width="15" heigth="15">
-                                    <path
-                                        d = "M0.5 10 L19 30 L35 10"
-                                        fill = "none"
-                                        stroke-width = "4"
-                                    />
-                                </svg>
-                            </div>
-                        </a>
-                        <ul class="underlist">
-                            <li class="list-item list-treeview">
-                                <a href="../../playground/matrix/index.html" class="nav-link" title="Matrix calculator">
-                                    <div class="nav-icon">
-                                        <img src="./src/img/icon/matrixcalc.png" width="17" height="17" alt="Matrix calculator">
-                                    </div>
-                                    <span class="nav-text">MATRIX CALC</span>
-                                </a>
-                            </li>
-                            <li class="list-item list-treeview">
-                                <a href="../../playground/pixelsart/index.html" class="nav-link" title="Pixels art drawing">
-                                    <div class="nav-icon">
-                                        <img src="./src/img/icon/pixelsart.png" width="17" height="17" alt="Pixels art drawing">
-                                    </div>
-                                    <span class="nav-text">PIXELS ART</span>
-                                </a>
-                            </li>
-                            <li class="list-item list-treeview">
-                                <a href="../../playground/maze/index.html" class="nav-link" title="Maze game">
-                                    <div class="nav-icon">
-                                        <img src="./src/img/icon/maze-icon.png" width="17" height="17" alt="Maze game">
-                                    </div>
-                                    <span class="nav-text">MAZE GAME</span>
-                                </a>
-                            </li>
-                            <li class="list-item list-treeview">
-                                <a href="../../playground/stylingtag/index.html" class="nav-link" title="Styling tags">
-                                    <div class="nav-icon">
-                                        <img src="./src/img/icon/styling.png" width="17" height="17" alt="Styling tags">
-                                    </div>
-                                    <span class="nav-text">STYLING TAGS</span>
-                                </a>
-                            </li>
-                        </ul>
-                    </li>
-                    <li class="list-item data-list-url">
-                        <a href="../../portfolio.html" class="nav-link" title="Portfolio" id="portfolio">
-                            <div class="nav-icon" data-icon="portfolio">
-                                <img src="./src/img/icon/social-29.svg" alt="Portfolio">
-                            </div>
-                            <span class="nav-text" data-text="portfolio">PORTFOLIO</span>
-                        </a>
-                    </li>
-                    <li class="list-item data-list-url">
-                        <a href="../../shop.html" class="nav-link" title="Shop" id="shop">
-                            <div class="nav-icon" data-icon="shop">
-                                <img src="./src/img/icon/social-27.svg" alt="Shop">
-                            </div>
-                            <span class="nav-text" data-text="shop">SHOP</span>
-                        </a>
-                    </li>
-                    <li class="list-item data-list-url">
-                        <a href="../../blog.html" class="nav-link" title="Blog" id="blog">
-                            <div class="nav-icon" data-icon="blog">
-                                <img src="./src/img/icon/social-33.svg" alt="Blog">
-                            </div>
-                            <span class="nav-text" data-text="blog">BLOG</span>
-                        </a>
-                    </li>
-                    <li class="list-item has-treeview data-list-url">
-                        <a href="javascript:void(0)" class="nav-link btnDropmenu" title="Resume">
-                            <div class="nav-icon">
-                                <img src="./src/img/icon/social-31.svg" alt="Service">
-                            </div>
-                            <span class="nav-text">RESUME</span>
-                            <div class="iconArrowdrop">
-                                <svg viewbox="0 0 40 40" width="15" heigth="15">
-                                    <path
-                                        d = "M0.5 10 L19 30 L35 10"
-                                        fill = "none"
-                                        stroke-width = "4"
-                                    />
-                                </svg>
-                            </div>
-                        </a>
-                        <ul class="underlist">
-                            <li class="list-item list-treeview">
-                                <a href="./src/download/Prapas - Resume_EN_2022.pdf" title="Download Resume" class="nav-link dlbtn-wraper" download>
-                                    <div class="nav-icon">
-                                        <img src="./src/img/icon/zmlogo-page-03.png" alt="Resume EN">
-                                    </div>
-                                    <span class="nav-text">RESUME EN</span>
-                                </a>
-                            </li>
-                            <li class="list-item list-treeview">
-                                <a href="./src/download/Prapas - Resume_TH_2022.pdf" title="Download Resume" class="nav-link dlbtn-wraper" download>
-                                    <div class="nav-icon">
-                                        <img src="./src/img/icon/zmlogo-page-03.png" alt="Resume TH">
-                                    </div>
-                                    <span class="nav-text">RESUME TH</span>
-                                </a>
-                            </li>
-                        </ul>
-                    </li>
-                </ul>
-                <div class="buttonToTop" id="buttonToTop" onclick="topFunction()">
-                    <input type="button" class="toTopBtn" id="toTopBtn">
-                    <svg class="arrowTop" viewbox="0 0 35 35" aria-hidden="true" alt="backTop">
-                        <path
-                            d = "M10 22 L 18 13 L 25 22"
-                            fill = "none"
-                            stroke = "#666"
-                            stroke-width = "3"
-                        />
-                    </svg>
-                </div>
-            </div>
-        </nav>
+        <nav class="sideMenu noSelect" id="sideMenu"></nav>
         <main class="main">
             <div class="topNav-section" id="topNav-section">
                 <div class="container">
@@ -222,35 +32,112 @@
                 </div>
             </div>
             <!-- start here -->
-            <section class="blog-section" id="blog-section">
+            <section class="topic-section" id="topic-section">
                 <div class="container">
                     <div class="row">
-                        <div class="col-12">
-                            <div class="blog-banner">
-                                <img src="./src/img/findyourhat.jpg" alt="">
+                        <article class="col-12 col-md-9">
+                            <div class="topic-item">
+                                <a href="./blog/time/" class="topic-link">
+                                    <div class="topic-l">
+                                        <img src="./src/img/cover/time.jpg" alt="" class="topic-cover">
+                                    </div>
+                                    <div class="topic-r">
+                                        <h1>Time Complexity & Primitive Operations</h1>
+                                        <p class="topic-detail">What is time complexity and how to calculate</p>
+                                        <small class="topic-date">31 Oct 2023 : Prapas k, Writer</small>
+                                    </div>
+                                </a>
                             </div>
-                        </div>
-                        <div class="col-4">Prototype & __proto__</div>
-                        <div class="col-4">Time Complexity</div>
-                        <div class="col-4">Shortest path idea</div>
+                            <div class="topic-item">
+                                <a href="./blog/obj/" class="topic-link">
+                                    <div class="topic-l">
+                                        <img src="./src/img/cover/objproto.jpg" alt="" class="topic-cover">
+                                    </div>
+                                    <div class="topic-r">
+                                        <h1>Javascript Object Class</h1>
+                                        <p class="topic-detail">The class is a blueprint for creating objects with specific properties and methods.</p>
+                                        <small class="topic-date">31 Oct 2023 : Prapas k, Writer</small>
+                                    </div>
+                                </a>
+                                
+                            </div>
+                            <div class="control-topic d-flex justify-content-center align-items-center w-100">
+                                <button type="button" name="prev" class="btn-control-topic prev" disabled>&leftarrow; Previous</button>
+                                <button type="button" name="pagination" class="btn-control-topic page active" value="1">1</button>
+                                <button type="button" name="next" class="btn-control-topic next" disabled>Next &rightarrow;</button>
+                            </div>
+                        </article>
+                        <aside class="col-12 col-md-3">
+                            <div class="suggestion-aside">
+                                <h4>Suggestion</h4>
+                                <div class="row no-gutters">
+                                    <div class="col-6 col-md-12">
+                                        <a href="./playground/maze/index.html" target="_blank" class="project-link">
+                                            <img src="./src/img/cover/maze.jpg" class="project-image" alt="maze">
+                                        </a>
+                                    </div>
+                                    <div class="col-6 col-md-12">
+                                        <a href="https://jammping.surge.sh" target="_blank" class="project-link">
+                                            <img src="./src/img/cover/jammping.jpg" class="project-image" alt="jammping">
+                                        </a>
+                                    </div>
+                                    <div class="col-6 col-md-12">
+                                        <a href="./playground/theunderclass/index.html" target="_blank" class="project-link">
+                                            <img src="./src/img/cover/theunderclass.jpg" class="project-image" alt="theunderclass">
+                                        </a>
+                                    </div>
+                                    <div class="col-6 col-md-12">
+                                        <a href="./playground/stylingtag/index.html" target="_blank" class="project-link">
+                                            <img src="./src/img/cover/stylingtags.jpg" class="project-image" alt="stylingtags">
+                                        </a>
+                                    </div>
+                                    <div class="col-6 col-md-12">
+                                        <a href="./playground/matrix/index.html" target="_blank" class="project-link">
+                                            <img src="./src/img/cover/matrix.jpg" class="project-image" alt="matrix">
+                                        </a>
+                                    </div>
+                                    <div class="col-6 col-md-12">
+                                        <a href="https://goaltofitapp.vercel.app" target="_blank" class="project-link">
+                                            <img src="./src/img/cover/goaltofit.jpg" class="project-image" alt="goaltofit">
+                                        </a>
+                                    </div>
+                                    <div class="col-6 col-md-12">
+                                        <a href="./playground/pixelsart/index.html" target="_blank" class="project-link">
+                                            <img src="./src/img/cover/pixelsart.jpg" class="project-image" alt="pixelsart">
+                                        </a>
+                                    </div>
+                                    <div class="col-6 col-md-12">
+                                        <a href="./playground/algopuzzle/index.html" target="_blank" class="project-link">
+                                            <img src="./src/img/cover/algopuzzle.jpg" class="project-image" alt="algopuzzle">
+                                        </a>
+                                    </div>
+                                </div>
+
+
+
+
+
+
+
+
+                            </div>
+                        </aside>
                     </div>
                 </div>
             </section>
         </main>
         <div class="push"></div>
     </div>
-    <footer>
-        <div class="container">
-            <div class="row">
-                <div class="col-auto footer-copy">
-                    <p>All rights reserved &copy; Copy Right 2022 - Present : Prapas K</p>
-                </div>
-            </div>
-        </div>
-    </footer>
-    <script src="./src/scripts/scripts.js"></script>
-    <script src="./src/scripts/sidemenu.js"></script>
-    <script src="./src/scripts/totop.js"></script>
-    <script src="./src/scripts/stylingtag.js"></script>
+    <footer id="footer"></footer>
+    <script type="module">
+        import Footer from './src/scripts/Components/Footer.js';
+        import Sidemenu from './src/scripts/Components/Sidemenu.js';
+        const sidemenu = document.getElementById('sideMenu');
+        const footer = document.getElementById('footer');
+        sidemenu.innerHTML = Sidemenu();
+        footer.innerHTML = Footer();
+    </script>
+    <script src="./src/scripts/sidemenu.js" defer></script>
+    <script src="./src/scripts/totop.js" defer></script>
 </body>
 </html>

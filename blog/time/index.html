@@ -1,0 +1,1993 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Freelance, Graphic, Web application, Algorithm, Frontend, Backend, Full-Stack, Developer, MERN stack, MongoDB, Express, React, NodeJS, UXUI">
+    <title>zixma - All the sum</title>
+    <link rel="shortcut icon" href="../../src/img/icon/zmlogo-page-03.png" type="image/x-icon">
+    <link rel="stylesheet" href="../../src/style/main.css">
+    <link rel="stylesheet" href="../../src/dist/style.css">
+    <link rel="stylesheet" href="../../src/dist/sidemenu.css">
+    <link rel="stylesheet" href="../../src/dist/totop.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css">
+
+    <!-- The loading of KaTeX is deferred to speed up page rendering -->
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.js"></script>
+
+    <!-- To automatically render math in text elements, include the auto-render extension: -->
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/contrib/auto-render.min.js"
+        onload="renderMathInElement(document.body);">
+    </script>
+    <style>
+        .katex > .katex-mathml{
+            left: 0;
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="wrapper">
+        <nav class="sideMenu noSelect" id="sideMenu"></nav>
+        <main class="main">
+            <div class="topNav-section" id="topNav-section">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="nav-menu">
+                                <div class="topLogo">
+                                    <img src="../../src/img/icon/zmlogo-page-15.png" alt="logo zixma">
+                                </div>
+                                <div class="switchWrapper">
+                                    <input type="checkbox" name="toggleBrightDark" class="toggleBrightDark" id="toggleBrightDark"></input>
+                                    <div class="iconSwitchUI" id="iconSwitchUI">
+                                        <span>
+                                            <svg viewBox="0 0 36 36" aria-hidden="true" width="30" height="30" id="svg">
+                                                <path id="sun"
+                                                    d="
+                                                    M28 18
+                                                    A10 10 0 0 0 18 8
+                                                    A10 10 0 0 0 8 18
+                                                    A10 10 0 0 0 18 28
+                                                    A10 10 0 0 0 28 18 Z"
+                                                    fill="none"
+                                                    stroke="#ccc"
+                                                    stroke-width="3"
+                                                />
+                                                <circle id="sunRay" cx="18" cy="18" r="15" stroke="#ccc" fill="none" stroke-width="4" stroke-dasharray="0 12" stroke-linecap="round" />
+                                            </svg>
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- start here -->
+            <section class="blog-section" id="blog-section">
+                <div class="container">
+                    <div class="d-flex align-items-center">
+                        <h1 class="head-title">Time Complexity</h1>
+                        <a class="downloadBtn" href="./time_complexity.pdf" download><i class="fa-solid fa-download"></i> Download PDF</a>
+                    </div>
+                    <span class="tagLists">Time complexity, Big-O notatino, Space complexity, Javascript</span>
+                    <h4 class="writer">Prapas K : 2023, 24 AUG</h4>
+                    <div class="row justify-content-center">
+                        <div class="infomation">
+                            <div class="illustrate">
+                                <img src="../../src/img/banner/topbanner.jpg" alt="">
+                                <small class="credit">Dall-E</small>
+                            </div>
+                            <h1 class="headline" id="whatis">What is Time Complexity</h1>
+                            <p class="paragraph">Time complexity is a measure used in computer science and algorithm analysis to estimate how the running time of an algorithm increases with the input size.
+                                It helps us understand the efficiency of an algorithm and how it scales as the problem size grows.
+                                
+                                Time complexity is often expressed using Big O notation, which provides an upper bound on the growth rate of an algorithm's running time.
+                                
+                                In Big O notation, the time complexity of an algorithm is denoted <code class="raw">O(f(n)), where f(n)</code>
+                                is a <b>function representing the growth rate of the algorithm's running time concerning the input size "n."</b>
+                            </p>
+                            <h1 class="headline" id="concept">Concept</h1>
+                            <p class="paragraph">
+                                the amount of time taken to run an algorithm <b>( estimated )</b>, as a function of the <b>length of the input.</b>
+                            </p>
+                            <blockquote class="quote">
+                                The complexity is a theoretical measurement to get an idea of how an algorithm slow down on
+                                bigger inputs compared to smaller inputs or compared to other algorithms.
+                                <br>
+                                <strong>credit: AbcAeffchen</strong>
+                            </blockquote>
+                            <h1 class="headline" id="growthrate">The growth rate algorithm</h1>
+                            <p class="paragraph">
+                                The growth rate for an algorithm is <b>the rate at which the cost of the algorithm grows as the size of its input grows.</b>
+                            </p>
+                            <div class="illustrate">
+                                <img src="https://miro.medium.com/max/1400/1*j8fUQjaUlmrQEN_udU0_TQ.jpeg" alt="Big-O Notation">
+                                <small class="credit">https://miro.medium.com/max/1400/1*j8fUQjaUlmrQEN_udU0_TQ.jpeg</small>
+                            </div>
+                            <h1 class="headline" id="o1">O(1) - Constant</h1>
+                            <p class="paragraph">
+                                Constant Time Complexity: The algorithm's running time does not depend on the input size. It performs the same number of operations regardless of the input size.
+                            </p>
+                            <pre class="codePreview">s = [ -1000000, -999999, ..., 0, ..., 999999, 10000000 ]
+
+const len = (str) => {return str.length};
+
+const isBool = (value) => {return value ? true : false};
+
+const isString = (value) => {return isNaN(value) ? true : false};
+
+const searchItem = (index) => {return [1, 'a', 2, 'b', 100000000][index]};</pre>
+<img src="./O1.JPG" alt="O(1)" class="bigo"></img>
+<hr>
+                            <h1 class="headline" id="on">O(n) - Linear</h1>
+                            <p class="paragraph">
+                                Linear Time Complexity: The algorithm's running time grows linearly with the input size. The number of operations increases linearly with the input.
+                            </p>
+                            <pre class="codePreview">for(let i = 0; i < 10; i++){ // length = 10
+    console.log(i) // 0 1 2 3 4 5 6 7 8 9
+}
+
+
+for(let i = 0; i ≤ 10; i++){ // length = 11
+    console.log(i) // 0 1 2 3 4 5 6 7 8 9 10
+}
+
+
+for(let i = 1; i < 10; i++){ // length = 9
+    console.log(i) // 1 2 3 4 5 6 7 8 9
+}
+
+
+for(let i = 1; i ≤ 10; i++){ // length = 10
+    console.log(i) // 1 2 3 4 5 6 7 8 9 10
+}</pre>
+<img src="./On.JPG" alt="O(n)" class="bigo"></img>
+<hr>
+                            <h1 class="headline" id="ologn">O(log n) - Logarithmic</h1>
+                            <p class="paragraph">
+                                Logarithmic Time Complexity: The algorithm's running time grows logarithmically with the input size. As the input size increases, the running time grows at a slower rate compared to linear growth.
+                            </p>
+                            <pre class="codePreview">let n = 16;
+let count = 0;
+function logFunc(n){
+    if(n ≤ 1){
+        return `Done in ${count} times`;
+    }
+    n = Math.floor(n / 2);
+    count++;
+    return logFunc(n);
+}
+console.log(logFunc(n));
+
+for(let i = 0; i < 10; i+=3){
+    console.log(i) // 0 3 6 9
+}
+
+i = 0;
+while(i < 10){
+    console.log(i);
+    if(i % 2 === 0){
+        console.log(i); // 0 2 4 8
+        i += 2;
+    }
+}</pre>
+<img src="./Ologn.JPG" alt="O(logn)" class="bigo"></img>
+<hr>
+                            <h1 class="headline" id="onlogn">O(n * log n) - Log Linear</h1>
+                            <p class="paragraph">
+                                Linearithmic Time Complexity: The algorithm's running time grows between linear and logarithmic. Common in many efficient sorting and searching algorithms like Merge Sort and Quick Sort.
+                            </p>
+                            <pre class="codePreview">for(let i = 0; i < 5; i++){
+for(let j = 0; j < 5; j+=2){
+    console.log(i, j)
+        // 0 0
+        // 0 2
+        // 0 4
+        // 1 0
+        // 1 2
+        // 1 4
+        // 2 0
+        // 2 2
+        // 2 4
+        // 3 0
+        // 3 2
+        // 3 4
+        // 4 0
+        // 4 2
+        // 4 4
+    }
+}</pre>
+<img src="./Onlogn.JPG" alt="O(nlogn)" class="bigo"></img>
+<hr>
+                            <h1 class="headline" id="on2">O(n<sup>2</sup>) - Quadratic</h1>
+                            <p class="paragraph">
+                                Quadratic Time Complexity: The algorithm's running time grows quadratically with the input size. It generally involves nested loops.
+                            </p>
+                            <pre class="codePreview">for(let i = 0; i < 5; i++){
+for(let j = 0; j < 3; j++){
+    console.log(i, j)
+        // 0 0
+        // 0 1
+        // 0 2
+        // 1 0
+        // 1 1
+        // 1 2
+        // 2 0
+        // 2 1
+        // 2 2
+        // 3 0
+        // 3 1
+        // 3 2
+        // 4 0
+        // 4 1
+        // 4 2
+    }
+}</pre>
+<img src="./On^2.JPG" alt="O(n2)" class="bigo"></img>
+<hr>
+                            <h1 class="headline" id="o2n">O(2<sup>n</sup>) - Exponential</h1>
+                            <blockquote class="quote">
+                                The pattern to watch for is that if a recursive function makes more then one call, the complexity is often <b>O(branches<sup>depth</sup>), where branches refers the number recursive calls made</b> and <b>the depth refers to the depth of the tree this creates.</b><br><strong>Credit: Joseph Trettevik</strong>
+                            </blockquote>
+                            <pre class="codePreview">Power set
+s = [1, 3, 5]
+n(s) = 3
+P(n(s)) = 2^3 = 8
+
+s = [5, 8, 12, 1, 6]
+n(s) = 5
+P(n(s)) = 2^5 = 32
+
+function fibo(n){
+    if(n === 1 || n === 0){ return n; }
+    return fibo(n - 1) + fibo(n - 2); // 2 branches
+}
+fibo(1): 1           execute 1 times               depth lv. 0 = 1
+fibo(2): 1           execute 3 times               depth lv. 1 = 2
+fibo(3): 2           execute 5 times               depth lv. 2 = 4
+fibo(10): 55         execute 177 times             depth lv. 9 = 512
+
+<img src="./n!.PNG" alt=""></pre>
+<img src="./O2^n.JPG" alt="O(2n)" class="bigo"></img>
+<hr>
+                            <h1 class="headline" id="onf">O(n!) - Factorial</h1>
+                            <blockquote class="quote">
+                                If there are N cities, <b>the brute force method will try each and every permutation</b> of these N cities.<br><strong>Credit: codaddict</strong>
+                            </blockquote>
+                            <pre class="codePreview">let allExecute = 0;
+let t0 = 0;
+
+function nFactorial(n){
+    t0 = performance.now();
+    let num = n;
+    allExecute++;
+    if(n === 0){
+        return 1;
+    };
+
+    for(let i = 1; i <= n; i++) {
+        num = n * nFactorial(n - 1);
+    }
+    return num;
+}
+let t1 = performance.now();
+
+nFactorial(1): 1      0.045 milliseconds   1 branches      execute 2 times
+nFactorial(2): 2      2.714 milliseconds   2 branches      execute 5 times
+nFactorial(5): 120    3.356 milliseconds   120 branches    execute 326 times
+nFactorial(7): 5040   12.75 milliseconds   5040 branches   execute 13700 times</pre>
+<img src="./On!.JPG" alt="O(n!)" class="bigo"></img>
+<hr>
+                            <div class="illustrate">
+                                <img src="./Binary-Operation.png" alt="Primitive Operations">
+                                <small class="credit">http://byjus.com</small>
+                            </div>
+                            <h1 class="headline" id="pos">Primitive Operations (POs)</h1>
+                            <blockquote class="quote">
+                                In computer science and algorithm analysis, primitive operations refer to the basic and fundamental operations that an algorithm or program performs. These operations are considered to have constant time complexity and are used to measure the efficiency of an algorithm in terms of its execution time.
+                                The choice of primitive operations might vary depending on the context, but some common examples of primitive operations include:<br>
+                                <br>
+                                <b>1.</b> Arithmetic Operations: Addition, subtraction, multiplication, and division of simple data types like integers, floating-point numbers, etc.<br>
+                                <b>2.</b> Assignment: Assigning a value to a variable.<br>
+                                <b>3.</b> Comparison: Comparing two values to check for equality, inequality, greater than, less than, etc.<br>
+                                <b>4.</b> Memory Access: Reading from or writing to a specific memory location.<br>
+                                <b>5.</b> Control Flow: Basic control structures like branching (if-else statements) and looping (for, while, do-while loops).<br>
+                                <b>6.</b> Function Calls: Invoking a function or method.<br>
+                                <b>7.</b> Pointer Operations: Operations on pointers such as dereferencing or getting the address of a variable.<br>
+                                <b>8.</b> Array Access: Accessing elements in an array using an index.<br>
+                                <br>
+                                When analyzing the time complexity of an algorithm, it is often assumed that these primitive operations take constant time (O(1)) because they are considered elementary and do not depend on the size of the input data. However, it's essential to consider that the actual time taken by these operations might vary depending on hardware architecture, compiler optimizations, and other low-level factors.
+                                By counting the number of primitive operations executed by an algorithm as a function of the input size, we can determine its time complexity and understand how the running time scales with larger inputs. This analysis helps in comparing and selecting the most efficient algorithm for a given problem.
+                                <small class="credit">ChatGPT</small>
+                            </blockquote>
+                            <blockquote class="quote">
+                                <strong>My summary :</strong> Count <b>No. of operations</b> that the algorithm is performing <b>at worst case.</b><br>
+                                You may found a variety of counting methods. <b>Keep reminding that counting is only an approximation for make the performance of the function can be measured.</b>
+                            </blockquote>
+                            <h1 class="headline" id="counting">Counting concept</h1>
+                            <table class="tablePOs">
+                                <thead>
+                                    <tr>
+                                        <th>POs (Primitive Operations)</th>
+                                        <th>expression</th>
+                                        <th>constant factor</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>Assigned a value to variable</td>
+                                        <td>v = 5</td>
+                                        <td>1</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Calling a method</td>
+                                        <td>function()</td>
+                                        <td>1</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Performing an arithmetic operations ( + - * / % )</td>
+                                        <td>1 + 2</td>
+                                        <td>1</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Comparing two numbers</td>
+                                        <td>1 < 2 , 1 === 2</td>
+                                        <td>1</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Indexing into an array</td>
+                                        <td>array[i]</td>
+                                        <td>1</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Returning from a method</td>
+                                        <td>return</td>
+                                        <td>1</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <h3 class="headline">Single line code</h3>
+                            <pre class="codePreview">let num = 0;               // POs is assignment = 1
+console.log(num)        // POs is only log = 1
+let sum = 1 + 2          // POs is arithmetic operations and assign = 2
+console.log(1 < 2)      // POs is comparison and log = 2</pre>
+                            <h3 class="headline">Iteration loop</h3>
+                            <p class="paragraph">has 3 tasks to processing <span style="color: #001deb">initial value</span>, <span style="color :#00bd06">condition</span>, <span style="color: #f27d07">updation</span></p>
+                            <pre class="codePreview">for(initial value; condition; updation){
+    /*body statement*/
+}</pre>
+                            <pre class="codePreview">initial value                                    initial value
+while(condition){                            do{
+    /*body statement*/                          /*body statement*/
+    updation                                    updation
+}                                                   } while(condition);</pre>
+                            <p class="paragraph">Excepted These loops are execute n times, there are no updation and condition.</p>
+                            <pre class="codePreview">for(value of items){                    for(value in items){
+    /*body statement*/                      /*body statement*/
+}                                              }</pre>
+
+                            <h1 class="headline" id="calcIterate">Calculate iteration</h1>
+                            <ol class="orderList">
+                                <div class="item">
+                                    <li class="olItem"><strong class="initialValue">Initial value</strong> is init value to starting count each loop.</li>
+                                </div>
+                                <div class="item">
+                                    <li class="olItem"><strong class="condition">Condition</strong> is <strong>the determinants No. of iterations from initial value until whatever condition has setted.</strong> If working in a large system or with a database, perhaps we cannot know correct of No. of iterations so for simplicity will <strong>called that <span class="condition"><strong>n</strong></span> times</strong> (or any) and <span class="condition"><strong>n</strong></span> will related to the condition that executed is true and at the last of every single iteration the condition always executed to be <strong><span style="color: #f00">false 1 time</span> for exit the iterations.</strong> So general form is <span class="condition"><strong>n</strong></span><span style="color: #f00"> <strong>+ 1</strong></span></li>
+                                    <blockquote class="quote">
+                                        <ul>
+                                            <li>Note: every example in this topic</li>
+                                            <li class="ml-15">- use update just only <code class="raw">i++</code> and <code class="raw">i--</code></li>
+                                            <li class="ml-15">- use absolute value because it's best way to counting for this case</li>
+                                            <li class="ml-15">- for to show formula structure and how to use it<span style="color: red"> In general will use updation</span></li>
+                                        </ul>
+                                    </blockquote>
+                                    <ul class="unorderList">
+                                        <li class="ulItem"><strong>if either of initial value or condition is 0</strong>
+                                            <ul class="unorderList">
+                                                <li class="ulItem">
+                                                    if condition use <strong>&gt;</strong> or <strong>&lt;</strong> : No. of iterations is <span class="condition"><strong>n</strong></span><span style="color: #f00"> <strong>+ 1</strong></span> | n is initial value or condition not equals to 0 and turns negative sign to positive sign.
+                                                    <ul class="unorderList">
+                                                        <li class="ulItem">i = 0; i &lt; 3; i++</li>
+                                                        <li class="ulItem">i = 3; i &gt; 0; i--</li>
+                                                        <li class="ulItem">i = -3; i &lt; 0; i++</li>
+                                                        <li class="ulItem">i = 0; i &gt; -3; i--</li>
+                                                        <blockquote class="quote">
+                                                            All of this No. of iterations is <strong><span class="condition">3</span><span style="color: #f00"> + 1</span></strong>
+                                                        </blockquote>
+                                                    </ul>
+                                                </li>
+                                                <li class="ulItem">
+                                                    if condition use <strong>≥</strong> or <strong>≤</strong> it's mean No. of iterations is <strong><span class="condition">(n + 1)</span><span style="color: #f00"> + 1</span></strong> | n is initial value or condition not equals to 0 and turns negative sign to positive sign.
+                                                    <ul class="unorderList">
+                                                        <li class="ulItem">i = 0; i &lt;= 3; i++</li>
+                                                        <li class="ulItem">i = 3; i &gt;= 0; i--</li>
+                                                        <li class="ulItem">i = -3; i &lt;= 0; i++</li>
+                                                        <li class="ulItem">i = 0; i &gt;= -3; i--</li>
+                                                        <blockquote class="quote">
+                                                            All of this No. of iterations is <strong><span class="condition">(3 + 1)</span><span style="color: #f00"> + 1</span></strong>
+                                                        </blockquote>
+                                                    </ul>
+                                                </li>
+                                            </ul>
+                                        </li>
+                                        <li class="ulItem"><strong>if either of initial values or condition ≠ 0 No. of iterations is <span class="condition">(n - <span class="initialValue">initial value</span>)</code><span style="color: #f00"> + 1</span></strong>
+                                            <ul class="unorderList">
+                                                <li class="ulItem">
+                                                    if condition use <strong>≥</strong> or <strong>≤</strong> the condition have to shift ceiling so <span class="condition"><strong>n</strong></span> is
+                                                    <ul class="unorderList">
+                                                        <li class="ulItem"><span class="condition">condition + 1</span> : if updation is plus.</li>
+                                                        <li class="ulItem"><span class="condition">condition - 1</span> : if updation is minus.</li>
+                                                    </ul>
+                                                </li>
+                                                <table class="tablePOs">
+                                                    <thead>
+                                                        <tr>
+                                                            <th class="alignCenter"></th>
+                                                            <th class="alignCenter">-3</th>
+                                                            <th class="alignCenter">-2</th>
+                                                            <th class="alignCenter">-1</th>
+                                                            <th class="alignCenter">0</th>
+                                                            <th class="alignCenter">1</th>
+                                                            <th class="alignCenter">2</th>
+                                                            <th class="alignCenter">3</th>
+                                                            <th class="alignCenter">4</th>
+                                                            <th class="alignCenter">No. of iterations</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        <tr>
+                                                            <td>i = 1; i &lt; 3; i++</td>
+                                                            <td class="alignCenter">-</td>
+                                                            <td class="alignCenter">-</td>
+                                                            <td class="alignCenter">-</td>
+                                                            <td class="alignCenter">-</td>
+                                                            <td class="alignCenter">✔</td>
+                                                            <td class="alignCenter">✔</td>
+                                                            <td class="alignCenter">✗</td>
+                                                            <td class="alignCenter">-</td>
+                                                            <td>|<span class="condition">3 -</span> <span class="initialValue">1</span>| <span style="color: red">+ 1</span></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>i = -3; i &lt;= 2; i++</td>
+                                                            <td class="alignCenter">✔</td>
+                                                            <td class="alignCenter">✔</td>
+                                                            <td class="alignCenter">✔</td>
+                                                            <td class="alignCenter">✔</td>
+                                                            <td class="alignCenter">✔</td>
+                                                            <td class="alignCenter">✔</td>
+                                                            <td class="alignCenter">✗</td>
+                                                            <td class="alignCenter">-</td>
+                                                            <td>|<span class="condition">(2 + 1) -</span> <span class="initialValue">(-3)</span>| <span style="color: red">+ 1</span></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>i = 4; i &gt;= 1; i--</td>
+                                                            <td class="alignCenter">-</td>
+                                                            <td class="alignCenter">-</td>
+                                                            <td class="alignCenter">-</td>
+                                                            <td class="alignCenter">✗</td>
+                                                            <td class="alignCenter">✔</td>
+                                                            <td class="alignCenter">✔</td>
+                                                            <td class="alignCenter">✔</td>
+                                                            <td class="alignCenter">✔</td>
+                                                            <td>|<span class="condition">(1 - 1) -</span> <span class="initialValue">4</span>| <span style="color: red">+ 1</span></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>i = 1; i &gt;= -2; i--</td>
+                                                            <td class="alignCenter">✗</td>
+                                                            <td class="alignCenter">✔</td>
+                                                            <td class="alignCenter">✔</td>
+                                                            <td class="alignCenter">✔</td>
+                                                            <td class="alignCenter">✔</td>
+                                                            <td class="alignCenter">-</td>
+                                                            <td class="alignCenter">-</td>
+                                                            <td class="alignCenter">-</td>
+                                                            <td>|<span class="condition">((-2) - 1) -</span> <span class="initialValue">1</span>| <span style="color: red">+ 1</span></td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </ul>
+                                        </li>
+                                    </ul>
+                                </div>
+                                <div class="item">
+                                    <li class="olItem"><strong class="updation">Updation</strong>
+                                        determines the type of function it is implied when value
+                                        <span class="updation"><strong>≠ 0 or 1</strong></span>
+                                        because updation use for <span class="updation"><strong>divisor of</span> <span class="condition">n.</strong></span>
+                                        <strong>And if result of division turns out to decimal use only the integer then plus 1</strong>
+                                        <ul class="unorderList">
+                                            <li class="ulItem">If updation is
+                                                <strong>plus or minus called linear growth.</strong>
+                                                Formula is
+                                                <span class="math">
+                                                    $$\color{ff2277}{POs}\ ⋅\ \color{001deb}{(\frac{condition\ -\ \color{00bd06}{initial\ value}}{\color{f27d07}{updation}})\ \color{red}{+\ 1}}$$
+                                                </span>
+                                            </li>
+                                            <table class="tablePOs">
+                                                <thead>
+                                                    <tr>
+                                                        <th>example</th>
+                                                        <th>i = 0; i &lt; 10; i+=2</th>
+                                                        <th>i = 2; i &lt;= 10; i+=2</th>
+                                                        <th>i = 10; i &gt; 2; i-=2</th>
+                                                        <th>i = 10; i &gt;= 2; i-=2</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr>
+                                                        <td><small>initial, condition</small></td>
+                                                        <td>0 &lt; 10</td>
+                                                        <td>2 &lt;<strong>=</strong> 10</td>
+                                                        <td>10 &gt; 2</td>
+                                                        <td>10 &gt;<strong>=</strong> 2</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td><small>updation value</small></td>
+                                                        <td>2</td>
+                                                        <td>2</td>
+                                                        <td>-2</td>
+                                                        <td>-2</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td><small>No. of iterations</small></td>
+                                                        <td><span class="small">$$(\frac{10\ -\ 0}{2})\ +\ 1$$</span></td>
+                                                        <td><span class="small">$$(\frac{(10\ \textbf{+\ 1})\ -\ 2}{2})\ +\ 1$$</span></td>
+                                                        <td><span class="small">$$(\frac{2\ -\ 10}{-2})\ +\ 1$$</span></td>
+                                                        <td><span class="small">$$(\frac{(2\ \textbf{-\ 1})\ -\ 10}{-2})\ +\ 1$$</span></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td><small>is decimal</small></td>
+                                                        <td>-</td>
+                                                        <td>4 + 1</td>
+                                                        <td>-</td>
+                                                        <td>4 + 1</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td><small>true</small></td>
+                                                        <td>0, 2, 4, 6, 8</td>
+                                                        <td>2, 4, 6, 8, 10</td>
+                                                        <td>10, 8, 6, 4</td>
+                                                        <td>10, 8, 6, 4, 2</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td><small>false</small></td>
+                                                        <td>10</td>
+                                                        <td>12</td>
+                                                        <td>2</td>
+                                                        <td>0</td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                            
+                                            <li class="ulItem">If updation is <strong>mutiply or division called logarithmic growth.</strong>
+                                                Use <strong>updation to be logarithm base</strong>
+                                                and the either of initial value or condition where
+                                                <strong>largest value to be dividend and smallest to be divisor.</strong>
+                                                Formula is
+                                                <span class="math">
+                                                    $$\log_{\color{f27d07}{updation}}\frac{largest\ value}{smallest\ value}$$
+                                                </span>
+                                                <ul class="unorderList">
+                                                    <li class="ulItem">
+                                                        <span class="condition">condition * updation</span> : if updation is multiplication.
+                                                    </li>
+                                                    <li class="ulItem">
+                                                        <span class="condition">condition / updation</span> : if updation is division.
+                                                    </li>
+                                                </ul>
+                                            </li>
+                                            <table class="tablePOs">
+                                                <thead>
+                                                    <tr>
+                                                        <th>example</th>
+                                                        <th>i = 2; i &lt; 32; i*=2</th>
+                                                        <th>i = 2; i &lt;= 32; i*=2</th>
+                                                        <th>i = 12; i &gt; 3; i/=2</th>
+                                                        <th>i = 12; i &gt;= 3; i/=2</th>
+                                                        <th>i = 12; i &gt;= 3; i/=2</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr>
+                                                        <td><small>initial, condition</small></td>
+                                                        <td>2 &lt; 32</td>
+                                                        <td>2 &lt;<strong>=</strong> 32</td>
+                                                        <td>12 &gt; 3</td>
+                                                        <td>12 &gt;<strong>=</strong> 3</td>
+                                                        <td>12 &gt;<strong>=</strong> 3</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td><small>updation value</small></td>
+                                                        <td>2</td>
+                                                        <td>2</td>
+                                                        <td>2</td>
+                                                        <td>2</td>
+                                                        <td>2</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td><small>No. of iterations</small></td>
+                                                        <td><span>$$\log_{2}\frac{32}{2}$$</span></td>
+                                                        <td><span>$$\log_{2}\frac{32\ \textbf{*\ 2}}{2}$$</span></td>
+                                                        <td><span>$$\log_{2}\frac{12}{3}$$</span></td>
+                                                        <td><span>$$\log_{2}\frac{12}{3\ \textbf{/ 2}}$$</span></td>
+                                                        <td><span>$$\log_{\frac{1}{2}}\frac{3}{12\ \textbf{/}\ \frac{\textbf{1}}{\textbf{2}}}$$</span></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td><small>is decimal</small></td>
+                                                        <td>-</td>
+                                                        <td>-</td>
+                                                        <td>-</td>
+                                                        <td>-</td>
+                                                        <td>-</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td><small>true</small></td>
+                                                        <td>2, 4, 8, 16</td>
+                                                        <td>2, 4, 8, 16, 32</td>
+                                                        <td>12, 6</td>
+                                                        <td>12, 6, 3</td>
+                                                        <td>12, 6, 3</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td><small>false</small></td>
+                                                        <td>32</td>
+                                                        <td>64</td>
+                                                        <td>3</td>
+                                                        <td>1.5</td>
+                                                        <td>1.5</td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </ul>
+                                    </li>
+                                </div>
+                            </ol>
+
+                            <h3 class="headline">Conclusion</h3>
+                            <table class="tablePOs">
+                                <thead>
+                                    <tr>
+                                        <th>Lesser than</th>
+                                        <th>i = 0; i &lt; n; i++</th>
+                                        <th>i = 3; i &lt; n; i+=2</th>
+                                        <th>i = -3; i &lt; n; i+=5</th>
+                                        <th>i = 1; i &lt; n; i*=2</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>condition</td>
+                                        <td><span class="small">$$\color{001deb}{(\frac{n\ -\ \color{00bd06}{(0)}}{\color{f27d07}{1}})}\ \color{red}{+\ 1}$$</span></td>
+                                        <td><span class="small">$$\color{001deb}{(\frac{n\ -\ \color{00bd06}{(+3)}}{\color{f27d07}{2}})}\ \color{red}{+\ 1}$$</span></td>
+                                        <td><span class="small">$$\color{001deb}{(\frac{n\ -\ \color{00bd06}{(-3)}}{\color{f27d07}{5}})}\ \color{red}{+\ 1}$$</span></td>
+                                        <td>$$\color{001deb}{(}\color{666666}\log_{\color{f27d07}{2}}\frac{\color{001deb}{n}}{\color{00bd06}{1}}\color{001deb}{)}\ \color{red}{+\ 1}$$</td>
+                                    </tr>
+                                    <tr>
+                                        <td>updation</td>
+                                        <td><span class="small">$$\color{001deb}{{\color{ff2277}{2}\ ·}\ \frac{n\ -\ \color{00bd06}{(0)}}{\color{f27d07}{1}}}$$</span></td>
+                                        <td><span class="small">$$\color{001deb}{{\color{ff2277}{2}\ ·}\ \frac{n\ -\ \color{00bd06}{(+3)}}{\color{f27d07}{2}}}$$</span></td>
+                                        <td><span class="small">$$\color{001deb}{{\color{ff2277}{2}\ ·}\ \frac{n\ -\ \color{00bd06}{(-3)}}{\color{f27d07}{5}}}$$</span></td>
+                                        <td>$$\color{001deb}{(}\color{666666}\log_{\color{f27d07}{2}}\frac{\color{001deb}{n}}{\color{00bd06}{1}}\color{001deb}{)}$$</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <table class="tablePOs">
+                                <thead>
+                                    <tr>
+                                        <th>Lesser than or<br>equal</th>
+                                        <th>i = 0; i &lt;= n; i++</th>
+                                        <th>i = 3; i &lt;= n; i+=2</th>
+                                        <th>i = -3; i &lt;= n; i+=5</th>
+                                        <th>i = 2; i &lt;= n; i*=4</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>condition</td>
+                                        <td><span class="small">$$\color{001deb}{(\frac{(n\ +\ 1)\ -\ \color{00bd06}{(0)}}{\color{f27d07}{1}})}\ \color{red}{+\ 1}$$</span></td>
+                                        <td><span class="small">$$\color{001deb}{(\frac{(n\ +\ 1)\ -\ \color{00bd06}{(+3)}}{\color{f27d07}{2}})}\ \color{red}{+\ 1}$$</span></td>
+                                        <td><span class="small">$$\color{001deb}{(\frac{(n\ +\ 1)\ -\ \color{00bd06}{(-3)}}{\color{f27d07}{5}})} \color{red}{+\ 1}$$</span></td>
+                                        <td>$$\color{001deb}{(}\color{666666}\log_{\color{f27d07}{4}}\frac{\color{001deb}{n\ *\ 4}}{\color{00bd06}{2}}\color{001deb}{)}\ \color{red}{+\ 1}$$</td>
+                                    </tr>
+                                    <tr>
+                                        <td>updation</td>
+                                        <td><span class="small">$$\color{001deb}{{\color{ff2277}{2}\ ·}\ \frac{(n\ +\ 1)\ -\ \color{00bd06}{(0)}}{\color{f27d07}{1}}}$$</span></td>
+                                        <td><span class="small">$$\color{001deb}{{\color{ff2277}{2}\ ·}\ \frac{(n\ +\ 1)\ -\ \color{00bd06}{(+3)}}{\color{f27d07}{2}}}$$</span></td>
+                                        <td><span class="small">$$\color{001deb}{{\color{ff2277}{2}\ ·}\ \frac{(n\ +\ 1)\ -\ \color{00bd06}{(-3)}}{\color{f27d07}{5}}}$$</span></td>
+                                        <td>$$\color{001deb}{(}\color{666666}\log_{\color{f27d07}{4}}\frac{\color{001deb}{n\ *\ 4}}{\color{00bd06}{2}}\color{001deb}{)}$$</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <table class="tablePOs">
+                                <thead>
+                                    <tr>
+                                        <th>Greater than</th>
+                                        <th>i = 5; i &gt; n; i--</th>
+                                        <th>i = 4; i &gt; n; i-=2</th>
+                                        <th>i = 3; i &gt; n; i-=4</th>
+                                        <th>i = 7; i &gt; n; i/=2</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>condition</td>
+                                        <td><span class="small">$$\color{001deb}{(\frac{n\ -\ \color{00bd06}{(+5)}}{\color{f27d07}{-1}})}\ \color{red}{+\ 1}$$</span></td>
+                                        <td><span class="small">$$\color{001deb}{(\frac{n\ -\ \color{00bd06}{(+4)}}{\color{f27d07}{-2}})}\ \color{red}{+\ 1}$$</span></td>
+                                        <td><span class="small">$$\color{001deb}{(\frac{n\ -\ \color{00bd06}{(+3)}}{\color{f27d07}{-4}})}\ \color{red}{+\ 1}$$</span></td>
+                                        <td>$$\color{001deb}{(}\color{666666}\log_{\color{f27d07}{2}}\frac{\color{001deb}{7}}{\color{00bd06}{n}}\color{001deb}{)}\ \color{red}{+\ 1}$$</td>
+                                    </tr>
+                                    <tr>
+                                        <td>updation</td>
+                                        <td><span class="small">$$\color{001deb}{{\color{ff2277}{2}\ ·}\ \frac{n\ -\ \color{00bd06}{(+5)}}{\color{f27d07}{-1}}}$$</span></td>
+                                        <td><span class="small">$$\color{001deb}{{\color{ff2277}{2}\ ·}\ \frac{n\ -\ \color{00bd06}{(+4)}}{\color{f27d07}{-2}}}$$</span></td>
+                                        <td><span class="small">$$\color{001deb}{{\color{ff2277}{2}\ ·}\ \frac{n\ -\ \color{00bd06}{(+3)}}{\color{f27d07}{-4}}}$$</span></td>
+                                        <td>$$\color{001deb}{(}\color{666666}\log_{\color{f27d07}{2}}\frac{\color{001deb}{7}}{\color{00bd06}{n}}\color{001deb}{)}$$</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <table class="tablePOs">
+                                <thead>
+                                    <tr>
+                                        <th>Greater than<br>equal</th>
+                                        <th>i = 5; i &gt;= n; i--</th>
+                                        <th>i = 4; i &gt;= n; i-=2</th>
+                                        <th>i = 3; i &gt;= n; i-=4</th>
+                                        <th>i = 32; i &gt;= n; i/=4</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>condition</td>
+                                        <td><span class="small">$$\color{001deb}{(\frac{(n\ -\ 1)\ -\ \color{00bd06}{(+5)}}{\color{f27d07}{-1}})}\ \color{red}{+\ 1}$$</span></td>
+                                        <td><span class="small">$$\color{001deb}{(\frac{(n\ -\ 1)\ -\ \color{00bd06}{(+4)}}{\color{f27d07}{-2}})}\ \color{red}{+\ 1}$$</span></td>
+                                        <td><span class="small">$$\color{001deb}{(\frac{(n\ -\ 1)\ -\ \color{00bd06}{(+3)}}{\color{f27d07}{-4}})} \color{red}{+\ 1}$$</span></td>
+                                        <td>$$\color{001deb}{(}\color{666666}\log_{\color{f27d07}{4}}\frac{\color{001deb}{32}}{\color{00bd06}{n\ /\ 4}}\color{001deb}{)}\ \color{red}{+\ 1}$$</td>
+                                    </tr>
+                                    <tr>
+                                        <td>updation</td>
+                                        <td><span class="small">$$\color{001deb}{{\color{ff2277}{2}\ ·}\ \frac{(n\ -\ 1)\ -\ \color{00bd06}{(+5)}}{\color{f27d07}{-1}}}$$</span></td>
+                                        <td><span class="small">$$\color{001deb}{{\color{ff2277}{2}\ ·}\ \frac{(n\ -\ 1)\ -\ \color{00bd06}{(+4)}}{\color{f27d07}{-2}}}$$</span></td>
+                                        <td><span class="small">$$\color{001deb}{{\color{ff2277}{2}\ ·}\ \frac{(n\ -\ 1)\ -\ \color{00bd06}{(+3)}}{\color{f27d07}{-4}}}$$</span></td>
+                                        <td>$$\color{001deb}{(}\color{666666}\log_{\color{f27d07}{4}}\frac{\color{001deb}{32}}{\color{00bd06}{n\ /\ 4}}\color{001deb}{)}$$</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+
+                            <h1 class="headline" id="countingPOs">Counting with POs</h1>
+                            <pre class="codePreview">ex1 for(let i = 0;    i < n;       i++) { console.log(i); }
+             ▼             ▼            ▼             ▼
+POs   =   1    +    (n + 1)   +   2(n)    +    n    =   4n + 2</pre>
+                            <pre class="codePreview">ex2 for(let i = 1;         i <= n;            i++) { console.log(i); }
+             ▼                    ▼                 ▼          ▼
+POs   =   1  +  (((n + 1) - 1) + 1)  +  2(n)   +   (n)   =   4n + 2</pre>
+                            <pre class="codePreview">ex3 for(let i = -3;          i <= n;                 i++) { console.log(i); }
+             ▼                    ▼                        ▼             ▼
+POs   =   1  +  (((n + 1) - (-3)) + 1)  +  2(n + 4)  +  (n + 4)   =   4n + 18</pre>
+                            <pre class="codePreview">ex4 for(let i = 10; i > n; i--) { console.log(i); }
+POs   =   1 + (((n - 10) / (-1)) + 1) + 2((n - 10) / (-1)) + (n - 10) / (-1)
+        =   4n + 42</pre>
+                            <pre class="codePreview">ex5 for(let i = 10; i >= n; i-=2) { console.log(i); }
+POs   =   1 
+            + ((((n - 1) - 10) / (-2)) + 1) + 2((n - 1) - 10) / (-2)
+            + ((n - 1) - 10) / (-2)
+        =   -2n + 24</pre>
+                            <pre class="codePreview">ex6 for(let i = 0; i < n; i++) {        // 1 + (n + 1) + (n)
+    // Outermost body is n
+    // Innermost is body of outermost so innermost iterate n times
+    for(let j = 10; j > n; j--) {   // 1 + n(((n - 10) / (-1)) + 1) + 2n((n - 10) / (-1))
+        console.log(j);             // n(n - 10) / (-1)
+    }
+}
+POs  =  1 + (n + 1) + (n) + 1 + n(((n - 10) / (-1)) + 1)
+        + 2n((n - 10) / (-1)) + n(n - 10) / (-1)
+        =  (4n^2 - 43n - 3) / (-1)</pre>
+
+                            <blockquote class="quote">
+                                Note : <span class="condition">let i</span> count only 1 beacause that assigning 0 at start loop only and <span class="condition">i++</span> is already includes assigning <span class="condition">i</span> after increment.
+                            </blockquote>
+
+                            <h3 class="headline">How many of i modulo n equals to 1</h3>
+                            <pre class="codePreview">countMod(num)
+1. SET count to be 0 (storing result count default is 0)
+2. LOOP i to num - 1
+    - IF num % i EQUAL TO 1
+        - THEN STATEMENT count + 1
+    - STATEMENT i + 1
+3. END LOOP
+4. RETURN count</pre>
+<pre class="codePreview">
+num = 7
+function countMod(num){
+    let count = 0;                          1
+    for(let i = 0; i < num; i++){     1 + 1(n + 1) + 2(n)
+        if(num % i === 1){             2(n)
+            count++;                        2(n) // 2(1) for best case
+        }
+    }
+    return count;                           1
+}</pre>
+                            <table class="tablePOs">
+                                <thead>
+                                    <tr>
+                                        <th>n</th>
+                                        <th>count = 0</th>
+                                        <th>let i = 0</th>
+                                        <th>i < num</th>
+                                        <th>num % i = 1</th>
+                                        <th>count++</th>
+                                        <th>i++</th>
+                                        <th>return</th>
+                                        <th>POs</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>1</td>
+                                        <td>true</td>
+                                        <td>true</td>
+                                        <td>true</td>
+                                        <td>7 % 0 = NaN</td>
+                                        <td></td>
+                                        <td>true</td>
+                                        <td></td>
+                                        <td></td>
+                                    </tr>
+                                    <tr>
+                                        <td>2</td>
+                                        <td></td>
+                                        <td></td>
+                                        <td>true</td>
+                                        <td>7 % 1 = 0</td>
+                                        <td></td>
+                                        <td>true</td>
+                                        <td></td>
+                                        <td></td>
+                                    </tr>
+                                    <tr>
+                                        <td>3</td>
+                                        <td></td>
+                                        <td></td>
+                                        <td>true</td>
+                                        <td>7 % 2 = 1</td>
+                                        <td>true</td>
+                                        <td>true</td>
+                                        <td></td>
+                                        <td></td>
+                                    </tr>
+                                    <tr>
+                                        <td>4</td>
+                                        <td></td>
+                                        <td></td>
+                                        <td>true</td>
+                                        <td>7 % 3 = 1</td>
+                                        <td>true</td>
+                                        <td>true</td>
+                                        <td></td>
+                                        <td></td>
+                                    </tr>
+                                    <tr>
+                                        <td>5</td>
+                                        <td></td>
+                                        <td></td>
+                                        <td>true</td>
+                                        <td>7 % 4 = 3</td>
+                                        <td></td>
+                                        <td>true</td>
+                                        <td></td>
+                                        <td></td>
+                                    </tr>
+                                    <tr>
+                                        <td>6</td>
+                                        <td></td>
+                                        <td></td>
+                                        <td>true</td>
+                                        <td>7 % 5 = 2</td>
+                                        <td></td>
+                                        <td>true</td>
+                                        <td></td>
+                                        <td></td>
+                                    </tr>
+                                    <tr>
+                                        <td>7</td>
+                                        <td></td>
+                                        <td></td>
+                                        <td>true</td>
+                                        <td>7 % 6 = 1</td>
+                                        <td>true</td>
+                                        <td>true</td>
+                                        <td></td>
+                                        <td></td>
+                                    </tr>
+                                    <tr>
+                                        <td>8</td>
+                                        <td></td>
+                                        <td></td>
+                                        <td>false</td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td>true</td>
+                                        <td></td>
+                                    </tr>
+                                    <tr>
+                                        <td></td>
+                                        <td>1</td>
+                                        <td>1</td>
+                                        <td>1(n + 1)</td>
+                                        <td>2(n)</td>
+                                        <td>2(n)</td>
+                                        <td>2(n)</td>
+                                        <td>1</td>
+                                        <td><b>7n + 4</b></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <h3 class="headline">Calc mean</h3>
+                            <pre class="codePreview">calcMean(set_data)
+1. SET sum to be 0 (sum of each element)
+2. SET len to be length of set_data
+3. LOOP i to len - 1
+    - OPERATION summation of sum and current data value
+    - STATEMENT i + 1
+4. END LOOP
+5. RETURN sum / len</pre>
+<pre class="codePreview">
+const set_data = [4, 6, 1, 5]
+const len = 4
+function calcMean(set_data){
+    let sum = 0;                            1
+    let len = set_data.length;          2
+    for(let i = 0; i < len; i++){        1 + 1(n + 1) + 2(n)
+        sum += set_data[i];             3(n)
+    }
+    return sum / len;                      2
+}
+}</pre>
+                            <table class="tablePOs">
+                                <thead>
+                                    <tr>
+                                        <th>n</th>
+                                        <th>sum = 0</th>
+                                        <th>len = set_data.length</th>
+                                        <th>let i = 0</th>
+                                        <th>i < len</th>
+                                        <th>sum += set_data[i]</th>
+                                        <th>i++</th>
+                                        <th>return</th>
+                                        <th>POs</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>1</td>
+                                        <td>true</td>
+                                        <td>true</td>
+                                        <td>true</td>
+                                        <td>true</td>
+                                        <td>0 + 4 = 4</td>
+                                        <td>true</td>
+                                        <td></td>
+                                        <td></td>
+                                    </tr>
+                                    <tr>
+                                        <td>2</td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td>true</td>
+                                        <td>4 + 6 = 10</td>
+                                        <td>true</td>
+                                        <td></td>
+                                        <td></td>
+                                    </tr>
+                                    <tr>
+                                        <td>3</td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td>true</td>
+                                        <td>10 + 1 = 11</td>
+                                        <td>true</td>
+                                        <td></td>
+                                        <td></td>
+                                    </tr>
+                                    <tr>
+                                        <td>4</td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td>true</td>
+                                        <td>11 + 5 = 16</td>
+                                        <td>true</td>
+                                        <td></td>
+                                        <td></td>
+                                    </tr>
+                                    <tr>
+                                        <td>5</td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td>false</td>
+                                        <td></td>
+                                        <td></td>
+                                        <td>true</td>
+                                        <td></td>
+                                    </tr>
+                                    <tr>
+                                        <td></td>
+                                        <td>1</td>
+                                        <td>2</td>
+                                        <td>1</td>
+                                        <td>1(n + 1)</td>
+                                        <td>3(n)</td>
+                                        <td>2(n)</td>
+                                        <td>2</td>
+                                        <td><b>6n + 7</b></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <h3 class="headline">Print 5 natural numbers from given x</h3>
+                            <pre class="codePreview">naturalNumber(x)
+1. IF x not be a natural number
+    - THEN
+        - STATEMENT console.log
+        - RETRUN
+2. LOOP i = 1 to x
+    - console.log i
+    - STATEMENT i + 1
+3. END LOOP</pre>
+<pre class="codePreview">
+x = 5
+function naturalNumber(x){
+    if(x < 1){                                                 1
+        console.log('Not a natural number');       1
+        return                                                  1
+    };
+    for(let i = 1; i < x; i++){                           1 + ((n + 1) - 1) + 2(n - 1)
+        console.log(i);                                      (n - 1)
+    }
+}</pre>
+                            <table class="tablePOs">
+                                <thead>
+                                    <tr>
+                                        <th>n</th>
+                                        <th>x < 1</th>
+                                        <th>console.log("..")</th>
+                                        <th>return</th>
+                                        <th>let i = 1</th>
+                                        <th>i < x</th>
+                                        <th>console.log(i)</th>
+                                        <th>i++</th>
+                                        <th>POs</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>1</td>
+                                        <td>false</td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                    </tr>
+                                    <tr>
+                                        <td>2</td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td>true</td>
+                                        <td>true</td>
+                                        <td>1</td>
+                                        <td>true</td>
+                                        <td></td>
+                                    </tr>
+                                    <tr>
+                                        <td>3</td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td>true</td>
+                                        <td>2</td>
+                                        <td>true</td>
+                                        <td></td>
+                                    </tr>
+                                    <tr>
+                                        <td>4</td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td>true</td>
+                                        <td>3</td>
+                                        <td>true</td>
+                                        <td></td>
+                                    </tr>
+                                    <tr>
+                                        <td>5</td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td>true</td>
+                                        <td>4</td>
+                                        <td>true</td>
+                                        <td></td>
+                                    </tr>
+                                    <tr>
+                                        <td>6</td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td>false</td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                    </tr>
+                                    <tr>
+                                        <td></td>
+                                        <td>1</td>
+                                        <td>1</td>
+                                        <td>1</td>
+                                        <td>1</td>
+                                        <td>(n + 1) - 1</td>
+                                        <td>(n - 1)</td>
+                                        <td>2(n - 1)</td>
+                                        <td><b>4n + 1</b></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <h3 class="headline">Nested linear and logarithm loop</h3>
+                            <pre class="codePreview">nestedLinearLogarithmic(n)
+1. SET total to be 0
+2. LOOP
+    - OUTER LOOP i to n + 1
+        - STATEMENT SET j to be 1
+        - INNER LOOP j to n
+        - STATEMENT INCREMENT TOTAL BY PLUS 1
+        - STATEMENT INCREMENT j BY MULTIPLY 2
+3. END LOOP
+4. RETURN total</pre>
+<pre class="codePreview">
+let n = 3;
+function nestedLinearLogarithmic(n){
+    let total = 0;                      1
+    // Outer loop (O(n))
+    for(let i = 0; i < n + 1; i++){     1 + 2((n + 1) + 1) + 2(n + 1)
+        let j = 1;                      1(n + 1)
+        // body of outermost is (n + 1) represent to m
+        // + 1 of outermost is not false it just n + 1
+
+        // Inner loop (O(log n))
+        // j is initial value for innermost
+        // if result from log is decimal then use only integer then + 1
+        while(j < n){                   m((log_2 n / j) + 1)
+            total += 1;                 2m(log_2 n / j)
+            j *= 2;                     2m(log_2 n / j)
+        }
+    }
+    return total;                       1
+}</pre>
+                            <h3 class="headline">Explain</h3>
+                            <p class="paragraph">
+                                <ul class="unorderList">
+                                    <li class="ulItem">At outermost is linear loop it's basic to count, see at previous example before.</li>
+                                    <li class="ulItem">At innermost is logarithmic loop</li>
+                                    <li class="ulItem">
+                                        <span class="condition">(n + 1)</span> is the <strong>No. of iterations of the outermost loop</strong> that the innermost loop must iterate to. <strong>Represent to be m</strong>
+                                        <ul class="unorderList">
+                                            <li class="ulItem">
+                                                <strong>Condition</strong><span class="math inline noMargin">$$\color{001deb}{m}\color{666666}{(}\color{001deb}{(}\color{666666}\log_{\color{f27d07}2}\color{001deb}\frac{n}{\color{00bd06}{j}})\ \color{red}{+\ 1}\color{666666}{)}$$</span>
+                                            </li>
+                                            <li class="ulItem">
+                                                <strong>Updation</strong><span class="math inline noMargin">$$\color{ff2277}{2}\color{001deb}{m}\color{001deb}{(}\color{666666}\log_{\color{f27d07}2}\color{001deb}\frac{n}{\color{00bd06}{j}})$$</span>
+                                                <ul class="unorderList">
+                                                    <li class="ulItem"><strong>body not execute at condition false</strong> so get rid off <span style="color: red">+ 1</li>
+                                                    <li class="ulItem">2 is POs of code body it iterations related to condition then multiply to condition.</li>
+                                                </ul>
+                                            </li>
+                                        </ul>
+                                    </li>
+                                </ul>
+                            </p>
+
+                            <table class="tablePOs">
+                                <thead>
+                                    <tr>
+                                        <th>total</th>
+                                        <th>let i</th>
+                                        <th>i &lt; n + 1</th>
+                                        <th>let j</th>
+                                        <th>j &lt; n</th>
+                                        <th>total++</th>
+                                        <th>j*=2</th>
+                                        <th>i++</th>
+                                        <th>return</th>
+                                        <th>POs</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>true</td>
+                                        <td>0</td>
+                                        <td>true</td>
+                                        <td>0</td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                    </tr>
+                                    <tr>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td>1</td>
+                                        <td>true</td>
+                                        <td>true</td>
+                                        <td>true</td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                    </tr>
+                                    <tr>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td>2</td>
+                                        <td>true</td>
+                                        <td>true</td>
+                                        <td>true</td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                    </tr>
+                                    <tr>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td>4</td>
+                                        <td>false</td>
+                                        <td></td>
+                                        <td></td>
+                                        <td>true</td>
+                                        <td></td>
+                                        <td></td>
+                                    </tr>
+                                    <tr>
+                                        <td></td>
+                                        <td>1</td>
+                                        <td>true</td>
+                                        <td>0</td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                    </tr>
+                                    <tr>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td>1</td>
+                                        <td>true</td>
+                                        <td>true</td>
+                                        <td>true</td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                    </tr>
+                                    <tr>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td>2</td>
+                                        <td>true</td>
+                                        <td>true</td>
+                                        <td>true</td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                    </tr>
+                                    <tr>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td>4</td>
+                                        <td>false</td>
+                                        <td></td>
+                                        <td></td>
+                                        <td>true</td>
+                                        <td></td>
+                                        <td></td>
+                                    </tr>
+                                    <tr>
+                                        <td></td>
+                                        <td>2</td>
+                                        <td>true</td>
+                                        <td>0</td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                    </tr>
+                                    <tr>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td>1</td>
+                                        <td>true</td>
+                                        <td>true</td>
+                                        <td>true</td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                    </tr>
+                                    <tr>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td>2</td>
+                                        <td>true</td>
+                                        <td>true</td>
+                                        <td>true</td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                    </tr>
+                                    <tr>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td>4</td>
+                                        <td>false</td>
+                                        <td></td>
+                                        <td></td>
+                                        <td>true</td>
+                                        <td></td>
+                                        <td></td>
+                                    </tr>
+                                    <tr>
+                                        <td></td>
+                                        <td>3</td>
+                                        <td>true</td>
+                                        <td>0</td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                    </tr>
+                                    <tr>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td>1</td>
+                                        <td>true</td>
+                                        <td>true</td>
+                                        <td>true</td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                    </tr>
+                                    <tr>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td>2</td>
+                                        <td>true</td>
+                                        <td>true</td>
+                                        <td>true</td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                    </tr>
+                                    <tr>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td>4</td>
+                                        <td>false</td>
+                                        <td></td>
+                                        <td></td>
+                                        <td>true</td>
+                                        <td></td>
+                                        <td></td>
+                                    </tr>
+                                    <tr>
+                                        <td></td>
+                                        <td>4</td>
+                                        <td>false</td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td>true</td>
+                                        <td></td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>1</strong></td>
+                                        <td><strong>1</strong></td>
+                                        <td><strong>2((n + 1) + 1)</strong></td>
+                                        <td><strong>1(n + 1)</strong></td>
+                                        <td><strong>$$(n + 1)((\log_{2}\frac{n}{j}) + 1)$$</strong></td>
+                                        <td><strong>$$2(n + 1)(\log_{2}\frac{n}{j})$$</strong></td>
+                                        <td><strong>$$2(n + 1)(\log_{2}\frac{n}{j})$$</strong></td>
+                                        <td><strong>2(n + 1)</strong></td>
+                                        <td><strong>1</strong></td>
+                                        <td><strong><span class="marh inline medium">$$6n + \frac{5\log_{2}n*(n\ +\ 1)}{j} + 11$$</span></strong></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+
+
+
+
+
+
+
+
+                            <h1 class="headline" id="measures"><strong>Measures</strong></h1>
+                            <h3 class="headline" style="text-align: center;">Lower bound ≤ f(n) ≤ Upper bound</h3>
+                            <p class="paragraph">It measures the time taken to
+                                <strong>execute each statement or the number of primitive operations</strong>
+                                performed by the algorithm are taken to be
+                                <strong>related by a constant factor.</strong>
+                                <em>It is not going to examine the total execution time of an algorithm.</em>
+                            </p>
+                            <blockquote class="quote">A function that is a boundary above the algorithms runtime function,
+                                when that algorithm is given the inputs that maximize the algorithm's run time.
+                            </blockquote>
+                            <h3 class="headline" style="text-align: center;">Classes</h3>
+                            <div class="illustrate">
+                                <img src="./v2eH3.PNG" alt="Assymp notation">
+                            </div>
+                            <div class="illustrate">
+                                <img src="./t.WEBP" alt="Assymp notation">
+                                <small class="credit">https://www.mdpi.com/1996-1073/12/1/19/htm</small>
+                            </div>
+                            <p class="paragraph">
+                                <ul class="unorderList">
+                                    <li class="ulItem">
+                                        <strong>constant C</strong> : <strong>The sum of coefficient</strong> that cause a new function from the original function to be <strong>compare between f(n) and g(n)</strong> | C is positive real constant
+                                    </li>
+                                    <li class="ulItem">
+                                        <strong>constant K</strong> : <strong>Any value</strong> that make the equation comparison of the asymptotic notations f(n) and g(n) | K is positive real constant
+                                    </li>
+                                </ul>
+                            </p>
+
+                            <h2 class="headline"><strong>Upper bound - Big-O</strong></h2>
+                            <span class="math">
+                                $$f(n) = O(g(n)) ⟺ ∃C &gt; 0, ∃K &gt; 0 : 0 ≤ | f(n) | ≤ C ⋅ g(n) | ∀n ≥ K$$
+                            </span>
+                            <p class="paragraph"><code class="raw"><strong>f(n) = O(g(n))</strong></code> the notaion is read f of n is Big-O of g of n, iff there exits
+                                <em><strong>some positive constant c, k</strong></em> such that <code class="raw"><strong>0 ≤ | f(n) | ≤ C ⋅ g(n) | ∀ n ≥ K</strong></code>
+                            </p>
+                            <span class="math">
+                                Prove $$\lim_{n \to ∞} \bigl|\frac{f(n)}{g(n)}\bigr| &lt; ∞$$
+                            </span>
+                            <div class="illustrate">
+                                <img src="./bigO.JPG" alt="bigO">
+                            </div>
+                            <table class="tablePOs">
+                                <thead>
+                                    <tr>
+                                        <th style="text-align:left">PROVE</th>
+                                        <th style="text-align:center"></th>
+                                        <th style="text-align:left">choose k = 1</th>
+                                        <th style="text-align:center"></th>
+                                        <th style="text-align:left"></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td style="text-align:left">f(n)</td>
+                                        <td style="text-align:center">=</td>
+                                        <td style="text-align:left"><strong>n<sup>2</sup> + n</strong></td>
+                                        <td style="text-align:center"></td>
+                                        <td style="text-align:left"></td>
+                                    </tr>
+                                    <tr>
+                                        <td style="text-align:left">g(n)</td>
+                                        <td style="text-align:center">=</td>
+                                        <td style="text-align:left"><strong>n<sup>2</sup></strong></td>
+                                        <td style="text-align:center"></td>
+                                        <td style="text-align:left"></td>
+                                    </tr>
+                                    <tr>
+                                        <td style="text-align:left">O(g(n))</td>
+                                        <td style="text-align:center">=</td>
+                                        <td style="text-align:left">O(<strong>n<sup>2</sup></strong>)</td>
+                                        <td style="text-align:center"></td>
+                                        <td style="text-align:left"></td>
+                                    </tr>
+                                    <tr>
+                                        <td style="text-align:left">cg(n)</td>
+                                        <td style="text-align:center">=</td>
+                                        <td style="text-align:left"><strong>n<sup>2</sup> + n<sup>2</sup></strong></td>
+                                        <td style="text-align:center">=</td>
+                                        <td style="text-align:left"><strong>2n<sup>2</sup></strong></td>
+                                    </tr>
+                                    <tr>
+                                        <td style="text-align:left">c</td>
+                                        <td style="text-align:center">=</td>
+                                        <td style="text-align:left">2</td>
+                                        <td style="text-align:center"></td>
+                                        <td style="text-align:left"></td>
+                                    </tr>
+                                    <tr>
+                                        <td style="text-align:left">k</td>
+                                        <td style="text-align:center">=</td>
+                                        <td style="text-align:left">1</td>
+                                        <td style="text-align:center">∴</td>
+                                        <td style="text-align:left"><strong>n ≥ 1</strong></td>
+                                    </tr>
+                                    <tr>
+                                        <td style="text-align:left">| f(n) | ≤ cg(n)</td>
+                                        <td style="text-align:center">=</td>
+                                        <td style="text-align:left"><strong>| n<sup>2</sup> + n | ≤ 2n<sup>2</sup></strong></td>
+                                        <td style="text-align:center"></td>
+                                        <td style="text-align:left"></td>
+                                    </tr>
+                                    <tr>
+                                        <td style="text-align:left">∴ f(n)</td>
+                                        <td style="text-align:center">=</td>
+                                        <td style="text-align:left"><strong>n<sup>2</sup> + n</strong></td>
+                                        <td style="text-align:center">is</td>
+                                        <td style="text-align:left"><strong>O(n<sup>2</sup>)</strong></td>
+                                    </tr>
+                                    <tr>
+                                        <td style="text-align:left">Big-O</td>
+                                        <td style="text-align:center">=</td>
+                                        <td style="text-align:left">O(n<sup>2</sup>)</td>
+                                        <td style="text-align:center">∴</td>
+                                        <td style="text-align:left"><strong>n<sup>2</sup> + n ∈ O(n<sup>2</sup>)</strong></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+
+                            <h2 class="headline"><strong>Upper bound - Little-o</strong></h2>
+                            <span class="math">
+                                $$f(n) = o(g(n)) ⟺ ∃C &gt; 0, ∃K &gt; 0 : 0 &lt; | f(n) | &lt; C ⋅ g(n) | ∀n ≥ K$$
+                            </span>
+                            <p class="paragraph"><code class="raw"><strong>f(n) = O(g(n))</strong></code> the notaion is read f of n is Little-o of g of n, iff there exists positive
+                                <em><strong>some constants c, k</strong></em> such that <code class="raw"><strong>0 &lt; | f(n) | &lt; C ⋅ g(n) | ∀ n ≥ K</strong></code>
+                            </p>
+                            <span class="math">
+                                Prove $$\lim_{n \to ∞} \bigl|\frac{f(n)}{g(n)}\bigr| = 0$$
+                            </span>
+                            <div class="illustrate">
+                                <img src="./littleO.JPG" alt="littleO">
+                            </div>
+                            <table class="tablePOs">
+                                <thead>
+                                    <tr>
+                                        <th style="text-align:left">PROVE</th>
+                                        <th style="text-align:center"></th>
+                                        <th style="text-align:left">choose k = 1 and c = 3</th>
+                                        <th style="text-align:center"></th>
+                                        <th style="text-align:left"></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td style="text-align:left">f(n)</td>
+                                        <td style="text-align:center">=</td>
+                                        <td style="text-align:left"><strong>n<sup>2</sup> + n</strong></td>
+                                        <td style="text-align:center"></td>
+                                        <td style="text-align:left"></td>
+                                    </tr>
+                                    <tr>
+                                        <td style="text-align:left">g(n)</td>
+                                        <td style="text-align:center">=</td>
+                                        <td style="text-align:left"><strong>n<sup>3</sup> + n</strong></td>
+                                        <td style="text-align:center"></td>
+                                        <td style="text-align:left"></td>
+                                    </tr>
+                                    <tr>
+                                        <td style="text-align:left">o(g(n))</td>
+                                        <td style="text-align:center">=</td>
+                                        <td style="text-align:left">o(<strong>n<sup>3</sup></strong>)</td>
+                                        <td style="text-align:center"></td>
+                                        <td style="text-align:left"></td>
+                                    </tr>
+                                    <tr>
+                                        <td style="text-align:left">c</td>
+                                        <td style="text-align:center">=</td>
+                                        <td style="text-align:left">3</td>
+                                        <td style="text-align:center"></td>
+                                        <td style="text-align:left"></td>
+                                    </tr>
+                                    <tr>
+                                        <td style="text-align:left">cg(n)</td>
+                                        <td style="text-align:center">=</td>
+                                        <td style="text-align:left"><strong>3 * n<sup>3</sup> + n</strong></td>
+                                        <td style="text-align:center">=</td>
+                                        <td style="text-align:left"><strong>3n<sup>3</sup></strong></td>
+                                    </tr>
+                                    <tr>
+                                        <td style="text-align:left">k</td>
+                                        <td style="text-align:center">=</td>
+                                        <td style="text-align:left">1</td>
+                                        <td style="text-align:center">∴</td>
+                                        <td style="text-align:left"><strong>n ≥ 1</strong></td>
+                                    </tr>
+                                    <tr>
+                                        <td style="text-align:left">| f(n) | ≤ cg(n)</td>
+                                        <td style="text-align:center">=</td>
+                                        <td style="text-align:left"><strong>| n<sup>3</sup> + n | &lt; 3n<sup>3</sup> + n</strong></td>
+                                        <td style="text-align:center"></td>
+                                        <td style="text-align:left"></td>
+                                    </tr>
+                                    <tr>
+                                        <td style="text-align:left">∴ f(n)</td>
+                                        <td style="text-align:center">=</td>
+                                        <td style="text-align:left"><strong>n<sup>2</sup> + n</strong></td>
+                                        <td style="text-align:center">is</td>
+                                        <td style="text-align:left"><strong>o(n<sup>3</sup>)</strong></td>
+                                    </tr>
+                                    <tr>
+                                        <td style="text-align:left">little-o</td>
+                                        <td style="text-align:center">=</td>
+                                        <td style="text-align:left">o(n<sup>3</sup>)</td>
+                                        <td style="text-align:center">∴</td>
+                                        <td style="text-align:left"><strong>n<sup>2</sup> + n ∈ O(n<sup>3</sup>)</strong></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+
+                            <h2 class="headline"><strong>Lower bound - Big-Ω</strong></h2>
+                            <span class="math">
+                                $$f(n) = Ω(g(n)) ⟺ ∃C &gt; 0, ∃K &gt; 0 : 0 ≤ | f(n) | ≤ C ⋅ g(n) | ∀n ≥ K$$
+                            </span>
+                            <p class="paragraph"><code class="raw"><strong>f(n) = Ω(g(n))</strong></code> the notaion is read f of n is Big-Omega of g of n, iff there exits
+                                <em><strong>some positive constant c, k</strong></em> such that <code class="raw"><strong>0 ≤ | f(n) | ≤ C ⋅ g(n) | ∀ n ≥ K</strong></code>
+                            </p>
+                            <span class="math">
+                                Prove $$\lim_{n \to ∞} \bigl|\frac{f(n)}{g(n)}\bigr| &gt; 0$$
+                            </span>
+                            <div class="illustrate">
+                                <img src="./bigOmega.JPG" alt="bigOmega">
+                            </div>
+                            <table class="tablePOs">
+                                <thead>
+                                    <tr>
+                                        <th style="text-align:left">PROVE</th>
+                                        <th style="text-align:center"></th>
+                                        <th style="text-align:left">choose k = 1</th>
+                                        <th style="text-align:center"></th>
+                                        <th style="text-align:left"></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td style="text-align:left">f(n)</td>
+                                        <td style="text-align:center">=</td>
+                                        <td style="text-align:left"><strong>3n<sup>2</sup></strong></td>
+                                        <td style="text-align:center"></td>
+                                        <td style="text-align:left"></td>
+                                    </tr>
+                                    <tr>
+                                        <td style="text-align:left">g(n)</td>
+                                        <td style="text-align:center">=</td>
+                                        <td style="text-align:left"><strong>n<sup>2</sup> + n</strong></td>
+                                        <td style="text-align:center"></td>
+                                        <td style="text-align:left"></td>
+                                    </tr>
+                                    <tr>
+                                        <td style="text-align:left">Ω(g(n))</td>
+                                        <td style="text-align:center">=</td>
+                                        <td style="text-align:left">Ω(<strong>n<sup>2</sup></strong>)</td>
+                                        <td style="text-align:center"></td>
+                                        <td style="text-align:left"></td>
+                                    </tr>
+                                    <tr>
+                                        <td style="text-align:left">cg(n)</td>
+                                        <td style="text-align:center">=</td>
+                                        <td style="text-align:left"><strong>n<sup>2</sup> + n<sup>2</sup></strong></td>
+                                        <td style="text-align:center">=</td>
+                                        <td style="text-align:left"><strong>2n<sup>2</sup></strong></td>
+                                    </tr>
+                                    <tr>
+                                        <td style="text-align:left">c</td>
+                                        <td style="text-align:center">=</td>
+                                        <td style="text-align:left">2</td>
+                                        <td style="text-align:center"></td>
+                                        <td style="text-align:left"></td>
+                                    </tr>
+                                    <tr>
+                                        <td style="text-align:left">k</td>
+                                        <td style="text-align:center">=</td>
+                                        <td style="text-align:left">1</td>
+                                        <td style="text-align:center">∴</td>
+                                        <td style="text-align:left"><strong>n ≥ 1</strong></td>
+                                    </tr>
+                                    <tr>
+                                        <td style="text-align:left">cg(n) ≤ | f(n) |</td>
+                                        <td style="text-align:center">=</td>
+                                        <td style="text-align:left"><strong>2n<sup>2</sup> ≤ | 3n<sup>2</sup> |</strong></td>
+                                        <td style="text-align:center"></td>
+                                        <td style="text-align:left"></td>
+                                    </tr>
+                                    <tr>
+                                        <td style="text-align:left">∴ f(n)</td>
+                                        <td style="text-align:center">=</td>
+                                        <td style="text-align:left"><strong>3n<sup>2</sup></strong></td>
+                                        <td style="text-align:center">is</td>
+                                        <td style="text-align:left"><strong>Ω(n<sup>2</sup>)</strong></td>
+                                    </tr>
+                                    <tr>
+                                        <td style="text-align:left">Big-Ω</td>
+                                        <td style="text-align:center">=</td>
+                                        <td style="text-align:left">Ω(n<sup>2</sup>)</td>
+                                        <td style="text-align:center">∴</td>
+                                        <td style="text-align:left"><strong>3n<sup>2</sup> + ∈ Ω(n<sup>2</sup>)<br>but<br>3n<sup>2</sup> ∉ Ω(n<sup>2</sup>)</strong></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+
+                            <h2 class="headline"><strong>Lower bound - Little-ω</strong></h2>
+                            <span class="math">
+                                $$f(n) = ω(g(n)) ⟺ ∃C &gt; 0, ∃K &gt; 0 : 0 &lt; C ⋅ g(n) &lt; | f(n) |\ by\ ∀n ≥ K$$
+                            </span>
+                            <p class="paragraph"><code class="raw"><strong>f(n) = ω(g(n))</strong></code> the notaion is read f of n is Little-omega of g of n, iff there exits
+                                <em><strong>some positive constant c, k</strong></em> such that <code class="raw"><strong>0 &lt; C ⋅ g(n) &lt; | f(n) |, ∀n ≥ K</strong></code>
+                            </p>
+                            <span class="math">
+                                Prove $$\lim_{n \to ∞} \bigl|\frac{f(n)}{g(n)}\bigr| = ∞$$
+                            </span>
+                            <div class="illustrate">
+                                <img src="./littleOmega.JPG" alt="littleOmega">
+                            </div>
+                            <table class="tablePOs">
+                                <thead>
+                                    <tr>
+                                        <th style="text-align:left">PROVE</th>
+                                        <th style="text-align:center"></th>
+                                        <th style="text-align:left">choose k = 1</th>
+                                        <th style="text-align:center"></th>
+                                        <th style="text-align:left"></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td style="text-align:left">f(n)</td>
+                                        <td style="text-align:center">=</td>
+                                        <td style="text-align:left"><strong>3n<sup>2</sup> + n</strong></td>
+                                        <td style="text-align:center"></td>
+                                        <td style="text-align:left"></td>
+                                    </tr>
+                                    <tr>
+                                        <td style="text-align:left">g(n)</td>
+                                        <td style="text-align:center">=</td>
+                                        <td style="text-align:left"><strong>n<sup>2</sup></strong></td>
+                                        <td style="text-align:center"></td>
+                                        <td style="text-align:left"></td>
+                                    </tr>
+                                    <tr>
+                                        <td style="text-align:left">ω(g(n))</td>
+                                        <td style="text-align:center">=</td>
+                                        <td style="text-align:left">ω(<strong>n<sup>2</sup></strong>)</td>
+                                        <td style="text-align:center"></td>
+                                        <td style="text-align:left"></td>
+                                    </tr>
+                                    <tr>
+                                        <td style="text-align:left">cg(n)</td>
+                                        <td style="text-align:center">=</td>
+                                        <td style="text-align:left"><strong>n<sup>2</sup> + n<sup>2</sup></strong></td>
+                                        <td style="text-align:center">=</td>
+                                        <td style="text-align:left"><strong>2n<sup>2</sup></strong></td>
+                                    </tr>
+                                    <tr>
+                                        <td style="text-align:left">c</td>
+                                        <td style="text-align:center">=</td>
+                                        <td style="text-align:left">2</td>
+                                        <td style="text-align:center"></td>
+                                        <td style="text-align:left"></td>
+                                    </tr>
+                                    <tr>
+                                        <td style="text-align:left">k</td>
+                                        <td style="text-align:center">=</td>
+                                        <td style="text-align:left">1</td>
+                                        <td style="text-align:center">∴</td>
+                                        <td style="text-align:left"><strong>n ≥ 1</strong></td>
+                                    </tr>
+                                    <tr>
+                                        <td style="text-align:left">cg(n) ≤ | f(n) |</td>
+                                        <td style="text-align:center">=</td>
+                                        <td style="text-align:left"><strong>2n<sup>2</sup> &lt; | 3n<sup>2</sup> + n |</strong></td>
+                                        <td style="text-align:center"></td>
+                                        <td style="text-align:left"></td>
+                                    </tr>
+                                    <tr>
+                                        <td style="text-align:left">∴ f(n)</td>
+                                        <td style="text-align:center">=</td>
+                                        <td style="text-align:left"><strong>3n<sup>2</sup> + n</strong></td>
+                                        <td style="text-align:center">is</td>
+                                        <td style="text-align:left"><strong>ω(n<sup>2</sup>)</strong></td>
+                                    </tr>
+                                    <tr>
+                                        <td style="text-align:left">Little-ω</td>
+                                        <td style="text-align:center">=</td>
+                                        <td style="text-align:left">ω(n<sup>2</sup>)</td>
+                                        <td style="text-align:center">∴</td>
+                                        <td style="text-align:left"><strong>3n<sup>2</sup> + n ∈ ω(n<sup>2</sup>)<br>but<br>3n<sup>2</sup> + n ∉ o(n<sup>2</sup>)</strong></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+
+                            <h2 class="headline"><strong>Upper and Lower bound - Big-Θ</strong></h2>
+                            <span class="math">
+                                $$f(n) = Θ(g(n)) ⟺ ∃C_1, C_2 &gt; 0, ∃K &gt; 0 : 0 ≤ C_1 ⋅ g(n) ≤ | f(n) |\ ≤ C_2 ⋅ g(n) | ∀n ≥ K$$
+                            </span>
+                            <p class="paragraph"><code class="raw"><strong>f(n) = Θ(g(n))</strong></code> the notaion is read f of n is Big-Theta of g of n, iff there exits
+                                <br><em><strong>some positive constant c, k</strong></em> such that <code class="raw"><strong>0 ≤ | f(n) | ≤ C<sub>2</sub> ⋅ g(n), ∀n ≥ K</strong></code>
+                                <br><em><strong>some positive constant c, k</strong></em> such that <code class="raw"><strong>0 ≤ C<sub>1</sub> ⋅ g(n) ≤ | f(n) |, ∀n ≥ K</strong></code>
+                            </p>
+                            <span class="math">
+                                Prove $$\lim_{n \to ∞} \bigl|\frac{f(n)}{g(n)}\bigr| ∈ R &lt; 0$$
+                            </span>
+                            <div class="illustrate">
+                                <img src="./bigTheta.JPG" alt="bigTheta">
+                            </div>
+                            <table class="tablePOs">
+                                <thead>
+                                    <tr>
+                                        <th style="text-align:left">PROVE</th>
+                                        <th style="text-align:center">Lower</th>
+                                        <th style="text-align:left"></th>
+                                        <th style="text-align:center">choose k = 1</th>
+                                        <th style="text-align:left"></th>
+                                        <th style="text-align:left">Upper</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td style="text-align:left">f(n)</td>
+                                        <td style="text-align:center"></td>
+                                        <td style="text-align:left"></td>
+                                        <td style="text-align:center"><strong>n<sup>2</sup> + n</strong></td>
+                                        <td style="text-align:left"></td>
+                                        <td style="text-align:left"></td>
+                                    </tr>
+                                    <tr>
+                                        <td style="text-align:left">notation</td>
+                                        <td style="text-align:center">Big-Ω</td>
+                                        <td style="text-align:left"></td>
+                                        <td style="text-align:center"></td>
+                                        <td style="text-align:left"></td>
+                                        <td style="text-align:left">Big-O</td>
+                                    </tr>
+                                    <tr>
+                                        <td style="text-align:left">g(n)</td>
+                                        <td style="text-align:center"><strong>n</strong></td>
+                                        <td style="text-align:left"></td>
+                                        <td style="text-align:center"></td>
+                                        <td style="text-align:left"></td>
+                                        <td style="text-align:left"><strong>n<sup>2</sup></strong></td>
+                                    </tr>
+                                    <tr>
+                                        <td style="text-align:left"></td>
+                                        <td style="text-align:center">Ω(n)</td>
+                                        <td style="text-align:left"></td>
+                                        <td style="text-align:center"></td>
+                                        <td style="text-align:left"></td>
+                                        <td style="text-align:left">O(n<sup>2</sup>)</td>
+                                    </tr>
+                                    <tr>
+                                        <td style="text-align:left">c</td>
+                                        <td style="text-align:center">2</td>
+                                        <td style="text-align:left"></td>
+                                        <td style="text-align:center"></td>
+                                        <td style="text-align:left"></td>
+                                        <td style="text-align:left">3</td>
+                                    </tr>
+                                    <tr>
+                                        <td style="text-align:left">n ≥ k</td>
+                                        <td style="text-align:center"><strong>n ≥ 1</strong></td>
+                                        <td style="text-align:left"></td>
+                                        <td style="text-align:center"></td>
+                                        <td style="text-align:left"></td>
+                                        <td style="text-align:left"><strong>n ≥ 1</strong></td>
+                                    </tr>
+                                    <tr>
+                                        <td style="text-align:left">cg(n)</td>
+                                        <td style="text-align:center"><strong>2n</strong></td>
+                                        <td style="text-align:left"></td>
+                                        <td style="text-align:center"></td>
+                                        <td style="text-align:left"></td>
+                                        <td style="text-align:left"><strong>3n<sup>2</sup></strong></td>
+                                    </tr>
+                                    <tr>
+                                        <td style="text-align:left">c<sub>1</sub>g(n) ≤ | f(n) | ≤ c<sub>2</sub>g(n)</td>
+                                        <td style="text-align:center"><strong>2n</strong></td>
+                                        <td style="text-align:left">≤</td>
+                                        <td style="text-align:center"><strong>n<sup>2</sup> + n</strong></td>
+                                        <td style="text-align:left">≤</td>
+                                        <td style="text-align:left"><strong>3n<sup>2</sup></strong></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        <!-- end infomation -->
+                        </div>
+                    </div>
+            </section>
+        </main>
+        <div class="push"></div>
+    </div>
+    
+    <footer id="footer"></footer>
+    <script type="module">
+        import Footer from '../../src/scripts/Components/Footer.js';
+        import Sidemenu from '../../src/scripts/Components/Sidemenu.js';
+        const sidemenu = document.getElementById('sideMenu');
+        const footer = document.getElementById('footer');
+        sidemenu.innerHTML = Sidemenu(true, '../../src');
+        footer.innerHTML = Footer();
+    </script>
+    <script src="../../src/scripts/stylingtag.js" defer></script>
+    <script src="../../src/scripts/sidemenu.js" defer></script>
+    <script src="../../src/scripts/totop.js" defer></script>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+    <script type="text/x-mathjax-config">
+        MathJax.Hub.Config({
+            tex2jax: {
+            math: [['\\(','\\)']],
+            displayMath: [['\\[','\\]']],
+            processEscapes: true
+            }
+        });
+        window.MathJax = {
+        loader: {load: ['[tex]/color']},
+        tex: {packages: {'[+]': ['color']}}
+        };
+        MathJax.Hub.Queue(["Typeset", MathJax.Hub]);
+    </script>
+    <script>
+        const btn = document.getElementById('toggleBrightDark');
+        const svg = document.getElementById('svg');
+
+        btn.addEventListener('click', e => {
+
+            if(!e.target.checked){
+                svg.classList.remove('active');
+                document.body.style.transition = 'ease-in-out .2s';
+                document.body.style.backgroundColor = '';
+                document.querySelector('#topNav-section').style.backgroundColor = 'hsl(0, 0%, 99%)';
+                document.querySelector('.topLogo').children[0].src = '../../src/img/icon/zmlogo-page-15.png';
+                document.querySelectorAll('.invert').forEach(elem => {
+                    elem.classList.remove('invert');
+                });
+            } else {
+                svg.classList.add('active');
+                document.body.style.transition = 'ease-in-out .2s';
+                document.body.style.backgroundColor = '#222';
+                document.querySelector('#topNav-section').style.backgroundColor = '#222';
+                document.querySelector('.topLogo').children[0].src = '../../src/img/icon/zmlogo-page-16.png';
+                ['.tablePOs', '.codePreview', '.head-title', '.writer', '.headline', '.paragraph', '.raw', '.quote', '.orderList', '.unorderList', '.math'].forEach(c => {
+                    document.querySelectorAll(c).forEach(elem => {
+                        elem.classList.add('invert');
+                    });
+                });
+            }
+        });
+    </script>
+</body>
+</html>

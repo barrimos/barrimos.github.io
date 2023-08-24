@@ -4,210 +4,20 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Freelance, Graphic, Web application, Algorithm, Frontend, Backend, Full-Stack, Developer, MERN stack, MongoDB, Express, React, NodeJS, UXUI">
     <title>zixma - All the sum</title>
     <link rel="shortcut icon" href="./src/img/icon/zmlogo-page-03.png" type="image/x-icon">
     <link rel="stylesheet" href="./src/dist/stylingtag.css">
     <link rel="stylesheet" href="./src/style/main.css">
     <link rel="stylesheet" href="./src/dist/style.css">
-    <link rel="stylesheet" href="./src/dist/carousel.css">
     <link rel="stylesheet" href="./src/dist/sidemenu.css">
     <link rel="stylesheet" href="./src/dist/totop.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
 <body>
     <div class="wrapper">
-        <nav class="sideMenu noSelect" id="sideMenu">
-            <div class="hamburger">
-                <input type="checkbox" class="toggler" id="btnToggle" autocomplete="off">
-                <div class="bars">
-                    <div class="ham-icon" id="ham-icon"></div>
-                </div>
-            </div>
-            <div class="nav-side-menu" id="sideNav-left">
-                <ul class="underlist">
-                    <li class="list-item data-list-url">
-                        <a href="/" class="nav-link" title="Home" id="index">
-                            <div class="nav-icon" data-icon="index">
-                                <img src="./src/img/icon/social-23.svg" alt="Home">
-                            </div>
-                            <span class="nav-text" data-text="index">HOME</span>
-                        </a>
-                    </li>
-                    <li class="list-item has-treeview data-list-url">
-                        <a href="javascript:void(0)" class="nav-link btnDropmenu" title="Service" id="hired">
-                            <div class="nav-icon" data-icon="hired">
-                                <img src="./src/img/icon/social-35.svg" alt="Service">
-                            </div>
-                            <span class="nav-text" data-text="hired">SERVICE</span>
-                            <div class="iconArrowdrop">
-                                <svg viewbox="0 0 40 40" width="15" heigth="15">
-                                    <path
-                                        d = "M0.5 10 L19 30 L35 10"
-                                        fill = "none"
-                                        stroke-width = "4"
-                                    />
-                                </svg>
-                            </div>
-                        </a>
-                        <ul class="underlist">
-                            <li class="list-item list-treeview">
-                                <a href="../../hired.html?sv=graphic" class="nav-link" title="Graphic">
-                                    <div class="nav-icon">
-                                        <img src="./src/img/icon/zmlogo-page-03.png" alt="Graphic">
-                                    </div>
-                                    <span class="nav-text">GRAPHIC</span>
-                                </a>
-                            </li>
-                            <li class="list-item list-treeview">
-                                <a href="../../hired.html?sv=uxui" class="nav-link" title="UI Design">
-                                    <div class="nav-icon">
-                                        <img src="./src/img/icon/zmlogo-page-03.png" alt="UI Design">
-                                    </div>
-                                    <span class="nav-text">UI DESIGN</span>
-                                </a>
-                            </li>
-                            <li class="list-item list-treeview">
-                                <a href="../../hired.html?sv=frontend" class="nav-link" title="Front-end Develop">
-                                    <div class="nav-icon">
-                                        <img src="./src/img/icon/zmlogo-page-03.png" alt="Front-end Develop">
-                                    </div>
-                                    <span class="nav-text">FRONT-END DEV</span>
-                                </a>
-                            </li>
-                        </ul>
-                    </li>
-                    <li class="list-item data-list-url">
-                        <a href="../../profile.html" class="nav-link" title="Profile" id="profile">
-                            <div class="nav-icon" data-icon="profile">
-                                <img src="./src/img/icon/social-09.svg" alt="Profile">
-                            </div>
-                            <span class="nav-text" data-text="profile">PROFILE</span>
-                        </a>
-                    </li>
-                    <li class="list-item has-treeview data-list-url">
-                        <a href="javascript:void(0)" class="nav-link btnDropmenu" title="Zxsandbox" id="zxsandbox">
-                            <div class="nav-icon" data-icon="zxsandbox">
-                                <img src="./src/img/icon/social-37.svg" alt="Service">
-                            </div>
-                            <span class="nav-text" data-text="zxsandbox">ZXSANDBOX</span>
-                            <div class="iconArrowdrop">
-                                <svg viewbox="0 0 40 40" width="15" heigth="15">
-                                    <path
-                                        d = "M0.5 10 L19 30 L35 10"
-                                        fill = "none"
-                                        stroke-width = "4"
-                                    />
-                                </svg>
-                            </div>
-                        </a>
-                        <ul class="underlist">
-                            <li class="list-item list-treeview">
-                                <a href="../../playground/matrix/index.html" class="nav-link" title="Matrix calculator">
-                                    <div class="nav-icon">
-                                        <img src="./src/img/icon/matrixcalc.png" width="17" height="17" alt="Matrix calculator">
-                                    </div>
-                                    <span class="nav-text">MATRIX CALC</span>
-                                </a>
-                            </li>
-                            <li class="list-item list-treeview">
-                                <a href="../../playground/pixelsart/index.html" class="nav-link" title="Pixels art drawing">
-                                    <div class="nav-icon">
-                                        <img src="./src/img/icon/pixelsart.png" width="17" height="17" alt="Pixels art drawing">
-                                    </div>
-                                    <span class="nav-text">PIXELS ART</span>
-                                </a>
-                            </li>
-                            <li class="list-item list-treeview">
-                                <a href="../../playground/maze/index.html" class="nav-link" title="Maze game">
-                                    <div class="nav-icon">
-                                        <img src="./src/img/icon/maze-icon.png" width="17" height="17" alt="Maze game">
-                                    </div>
-                                    <span class="nav-text">MAZE GAME</span>
-                                </a>
-                            </li>
-                            <li class="list-item list-treeview">
-                                <a href="../../playground/stylingtag/index.html" class="nav-link" title="Styling tags">
-                                    <div class="nav-icon">
-                                        <img src="./src/img/icon/styling.png" width="17" height="17" alt="Styling tags">
-                                    </div>
-                                    <span class="nav-text">STYLING TAGS</span>
-                                </a>
-                            </li>
-                        </ul>
-                    </li>
-                    <li class="list-item data-list-url">
-                        <a href="../../portfolio.html" class="nav-link" title="Portfolio" id="portfolio">
-                            <div class="nav-icon" data-icon="portfolio">
-                                <img src="./src/img/icon/social-29.svg" alt="Portfolio">
-                            </div>
-                            <span class="nav-text" data-text="portfolio">PORTFOLIO</span>
-                        </a>
-                    </li>
-                    <li class="list-item data-list-url">
-                        <a href="../../shop.html" class="nav-link" title="Shop" id="shop">
-                            <div class="nav-icon" data-icon="shop">
-                                <img src="./src/img/icon/social-27.svg" alt="Shop">
-                            </div>
-                            <span class="nav-text" data-text="shop">SHOP</span>
-                        </a>
-                    </li>
-                    <li class="list-item data-list-url">
-                        <a href="../../blog.html" class="nav-link" title="Blog" id="blog">
-                            <div class="nav-icon" data-icon="blog">
-                                <img src="./src/img/icon/social-33.svg" alt="Blog">
-                            </div>
-                            <span class="nav-text" data-text="blog">BLOG</span>
-                        </a>
-                    </li>
-                    <li class="list-item has-treeview data-list-url">
-                        <a href="javascript:void(0)" class="nav-link btnDropmenu" title="Resume">
-                            <div class="nav-icon">
-                                <img src="./src/img/icon/social-31.svg" alt="Service">
-                            </div>
-                            <span class="nav-text">RESUME</span>
-                            <div class="iconArrowdrop">
-                                <svg viewbox="0 0 40 40" width="15" heigth="15">
-                                    <path
-                                        d = "M0.5 10 L19 30 L35 10"
-                                        fill = "none"
-                                        stroke-width = "4"
-                                    />
-                                </svg>
-                            </div>
-                        </a>
-                        <ul class="underlist">
-                            <li class="list-item list-treeview">
-                                <a href="./src/download/Prapas - Resume_EN_2022.pdf" title="Download Resume" class="nav-link dlbtn-wraper" download>
-                                    <div class="nav-icon">
-                                        <img src="./src/img/icon/zmlogo-page-03.png" alt="Resume EN">
-                                    </div>
-                                    <span class="nav-text">RESUME EN</span>
-                                </a>
-                            </li>
-                            <li class="list-item list-treeview">
-                                <a href="./src/download/Prapas - Resume_TH_2022.pdf" title="Download Resume" class="nav-link dlbtn-wraper" download>
-                                    <div class="nav-icon">
-                                        <img src="./src/img/icon/zmlogo-page-03.png" alt="Resume TH">
-                                    </div>
-                                    <span class="nav-text">RESUME TH</span>
-                                </a>
-                            </li>
-                        </ul>
-                    </li>
-                </ul>
-                <div class="buttonToTop" id="buttonToTop" onclick="topFunction()">
-                    <input type="button" class="toTopBtn" id="toTopBtn">
-                    <svg class="arrowTop" viewbox="0 0 35 35" aria-hidden="true" alt="backTop">
-                        <path
-                            d = "M10 22 L 18 13 L 25 22"
-                            fill = "none"
-                            stroke = "#666"
-                            stroke-width = "3"
-                        />
-                    </svg>
-                </div>
-            </div>
-        </nav>
+        <nav class="sideMenu noSelect" id="sideMenu"></nav>
+        
         <main class="main">
             <div class="topNav-section" id="topNav-section">
                 <div class="container">
@@ -217,209 +27,84 @@
                                 <div class="topLogo">
                                     <img src="./src/img/icon/zmlogo-page-15.png" alt="logo zixma">
                                 </div>
-                                <!-- <div class="nav-list d-none d-md-block">
-                                    <ul class="nav-items">
-                                        <li class="menu-list"><a href="./profile.html">Profile</a></li>
-                                        <li class="menu-list"><a href="#project-section">Projects</a></li>
-                                    </ul>
-                                </div> -->
                                 <div class="btn d-none d-md-block">
-                                    <a href="./src/download/Prapas - Resume_EN_2022.pdf" class="Downloadresume" download>Download Resume</a>
+                                    <a href="./src/download/Prapas - Resume_EN_2023.pdf" class="Downloadresume" download>Download Resume</a>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-            <section class="banner-section" id="banner-section">
+
+            <section class="introduce-section" id="introduce-section">
                 <div class="container">
                     <div class="row">
-                        <div class="col-12 col-lg-4">
-                            <div class="dashboard">
-                                <div class="titlehead">
-                                    <h1>WARM WELCOME</h1>
-                                    <span>let's discover me</span>
-                                </div>
-                            </div>
+                        <div class="left-wrapper col-12">
+                            <span class="intro-head text-focus-in">
+                                WELCOME TO MY ENDLESS ADVENTURE OF PURSUITS OF KNOWLEDGE
+                            </span>
                         </div>
-                        <div class="col-12 col-lg-8">
-                            <div class="carousel slide" id="carousel" data-ride="carousel">
-                                <div class="carousel-inner">
-                                    <div class="carousel-item active">
-                                        <img src="#" alt="" class="carousel-img projectLink" name="matrix">
-                                        <!-- <div class="caption animToDown">
-                                            <p class="caption-Head bg-dark">caption1</p>
-                                            <p class="caption-Detail bg-dark">Lorem ipsum dolor sit amet co</p>
-                                        </div> -->
-                                    </div>
-                                    <div class="carousel-item">
-                                        <img src="#" alt="" class="carousel-img projectLink" name="theunderclass">
-                                        <!-- <div class="caption">
-                                            <p class="caption-Head bg-light">caption2</p>
-                                            <p class="caption-Detail bg-light"><a href="./blog.html">click to blog page</a></p>
-                                        </div> -->
-                                    </div>
-                                    <div class="carousel-item">
-                                        <img src="#" alt="" class="carousel-img projectLink" name="goaltofit">
-                                        <!-- <div class="caption">
-                                            <p class="caption-Head bg-light">caption3</p>
-                                            <p class="caption-Detail bg-light">Lorem ipsum dolor sit amet co</p>
-                                        </div> -->
-                                    </div>
-                                    <div class="carousel-item">
-                                        <img src="#" alt="" class="carousel-img projectLink" name="jammping">
-                                        <!-- <div class="caption">
-                                            <p class="caption-Head bg-dark">caption4</p>
-                                            <p class="caption-Detail bg-dark">Lorem ipsum dolor sit amet co</p>
-                                        </div> -->
-                                    </div>
-                                    <div class="carousel-item">
-                                        <img src="#" alt="" class="carousel-img projectLink" name="stylingtags">
-                                        <!-- <div class="caption">
-                                            <p class="caption-Head bg-dark">caption5</p>
-                                            <p class="caption-Detail bg-dark">Lorem ipsum dolor sit amet co</p>
-                                        </div> -->
-                                    </div>
-                                    <div class="carousel-item">
-                                        <img src="#" alt="" class="carousel-img projectLink" name="mazegame">
-                                        <!-- <div class="caption">
-                                            <p class="caption-Head bg-dark">caption6</p>
-                                            <p class="caption-Detail bg-dark">Lorem ipsum dolor sit amet co</p>
-                                        </div> -->
+                        <div class="right-wrapper col-12">
+                            <div class="reels">
+                                <video autoplay muted>
+                                    <source src="./src/reels/reels.mp4">
+                                    Your browser does not support the video tag.
+                                </video>
+                            </div>
+                            <div class="skills">
+                                <div class="status">
+                                    <div class="row">
+                                        <div class="sk-item col-12 col-md-5">
+                                            <div class="st-top">7 Years work experience</div>
+                                            <h6 class="st-bottom">Graphic designer</h6>
+                                            <div class="st-icon d-flex justify-content-center align-items-center">
+                                                <h6 class="adobe illus">AI</h6>
+                                                <h6 class="adobe pshop">PS</h6>
+                                            </div>
+                                        </div>
+                                        <div class="sk-item col-12 col-md-7">
+                                            <div class="st-top">Plus</div>
+                                            <div class="d-flex justify-content-around w-100">
+                                                <div>
+                                                    <h6 class="st-bottom">Web develop</h6>
+                                                    <div class="st-icon">
+                                                        <i class="fa-brands fa-html5"></i>
+                                                        <i class="fa-brands fa-css3-alt"></i>
+                                                        <i class="fa-brands fa-sass"></i>
+                                                        <i class="fa-brands fa-js"></i>
+                                                        <i class="fa-brands fa-python"></i>
+                                                    </div>
+                                                </div>
+                                                <div>
+                                                    <h6 class="st-bottom">3d</h6>
+                                                    <div class="st-icon">
+                                                        <h6 class="autodesk 3dsmax">3ds Max</h6>
+                                                        <h6 class="pixologic zbrush">Zbrush</h6>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
-                                <!-- <ol class="carousel-indicators">
-                                    <li data-target="#carousel" data-slide-to="0" class="active"></li>
-                                    <li data-target="#carousel" data-slide-to="1"></li>
-                                    <li data-target="#carousel" data-slide-to="2"></li>
-                                    <li data-target="#carousel" data-slide-to="3"></li>
-                                    <li data-target="#carousel" data-slide-to="4"></li>
-                                    <li data-target="#carousel" data-slide-to="5"></li>
-                                </ol> -->
-                                <a href="#carousel" data-slide="nextBtn" class="nextBtn" role="button">
-                                    <div class="circleBG">
-                                        <svg viewbox="0 0 60 60" aria-hidden="true">
-                                            <path
-                                                d = "M23 15 L 43 30 L 23 45 Z"
-                                                fill = "#000"
-                                                stroke = "none"
-                                                stroke-width = "5"
-                                                fill-opacity = "0.6"
-                                            />
-                                        </svg>
-                                    </div>
-                                </a>
-                                <a href="#carousel" data-slide="prevBtn" class="prevBtn" role="button">
-                                    <div class="circleBG">
-                                        <svg viewbox="0 0 60 60" aria-hidden="true">
-                                            <path
-                                                d = "M17 30 L 37 15 L 37 45 Z"
-                                                fill = "#000"
-                                                stroke = "none"
-                                                stroke-width = "5"
-                                                fill-opacity = "0.6"
-                                            />
-                                        </svg>
-                                    </div>
-                                </a>
                             </div>
                         </div>
                     </div>
                 </div>
             </section>
-            <!-- <section class="article-section" id="article-section">
+            <section class="article-section" id="article-section">
                 <div class="container">
-                    <div class="row">
-                        <div class="col-12 col-md-3">
-                            <div class="article-title posSticky">
-                                <h2>ARTICLES</h2>
-                            </div>
-                        </div>
-                        <div class="col-12">
-                            <div class="row">
-                                <div class="col-6">
-                                    <h3>TIME COMPLEXITY</h3>
-                                    <img class="time_img" src="./src/img/time.jpg" alt="time">
-                                </div>
-                                <div class="col-6">
-                                    <h3>OOP Class Javascript</h3>
-                                    <img class="time_img" src="./src/img/obj.png" alt="obj">
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                    <h1 class="section-head">SUMMARIES</h1>
+                    <small>WHAT I'VE LEARNED</small>
+                    <div class="row" id="blogItems"></div>
                 </div>
-            </section> -->
+            </section>
             <section class="project-section" id="project-section">
                 <div class="container">
+                    <h1 class="section-head">PROJECTS</h1>
+                    <small>PRACTICES</small>
                     <div class="row">
-                        <div class="col-12 col-md-3">
-                            <div class="project-title posSticky">
-                                <h2>PROJECTS</h2>
-                            </div>
-                        </div>
-                        <div class="col-12 col-md-9">
-                            <div class="row">
-                                <div class="col-12 col-md-6">
-                                    <a href="./playground/maze/index.html" target="_blank" class="projectLink" name="mazegame">
-                                        <div class="projectTitle">MAZE GAME</div>
-                                        <ul class="tagLists">
-                                            Javascript, Algorithm, Shortest Path, A*, Heuristic, Dijkstra, Depth First Search, Breath First Search, Maze
-                                        </ul>
-                                    </a>
-                                </div>
-                                <div class="col-12 col-md-6">
-                                    <a href="https://jammping.surge.sh" target="_blank" class="projectLink" name="jammping">
-                                        <div class="projectTitle">JAMMMING</div>
-                                        <ul class="tagLists">
-                                            React, Spotify, API, Mern, MongoDB, ExpressJS, NodeJS, Scss, Css
-                                        </ul>
-                                    </a>
-                                </div>
-                                <div class="col-12 col-md-6">
-                                    <a href="./playground/theunderclass/index.html" target="_blank" class="projectLink" name="theunderclass">
-                                        <div class="projectTitle">THE UNDERCLASS</div>
-                                        <ul class="tagLists">
-                                            Html, Css, Javascript
-                                        </ul>
-                                    </a>
-                                </div>
-                                <div class="col-12 col-md-6">
-                                    <a href="./playground/stylingtag/index.html" target="_blank" class="projectLink" name="stylingtags">
-                                        <div class="projectTitle">STYLING TAGS</div>
-                                        <ul class="tagLists">
-                                            Html, Css, Javascript
-                                        </ul>
-                                    </a>
-                                </div>
-                                <div class="col-12 col-md-6">
-                                    <a href="./playground/matrix/index.html" target="_blank" class="projectLink" name="matrix">
-                                        <div class="projectTitle">MATRIX CALCULATOR</div>
-                                        <ul class="tagLists">
-                                            Python, Algorithm, Artificial intelligence, AI, PyScript
-                                        </ul>
-                                    </a>
-                                </div>
-                                <div class="col-12 col-md-6">
-                                    <a href="https://goaltofitapp.vercel.app" target="_blank" class="projectLink" name="goaltofit">
-                                        <div class="projectTitle">GOAL TO FIT : TRACKING FITNESS</div>
-                                        <ul class="tagLists">
-                                            Mern, MongoDB, ExpressJS, React, NodeJS, Scss, Css
-                                        </ul>
-                                    </a>
-                                </div>
-                                <div class="col-12 col-md-6">
-                                    <a href="./playground/pixelsart/index.html" target="_blank" class="projectLink" name="pixelsart">
-                                        <div class="projectTitle">DRAW PIXELS ART</div>
-                                        <ul class="tagLists">
-                                            Scss, css, Html, Javascript, canvas, pixels
-                                        </ul>
-                                    </a>
-                                </div>
-                                <div class="col-12 col-md-6">
-                                    <a href="javascript:void(0)" class="projectLink" name="iscoming"></a>
-                                </div>
-                            </div>
+                        <div class="col-12">
+                            <div class="row" id="projectItems"></div>
                         </div>
                     </div>
                 </div>
@@ -427,19 +112,53 @@
         </main>
         <div class="push"></div>
     </div>
-    <footer>
-        <div class="container">
-            <div class="row">
-                <div class="col-auto footer-copy">
-                    <p>All rights reserved &copy; Copy Right 2022 - Present : Prapas K</p>
-                </div>
-            </div>
-        </div>
-    </footer>
-    <script src="./src/scripts/scripts.js"></script>
-    <script src="./src/scripts/carousel.js"></script>
-    <script src="./src/scripts/sidemenu.js"></script>
-    <script src="./src/scripts/stylingtag.js"></script>
-    <script src="./src/scripts/totop.js"></script>
+    <footer id="footer"></footer>
+    
+    <script type="module">
+        import Footer from './src/scripts/Components/Footer.js';
+        import Sidemenu from './src/scripts/Components/Sidemenu.js';
+        import BlogItem from './src/scripts/Components/BlogItem.js';
+        import ProjectItem from './src/scripts/Components/ProjectItem.js';
+
+        const sidemenu = document.getElementById('sideMenu');
+        const footer = document.getElementById('footer');
+
+        async function fetchAndDisplayJSON(name){
+            try{
+                const response = await fetch(`./src/data/${name}.json`); // Change to your JSON file path
+                const jsonData = await response.json();
+                const elem = document.getElementById(name);
+                
+                jsonData.forEach(item => {
+                    if(name === 'blogItems'){
+                        elem.innerHTML += BlogItem(item);
+                    } else {
+                        elem.innerHTML += ProjectItem(item);
+                    }
+                });
+                return Promise.resolve();
+            } catch(error){
+                console.error('Error fetching JSON:', error);
+                return Promise.reject(error);
+            }
+        }
+        window.onload = () => {
+            const promise = ['blogItems', 'projectItems'].map(name => fetchAndDisplayJSON(name));
+            Promise.all(promise).then(() => {
+                new Promise((resolve, reject) => {
+                    const script = document.createElement('script');
+                    script.src = './src/scripts/stylingtag.js';
+                    script.defer = true;
+                    script.onload = resolve;
+                    script.onerror = reject;
+                    document.body.appendChild(script);
+                });
+            });
+        }
+        sidemenu.innerHTML = Sidemenu();
+        footer.innerHTML = Footer();
+    </script>
+    <script src="./src/scripts/sidemenu.js" defer></script>
+    <script src="./src/scripts/totop.js" defer></script>
 </body>
 </html>

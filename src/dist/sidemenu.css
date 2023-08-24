@@ -164,6 +164,10 @@
 #sideMenu .nav-side-menu .underlist .has-treeview .underlist .list-item .nav-icon {
   min-width: 25px;
 }
+#sideMenu .nav-side-menu .underlist .has-treeview .underlist .list-item .nav-icon img {
+  width: 17px;
+  height: 17px;
+}
 #sideMenu .nav-side-menu .underlist .has-treeview .underlist .list-item .nav-text {
   font-size: 0.8em;
 }

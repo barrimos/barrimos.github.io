@@ -164,6 +164,10 @@ $listActive--color: rgba(0, 78, 245, 0.719);
                         margin-left: 10px;
                         .nav-icon{
                             min-width: 25px;
+                            img{
+                                width: 17px;
+                                height: 17px;
+                            }
                         }
                         .nav-text{
                             font-size: 0.8em;

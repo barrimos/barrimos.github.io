@@ -3,8 +3,10 @@ const btnToggle = document.getElementById('btnToggle');
 const toggler = document.querySelector('.toggler');
 const sideDropdown = document.getElementsByClassName('btnDropmenu');
 const dropDown = document.getElementsByClassName('iconArrowdrop');
-const currentPage = window.location.pathname.substring(window.location.pathname.indexOf('/') + 1).split(/[.\/]/g)[0];
-
+const pathName = window.location.pathname.substring(window.location.pathname.indexOf('/') + 1).split(/[.\/]/g);
+const queryName = window.location.search.split('=')[1];
+const currentPage = pathName[0];
+const subPage = pathName[1];
 
 let touchX = 0;
 let deltaX = 0;
@@ -54,7 +56,7 @@ function swipeMenu(){
     if(window.innerWidth > 767){
         return;
     } else {
-        if(deltaX >= 100){
+        if(deltaX >= 200){
             sideMenu.style.left = '0';
         }
         if(deltaX < -100){
@@ -120,21 +122,27 @@ for(let i = 0; i < sideDropdown.length; i++){
     });
 }
 const curPage = (() => {
-    let activePage;
-    let linkIcon;
-    let linkText;
+    let activePage, linkIcon, linkText, treeView;
     if(currentPage === 'index' || currentPage.length === 0){
         activePage = document.getElementById('index');
         linkIcon = document.querySelector('[data-icon=index]');
         linkText = document.querySelector('[data-text=index]');
     } else if(currentPage === 'playground'){
         activePage = document.getElementById('zxsandbox');
-        linkIcon = document.querySelector(`[data-icon="zxsandbox"]`);
-        linkText = document.querySelector(`[data-text="zxsandbox"]`);
+        linkIcon = document.querySelector('[data-icon=zxsandbox]');
+        linkText = document.querySelector('[data-text=zxsandbox]');
+
+        treeView = document.querySelectorAll(`[data-page=${subPage}]`)[0].parentElement;
+        treeView.style.backgroundColor = 'rgba(0, 0, 0, .05)';
     } else {
         activePage = document.getElementById(currentPage);
         linkIcon = document.querySelector(`[data-icon=${currentPage}]`);
         linkText = document.querySelector(`[data-text=${currentPage}]`);
+
+        if(currentPage === 'hired'){
+            treeView = document.querySelectorAll(`[data-page=${queryName}]`)[0].parentElement;
+            treeView.style.backgroundColor = 'rgba(0, 0, 0, .05)';
+        }
     }
     activePage.classList.add('curpage')
     linkIcon.style.filter = 'invert(1)';
