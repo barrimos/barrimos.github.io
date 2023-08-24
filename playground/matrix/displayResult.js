@@ -182,6 +182,8 @@ const display = () => {
       }
     });
     mWrapper.setAttribute('data-result', mRegex);
+  } else if(method[0] === 'rank'){
+    mWrapper.setAttribute('data-result', JSON.stringify(matRes[0]));
   } else {
     mWrapper.setAttribute('data-result', JSON.stringify(matRes));
   }
