@@ -44,7 +44,7 @@
                                     <input type="checkbox" name="toggleBrightDark" class="toggleBrightDark" id="toggleBrightDark"></input>
                                     <div class="iconSwitchUI" id="iconSwitchUI">
                                         <span>
-                                            <svg viewBox="0 0 36 36" aria-hidden="true" width="30" height="30" id="svg">
+                                            <svg viewBox="0 0 36 36" aria-hidden="true" width="30" height="30" id="sunMoon">
                                                 <path id="sun"
                                                     d="
                                                     M28 18
@@ -73,7 +73,7 @@
                         <h1 class="head-title">Time Complexity</h1>
                         <a class="downloadBtn" href="./time_complexity.pdf" download><i class="fa-solid fa-download"></i> Download PDF</a>
                     </div>
-                    <span class="tagLists">Time complexity, Big-O notatino, Space complexity, Javascript</span>
+                    <span class="tagLists">Time complexity, Big-O notation, Space complexity, Javascript</span>
                     <h4 class="writer">Prapas K : 2023, 24 AUG</h4>
                     <div class="row justify-content-center">
                         <div class="infomation">
@@ -1951,34 +1951,6 @@ function nestedLinearLogarithmic(n){
         };
         MathJax.Hub.Queue(["Typeset", MathJax.Hub]);
     </script>
-    <script>
-        const btn = document.getElementById('toggleBrightDark');
-        const svg = document.getElementById('svg');
-
-        btn.addEventListener('click', e => {
-
-            if(!e.target.checked){
-                svg.classList.remove('active');
-                document.body.style.transition = 'ease-in-out .2s';
-                document.body.style.backgroundColor = '';
-                document.querySelector('#topNav-section').style.backgroundColor = 'hsl(0, 0%, 99%)';
-                document.querySelector('.topLogo').children[0].src = '../../src/img/icon/zmlogo-page-15.png';
-                document.querySelectorAll('.invert').forEach(elem => {
-                    elem.classList.remove('invert');
-                });
-            } else {
-                svg.classList.add('active');
-                document.body.style.transition = 'ease-in-out .2s';
-                document.body.style.backgroundColor = '#222';
-                document.querySelector('#topNav-section').style.backgroundColor = '#222';
-                document.querySelector('.topLogo').children[0].src = '../../src/img/icon/zmlogo-page-16.png';
-                ['.tablePOs', '.codePreview', '.head-title', '.writer', '.headline', '.paragraph', '.raw', '.quote', '.orderList', '.unorderList', '.math'].forEach(c => {
-                    document.querySelectorAll(c).forEach(elem => {
-                        elem.classList.add('invert');
-                    });
-                });
-            }
-        });
-    </script>
+    <script src="../../src/scripts/lightdark.js"></script>
 </body>
 </html>

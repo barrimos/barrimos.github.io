@@ -583,6 +583,9 @@ section{
         margin-left: 15px;
         margin-bottom: 15px;
         color: #333;
+        &.invert{
+            color: #ddd !important;
+        }
     }
 
     position: relative;
@@ -816,7 +819,7 @@ section{
         z-index: 9999;
     }
     .iconSwitchUI{
-        svg{
+        #sunMoon{
             top: 0;
             left: 0;
             &.active #sun{
@@ -828,12 +831,12 @@ section{
                 transform-origin: center center;
                 opacity: 0;
             }
+            #sun {
+                stroke-linecap: round;
+                transition: 0.3s;
+            }
         }
-    }
-    svg path {
-      stroke-linecap: round;
-      transition: 0.3s;
-    }
+    } 
 }
 
 footer{

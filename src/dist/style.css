@@ -527,6 +527,9 @@ section .section-head {
   margin-bottom: 15px;
   color: #333;
 }
+#blog-section .downloadBtn.invert {
+  color: #ddd !important;
+}
 #blog-section .head-title.invert, #blog-section .writer.invert {
   color: #ddd !important;
 }
@@ -714,20 +717,20 @@ section .section-head {
   opacity: 0;
   z-index: 9999;
 }
-.switchWrapper .iconSwitchUI svg {
+.switchWrapper .iconSwitchUI #sunMoon {
   top: 0;
   left: 0;
 }
-.switchWrapper .iconSwitchUI svg.active #sun {
+.switchWrapper .iconSwitchUI #sunMoon.active #sun {
   d: path("M18 18 A11 11 0 0 1 18 3 A15 15 0 0 0 3 18 A15 15 0 0 0 33 18 A11 11 0 0 1 18 18 Z");
 }
-.switchWrapper .iconSwitchUI svg.active #sunRay {
+.switchWrapper .iconSwitchUI #sunMoon.active #sunRay {
   transition: ease-in-out 0.3s;
   transform: scale(2);
   transform-origin: center center;
   opacity: 0;
 }
-.switchWrapper svg path {
+.switchWrapper .iconSwitchUI #sunMoon #sun {
   stroke-linecap: round;
   transition: 0.3s;
 }
