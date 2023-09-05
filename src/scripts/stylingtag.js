@@ -94,6 +94,7 @@ if(window.location.href.split('/')[4] === 'stylingtag'){
     const colorTagText = document.getElementById('colorTagText');
     const nameTag = document.getElementById('nameTag');
     const submitBtn = document.getElementById('submitBtn');
+    const selectElem = document.getElementById('colortag');
     let customName = '';
     let customColorBG = 'hsl(0, 0%, 0%)';
     let customColorText = 'hsl(0, 0%, 0%)';
@@ -247,6 +248,41 @@ if(window.location.href.split('/')[4] === 'stylingtag'){
 
         // Stying
         stylingTags();
+    });
+    
+    selectElem.addEventListener('click', () => {
+
+        async function fetchTagColorData(){
+            try{
+                const response = await fetch('../../src/data/stylingTagRGBHEXData.json');
+                const jsonData = await response.json();
+                
+                return Promise.resolve(jsonData);
+            } catch(err){
+                console.error(err);
+                throw Error(err);
+            }
+        }
+
+        fetchTagColorData().then(res => {
+            const keys = Object.keys(res);
+            
+            keys.forEach((k, i) => {
+                const optElem = document.createElement('option');
+                optElem.setAttribute('class', 'optColor');
+                optElem.setAttribute('value', k);
+                optElem.innerHTML = k;
+                selectElem.appendChild(optElem);
+            });
+            
+            selectElem.addEventListener('change', e => {
+                document.getElementById('colorTagBG').value = res[e.target.value].background;
+                document.getElementById('colorTagText').value = res[e.target.value].text;
+                L1 = res[e.target.value].background;
+                L2 = res[e.target.value].text;
+            });
+        });
+        
     });
 }
 

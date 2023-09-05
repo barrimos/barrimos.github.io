@@ -1,0 +1,54 @@
+{
+    "javascript" : {
+        "background" : "#FFECCC",
+        "text" : "#996100"
+    },
+    "html" : {
+        "background" : "#FFCCCC",
+        "text" : "#990000"
+    },
+    "css" : {
+        "background" : "#FFFECC",
+        "text" : "#999600"
+    },
+    "react" : {
+        "background" : "#CCF4FF",
+        "text" : "#007899"
+    },
+    "algorithm" : {
+        "background" : "#ECFFCC",
+        "text" : "#619900"
+    },
+    "mern" : {
+        "background" : "#CCEEFF",
+        "text" : "#006699"
+    },
+    "spotify" : {
+        "background" : "#CCFFDE",
+        "text" : "#009936"
+    },
+    "api" : {
+        "background" : "#EDCCFF",
+        "text" : "#630099"
+    },
+    "scss" : {
+        "background" : "#DFCCFF",
+        "text" : "#380099"
+    },
+    "mongodb" : {
+        "background" : "#D0FFCC",
+        "text" : "#0D9900"
+    },
+    "expressjs" : {
+        "background" : "#FFCCEB",
+        "text" : "#99005E"
+    },
+    "nodejs" : {
+        "background" : "#D2CCFF",
+        "text" : "#120099"
+    },
+    "sample" : {
+        "background" : "#FFECCC",
+        "text" : "#996100"
+    }
+}
