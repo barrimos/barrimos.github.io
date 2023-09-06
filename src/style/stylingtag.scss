@@ -9,6 +9,7 @@
     background-color: hsl(0, 0%, 95%);
     display: flex;
     justify-content: center;
+    align-items: center;
     padding: 20px;
     .box{
         display: flex;
@@ -19,7 +20,7 @@
             display: block;
             height: 400px;
             width: auto;
-            margin-top: 70px;
+            margin-top: 65px;
         }
         .leftbox{
             overflow-y: scroll;
@@ -70,9 +71,9 @@
         }
 
     }
-    // @media screen and (min-width: 576px){
-    //     height: 100vh;
-    // }
+    @media screen and (max-width: 576px){
+        align-items: flex-start;
+    }
 }
 .contrastRatio{
     position: absolute;

@@ -10,6 +10,7 @@
   background-color: #f2f2f2;
   display: flex;
   justify-content: center;
+  align-items: center;
   padding: 20px;
 }
 .containerStylingtag .box {
@@ -23,7 +24,7 @@
     display: block;
     height: 400px;
     width: auto;
-    margin-top: 70px;
+    margin-top: 65px;
   }
 }
 .containerStylingtag .box .leftbox {
@@ -73,6 +74,11 @@
 @media screen and (max-width: 492px) {
   .containerStylingtag .box .leftbox, .containerStylingtag .box .rightbox {
     height: 50%;
+  }
+}
+@media screen and (max-width: 576px) {
+  .containerStylingtag {
+    align-items: flex-start;
   }
 }
 
