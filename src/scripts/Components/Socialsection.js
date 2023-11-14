@@ -1,3 +1,7 @@
+/**
+ * DocsString
+ * @returns 
+ */
 const Socialsection = () => {
   return `<div class="container">
   <div class="row no-gutters">

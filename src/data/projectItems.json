@@ -1,5 +1,12 @@
 [
   {
+      "name": "iscoming",
+      "title": "Makhos Game",
+      "info": "A board game Thai checkers",
+      "tags": "Makhos, Thai, Checkers, Game, Javascript, Algorithm",
+      "link": "javascript:void(0)"
+  },
+  {
       "name": "maze",
       "title": "Maze Game",
       "info": "A puzzle game with backtracking algorithm",

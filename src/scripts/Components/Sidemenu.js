@@ -1,5 +1,11 @@
 import TopButton from "./TopButton.js";
 
+/**
+ * DocsString
+ * @param {*} backTo 
+ * @param {*} newRoot 
+ * @returns 
+ */
 const Sidemenu = (backTo = false, newRoot = '../src') => {
     let _ = './src';
     if(backTo){
@@ -108,6 +114,14 @@ const Sidemenu = (backTo = false, newRoot = '../src') => {
                           <img src="${_}/img/icon/algopuzzle.png" alt="Algo Game">
                       </div>
                       <span class="nav-text">ALGO GAME</span>
+                  </a>
+              </li>
+              <li class="list-item list-treeview">
+                  <a href="javascript:void(0)" class="nav-link" title="Makhos Thai Chekers Game" data-page="makhos">
+                      <div class="nav-icon">
+                          <img src="${_}/img/icon/makhos.png" alt="Makhos Thai Chekers Game">
+                      </div>
+                      <span class="nav-text">MAKHOS</span>
                   </a>
               </li>
           </ul>

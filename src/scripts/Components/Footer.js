@@ -1,4 +1,9 @@
 import Socialsection from "./Socialsection.js";
+
+/**
+ * DocsString
+ * @returns 
+ */
 const Footer = () => {
   return `<div class="container">
   <div class="row">

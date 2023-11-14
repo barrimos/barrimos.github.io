@@ -40,6 +40,13 @@
     --breakpoint-xl: 1200px;
     --breakpoint-xxl: 1400px;
 }
+input,
+textarea,
+button,
+select,
+a {
+    -webkit-tap-highlight-color: transparent;
+}
 body{
     font-family: 'Roboto', sans-serif;
 }

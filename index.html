@@ -133,7 +133,7 @@
                     if(name === 'blogItems'){
                         elem.innerHTML += BlogItem(item);
                     } else {
-                        elem.innerHTML += ProjectItem(item);
+                        elem.innerHTML += ProjectItem(item, false);
                     }
                 });
                 return Promise.resolve();

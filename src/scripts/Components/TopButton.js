@@ -1,3 +1,9 @@
+/**
+ * DocsString
+ * @param {*} strokeColor 
+ * @param {*} strokeWidth 
+ * @returns 
+ */
 const TopButton = (strokeColor = '#666', strokeWidth = 3) => {
   return `<div class="buttonToTop" id="buttonToTop" onclick="topFunction()">
   <input type="button" class="toTopBtn" id="toTopBtn">

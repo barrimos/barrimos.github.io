@@ -1,3 +1,8 @@
+/**
+ * DocsString
+ * @param {*} item 
+ * @returns 
+ */
 const BlogItem = item => {
   return `<div class="col-12 col-md-4 col-xl-3 mt-10">
   <div class="blog-item">
