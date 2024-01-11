@@ -374,14 +374,19 @@
 
     // If switch from table_area to table
     if(!Config[key_idx].isTableArea){
+      // If data is only whitespace
+      if (/^\s*$/g.test(table_area.value)) {
+        table_area.value = '';
+      }
       // If table_area have a data
       if(table_area.value !== ''){
         clearAndCreateTable(table, key_idx, JSON.parse(sessionStorage.getItem(Config[key_idx].id)))
 
         getCellData();
       } else {
-        Config[key_idx].oldRows = Default.oldRows;
-        Config[key_idx].oldCols = Default.oldCols;
+        clearCell(table, id);
+        // Config[key_idx].oldRows = Default.oldRows;
+        // Config[key_idx].oldCols = Default.oldCols;
       }
     }
 
@@ -607,13 +612,17 @@
         if(e.inputType === 'insertText' && e.data === ' ' && isTextDown === false){
           isTextDown = true;
         }
+        // Insert new line
+        if (e.inputType === 'insertLineBreak') {
+          isTextDown = true;
+        }
         // Copy paste data
         if(e.inputType === 'insertFromPaste' && e.data === null){
           rows = 0;
           cols = 0;
           isTextDown = true;
         }
-        // Delete oen or more or whitespace
+        // Delete one or more or whitespace
         if(e.inputType === 'deleteContentBackward' || e.inputType === 'deleteWordBackward' && e.data === null || /^\s*$/.test(e.target.value)){
           // Every delete will reset rows cols then counting again
           rows = 0;
