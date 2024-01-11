@@ -576,12 +576,14 @@
           i++;
         }
       } else {
+        let copyWhite = whiteCards.slice();
+        let copyblue = blueCards.slice();
         while(i < halfDeck){
           randomIndex = Math.floor(Math.random() * (halfDeck - i));
-          deck.push(whiteCards[randomIndex]);
-          deck.push(blueCards[randomIndex]);
-          whiteCards.splice(randomIndex, 1);
-          blueCards.splice(randomIndex, 1);
+          deck.push(copyWhite[randomIndex]);
+          deck.push(copyblue[randomIndex]);
+          copyWhite.splice(randomIndex, 1);
+          copyblue.splice(randomIndex, 1);
           i++;
         }
       }
