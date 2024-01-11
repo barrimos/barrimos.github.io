@@ -61,6 +61,14 @@ const Sidemenu = (backTo = false, newRoot = '../src') => {
                   </a>
               </li>
               <li class="list-item list-treeview">
+                  <a href="../../playground/textareaTo2Darray/index.html" class="nav-link" title="Conversion Textarea to 2 Dimensions array" data-page="textareaTo2Darray">
+                      <div class="nav-icon">
+                          <img src="${_}/img/icon/txt2arr.png" alt="Conversion Textarea to 2 Dimensions array">
+                      </div>
+                      <span class="nav-text">TXT TO 2D-ARRAY</span>
+                  </a>
+              </li>
+              <li class="list-item list-treeview">
                   <a href="../../playground/pixelsart/index.html" class="nav-link" title="Pixels art drawing" data-page="pixelsart">
                       <div class="nav-icon">
                           <img src="${_}/img/icon/pixelsart.png" alt="Pixels art drawing">

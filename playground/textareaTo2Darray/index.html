@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>textarea To 2D array</title>
+    <link rel="stylesheet" href="../../src/style/main.css">
+    <link rel="stylesheet" href="../../src/dist/textareaTo2Darray.css">
+    <link rel="stylesheet" href="../../src/dist/sidemenu.css">
+    <link rel="stylesheet" href="../../src/dist/totop.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/sweetalert2@11.10.2/dist/sweetalert2.min.css" rel="stylesheet">
+</head>
+<body>
+    <nav class="sideMenu noSelect" id="sideMenu"></nav>
+    <div id="content">
+        <div class="wrapper latest" wrapper-id="A">
+            <textarea name="txtToarray" data-area="txtToarray" data-id="A" cols="30" rows="10" placeholder="0 0 0&#10;1 1 1&#10;2 2 2"></textarea>
+            <div class="operation">
+                <span class="text-id">result A</span>
+                <button name="copy" class="btn" hdid="A">Copy</button>
+                <div class="result" id="A"></div>
+            </div>
+        </div>
+    </div>
+    <button id="addArea">&plus;</button>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.10.2/dist/sweetalert2.all.min.js"></script>
+    <script src="../../src/scripts/textareaTo2Darray.js"></script>
+    <script>
+        const content = document.querySelector('#content');
+        const addArea = document.querySelector('#addArea');
+        let copyBtn = document.querySelectorAll('button[name=copy]');
+        let currentCharId = Array.from(document.querySelectorAll('[data-id]')).slice(-1)[0].getAttribute('data-id').charCodeAt();
+        
+        const copyResult = newElem => {
+            newElem.forEach(elem => {
+                elem.addEventListener('click', e => {
+                    let resultText = document.querySelector(`#${e.target.getAttribute('hdid')}`).innerText;
+                    if (!resultText || /^\s*$/g.test(resultText) || resultText === '[]') {
+                        Swal.fire('Nothing to copy');
+                        return;
+                    }
+
+                    // Copy the text inside the text field
+                    navigator.clipboard.writeText(document.querySelector(`#${e.target.getAttribute('hdid')}`).innerText);
+                    Swal.fire('Copy result completed');
+                });
+            });
+        }
+
+        const whereLatest = newElem => {
+            document.querySelector('.latest').classList.remove('latest');
+            newElem.classList.add('latest');
+        }
+
+        addArea.addEventListener('click', e => {
+            e.preventDefault();
+            const id = String.fromCharCode(++currentCharId);
+            const textAreaElem = `<div class="wrapper" wrapper-id="${id}">
+                <textarea name="txtToarray" data-area="txtToarray" data-id="${id}" cols="30" rows="10"  placeholder="0 0 0&#10;1 1 1&#10;2 2 2"></textarea>
+                <div class="operation">
+                    <span class="text-id">result ${id}</span>
+                    <button name="copy" class="btn" hdid=${id}>Copy</button>
+                    <div class="result" id="${id}"></div>
+                </div>
+            </div>`
+
+                
+            content.innerHTML += textAreaElem;
+            let newAddTextArea = document.querySelectorAll('[data-area=txtToarray]');
+            copyBtn = document.querySelectorAll('button[name=copy]');
+            
+            window.scrollTo(0, document.body.scrollHeight || document.documentElement.scrollHeight);
+            
+            getTextAreaData(newAddTextArea);
+            whereLatest(document.querySelector(`[wrapper-id=${id}]`));
+            copyResult(copyBtn);
+        });
+
+        copyResult(copyBtn); // call initial
+
+    </script>
+    <script type="module">
+        import Sidemenu from '../../src/scripts/Components/Sidemenu.js';
+        const sidemenu = document.getElementById('sideMenu');
+        sidemenu.innerHTML = Sidemenu(true, '../../src');
+    </script>
+    <script src="../../src/scripts/sidemenu.js" defer></script>
+    <script src="../../src/scripts/totop.js" defer></script>
+</body>
+</html>
