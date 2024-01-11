@@ -8,6 +8,9 @@ let isTextDown = false;
 const getTextAreaData = (tableArea) => {
   Array.from(tableArea ?? TEXTAREAS).forEach(area => {
     area.addEventListener('input', e => {
+      // add value into innerText. If not every add new textarea old data will remove
+      e.target.innerText += e.target.value;
+
       // If insert between number or split from one number with 2 digits into 2 numbers one digit each 
       if (e.inputType === 'insertText' && e.data === ' ' && isTextDown === false) {
         isTextDown = true;
