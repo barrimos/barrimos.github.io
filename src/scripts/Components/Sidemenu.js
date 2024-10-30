@@ -160,7 +160,7 @@ const Sidemenu = (backTo = false, newRoot = '../src') => {
           </a>
           <ul class="underlist">
               <li class="list-item list-treeview">
-                  <a href="${_}/download/Prapas - Resume_EN_2023.pdf" title="Download Resume" class="nav-link dlbtn-wraper" download>
+                  <a href="${_}/download/Prapas-Resume_EN.pdf" title="Download Resume" class="nav-link dlbtn-wraper" download>
                       <div class="nav-icon">
                           <img src="${_}/img/icon/zmlogo-page-03.png" alt="Resume EN">
                       </div>
@@ -168,7 +168,7 @@ const Sidemenu = (backTo = false, newRoot = '../src') => {
                   </a>
               </li>
               <li class="list-item list-treeview">
-                  <a href="${_}/download/Prapas - Resume_TH_2023.pdf" title="Download Resume" class="nav-link dlbtn-wraper" download>
+                  <a href="${_}/download/Prapas-Resume_TH.pdf" title="Download Resume" class="nav-link dlbtn-wraper" download>
                       <div class="nav-icon">
                           <img src="${_}/img/icon/zmlogo-page-03.png" alt="Resume TH">
                       </div>
