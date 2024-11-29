@@ -1,0 +1,369 @@
+*, *::after, *::before {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+body {
+  height: 100svh;
+  padding: 15px;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.wrapper {
+  margin: 0 80px;
+}
+.wrapper .container button {
+  cursor: pointer;
+}
+.wrapper .container #itemTodo {
+  width: calc(100% - 50px);
+  padding: 10px;
+  border: 0.5px solid #e6e6e6;
+  transition: box-shadow ease-in-out 0.2s;
+  border-radius: 5px;
+}
+.wrapper .container #itemTodo:focus {
+  outline: none;
+  box-shadow: inset 0 0 0.5px 1px #4d4d4d;
+}
+.wrapper .container #addBtn {
+  background-color: #051885;
+  font-size: 0.8em;
+  padding: 5px 10px;
+  height: 35px;
+  font-weight: bold;
+  color: white;
+  border: none;
+  border-radius: 3px;
+  margin-left: 10px;
+}
+.wrapper .container #errorInp {
+  font-size: 0.8em;
+  color: #ff4242;
+  margin: 3px 0;
+  height: 20px;
+  width: 100%;
+  position: absolute;
+  bottom: -25px;
+  left: 0;
+}
+.wrapper .container .controller {
+  margin-top: 30px;
+}
+.wrapper .container .controller .controlListsBtn {
+  font-size: 1em;
+  text-align: center;
+  background-color: whitesmoke;
+  padding: 5px 10px;
+  width: 80px;
+  height: 40px;
+  border: none;
+  color: #353535;
+  border-radius: 3px;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+.wrapper .container .controller .controlListsBtn:nth-child(n+2) {
+  margin-left: 10px;
+}
+.wrapper .container .controller .controlListsBtn div {
+  display: inline-block;
+}
+.wrapper .container .controller .controlListsBtn span {
+  font-size: 0.8em;
+}
+@media screen and (min-width: 768px) {
+  .wrapper .container .controller .controlListsBtn#showArchiveBtn {
+    display: none;
+  }
+}
+@media screen and (min-width: 576px) {
+  .wrapper .container .controller .controlListsBtn {
+    width: 90px;
+  }
+  .wrapper .container .controller .controlListsBtn div {
+    display: block;
+  }
+}
+@media screen and (min-width: 576px) {
+  .wrapper .container .controller {
+    justify-content: flex-start;
+  }
+}
+.wrapper .container .ulist {
+  min-width: 260px;
+  max-height: 500px;
+  height: 320px;
+  overflow-y: scroll;
+}
+.wrapper .container .ulist::-webkit-scrollbar {
+  display: none;
+}
+.wrapper .container .ulist .mty {
+  background-color: whitesmoke;
+  border-radius: 5px;
+  padding: 5px;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #b3b3b3;
+  font-weight: 500;
+  font-size: 1.2em;
+}
+.wrapper .container .ulist li {
+  padding: 10px;
+}
+.wrapper .container .ulist li:nth-child(odd) {
+  background-color: whitesmoke;
+}
+.wrapper .container .ulist .listTodo:nth-child(n+2) {
+  margin-top: 2px;
+}
+.wrapper .container .ulist .listTodo.done {
+  background-color: #7088ff;
+}
+.wrapper .container .ulist .listTodo.done .textList, .wrapper .container .ulist .listTodo.done .timeCreateList {
+  color: white;
+}
+.wrapper .container .ulist .listTodo.done .removeBtn {
+  background-color: white;
+}
+.wrapper .container .ulist .listTodo.latest {
+  animation: latest 0.5s ease-in-out;
+}
+@keyframes latest {
+  0% {
+    background-color: #00ffc8;
+  }
+  100% {
+    background-color: whitesmoke;
+  }
+}
+.wrapper .container .ulist .listTodo:not(.done).hover:hover {
+  background-color: rgba(179, 179, 179, 0.2);
+}
+.wrapper .container .ulist .listTodo .sv045g2 {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.wrapper .container .ulist .listTodo .checkListBox {
+  width: 20px;
+  height: 20px;
+}
+.wrapper .container .ulist .listTodo .textList {
+  text-align: center;
+  width: 100%;
+}
+.wrapper .container .ulist .listTodo .removeBtn {
+  font-size: 0.7em;
+  padding: 5px 10px;
+  background-color: #dedede;
+  color: white;
+  border-radius: 3px;
+  border: none;
+}
+.wrapper .container .ulist .listTodo .timeCreateList {
+  font-size: 0.75em;
+  color: gray;
+}
+@media screen and (min-width: 576px) {
+  .wrapper .container .ulist {
+    height: 400px;
+  }
+}
+.wrapper .container table {
+  background-color: white;
+  /* Ensures sticky header is visible */
+}
+.wrapper .container td, .wrapper .container th {
+  border: none;
+  border: 0.5px solid #cccccc;
+  padding: 5px;
+  height: 45px;
+}
+.wrapper .container #archiveTable {
+  position: absolute;
+  width: 100%;
+  top: 0;
+  left: 0;
+  padding: 0 15px;
+  display: none;
+}
+.wrapper .container #archiveTable.bg::after {
+  display: none;
+}
+.wrapper .container #archiveTable.active {
+  display: block;
+}
+.wrapper .container #archiveTable.bg.active::after {
+  display: block;
+  content: "";
+  position: absolute;
+  clear: both;
+  width: 100%;
+  height: 100svh;
+  background-color: rgba(0, 0, 0, 0.6);
+  top: 0;
+  left: 0;
+  z-index: -1;
+}
+@media screen and (max-width: 768px) {
+  .wrapper .container #archiveTable {
+    position: fixed;
+    padding: 80px;
+  }
+}
+@media screen and (max-width: 576px) {
+  .wrapper .container #archiveTable {
+    padding: 30px;
+  }
+}
+.wrapper .container #archiveTable .wrapperRelative {
+  position: relative;
+  z-index: 2;
+  height: 520px;
+  overflow-y: scroll;
+}
+.wrapper .container #archiveTable .wrapperRelative::-webkit-scrollbar {
+  display: none;
+}
+@media screen and (max-width: 576px) {
+  .wrapper .container #archiveTable .wrapperRelative {
+    height: 480px;
+  }
+}
+.wrapper .container #archiveTable .wrapperRelative .tableHead {
+  position: sticky;
+  top: 0;
+  z-index: 2;
+  background-color: white;
+}
+.wrapper .container #archiveTable .wrapperRelative .tableHead > div {
+  border: 0.5px solid #cccccc;
+  height: 45px;
+}
+.wrapper .container #archiveTable .wrapperRelative .tableHead > div ~ div {
+  border-top: transparent;
+}
+.wrapper .container #archiveTable .wrapperRelative .tableHead > div:last-child {
+  height: 100%;
+}
+.wrapper .container #archiveTable .wrapperRelative .tableHead #re {
+  font-size: 0.85em;
+}
+.wrapper .container #archiveTable .wrapperRelative .tableHead #re div {
+  padding: 5px 8px;
+  width: 100%;
+}
+.wrapper .container #archiveTable .wrapperRelative .tableHead #re div ~ div {
+  border-left: 0.5px solid #cccccc;
+}
+.wrapper .container #archiveTable .wrapperRelative .tableHead .controlTableTaskBtn {
+  width: 70px;
+  height: 30px;
+  border: none;
+  background-color: whitesmoke;
+  border-radius: 3px;
+}
+.wrapper .container #archiveTable .wrapperRelative .tableHead #sortTableTaskBtn {
+  width: 120px;
+  background-color: #237b3d;
+  color: white;
+}
+.wrapper .container #archiveTable .wrapperRelative .tableHead #closeAchiveBtn {
+  background-color: transparent;
+  border: none;
+  float: right;
+  font-size: 1.4em;
+}
+.wrapper .container #archiveTable .wrapperRelative #tableTasks, .wrapper .container #archiveTable .wrapperRelative #reloadTableTask {
+  position: absolute;
+  left: 0;
+  width: 100%;
+}
+.wrapper .container #archiveTable .wrapperRelative #reloadTableTask {
+  top: 117px;
+  height: 350px;
+  background-color: white;
+  display: none;
+  border: 0.5px solid #cccccc;
+}
+.wrapper .container #archiveTable .wrapperRelative #reloadTableTask.open {
+  z-index: 3;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.wrapper .container #archiveTable .wrapperRelative #reloadTableTask #reload {
+  position: absolute;
+  top: calc(50% - 40px);
+  width: 30px;
+  height: 30px;
+  border: 6px solid #b5b5b5;
+}
+.wrapper .container #archiveTable .wrapperRelative #reloadTableTask #reload::after {
+  position: absolute;
+  display: flex;
+  clear: both;
+  content: "";
+  width: 6px;
+  height: 6px;
+  top: -6px;
+  left: -6px;
+  background-color: black;
+  z-index: 2;
+}
+.wrapper .container #archiveTable .wrapperRelative #reloadTableTask #reload.ing::after {
+  animation: reloading 2s ease-in-out;
+}
+@keyframes reloading {
+  0% {
+    top: -6px;
+    left: -6px;
+  }
+  25% {
+    top: -6px;
+    left: 18px;
+  }
+  50% {
+    top: 18px;
+    left: 18px;
+  }
+  75% {
+    top: 18px;
+    left: -6px;
+  }
+  100% {
+    top: -6px;
+    left: -6px;
+  }
+}
+.wrapper .container #archiveTable .wrapperRelative #tableTasks {
+  margin-top: -1px;
+  margin-bottom: 20px;
+  min-width: 100%;
+  max-height: 320px;
+  display: table;
+}
+.wrapper .container #archiveTable .wrapperRelative #tableTasks tr td {
+  width: 33.33%;
+  height: 45px;
+  padding: 5px;
+  font-size: 0.8em;
+  margin: 0;
+}
+.wrapper .container #archiveTable .wrapperRelative #tableTasks tr[data-tid] td {
+  max-width: 33.33%;
+  min-width: 33.33%;
+  width: 33.33%;
+  word-break: break-all;
+}
+@media screen and (max-width: 576px) {
+  .wrapper {
+    margin: 0;
+  }
+}

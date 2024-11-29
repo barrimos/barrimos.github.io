@@ -1,0 +1,369 @@
+*, *::after, *::before{
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+}
+body{
+    height: 100svh;
+    padding: 15px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+.wrapper{
+    margin: 0 80px;
+    .container{
+        button{
+            cursor: pointer;
+        }
+        #itemTodo{
+            width: calc(100% - 50px);
+            padding: 10px;
+            border: .5px solid hsl(0, 0%, 90%);
+            transition: box-shadow ease-in-out .2s;
+            border-radius: 5px;
+            &:focus{
+                outline: none;
+                box-shadow: inset 0 0 .5px 1px hsl(0, 0%, 30%);
+            }
+        }
+        #addBtn{
+            background-color: hsl(231, 93%, 27%);
+            font-size: .8em;
+            padding: 5px 10px;
+            height: 35px;
+            font-weight: bold;
+            color: hsl(0, 0%, 100%);
+            border: none;
+            border-radius: 3px;
+            margin-left: 10px;
+        }
+        #errorInp{
+            font-size: .8em;
+            color: hsl(0, 100%, 63%);
+            margin: 3px 0;
+            height: 20px;
+            width: 100%;
+            position: absolute;
+            bottom: -25px;
+            left: 0;
+        }
+        .controller{
+            margin-top: 30px;
+            .controlListsBtn{
+                font-size: 1em;
+                text-align: center;
+                background-color: hsl(0, 0%, 96%);
+                padding: 5px 10px;
+                width: 80px;
+                height: 40px;
+                border: none;
+                color: rgb(53, 53, 53);
+                border-radius: 3px;
+                display: flex;
+                justify-content: space-around;
+                align-items: center;
+                &:nth-child(n + 2){
+                    margin-left: 10px;
+                }
+                div{
+                    display: inline-block;
+                }
+                span{
+                    font-size: .8em;
+                }
+                @media screen and(min-width: 768px) {
+                    &#showArchiveBtn{
+                        display: none;
+                    }
+                }
+                @media screen and(min-width: 576px) {
+                    width: 90px;
+                    div{
+                        display: block;
+                    }
+                }
+            }
+            @media screen and(min-width: 576px) {
+                justify-content: flex-start;
+            }
+        }
+        .ulist{
+            min-width: 260px;
+            max-height: 500px;
+            height: 320px;
+            overflow-y: scroll;
+            &::-webkit-scrollbar{
+                display: none;
+            }
+            .mty{
+                background-color:hsl(0, 0%, 96%);
+                border-radius: 5px;
+                padding: 5px;
+                height: 100%;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                color: hsl(0, 0%, 70%);
+                font-weight: 500;
+                font-size: 1.2em;
+            }
+            li{
+                padding: 10px;
+                &:nth-child(odd){
+                    background-color: hsl(0, 0%, 96%);
+                }
+            }
+            .listTodo{
+                &:nth-child(n + 2) {
+                    margin-top: 2px;
+                }
+                &.done{
+                    background-color: hsl(230, 100%, 72%);
+                    .textList, .timeCreateList{
+                        color: white;
+                    }
+                    .removeBtn{
+                        background-color: white;
+                    }
+                }
+                &.latest{
+                    animation: latest .5s ease-in-out;
+                }
+                @keyframes latest {
+                    0%{
+                        background-color: hsl(167, 100%, 50%);
+                    } 100% {
+                        background-color: hsl(0, 0%, 96%);
+                    }
+                }
+                &:not(.done).hover{
+                    &:hover{
+                        background-color: hsla(0, 0%, 70%, 0.2);
+                    }
+                }
+                .sv045g2{
+                    display: flex;
+                    justify-content: space-between;
+                    align-items: center;
+                }
+                .checkListBox{
+                    width: 20px;
+                    height: 20px;
+                }
+                .textList{
+                    text-align: center;
+                    width: 100%;
+                }
+                .removeBtn{
+                    font-size: .7em;
+                    padding: 5px 10px;
+                    background-color: hsl(0, 0%, 87%);
+                    color: white;
+                    border-radius: 3px;
+                    border: none;
+                }
+                .timeCreateList{
+                    font-size: .75em;
+                    color: hsl(0, 0%, 50%);
+                }
+            }
+            @media screen and(min-width: 576px) {
+                height: 400px;
+            }
+        }
+        table{
+            background-color: white; /* Ensures sticky header is visible */
+        }
+        td, th{
+            border: none;
+            border: .5px solid hsl(0, 0%, 80%);
+            padding: 5px;
+            height: 45px;
+        }
+        #archiveTable{
+            position: absolute;
+            width: 100%;
+            top: 0;
+            left: 0;
+            padding: 0 15px;
+            display: none;
+            &.bg::after{
+                display: none;
+            }
+            &.active{
+                display: block;
+            }
+            &.bg.active{
+                &::after{
+                    display: block;
+                    content: '';
+                    position: absolute;
+                    clear: both;
+                    width: 100%;
+                    height: 100svh;
+                    background-color: hsla(0, 0%, 0%, 0.6);
+                    top: 0;
+                    left: 0;
+                    z-index: -1;
+                }
+            }
+            
+            @media screen and(max-width: 768px) {
+                position: fixed;
+                padding: 80px;
+            }
+            @media screen and(max-width: 576px) {
+                padding: 30px;
+            }
+            .wrapperRelative{
+                position: relative;
+                z-index: 2;
+                height: 520px;
+                overflow-y: scroll;
+                &::-webkit-scrollbar{
+                    display: none;
+                }
+                @media screen and(max-width: 576px) {
+                    height: 480px;
+                }
+                .tableHead{
+                    position: sticky;
+                    top: 0;
+                    z-index: 2;
+                    background-color: white;
+                    > div{
+                        border: .5px solid hsl(0, 0%, 80%);
+                        height: 45px;
+                        ~ div {
+                            border-top: transparent;
+                        }
+                        &:last-child{
+                            height: 100%
+                        }
+                    }
+                    #re{
+                        font-size: .85em;
+                        div{
+                            padding: 5px 8px;
+                            width: 100%;
+                            ~ div{
+                                border-left: .5px solid hsl(0, 0%, 80%);
+                            }
+                        }
+                    }
+                    .controlTableTaskBtn{
+                        width: 70px;
+                        height: 30px;
+                        border: none;
+                        background-color: hsl(0, 0%, 96%);
+                        border-radius: 3px;
+                    }
+                    #sortTableTaskBtn{
+                        width: 120px;
+                        background-color: hsl(138, 56%, 31%);
+                        color: white;
+                    }
+                    #clearTableTaskBtn{
+    
+                    }
+                    #closeAchiveBtn{
+                        background-color: transparent;
+                        border: none;
+                        float: right;
+                        font-size: 1.4em;
+                    }
+                }
+                #tableTasks, #reloadTableTask{
+                    position: absolute;
+                    left: 0;
+                    width: 100%;
+                }
+                #reloadTableTask{
+                    top: 117px;
+                    height: 350px;
+                    background-color: white;
+                    display: none;
+                    border: .5px solid hsl(0, 0%, 80%);
+                    &.open{
+                        z-index: 3;
+                        display: flex;
+                        justify-content: center;
+                        align-items: center;
+                    }
+                    #reload{
+                        position: absolute;
+                        top: calc(50% - 40px);
+                        width: 30px;
+                        height: 30px;
+                        border: 6px solid hsl(0, 0%, 71%);
+                        &::after{
+                            position: absolute;
+                            display: flex;
+                            clear: both;
+                            content: '';
+                            width: 6px;
+                            height: 6px;
+                            top: -6px;
+                            left: -6px;
+                            background-color: black;
+                            z-index: 2;
+                        }
+                        &.ing{
+                            &::after{
+                                animation: reloading 2s ease-in-out;
+                            }
+                            @keyframes reloading {
+                                0%{
+                                    top: -6px;
+                                    left: -6px;
+                                }
+                                25%{
+                                    top: -6px;
+                                    left: 18px;
+                                }
+                                50%{
+                                    top: 18px;
+                                    left: 18px;
+                                }
+                                75%{
+                                    top: 18px;
+                                    left: -6px;
+                                }
+                                100%{
+                                    top: -6px;
+                                    left: -6px;
+                                }
+                            }
+                        }
+                    }
+                }
+                #tableTasks{
+                    margin-top: -1px;
+                    margin-bottom: 20px;
+                    min-width: 100%;
+                    max-height: 320px;
+                    display: table;
+                    tr{
+                        td{
+                            width: 33.33%;
+                            height: 45px;
+                            padding: 5px;
+                            font-size: .8em;
+                            margin: 0;
+                        }
+                        &[data-tid]{
+                            td{
+                                max-width: 33.33%;
+                                min-width: 33.33%;
+                                width: 33.33%;
+                                word-break: break-all;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+    @media screen and(max-width: 576px) {
+        margin: 0;
+    }
+}

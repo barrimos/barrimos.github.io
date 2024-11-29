@@ -48,5 +48,11 @@
       "title": "Algo Game",
       "info": "Arithmetic puzzle card game",
       "tags": "Html, Css, Javascript, Scss, Game, Puzzle, Arithmetic, Cards, Math"
+  },
+  {
+      "name": "todolists",
+      "title": "To-Do List",
+      "info": "Don't miss a thing",
+      "tags": "Html, Css, Javascript, Scss, To-Do"
   }
 ]

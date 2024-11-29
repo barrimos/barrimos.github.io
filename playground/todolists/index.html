@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>To-Do</title>
+    
+    <!-- Main -->
+    <link rel="stylesheet" href="../../src/style/main.css">
+    <link rel="stylesheet" href="../../src/dist/sidemenu.css">
+    <link rel="stylesheet" href="../../src/dist/totop.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
+    <!-- To-Do -->
+    <link rel="stylesheet" href="../../src/dist/todo.css">
+
+    <!-- Utils -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+    <!-- Font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Darumadrop+One&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Zen+Kurenaido&display=swap" rel="stylesheet">
+</head>
+<body>
+    <nav class="sideMenu noSelect" id="sideMenu"></nav>
+    <div class="wrapper">
+        <div class="container">
+            <div class="d-flex align-items-baseline mb-20">
+                <h2>To-Do lists</h2>
+                <small class="ml-10">Don't miss a thing</small>
+            </div>
+            <div class="row">
+                <div class="col-12 col-md-7 col-lg-8 col-xl-9">
+                    <div class="d-flex align-items-center w-100 posRe">
+                        <input type="text" name="itemTodo" id="itemTodo" placeholder="Max 20 characters, Max 20 Tasks" autofocus autocomplete="off">
+                        <button type="submit" name="addBtn" id="addBtn">Add</button>
+                        <div id="errorInp"></div>
+                    </div>
+                    <div class="controller w-100 d-flex justify-content-between align-items-center mb-20">
+                        <button type="button" name="controlSaveListsBtn" class="controlListsBtn" id="saveListsBtn">
+                            <div>💾</div>
+                            <span>Save</span>
+                        </button>
+                        <button type="reset" name="controlClearListsBtn" class="controlListsBtn" id="clearListsBtn">
+                            <div>❌</div>
+                            <span>Clear</span>
+                        </button>
+                        <button type="button" name="controlShowArchive" class="controlListsBtn d-block d-md-none" id="showArchiveBtn">
+                            <div>📁</div>
+                            <span>Open</span>
+                        </button>
+                    </div>
+                    <ul class="ulist">
+                        <div class="mty">Empty list</div>
+                    </ul>
+                </div>
+                <div class="col-md-5 col-lg-4 col-xl-3">
+                    <div id="archiveTable">
+                        <div class="wrapperRelative">
+                            <div class="tableHead">
+                                <div class="p-10 d-flex justify-content-between align-items-center">
+                                    <b>Archive <span id="today"></span></b>
+                                    <button type="button" name="closeAchiveBtn" class="d-md-none" id="closeAchiveBtn">⨯</button>
+                                </div>
+                                <div class="p-10 d-flex justify-content-between align-items-center">
+                                    <button type="button" name="sortTableTaskBtn" class="controlTableTaskBtn" id="sortTableTaskBtn">⬇⬆ Sort</button>
+                                    <button type="reset" name="clearTableTaskBtn" class="controlTableTaskBtn" id="clearTableTaskBtn">Clear</button>
+                                </div>
+                                <div id="re" class="d-flex justify-content-between align-items-center">
+                                    <div>Task</div>
+                                    <div>Created</div>
+                                    <div>Done</div>
+                                </div>
+                            </div>
+                            <table id="tableTasks">
+                                <tbody id="tableTasksBody"></tbody>
+                            </table>
+                            <div id="reloadTableTask">
+                                <div id="reload"></div>
+                                <span>Reloading ...</span>    
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script type="module">
+        import Sidemenu from '../../src/scripts/Components/Sidemenu.js';
+        const sidemenu = document.getElementById('sideMenu');
+        sidemenu.innerHTML = Sidemenu(true, '../../src');
+    </script>
+    <script src="../../src/scripts/sidemenu.js" defer></script>
+    <script src="../../src/scripts/totop.js" defer></script>
+    <script type="module" src="../../src/scripts/todolists.js" defer></script>
+</body>
+</html>
