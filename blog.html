@@ -15,23 +15,11 @@
     <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
 </head>
 <body>
-    <div class="wrapper">
-        <nav class="sideMenu noSelect" id="sideMenu"></nav>
-        <main class="main">
-            <div class="topNav-section" id="topNav-section">
-                <div class="container">
-                    <div class="row">
-                        <div class="col-12">
-                            <div class="nav-menu">
-                                <div class="topLogo">
-                                    <img src="./src/img/icon/zmlogo-page-15.png" alt="logo zixma">
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <!-- start here -->
+    <script type="module">
+        import listSuggestion from './src/scripts/Components/listSuggestion.js';
+        import layout from './src/scripts/Components/layout.js'
+
+        const children = `
             <section class="topic-section" id="topic-section">
                 <div class="container">
                     <div class="row">
@@ -49,80 +37,35 @@
                                 </a>
                             </div>
                             <div class="control-topic d-flex justify-content-center align-items-center w-100">
-                                <button type="button" name="prev" class="btn-control-topic prev" disabled>&leftarrow; Previous</button>
+                                <button type="button" name="prev" class="btn-control-topic prev" disabled>&LeftTriangle;</button>
                                 <button type="button" name="pagination" class="btn-control-topic page active" value="1">1</button>
-                                <button type="button" name="next" class="btn-control-topic next" disabled>Next &rightarrow;</button>
+                                <button type="button" name="next" class="btn-control-topic next" disabled>&RightTriangle;</button>
                             </div>
                         </article>
                         <aside class="col-12 col-md-3">
                             <div class="suggestion-aside">
                                 <h4>Suggestion</h4>
-                                <div class="row no-gutters">
-                                    <div class="col-6 col-md-12">
-                                        <a href="./playground/maze/index.html" target="_blank" class="project-link">
-                                            <img src="./src/img/cover/maze.jpg" class="project-image" alt="maze">
-                                        </a>
-                                    </div>
-                                    <div class="col-6 col-md-12">
-                                        <a href="https://jammping.surge.sh" target="_blank" class="project-link">
-                                            <img src="./src/img/cover/jammping.jpg" class="project-image" alt="jammping">
-                                        </a>
-                                    </div>
-                                    <div class="col-6 col-md-12">
-                                        <a href="./playground/theunderclass/index.html" target="_blank" class="project-link">
-                                            <img src="./src/img/cover/theunderclass.jpg" class="project-image" alt="theunderclass">
-                                        </a>
-                                    </div>
-                                    <div class="col-6 col-md-12">
-                                        <a href="./playground/stylingtag/index.html" target="_blank" class="project-link">
-                                            <img src="./src/img/cover/stylingtags.jpg" class="project-image" alt="stylingtags">
-                                        </a>
-                                    </div>
-                                    <div class="col-6 col-md-12">
-                                        <a href="./playground/matrix/index.html" target="_blank" class="project-link">
-                                            <img src="./src/img/cover/matrix.jpg" class="project-image" alt="matrix">
-                                        </a>
-                                    </div>
-                                    <div class="col-6 col-md-12">
-                                        <a href="https://goaltofitapp.vercel.app" target="_blank" class="project-link">
-                                            <img src="./src/img/cover/goaltofit.jpg" class="project-image" alt="goaltofit">
-                                        </a>
-                                    </div>
-                                    <div class="col-6 col-md-12">
-                                        <a href="./playground/pixelsart/index.html" target="_blank" class="project-link">
-                                            <img src="./src/img/cover/pixelsart.jpg" class="project-image" alt="pixelsart">
-                                        </a>
-                                    </div>
-                                    <div class="col-6 col-md-12">
-                                        <a href="./playground/algopuzzle/index.html" target="_blank" class="project-link">
-                                            <img src="./src/img/cover/algopuzzle.jpg" class="project-image" alt="algopuzzle">
-                                        </a>
-                                    </div>
-                                </div>
-
-
-
-
-
-
-
-
+                                <div class="row no-gutters" id="listsuggestion"></div>
                             </div>
                         </aside>
                     </div>
                 </div>
-            </section>
-        </main>
-        <div class="push"></div>
-    </div>
-    <footer id="footer"></footer>
-    <script type="module">
-        import Footer from './src/scripts/Components/Footer.js';
-        import Sidemenu from './src/scripts/Components/Sidemenu.js';
-        const sidemenu = document.getElementById('sideMenu');
-        const footer = document.getElementById('footer');
-        sidemenu.innerHTML = Sidemenu();
-        footer.innerHTML = Footer();
+            </section>`
+        layout(children)
+            .then(html => {
+                document.body.innerHTML += html
+            })
+            .then(async res => {
+                sidemenu()
+                const response = await fetch(`./src/data/projectItems.json`)
+                const projects = await response.json()
+                let html = ''
+                projects.forEach(project => {
+                    html += listSuggestion(project)
+                })
+                document.querySelector('#listsuggestion').innerHTML += html
+            })
+
     </script>
     <script src="./src/scripts/sidemenu.js" defer></script>
     <script src="./src/scripts/totop.js" defer></script>

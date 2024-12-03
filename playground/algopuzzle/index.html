@@ -144,7 +144,6 @@
     </div>
   </div>
   <!-- <script src="./index.js"></script> -->
-  <script src="../../src/scripts/game/AlgoPuzzle.js"></script>
   <script>
     if('ontouchstart' in document.documentElement || navigator.maxTouchPoints > 0){
       window.onload = () => {
@@ -153,12 +152,18 @@
       }
     }
   </script>
-  <script type="module">
-    import Sidemenu from '../../src/scripts/Components/Sidemenu.js';
-    const sidemenu = document.getElementById('sideMenu');
-    sidemenu.innerHTML = Sidemenu(true, '../../src');
-  </script>
   <script src="../../src/scripts/sidemenu.js" defer></script>
   <script src="../../src/scripts/totop.js" defer></script>
+  <script type="module">
+    import Sidemenu from '../../../src/scripts/Components/Sidemenu.js'
+    await Sidemenu('../../../')
+      .then(html => {
+          document.querySelector('#sideMenu').innerHTML += html
+      })
+      .then(res => {
+          sidemenu()
+      })
+  </script>
+  <script src="../../src/scripts/game/AlgoPuzzle.js"></script>
 </body>
 </html>

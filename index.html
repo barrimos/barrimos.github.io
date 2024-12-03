@@ -15,72 +15,55 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
 <body>
-    <div class="wrapper">
-        <nav class="sideMenu noSelect" id="sideMenu"></nav>
-        
-        <main class="main">
-            <div class="topNav-section" id="topNav-section">
-                <div class="container">
-                    <div class="row">
-                        <div class="col-12">
-                            <div class="nav-menu">
-                                <div class="topLogo">
-                                    <img src="./src/img/icon/zmlogo-page-15.png" alt="logo zixma">
-                                </div>
-                                <div class="btn d-none d-md-block">
-                                    <a href="./src/download/Prapas-Resume_EN.pdf" class="Downloadresume" download>Download Resume</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+    <script type="module">
+        import BlogItem from './src/scripts/Components/BlogItem.js';
+        import ProjectItem from './src/scripts/Components/ProjectItem.js';
+        import layout from './src/scripts/Components/layout.js'
 
-            <section class="introduce-section" id="introduce-section">
-                <div class="container">
-                    <div class="row">
-                        <div class="left-wrapper col-12">
-                            <span class="intro-head text-focus-in">
-                                WELCOME TO MY ENDLESS ADVENTURE OF PURSUITS OF KNOWLEDGE
-                            </span>
+        const children = `<section class="introduce-section" id="introduce-section">
+            <div class="container">
+                <div class="row">
+                    <div class="left-wrapper col-12">
+                        <span class="intro-head text-focus-in">
+                            WELCOME TO MY ENDLESS ADVENTURE OF PURSUITS OF KNOWLEDGE
+                        </span>
+                    </div>
+                    <div class="right-wrapper col-12">
+                        <div class="reels">
+                            <video autoplay muted>
+                                <source src="./src/reels/reels.mp4">
+                                Your browser does not support the video tag.
+                            </video>
                         </div>
-                        <div class="right-wrapper col-12">
-                            <div class="reels">
-                                <video autoplay muted>
-                                    <source src="./src/reels/reels.mp4">
-                                    Your browser does not support the video tag.
-                                </video>
-                            </div>
-                            <div class="skills">
-                                <div class="status">
-                                    <div class="row">
-                                        <div class="sk-item col-12 col-md-5">
-                                            <div class="st-top">7 Years work experience</div>
-                                            <h6 class="st-bottom">Graphic designer</h6>
-                                            <div class="st-icon d-flex justify-content-center align-items-center">
-                                                <h6 class="adobe illus">AI</h6>
-                                                <h6 class="adobe pshop">PS</h6>
-                                            </div>
+                        <div class="skills">
+                            <div class="status">
+                                <div class="row">
+                                    <div class="sk-item col-12 col-md-5">
+                                        <div class="st-top">7 Years work experience</div>
+                                        <h6 class="st-bottom">Graphic designer</h6>
+                                        <div class="st-icon d-flex justify-content-center align-items-center">
+                                            <h6 class="adobe illus">AI</h6>
+                                            <h6 class="adobe pshop">PS</h6>
                                         </div>
-                                        <div class="sk-item col-12 col-md-7">
-                                            <div class="st-top">Plus</div>
-                                            <div class="d-flex justify-content-around w-100">
-                                                <div>
-                                                    <h6 class="st-bottom">Web develop</h6>
-                                                    <div class="st-icon">
-                                                        <i class="fa-brands fa-html5"></i>
-                                                        <i class="fa-brands fa-css3-alt"></i>
-                                                        <i class="fa-brands fa-sass"></i>
-                                                        <i class="fa-brands fa-js"></i>
-                                                        <i class="fa-brands fa-python"></i>
-                                                    </div>
+                                    </div>
+                                    <div class="sk-item col-12 col-md-7">
+                                        <div class="st-top">Plus</div>
+                                        <div class="d-flex justify-content-around w-100">
+                                            <div>
+                                                <h6 class="st-bottom">Web develop</h6>
+                                                <div class="st-icon">
+                                                    <i class="fa-brands fa-html5"></i>
+                                                    <i class="fa-brands fa-css3-alt"></i>
+                                                    <i class="fa-brands fa-sass"></i>
+                                                    <i class="fa-brands fa-js"></i>
+                                                    <i class="fa-brands fa-python"></i>
                                                 </div>
-                                                <div>
-                                                    <h6 class="st-bottom">3d</h6>
-                                                    <div class="st-icon">
-                                                        <h6 class="autodesk 3dsmax">3ds Max</h6>
-                                                        <h6 class="pixologic zbrush">Zbrush</h6>
-                                                    </div>
+                                            </div>
+                                            <div>
+                                                <h6 class="st-bottom">3d</h6>
+                                                <div class="st-icon">
+                                                    <h6 class="autodesk 3dsmax">3ds Max</h6>
+                                                    <h6 class="pixologic zbrush">Zbrush</h6>
                                                 </div>
                                             </div>
                                         </div>
@@ -90,75 +73,81 @@
                         </div>
                     </div>
                 </div>
-            </section>
-            <section class="article-section" id="article-section">
-                <div class="container">
-                    <h1 class="section-head">SUMMARIES</h1>
-                    <small>WHAT I'VE LEARNED</small>
-                    <div class="row" id="blogItems"></div>
-                </div>
-            </section>
-            <section class="project-section" id="project-section">
-                <div class="container">
-                    <h1 class="section-head">PROJECTS</h1>
-                    <small>PRACTICES</small>
-                    <div class="row">
-                        <div class="col-12">
-                            <div class="row" id="projectItems"></div>
-                        </div>
+            </div>
+        </section>
+        <section class="article-section" id="article-section">
+            <div class="container">
+                <h1 class="section-head">SUMMARIES</h1>
+                <small>WHAT I'VE LEARNED</small>
+                <div class="row" id="blogItems"></div>
+            </div>
+        </section>
+        <section class="project-section" id="project-section">
+            <div class="container">
+                <h1 class="section-head">PROJECTS</h1>
+                <small>PRACTICES</small>
+                <div class="row">
+                    <div class="col-12">
+                        <div class="row" id="projectItems"></div>
                     </div>
                 </div>
-            </section>
-        </main>
-        <div class="push"></div>
-    </div>
-    <footer id="footer"></footer>
-    
-    <script type="module">
-        import Footer from './src/scripts/Components/Footer.js';
-        import Sidemenu from './src/scripts/Components/Sidemenu.js';
-        import BlogItem from './src/scripts/Components/BlogItem.js';
-        import ProjectItem from './src/scripts/Components/ProjectItem.js';
+            </div>
+        </section>`
+        layout(children)
+            .then(html => {
+                document.body.innerHTML += html
+            })
+            .then(res => {
+                sidemenu()
+            })
 
-        const sidemenu = document.getElementById('sideMenu');
-        const footer = document.getElementById('footer');
-
-        async function fetchAndDisplayJSON(name){
-            try{
-                const response = await fetch(`./src/data/${name}.json`); // Change to your JSON file path
-                const jsonData = await response.json();
-                const elem = document.getElementById(name);
-                
-                jsonData.forEach(item => {
-                    if(name === 'blogItems'){
-                        elem.innerHTML += BlogItem(item);
-                    } else {
-                        elem.innerHTML += ProjectItem(item, false);
-                    }
-                });
-                return Promise.resolve();
-            } catch(error){
-                console.error('Error fetching JSON:', error);
-                return Promise.reject(error);
+            async function fetchAndDisplayJSON(name){
+                try{
+                    const response = await fetch(`./src/data/${name}.json`); // Change to your JSON file path
+                    const jsonData = await response.json();
+                    const elem = document.getElementById(name);
+                    
+                    jsonData.forEach(item => {
+                        if(name === 'blogItems'){
+                            elem.innerHTML += BlogItem(item);
+                        } else {
+                            elem.innerHTML += ProjectItem(item, false);
+                        }
+                    });
+                    return Promise.resolve();
+                } catch(error){
+                    console.error('Error fetching JSON:', error);
+                    return Promise.reject(error);
+                }
             }
-        }
-        window.onload = () => {
-            const promise = ['blogItems', 'projectItems'].map(name => fetchAndDisplayJSON(name));
-            Promise.all(promise).then(() => {
-                new Promise((resolve, reject) => {
-                    const script = document.createElement('script');
-                    script.src = './src/scripts/stylingtag.js';
-                    script.defer = true;
-                    script.onload = resolve;
-                    script.onerror = reject;
-                    document.body.appendChild(script);
+            window.onload = () => {
+                const promise = ['blogItems', 'projectItems'].map(name => fetchAndDisplayJSON(name));
+                Promise.all(promise).then(() => {
+                    new Promise((resolve, reject) => {
+                        const script = document.createElement('script');
+                        script.src = './src/scripts/stylingtag.js';
+                        script.defer = true;
+                        script.onload = resolve;
+                        script.onerror = reject;
+                        document.body.appendChild(script);
+                    });
                 });
-            });
-        }
-        sidemenu.innerHTML = Sidemenu();
-        footer.innerHTML = Footer();
+            }
+
     </script>
     <script src="./src/scripts/sidemenu.js" defer></script>
     <script src="./src/scripts/totop.js" defer></script>
+    <script>
+        let txt = ''
+        const hello = async _ => {
+            return 'hello world'
+        }
+        const main = async () => {
+            txt = await hello()
+            console.log(txt)
+        }
+
+        main()
+    </script>
 </body>
 </html>

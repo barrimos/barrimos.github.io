@@ -420,13 +420,14 @@ section .section-head {
   margin-top: 20px;
 }
 #topic-section .control-topic .btn-control-topic.next, #topic-section .control-topic .btn-control-topic.prev {
-  background-color: var(--primary);
+  background-color: var(--primary-opa);
   border: none;
-  color: white;
-  width: 90px;
+  color: var(--primary);
+  width: 40px;
   height: 30px;
   margin: 15px;
   border-radius: 5px;
+  font-size: 1.2em;
 }
 #topic-section .control-topic .btn-control-topic.page {
   margin: 0 2px;

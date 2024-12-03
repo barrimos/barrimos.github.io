@@ -15,32 +15,15 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
 <body>
-    <div class="wrapper">
-        <nav class="sideMenu noSelect" id="sideMenu"></nav>
-        <main class="main">
-            <div class="topNav-section" id="topNav-section">
-                <div class="container">
-                    <div class="row">
-                        <div class="col-12">
-                            <div class="nav-menu">
-                                <div class="topLogo">
-                                    <img src="./src/img/icon/zmlogo-page-15.png" alt="logo zixma">
-                                </div>
-                                <div class="btn d-none d-md-block">
-                                    <a href="./src/download/Prapas - Resume_EN_2023.pdf" class="Downloadresume" download>Download Resume</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <!-- start here -->
-            <section class="profile-section" id="profile-section">
+    <script type="module">
+        import layout from './src/scripts/Components/layout.js'
+
+        const children = `<section class="profile-section" id="profile-section">
                 <div class="container">
                     <div class="row">
                         <div class="col-12 col-sm-6 col-lg-3">
                             <div class="hero-img posSticky">
-                                <img src="https://scontent.fbkk2-5.fna.fbcdn.net/v/t31.18172-8/30073536_10215960594717532_6094550274771899716_o.jpg?_nc_cat=110&ccb=1-7&_nc_sid=09cbfe&_nc_eui2=AeEg4_-7LQPwCvlq7wGlV78qXg6JC4UriQpeDokLhSuJCt2nRkDMFYjqMEjUB9fm8h0&_nc_ohc=99_REmHL9IgAX_snkEt&_nc_ht=scontent.fbkk2-5.fna&oh=00_AT_k4EtyCAfKI7joGDBL4Lb2xG2lFUTfq1XK1b1m39EQOQ&oe=632F55D3" alt="prapas-k">
+                                <img src="#" alt="prapas-k">
                             </div>
                         </div>
                         <div class="col-12 col-sm-6 col-lg-9">
@@ -242,7 +225,7 @@
                 </div>
             </section>
             <section class="certification-section" id="certification-section">
-                <div class="modalEnlarge" onclick="closeModal()">
+                <div class="modalEnlarge">
                     <div class="container">
                         <div class="row">
                             <div class="col-12 d-flex justify-content-center align-items-center">
@@ -261,22 +244,22 @@
                         <div class="col-12 col-md-9">
                             <div class="row">
                                 <div class="col-12 col-md-6 col-lg-4">
-                                    <img src="./src/img/cert/Frontend_React.jpg" alt="Certificate Codecademy React" class="certImg projectLink" folder="cert" name="Frontend_React" onclick="enlarge(this)">
+                                    <img src="./src/img/cert/Frontend_React.jpg" alt="Certificate Codecademy React" class="certImg projectLink" folder="cert" name="Frontend_React">
                                 </div>
                                 <div class="col-12 col-md-6 col-lg-4">
-                                    <img src="./src/img/cert/Generation_Thailand.jpg" alt="Certificate Generation_Thailand Junior_software_dev" class="certImg projectLink" folder="cert" name="Generation_Thailand" onclick="enlarge(this)">
+                                    <img src="./src/img/cert/Generation_Thailand.jpg" alt="Certificate Generation_Thailand Junior_software_dev" class="certImg projectLink" folder="cert" name="Generation_Thailand">
                                 </div>
                                 <div class="col-12 col-md-6 col-lg-4">
-                                    <img src="./src/img/cert/First_Step_Coding.jpg" alt="Certificate ChulaMooc First_step_coding" class="certImg projectLink" folder="cert" name="First_Step_Coding" onclick="enlarge(this)">
+                                    <img src="./src/img/cert/First_Step_Coding.jpg" alt="Certificate ChulaMooc First_step_coding" class="certImg projectLink" folder="cert" name="First_Step_Coding">
                                 </div>
                                 <div class="col-12 col-md-6 col-lg-4">
-                                    <img src="./src/img/cert/Responsive.jpg" alt="Certificate Freecodecamp Responsive" class="certImg projectLink" folder="cert" name="Responsive" onclick="enlarge(this)">
+                                    <img src="./src/img/cert/Responsive.jpg" alt="Certificate Freecodecamp Responsive" class="certImg projectLink" folder="cert" name="Responsive">
                                 </div>
                                 <div class="col-12 col-md-6 col-lg-4">
-                                    <img src="./src/img/cert/Python_Beginners.jpg" alt="Certificate Sololearn Python_Beginners" class="certImg projectLink" folder="cert" name="Python_Beginners" onclick="enlarge(this)">
+                                    <img src="./src/img/cert/Python_Beginners.jpg" alt="Certificate Sololearn Python_Beginners" class="certImg projectLink" folder="cert" name="Python_Beginners">
                                 </div>
                                 <div class="col-12 col-md-6 col-lg-4">
-                                    <img src="./src/img/cert/NodeJS.jpg" alt="Certificate Codecademy NodeJS" class="certImg projectLink" folder="cert" name="NodeJS" onclick="enlarge(this)">
+                                    <img src="./src/img/cert/NodeJS.jpg" alt="Certificate Codecademy NodeJS" class="certImg projectLink" folder="cert" name="NodeJS">
                                 </div>
                             </div>
                             <ul class="tagLists pt-20">
@@ -285,21 +268,17 @@
                         </div>
                     </div>
                 </div>
-            </section>
-            <!-- end here -->
-        </main>
-        <div class="push"></div>
-    </div>
-    <footer id="footer"></footer>
-    <script src="./src/scripts/scripts.js"></script>
-    <script type="module">
-        import Footer from './src/scripts/Components/Footer.js';
-        import Sidemenu from './src/scripts/Components/Sidemenu.js';
-        import BlogItem from './src/scripts/Components/BlogItem.js';
-        import ProjectItem from './src/scripts/Components/ProjectItem.js';
+            </section>`
 
-        const sidemenu = document.getElementById('sideMenu');
-        const footer = document.getElementById('footer');
+        layout(children)
+            .then(html => {
+                document.body.innerHTML += html
+            })
+            .then(res => {
+                sidemenu()
+                toggleCert()
+            })
+
 
         window.onload = () => {
             const promise = Promise.resolve(true);
@@ -314,10 +293,8 @@
                 });
             });
         }
-
-        sidemenu.innerHTML = Sidemenu();
-        footer.innerHTML = Footer();
     </script>
+    <script src="./src/scripts/toggleCert.js" defer></script>
     <script src="./src/scripts/sidemenu.js" defer></script>
     <script src="./src/scripts/totop.js" defer></script>
 </body>

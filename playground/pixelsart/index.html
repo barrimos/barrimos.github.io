@@ -64,13 +64,18 @@
         </div>
         <div id="detail" class="detail"></div>
     </div>
-    <script src="../../src/scripts/pixelsart.js"></script>
-    <script type="module">
-        import Sidemenu from '../../src/scripts/Components/Sidemenu.js';
-        const sidemenu = document.getElementById('sideMenu');
-        sidemenu.innerHTML = Sidemenu(true, '../../src');
-    </script>
     <script src="../../src/scripts/sidemenu.js" defer></script>
     <script src="../../src/scripts/totop.js" defer></script>
+    <script type="module">
+        import Sidemenu from '../../../src/scripts/Components/Sidemenu.js'
+        await Sidemenu('../../../')
+            .then(html => {
+                document.querySelector('#sideMenu').innerHTML += html
+            })
+            .then(res => {
+                sidemenu()
+            })
+    </script>
+    <script src="../../src/scripts/pixelsart.js"></script>
 </body>
 </html>

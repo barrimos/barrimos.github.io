@@ -1,6 +1,6 @@
 "use strict"
 
-import { createNewElement } from './createNewElement.js'
+import { createNewElement } from './utils/createNewElement.js'
 
 let d = new Date
 const today = document.querySelector('#today')

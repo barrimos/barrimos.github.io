@@ -1,3 +1,14 @@
 [
-    "tablePOs", "codePreview", "head-title", "writer", "headline", "paragraph", "raw", "quote", "orderList", "unorderList", "math", "downloadBtn"
+    "tablePOs",
+    "codePreview",
+    "head-title",
+    "writer",
+    "headline",
+    "paragraph",
+    "raw",
+    "quote",
+    "orderList",
+    "unorderList",
+    "math",
+    "downloadBtn"
 ]

@@ -1,58 +1,66 @@
 [
-  {
-      "name": "maze",
-      "title": "Maze Game",
-      "info": "A puzzle game with backtracking algorithm",
-      "tags": "Maze, Game, Javascript, Canvas, A*, Backtracking, Algorithm, Shortest Path, Heuristic, Dijkstra, Depth First Search, Breath First Search"
-  },
-  {
-      "name": "jammping",
-      "title": "Jammping",
-      "info": "A spotify music search and save to your playlist",
-      "tags": "React, Spotify, API, Mern, MongoDB, ExpressJS, NodeJS, Scss, Css",
-      "link": "https://jammping.surge.sh"
-  },
-  {
-      "name": "theunderclass",
-      "title": "The Under Class",
-      "info": "Imitation of student ID card props in Thai sereies",
-      "tags": "Html, Css, Javascript"
-  },
-  {
-      "name": "stylingtag",
-      "title": "Styling Tags",
-      "info": "Decorate tags to stand out with colours",
-      "tags": "Html, Css, Javascript, SEO, tags"
-  },
-  {
-      "name": "matrix",
-      "title": "Matrix Calculator",
-      "info": "Manipulation matrix such as convolution, multiplication and determinant",
-      "tags": "Html, Css, Javascript, Scss, Python, PyScript, Algorithm"
-  },
-  {
-      "name": "goaltofit",
-      "title": "Goal To Fit",
-      "info": "Application planing and tracking your workout",
-      "tags": "Mern, MongoDB, ExpressJS, React, NodeJS, Scss, Css",
-      "link": "https://goaltofitapp.vercel.app"
-  },
-  {
-      "name": "pixelsart",
-      "title": "Pixels Art",
-      "info": "Drawing pixels art",
-      "tags": "Html, Css, Javascript, Canvas, Pixels, Scss, Css"
-  },
-  {
-      "name": "algopuzzle",
-      "title": "Algo Game",
-      "info": "Arithmetic puzzle card game",
-      "tags": "Html, Css, Javascript, Scss, Game, Puzzle, Arithmetic, Cards, Math"
-  },
-  {
-      "name": "todolists",
-      "title": "To-Do List",
-      "info": "Don't miss a thing",
-      "tags": "Html, Css, Javascript, Scss, To-Do"
-  }
+    {
+        "name": "maze",
+        "title": "Maze Game",
+        "info": "A puzzle game with backtracking algorithm",
+        "tags": "Maze, Game, Javascript, Canvas, A*, Backtracking, Algorithm, Shortest Path, Heuristic, Dijkstra, Depth First Search, Breath First Search",
+        "alt": "Maze game"
+    },
+    {
+        "name": "theunderclass",
+        "title": "The Under Class",
+        "info": "Imitation of student ID card props in Thai sereies",
+        "tags": "Html, Css, Javascript",
+        "alt": "The underclass make an id student card"
+    },
+    {
+        "name": "stylingtag",
+        "title": "Styling Tags",
+        "info": "Decorate tags to stand out with colours",
+        "tags": "Html, Css, Javascript, SEO, tags",
+        "alt": "Styling tags"
+    },
+    {
+        "name": "matrix",
+        "title": "Matrix Calculator",
+        "info": "Manipulation matrix such as convolution, multiplication and determinant",
+        "tags": "Html, Css, Javascript, Scss, Python, PyScript, Algorithm",
+        "alt": "Matrix calculator"
+    },
+    {
+        "name": "textareaTo2Darray",
+        "title": "Text to array",
+        "info": "Convert input from text area into array",
+        "tags": "Html, Css, Javascript, Scss",
+        "alt": "Conversion Textarea to 2 Dimensions array"
+    },
+    {
+        "name": "goaltofit",
+        "title": "Goal To Fit",
+        "info": "Application planing and tracking your workout",
+        "tags": "Mern, MongoDB, ExpressJS, React, NodeJS, Scss, Css",
+        "alt": "Goal to fit planing and tracking workout",
+        "link": "https://goaltofitapp.vercel.app"
+    },
+    {
+        "name": "pixelsart",
+        "title": "Pixels Art",
+        "info": "Drawing pixels art",
+        "tags": "Html, Css, Javascript, Canvas, Pixels, Scss, Css",
+        "alt": "Pixels art drawing"
+    },
+    {
+        "name": "algopuzzle",
+        "title": "Algo Game",
+        "info": "Arithmetic puzzle card game",
+        "tags": "Html, Css, Javascript, Scss, Game, Puzzle, Arithmetic, Cards, Math",
+        "alt": "Algo Game"
+    },
+    {
+        "name": "todolists",
+        "title": "To-Do List",
+        "info": "Don't miss a thing",
+        "tags": "Html, Css, Javascript, Scss, To-Do",
+        "alt": "To-Do lists"
+    }
 ]

@@ -273,7 +273,18 @@
         </div>
     </div>
 
-
+    <script src="../../src/scripts/sidemenu.js" defer></script>
+    <script src="../../src/scripts/totop.js" defer></script>
+    <script type="module">
+        import Sidemenu from '../../../src/scripts/Components/Sidemenu.js'
+        await Sidemenu('../../../')
+            .then(html => {
+                document.querySelector('#sideMenu').innerHTML += html
+            })
+            .then(res => {
+                sidemenu()
+            })
+    </script>
     <script src="../../src/scripts/matrix.js"></script>
     <script>
         // All buttons data-method and data-control for implement.py
@@ -281,12 +292,5 @@
     </script>
     <script src="./displayResult.js"></script>
     <py-script src="./implement.py"></py-script>
-    <script type="module">
-        import Sidemenu from '../../src/scripts/Components/Sidemenu.js';
-        const sidemenu = document.getElementById('sideMenu');
-        sidemenu.innerHTML = Sidemenu(true, '../../src');
-    </script>
-    <script src="../../src/scripts/sidemenu.js" defer></script>
-    <script src="../../src/scripts/totop.js" defer></script>
 </body>
 </html>

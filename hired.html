@@ -14,34 +14,16 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
 <body>
-    <div class="wrapper">
-        <nav class="sideMenu noSelect" id="sideMenu"></nav>
-        <main class="main">
-            <div class="topNav-section" id="topNav-section">
-                <div class="container">
-                    <div class="row">
-                        <div class="col-12">
-                            <div class="nav-menu">
-                                <div class="topLogo">
-                                    <img src="./src/img/icon/zmlogo-page-15.png" alt="logo zixma">
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <!-- start here -->
-        </main>
-        <div class="push"></div>
-    </div>
-    <footer id="footer"></footer>
     <script type="module">
-        import Footer from './src/scripts/Components/Footer.js';
-        import Sidemenu from './src/scripts/Components/Sidemenu.js';
-        const sidemenu = document.getElementById('sideMenu');
-        const footer = document.getElementById('footer');
-        sidemenu.innerHTML = Sidemenu();
-        footer.innerHTML = Footer();
+        import layout from './src/scripts/Components/layout.js'
+        const children = ''
+        layout(children)
+            .then(html => {
+                document.body.innerHTML += html
+            })
+            .then(res => {
+                sidemenu()
+            })
     </script>
     <script src="./src/scripts/sidemenu.js" defer></script>
     <script src="./src/scripts/totop.js" defer></script>
