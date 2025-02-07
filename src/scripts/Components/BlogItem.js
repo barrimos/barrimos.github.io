@@ -4,18 +4,18 @@
  * @returns 
  */
 const BlogItem = item => {
-  return `<div class="col-12 col-md-4 col-xl-3 mt-10">
-  <div class="blog-item">
-      <a href="./blog/${item.name}/">
-          <img class="blogCover" src="./src/img/cover/${item.name}.jpg" alt="${item.name}">
-          <div class="blog-info">
-              <h4 class="blog-title">${item.title}</h4>
-              <small class="blog-brief">${item.info}</small>
-          </div>
-      </a>
-      <span class="tagLists">${item.tags}</span>
-  </div>
-</div>`
+    return `<div class="topic-item" data-item=${item.number}>
+        <a href="./blog/${item.name}/" class="topic-link">
+            <div class="topic-l">
+                <img src="./src/img/cover/${item.name}.jpg" alt="${item.name}" class="topic-cover">
+            </div>
+            <div class="topic-r">
+                <h1>${item.title}</h1>
+                <p class="topic-detail">${item.info}</p>
+                <small class="topic-date">1 Jan 2025 : Prapas k, Writer</small>
+            </div>
+        </a>
+    </div>`
 }
 
 export default BlogItem;

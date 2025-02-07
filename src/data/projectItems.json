@@ -46,7 +46,7 @@
         "name": "pixelsart",
         "title": "Pixels Art",
         "info": "Drawing pixels art",
-        "tags": "Html, Css, Javascript, Canvas, Pixels, Scss, Css",
+        "tags": "Html, Css, Javascript, Canvas, Pixels, Scss",
         "alt": "Pixels art drawing"
     },
     {
@@ -62,5 +62,13 @@
         "info": "Don't miss a thing",
         "tags": "Html, Css, Javascript, Scss, To-Do",
         "alt": "To-Do lists"
+    },
+    {
+        "name": "lomwong",
+        "title": "Lomwong Chat",
+        "info": "Chat app",
+        "tags": "React, Typescript, Websocket, Chatting, Mern stack, Scss, Meeting, Camp fire, Socketio",
+        "alt": "Lomwoong Chat",
+        "link": "https://lomwongchat.vercel.app"
     }
 ]

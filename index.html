@@ -19,6 +19,7 @@
         import BlogItem from './src/scripts/Components/BlogItem.js';
         import ProjectItem from './src/scripts/Components/ProjectItem.js';
         import layout from './src/scripts/Components/layout.js'
+        import WhatIveLearned from './src/scripts/Components/WhatIveLearned.js'
 
         const children = `<section class="introduce-section" id="introduce-section">
             <div class="container">
@@ -109,7 +110,7 @@
                     
                     jsonData.forEach(item => {
                         if(name === 'blogItems'){
-                            elem.innerHTML += BlogItem(item);
+                            elem.innerHTML += WhatIveLearned(item);
                         } else {
                             elem.innerHTML += ProjectItem(item, false);
                         }

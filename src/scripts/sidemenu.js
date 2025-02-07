@@ -116,8 +116,10 @@ const sidemenu = () => {
             const dropdownContent = this.nextElementSibling;
             if (dropdownContent.style.maxHeight) {
                 dropdownContent.style.maxHeight = null;
+                document.querySelector('#buttonToTop').style.opacity = '.4'
             } else {
                 dropdownContent.style.maxHeight = dropdownContent.scrollHeight + 'px';
+                document.querySelector('#buttonToTop').style.opacity = '1'
             }
         });
     }

@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Freelance, Graphic, Web application, Algorithm, Frontend, Backend, Full-Stack, Developer, MERN stack, MongoDB, Express, React, NodeJS, UXUI">
-    <title>zixma - All the sum</title>
+    <title>zixma - All the sum : Time complexity</title>
     <link rel="shortcut icon" href="../../src/img/icon/zmlogo-page-03.png" type="image/x-icon">
     <link rel="stylesheet" href="../../src/style/main.css">
     <link rel="stylesheet" href="../../src/dist/style.css">
@@ -1926,9 +1926,16 @@ function nestedLinearLogarithmic(n){
     <script type="module">
         import Footer from '../../src/scripts/Components/Footer.js';
         import Sidemenu from '../../src/scripts/Components/Sidemenu.js';
-        const sidemenu = document.getElementById('sideMenu');
+
+        await Sidemenu('../../../')
+            .then(html => {
+                document.querySelector('#sideMenu').innerHTML += html
+            })
+            .then(res => {
+                sidemenu()
+            })
+        
         const footer = document.getElementById('footer');
-        sidemenu.innerHTML = Sidemenu(true, '../../src');
         footer.innerHTML = Footer();
     </script>
     <script src="../../src/scripts/stylingtag.js" defer></script>

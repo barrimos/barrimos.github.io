@@ -16,56 +16,120 @@
 </head>
 <body>
     <script type="module">
-        import listSuggestion from './src/scripts/Components/listSuggestion.js';
+        import listSuggestion from './src/scripts/Components/listSuggestion.js'
         import layout from './src/scripts/Components/layout.js'
+        import BlogItem from './src/scripts/Components/BlogItem.js'
+        import ButtonChangePage from './src/scripts/Components/ButtonChangePage.js'
 
-        const children = `
-            <section class="topic-section" id="topic-section">
-                <div class="container">
-                    <div class="row">
-                        <article class="col-12 col-md-9">
-                            <div class="topic-item">
-                                <a href="./blog/time/" class="topic-link">
-                                    <div class="topic-l">
-                                        <img src="./src/img/cover/time.jpg" alt="" class="topic-cover">
-                                    </div>
-                                    <div class="topic-r">
-                                        <h1>Time Complexity & Primitive Operations</h1>
-                                        <p class="topic-detail">What is time complexity and how to calculate</p>
-                                        <small class="topic-date">31 Oct 2023 : Prapas k, Writer</small>
-                                    </div>
-                                </a>
-                            </div>
-                            <div class="control-topic d-flex justify-content-center align-items-center w-100">
-                                <button type="button" name="prev" class="btn-control-topic prev" disabled>&LeftTriangle;</button>
-                                <button type="button" name="pagination" class="btn-control-topic page active" value="1">1</button>
-                                <button type="button" name="next" class="btn-control-topic next" disabled>&RightTriangle;</button>
-                            </div>
-                        </article>
-                        <aside class="col-12 col-md-3">
-                            <div class="suggestion-aside">
-                                <h4>Suggestion</h4>
-                                <div class="row no-gutters" id="listsuggestion"></div>
-                            </div>
-                        </aside>
+        const responseBlogs = await fetch(`./src/data/blogItems.json`)
+        const dataBlogs = await responseBlogs.json()
+        let htmlBlog = ''
+
+        const perPages = 7
+        const dataLength = dataBlogs.length
+        const totalPages = Math.ceil(dataLength / perPages)
+        let currentPage = 1
+
+        const render = n => {
+            const start = (n - 1) * perPages
+            const end = start + perPages
+            const dataPage = dataBlogs.slice(start, end)
+
+            htmlBlog = ''
+            dataPage.forEach(item => {
+                htmlBlog += BlogItem(item)
+            })
+
+            // Update only the blog content dynamically
+            const blogContainer = document.querySelector('#app');
+            if (blogContainer) {
+                blogContainer.innerHTML = `${htmlBlog}`
+            }
+        }
+
+        const handleChangePage = e => {
+            if (e.target.name === 'page') {
+                currentPage = e.target.dataset.currPage
+            } else if (e.target.name === 'next') {
+                currentPage++
+                if (currentPage > totalPages) currentPage = totalPages
+            } else if (e.target.name === 'prev') {
+                currentPage--
+                if (currentPage < 1) currentPage = 1
+            }
+            document.querySelector('.btn-control-topic.page.active').classList.remove('active')
+            document.querySelector(`.btn-control-topic.page[value="${currentPage}"]`).classList.add('active')
+            render(currentPage)
+        }
+
+        const renderLayout = async (n) => {
+            const children = `
+                <section class="topic-section" id="topic-section">
+                    <div class="container">
+                        <div class="row">
+                            <article class="col-12 col-md-9">
+                                <div id="app">${htmlBlog}</div>
+                                <div class="control-topic d-flex justify-content-center align-items-center w-100"></div>
+                            </article>
+                            <aside class="col-12 col-md-3">
+                                <div class="suggestion-aside">
+                                    <h4>Suggestion</h4>
+                                    <div class="row no-gutters" id="listsuggestion"></div>
+                                </div>
+                            </aside>
+                        </div>
                     </div>
-                </div>
-            </section>`
-        layout(children)
-            .then(html => {
-                document.body.innerHTML += html
-            })
-            .then(async res => {
-                sidemenu()
-                const response = await fetch(`./src/data/projectItems.json`)
-                const projects = await response.json()
-                let html = ''
-                projects.forEach(project => {
-                    html += listSuggestion(project)
-                })
-                document.querySelector('#listsuggestion').innerHTML += html
-            })
+                </section>`
+    
+            const layoutHtml = await layout(children)
+            document.body.innerHTML = layoutHtml // Reset or replace the layout content.
 
+            sidemenu()
+
+            const responseProjcets = await fetch(`./src/data/projectItems.json`)
+            const dataProjects = await responseProjcets.json()
+            let htmlProject = ''
+            dataProjects.forEach(project => {
+                htmlProject += listSuggestion(project)
+            })
+            document.querySelector('#listsuggestion').innerHTML += htmlProject
+    
+    
+            const prevBtn = ButtonChangePage({
+                isDisabled: totalPages > 1 ? false : true,
+                currentPage: currentPage,
+                name: 'prev',
+                inner: '&LeftTriangle;',
+                onClick: handleChangePage
+            })
+            const numPageBtn = Array.from({ length: totalPages }, (_, i) => {
+
+                return ButtonChangePage({
+                    isDisabled: false,
+                    value: i + 1,
+                    isActive: i + 1 == currentPage,
+                    name: 'page',
+                    currentPage: i + 1,
+                    inner: i + 1,
+                    onClick: handleChangePage
+                })
+            })
+            const nextBtn = ButtonChangePage({
+                isDisabled: totalPages > 1 ? false : true,
+                currentPage: currentPage,
+                name: 'next',
+                inner: '&RightTriangle;',
+                onClick: handleChangePage
+            })
+    
+            document.querySelector('.control-topic').appendChild(prevBtn)
+            numPageBtn.forEach(elem => {
+                document.querySelector('.control-topic').appendChild(elem)
+            })
+            document.querySelector('.control-topic').appendChild(nextBtn)
+        }
+        render(1)
+        await renderLayout() // Render the layout
     </script>
     <script src="./src/scripts/sidemenu.js" defer></script>
     <script src="./src/scripts/totop.js" defer></script>

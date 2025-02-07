@@ -23,7 +23,7 @@ const layout = async (children, rootSrc = './') => {
                                     <img src="./src/img/icon/zmlogo-page-15.png" alt="logo zixma">
                                 </div>
                                 <div class="btn d-none d-md-block">
-                                    <a href="./src/download/Prapas-Resume_EN.pdf" class="Downloadresume" download>Download Resume</a>
+                                    <a href="./src/download/Prapas_Resume_2025_EN.pdf" class="Downloadresume" download>Download Resume</a>
                                 </div>
                             </div>
                         </div>

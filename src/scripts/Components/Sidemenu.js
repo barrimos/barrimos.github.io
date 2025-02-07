@@ -82,7 +82,7 @@ const Sidemenu = async (rootSrc = './') => {
             </a>
             <ul class="underlist">
                 <li class="list-item list-treeview">
-                    <a href="${rootSrc}src/download/Prapas-Resume_EN.pdf" title="Download Resume" class="nav-link dlbtn-wraper" download>
+                    <a href="${rootSrc}src/download/Prapas_Resume_2025_EN.pdf" title="Download Resume" class="nav-link dlbtn-wraper" download>
                         <div class="nav-icon">
                             <img src="${rootSrc}src/img/icon/zmlogo-page-03.png" alt="Resume EN">
                         </div>
@@ -90,7 +90,7 @@ const Sidemenu = async (rootSrc = './') => {
                     </a>
                 </li>
                 <li class="list-item list-treeview">
-                    <a href="${rootSrc}src/download/Prapas-Resume_TH.pdf" title="Download Resume" class="nav-link dlbtn-wraper" download>
+                    <a href="${rootSrc}src/download/Prapas_Resume_2025_TH.pdf" title="Download Resume" class="nav-link dlbtn-wraper" download>
                         <div class="nav-icon">
                             <img src="${rootSrc}src/img/icon/zmlogo-page-03.png" alt="Resume TH">
                         </div>
