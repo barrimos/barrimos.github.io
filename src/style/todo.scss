@@ -89,7 +89,7 @@ body{
         .ulist{
             min-width: 260px;
             max-height: 500px;
-            height: 320px;
+            height: 340px;
             overflow-y: scroll;
             &::-webkit-scrollbar{
                 display: none;
@@ -251,16 +251,19 @@ body{
                         }
                     }
                     .controlTableTaskBtn{
-                        width: 70px;
+                        width: calc(33.33% - 3px);
                         height: 30px;
                         border: none;
                         background-color: hsl(0, 0%, 96%);
                         border-radius: 3px;
+                        max-width: 120px;
                     }
                     #sortTableTaskBtn{
-                        width: 120px;
                         background-color: hsl(138, 56%, 31%);
                         color: white;
+                    }
+                    #saveTableListsBtn{
+
                     }
                     #clearTableTaskBtn{
     

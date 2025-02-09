@@ -78,7 +78,7 @@ export class Pathfinding{
 
       let neighbors = neighborIndex(this.game, current, `${this.game.env.bombs}|${this.game.env.walls}`);
       for(let next of neighbors){
-        if(this.came_from[`[${next}]`] === null){
+        if(this.came_from[`[${next}]`] === undefined){
           this.frontier.put(next);
           this.came_from[`[${next}]`] = current;
         }

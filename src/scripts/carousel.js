@@ -133,7 +133,7 @@
             this.touchDeltaX = 0;
             this._config = this._getConfig(config);
             this._element = element;
-            this._indicatorsElement = this._element.querySelector(SELECTOR_INDICATORS);
+            this._indicatorsElement = this._element.querySelector(SELECTOR_INDICATORS) ?? null;
             this._touchSupported = 'ontouchstart' in document.documentElement || navigator.maxTouchPoints > 0;
             this._pointerEvent = Boolean(window.PointerEvent || window.MSPointerEvent);
             this._addEventListeners();
@@ -598,6 +598,6 @@
     // });
     var carousels = [].slice.call(document.querySelectorAll(SELECTOR_DATA_RIDE));
     for(var i=0, len=carousels.length; i<len; i++){
-        Carousel.clickHandler('click', carousels[i], SELECTOR_DATA_SLIDE, false);
+        Carousel.clickHandler('click', carousels[i], SELECTOR_DATA_SLIDE, true);
     }
 })));

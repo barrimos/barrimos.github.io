@@ -15,11 +15,40 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
 <body>
+    <div class="showHintWrapper">
+        <div>Open menu</div>
+        <div class="showHintSlideMenu">
+            <img class="imageTouchIcon" src="./src/img/icon/touch-svgrepo-com.svg" alt="touch icon" width="30">
+        </div>
+    </div>
+
+    <script>
+        window.addEventListener('DOMContentLoaded', () => {
+            const isShowHint = /isShowHint=true/.test(document.cookie)
+            if (!isShowHint) {
+                document.querySelector('.showHintWrapper').classList.add('active')
+                setTimeout(() => {
+                    document.querySelector('.showHintWrapper').classList.remove('active')
+                    const d = new Date()
+                    d.setTime(d.getTime() + (24 * 60 * 60 * 1000))
+                    document.cookie = `isShowHint=true; expires=${d.toUTCString()}; path=/;`
+            }, 7400)
+            }
+        })
+    </script>
+
     <script type="module">
-        import BlogItem from './src/scripts/Components/BlogItem.js';
-        import ProjectItem from './src/scripts/Components/ProjectItem.js';
+        import BlogItem from './src/scripts/Components/BlogItem.js'
+        import ProjectItem from './src/scripts/Components/ProjectItem.js'
         import layout from './src/scripts/Components/layout.js'
         import WhatIveLearned from './src/scripts/Components/WhatIveLearned.js'
+        import DetailProjects from './src/scripts/Components/DetailProjects.js'
+
+        const eventClick = () => {
+            document.body.style.overflow = ''
+            document.querySelector('.detailPage').classList.remove('active')
+            document.getElementById('descriptionDetail').innerHTML = ''
+        }
 
         const children = `<section class="introduce-section" id="introduce-section">
             <div class="container">
@@ -93,6 +122,10 @@
                     </div>
                 </div>
             </div>
+            <div class="detailPage">
+                <button type="button" class="closeDetailPageBtn" name="closeDetailPageBtn" onclick="(${eventClick})()">&#x2716;</button>
+                <section id="descriptionDetail"><div>
+            </div>
         </section>`
         layout(children)
             .then(html => {
@@ -104,35 +137,45 @@
 
             async function fetchAndDisplayJSON(name){
                 try{
-                    const response = await fetch(`./src/data/${name}.json`); // Change to your JSON file path
-                    const jsonData = await response.json();
-                    const elem = document.getElementById(name);
-                    
+                    const response = await fetch(`./src/data/${name}.json`) // Change to your JSON file path
+                    const jsonData = await response.json()
+                    const elem = document.getElementById(name)
+
                     jsonData.forEach(item => {
                         if(name === 'blogItems'){
-                            elem.innerHTML += WhatIveLearned(item);
+                            elem.innerHTML += WhatIveLearned(item)
                         } else {
-                            elem.innerHTML += ProjectItem(item, false);
+                            elem.innerHTML += ProjectItem(item, false)
                         }
-                    });
-                    return Promise.resolve();
+                    })
+                    if (name === 'projectItems') {
+                        document.querySelectorAll('.project-link[data-project-name]').forEach((project, i) => {
+                            project.addEventListener('click', async e => {
+                                document.querySelector('.detailPage').classList.add('active')
+                                document.getElementById('descriptionDetail').innerHTML = await DetailProjects(jsonData[i])
+                                document.body.style.overflow = 'hidden'
+                            })
+                        })
+                    }
+                    return Promise.resolve()
                 } catch(error){
-                    console.error('Error fetching JSON:', error);
-                    return Promise.reject(error);
+                    console.error('Error fetching JSON:', error)
+                    return Promise.reject(error)
                 }
             }
             window.onload = () => {
-                const promise = ['blogItems', 'projectItems'].map(name => fetchAndDisplayJSON(name));
-                Promise.all(promise).then(() => {
-                    new Promise((resolve, reject) => {
-                        const script = document.createElement('script');
-                        script.src = './src/scripts/stylingtag.js';
-                        script.defer = true;
-                        script.onload = resolve;
-                        script.onerror = reject;
-                        document.body.appendChild(script);
-                    });
-                });
+                const promise = ['blogItems', 'projectItems'].map(name => fetchAndDisplayJSON(name))
+                Promise.all(promise)
+                    .then(() => {
+                        new Promise((resolve, reject) => {
+                            const script = document.createElement('script')
+                            script.src = './src/scripts/stylingtag.js'
+                            script.defer = true
+                            script.onload = resolve
+                            script.onerror = reject
+                            document.body.appendChild(script)
+                        })
+                    })
             }
 
     </script>

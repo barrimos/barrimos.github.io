@@ -67,6 +67,7 @@
             padding: 20px;
             @media screen and (max-width: 492px){
                 height: 50%;
+                overflow-y: scroll;
             }
         }
 

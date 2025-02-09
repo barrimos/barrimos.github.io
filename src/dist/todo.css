@@ -95,7 +95,7 @@ body {
 .wrapper .container .ulist {
   min-width: 260px;
   max-height: 500px;
-  height: 320px;
+  height: 340px;
   overflow-y: scroll;
 }
 .wrapper .container .ulist::-webkit-scrollbar {
@@ -263,14 +263,14 @@ body {
   border-left: 0.5px solid #cccccc;
 }
 .wrapper .container #archiveTable .wrapperRelative .tableHead .controlTableTaskBtn {
-  width: 70px;
+  width: calc(33.33% - 3px);
   height: 30px;
   border: none;
   background-color: whitesmoke;
   border-radius: 3px;
+  max-width: 120px;
 }
 .wrapper .container #archiveTable .wrapperRelative .tableHead #sortTableTaskBtn {
-  width: 120px;
   background-color: #237b3d;
   color: white;
 }

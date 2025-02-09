@@ -4,35 +4,50 @@
         "title": "Maze Game",
         "info": "A puzzle game with backtracking algorithm",
         "tags": "Maze, Game, Javascript, Canvas, A*, Backtracking, Algorithm, Shortest Path, Heuristic, Dijkstra, Depth First Search, Breath First Search",
-        "alt": "Maze game"
+        "alt": "Maze game",
+        "detail": "",
+        "timeperiod": "",
+        "status": "online"
     },
     {
         "name": "theunderclass",
         "title": "The Under Class",
         "info": "Imitation of student ID card props in Thai sereies",
         "tags": "Html, Css, Javascript",
-        "alt": "The underclass make an id student card"
+        "alt": "The underclass make an id student card",
+        "detail": "",
+        "timeperiod": "",
+        "status": "online"
     },
     {
         "name": "stylingtag",
         "title": "Styling Tags",
         "info": "Decorate tags to stand out with colours",
         "tags": "Html, Css, Javascript, SEO, tags",
-        "alt": "Styling tags"
+        "alt": "Styling tags",
+        "detail": "",
+        "timeperiod": "",
+        "status": "online"
     },
     {
         "name": "matrix",
         "title": "Matrix Calculator",
         "info": "Manipulation matrix such as convolution, multiplication and determinant",
         "tags": "Html, Css, Javascript, Scss, Python, PyScript, Algorithm",
-        "alt": "Matrix calculator"
+        "alt": "Matrix calculator",
+        "detail": "",
+        "timeperiod": "",
+        "status": "online"
     },
     {
         "name": "textareaTo2Darray",
         "title": "Text to array",
         "info": "Convert input from text area into array",
         "tags": "Html, Css, Javascript, Scss",
-        "alt": "Conversion Textarea to 2 Dimensions array"
+        "alt": "Conversion Textarea to 2 Dimensions array",
+        "detail": "",
+        "timeperiod": "",
+        "status": "online"
     },
     {
         "name": "goaltofit",
@@ -40,28 +55,40 @@
         "info": "Application planing and tracking your workout",
         "tags": "Mern, MongoDB, ExpressJS, React, NodeJS, Scss, Css",
         "alt": "Goal to fit planing and tracking workout",
-        "link": "https://goaltofitapp.vercel.app"
+        "link": "https://goaltofitapp.vercel.app",
+        "detail": "",
+        "timeperiod": "",
+        "status": "develop"
     },
     {
         "name": "pixelsart",
         "title": "Pixels Art",
         "info": "Drawing pixels art",
         "tags": "Html, Css, Javascript, Canvas, Pixels, Scss",
-        "alt": "Pixels art drawing"
+        "alt": "Pixels art drawing",
+        "detail": "",
+        "timeperiod": "",
+        "status": "online"
     },
     {
         "name": "algopuzzle",
         "title": "Algo Game",
         "info": "Arithmetic puzzle card game",
         "tags": "Html, Css, Javascript, Scss, Game, Puzzle, Arithmetic, Cards, Math",
-        "alt": "Algo Game"
+        "alt": "Algo Game",
+        "detail": "",
+        "timeperiod": "",
+        "status": "online"
     },
     {
         "name": "todolists",
         "title": "To-Do List",
         "info": "Don't miss a thing",
         "tags": "Html, Css, Javascript, Scss, To-Do",
-        "alt": "To-Do lists"
+        "alt": "To-Do lists",
+        "detail": "",
+        "timeperiod": "",
+        "status": "online"
     },
     {
         "name": "lomwong",
@@ -69,6 +96,9 @@
         "info": "Chat app",
         "tags": "React, Typescript, Websocket, Chatting, Mern stack, Scss, Meeting, Camp fire, Socketio",
         "alt": "Lomwoong Chat",
-        "link": "https://lomwongchat.vercel.app"
+        "link": "https://lomwongchat.vercel.app",
+        "detail": "",
+        "timeperiod": "",
+        "status": "online"
     }
 ]
