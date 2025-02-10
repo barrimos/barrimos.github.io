@@ -862,7 +862,12 @@
               // Get constant triangular from element value, 1 for lower and 0 for upper
               constantValue.push(e.target.value);
             } else {
-              constantValue.push(e.target.nextElementSibling.value);
+              // get constant from input it next from button element
+              if (method === BUTTON_NAME_ROTATE) {
+                constantValue.push(e.target.nextElementSibling.value < 0 ? e.target.nextElementSibling.value * -1 : e.target.nextElementSibling.value);
+              } else {
+                constantValue.push(e.target.nextElementSibling.value);
+              }
             }
             if(method === BUTTON_NAME_PADDING){
               method = `'${BUTTON_NAME_PADDING}', '${e.target.value}'`;

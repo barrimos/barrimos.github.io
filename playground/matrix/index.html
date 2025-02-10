@@ -12,8 +12,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 
     <!---MathJax--->
-    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
-    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3.2.2/es5/tex-mml-chtml.min.js"></script>
     <script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-MML-AM_CHTML"></script>
     <script type="text/x-mathjax-config">
         MathJax.Hub.Config({
@@ -29,8 +28,10 @@
 
     <!---py-Script--->
     <link rel="stylesheet" href="./src/pyscript.css">
-    <script defer src="https://pyscript.net/latest/pyscript.js"></script>
-    <script src="https://cdn.jsdelivr.net/pyodide/v0.23.0/full/"></script>
+
+    <link rel="stylesheet" href="https://pyscript.net/releases/2025.2.2/core.css">
+    <!-- This script tag bootstraps PyScript -->
+    <script type="module" src="https://pyscript.net/releases/2025.2.2/core.js"></script>
     <!---py-Script--->
 </head>
 <body>
@@ -125,8 +126,8 @@
                                     <button type="submit" class="method_button" data-method="rank" name="matrix">Rank</button>
                                 </div>
                                 <div class="method_box">
-                                    <button type="submit" class="method_button constant" data-method="rotate" name="matrix">Rotate</button>
-                                    <input type="number" class="constant_value" value="0" placeholder="0">
+                                    <button type="submit" class="method_button constant" data-method="rotate" name="matrix">CW Rotate</button>
+                                    <input type="number" class="constant_value" value="0" placeholder="0" min="0">
                                 </div>
                             </div>
                             <!-----------------Methods----------------->
@@ -239,8 +240,8 @@
                                     <button type="submit" class="method_button" data-method="rank" name="matrix">Rank</button>
                                 </div>
                                 <div class="method_box">
-                                    <button type="submit" class="method_button constant" data-method="rotate" name="matrix">Rotate</button>
-                                    <input type="number" class="constant_value" value="0" placeholder="0">
+                                    <button type="submit" class="method_button constant" data-method="rotate" name="matrix">CW Rotate</button>
+                                    <input type="number" class="constant_value" value="0" placeholder="0" min="0">
                                 </div>
                             </div>
                             <!-----------------Methods----------------->
@@ -274,17 +275,17 @@
     </div>
 
     <script src="../../src/scripts/sidemenu.js" defer></script>
-    <script src="../../src/scripts/totop.js" defer></script>
     <script type="module">
         import Sidemenu from '../../../src/scripts/Components/Sidemenu.js'
         await Sidemenu('../../../')
-            .then(html => {
+        .then(html => {
                 document.querySelector('#sideMenu').innerHTML += html
             })
             .then(res => {
                 sidemenu()
             })
     </script>
+    <script src="../../src/scripts/totop.js" defer></script>
     <script src="../../src/scripts/matrix.js"></script>
     <script>
         // All buttons data-method and data-control for implement.py

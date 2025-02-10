@@ -214,7 +214,7 @@ def convolution(matrix, kernel, edge = False, padding = 1, stride = 1):
   if padding < 0 or type(padding) != int or stride < 1 or type(stride) != int: return logError("Your put wrong stride or padding parameter value")
 
   if edge:
-    if len(kernel) != len(kernel[0]) or len(kernel) % 2 != 1: return logError("When parameter edge is True, The kernel's rows and columns should be same size and odd size")
+    if len(kernel) != len(kernel[0]) or len(kernel) % 2 != 1: return logError("When use convolution with edge, The kernel's rows and columns should be odd size matrix")
   else:
     if len(matrix) < len(kernel) or len(matrix[0]) < len(kernel[0]): return logError("Matrix is smaller than kernel then set parameter edge as True or change your matrix")
 

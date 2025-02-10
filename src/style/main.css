@@ -132,6 +132,9 @@ img{
 .posAb{
     position: absolute;
 }
+.posSticky{
+    position: sticky;
+}
 .d-none{
     display: none;
 }

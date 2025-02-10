@@ -16,7 +16,7 @@ const loadImages = async (name) => {
     const exists = await checkImageExists(imgSrc);
     if (!exists) break;  // Stop loop if image is missing
 
-    console.log(`Loading image: ${name}-snapshot-${i}`);
+    // console.log(`Loading image: ${name}-snapshot-${i}`);
     
     // Append the image to the page
     const imgElement = document.createElement("img");
