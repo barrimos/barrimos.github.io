@@ -1,33 +1,37 @@
 [
     {
-        "name": "maze",
-        "title": "Maze Game",
-        "info": "A puzzle game with backtracking algorithm",
-        "tags": "Maze, Game, Javascript, Canvas, A*, Backtracking, Algorithm, Shortest Path, Heuristic, Dijkstra, Depth First Search, Breath First Search",
-        "alt": "Maze game",
+        "name": "lomwong",
+        "title": "Lomwong Chat",
+        "info": "Chat app",
+        "tags": "React, Typescript, Websocket, Chatting, Mern stack, Scss, Meeting, Camp fire, Socketio",
+        "alt": "Lomwong Chat",
+        "link": "https://lomwongchat.vercel.app",
         "detail": "",
         "timeperiod": "",
-        "status": "online"
+        "status": "online",
+        "developing": "break"
     },
     {
-        "name": "theunderclass",
-        "title": "The Under Class",
-        "info": "Imitation of student ID card props in Thai sereies",
-        "tags": "Html, Css, Javascript",
-        "alt": "The underclass make an id student card",
+        "name": "makhos",
+        "title": "Makhos",
+        "info": "Thai-Checkers",
+        "tags": "Scss, Game, Minimax, AI, Algorithm, Checkers",
+        "alt": "makhos",
         "detail": "",
         "timeperiod": "",
-        "status": "online"
+        "status": "online",
+        "developing": "break"
     },
     {
-        "name": "stylingtag",
-        "title": "Styling Tags",
-        "info": "Decorate tags to stand out with colours",
-        "tags": "Html, Css, Javascript, SEO, tags",
-        "alt": "Styling tags",
+        "name": "todolists",
+        "title": "To-Do List",
+        "info": "Don't miss a thing",
+        "tags": "Html, Css, Javascript, Scss, To-Do",
+        "alt": "To-Do lists",
         "detail": "",
         "timeperiod": "",
-        "status": "online"
+        "status": "online",
+        "developing": "complete"
     },
     {
         "name": "matrix",
@@ -37,17 +41,8 @@
         "alt": "Matrix calculator",
         "detail": "",
         "timeperiod": "",
-        "status": "online"
-    },
-    {
-        "name": "textareaTo2Darray",
-        "title": "Text to array",
-        "info": "Convert input from text area into array",
-        "tags": "Html, Css, Javascript, Scss",
-        "alt": "Conversion Textarea to 2 Dimensions array",
-        "detail": "",
-        "timeperiod": "",
-        "status": "online"
+        "status": "online",
+        "developing": "complete"
     },
     {
         "name": "goaltofit",
@@ -58,7 +53,8 @@
         "link": "https://goaltofitapp.vercel.app",
         "detail": "",
         "timeperiod": "",
-        "status": "online"
+        "status": "online",
+        "developing": "break"
     },
     {
         "name": "pixelsart",
@@ -68,7 +64,8 @@
         "alt": "Pixels art drawing",
         "detail": "",
         "timeperiod": "",
-        "status": "online"
+        "status": "online",
+        "developing": "complete"
     },
     {
         "name": "algopuzzle",
@@ -78,27 +75,51 @@
         "alt": "Algo Game",
         "detail": "",
         "timeperiod": "",
-        "status": "online"
+        "status": "online",
+        "developing": "complete"
     },
     {
-        "name": "todolists",
-        "title": "To-Do List",
-        "info": "Don't miss a thing",
-        "tags": "Html, Css, Javascript, Scss, To-Do",
-        "alt": "To-Do lists",
+        "name": "maze",
+        "title": "Maze Game",
+        "info": "A puzzle game with backtracking algorithm",
+        "tags": "Maze, Game, Javascript, Canvas, A*, Backtracking, Algorithm, Shortest Path, Heuristic, Dijkstra, Depth First Search, Breath First Search",
+        "alt": "Maze game",
         "detail": "",
         "timeperiod": "",
-        "status": "online"
+        "status": "online",
+        "developing": "complete"
     },
     {
-        "name": "lomwong",
-        "title": "Lomwong Chat",
-        "info": "Chat app",
-        "tags": "React, Typescript, Websocket, Chatting, Mern stack, Scss, Meeting, Camp fire, Socketio",
-        "alt": "Lomwoong Chat",
-        "link": "https://lomwongchat.vercel.app",
+        "name": "theunderclass",
+        "title": "The Under Class",
+        "info": "Imitation of student ID card props in Thai sereies",
+        "tags": "Html, Css, Javascript",
+        "alt": "The underclass make an id student card",
         "detail": "",
         "timeperiod": "",
-        "status": "online"
+        "status": "online",
+        "developing": "complete"
+    },
+    {
+        "name": "stylingtag",
+        "title": "Styling Tags",
+        "info": "Decorate tags to stand out with colours",
+        "tags": "Html, Css, Javascript, SEO, tags",
+        "alt": "Styling tags",
+        "detail": "",
+        "timeperiod": "",
+        "status": "online",
+        "developing": "complete"
+    },
+    {
+        "name": "textareaTo2Darray",
+        "title": "Text to array",
+        "info": "Convert input from text area into array",
+        "tags": "Html, Css, Javascript, Scss",
+        "alt": "Conversion Textarea to 2 Dimensions array",
+        "detail": "",
+        "timeperiod": "",
+        "status": "online",
+        "developing": "complete"
     }
 ]

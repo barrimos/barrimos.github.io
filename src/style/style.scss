@@ -425,27 +425,35 @@ section{
                 width: 100%;
                 border-radius: 10px;
             }
-            .bug, .online, .develop, .offline{
-                padding: 3px 8px;
-                border-radius: 5px;
-                font-size: .85em;
-                font-weight: 400;
-                color: white;
+            .statusWrapper{
                 position: absolute;
                 bottom: 10px;
                 left: 10px;
-            }
-            .bug{
-                background-color: red;
-            }
-            .online{
-                background-color: hsl(100, 92%, 42%);
-            }
-            .develop{
-                background-color: hsl(220, 50%, 50%);
-            }
-            .offline{
-                background-color: hsl(0, 0%, 10%);
+                .bug, .online, .offline, .complete, .developing, .break{
+                    padding: 3px 8px;
+                    border-radius: 5px;
+                    font-size: .85em;
+                    font-weight: 400;
+                    color: white;
+                }
+                .bug{
+                    background-color: red;
+                }
+                .online{
+                    background-color: hsl(100, 92%, 42%);
+                }
+                .offline{
+                    background-color: hsl(0, 0%, 10%);
+                }
+                .complete{
+                    background-color: hsl(220, 100%, 50%);
+                }
+                .developing{
+                    background-color: hsl(39, 100%, 50%);
+                }
+                .break{
+                    background-color: hsl(315, 100%, 50%);
+                }
             }
         }
         &:hover{
@@ -724,7 +732,7 @@ section{
         margin-bottom: 20px;
         color: #666 !important;
     }
-    .infomation{
+    .information{
         max-width: 700px;
         width: 100%;
         padding: 0 15px;

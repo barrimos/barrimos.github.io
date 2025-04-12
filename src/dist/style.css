@@ -407,27 +407,35 @@ section .section-head {
   width: 100%;
   border-radius: 10px;
 }
-#project-section .project-item .project-link .bug, #project-section .project-item .project-link .online, #project-section .project-item .project-link .develop, #project-section .project-item .project-link .offline {
+#project-section .project-item .project-link .statusWrapper {
+  position: absolute;
+  bottom: 10px;
+  left: 10px;
+}
+#project-section .project-item .project-link .statusWrapper .bug, #project-section .project-item .project-link .statusWrapper .online, #project-section .project-item .project-link .statusWrapper .offline, #project-section .project-item .project-link .statusWrapper .complete, #project-section .project-item .project-link .statusWrapper .developing, #project-section .project-item .project-link .statusWrapper .break {
   padding: 3px 8px;
   border-radius: 5px;
   font-size: 0.85em;
   font-weight: 400;
   color: white;
-  position: absolute;
-  bottom: 10px;
-  left: 10px;
 }
-#project-section .project-item .project-link .bug {
+#project-section .project-item .project-link .statusWrapper .bug {
   background-color: red;
 }
-#project-section .project-item .project-link .online {
+#project-section .project-item .project-link .statusWrapper .online {
   background-color: #4ace09;
 }
-#project-section .project-item .project-link .develop {
-  background-color: #406abf;
-}
-#project-section .project-item .project-link .offline {
+#project-section .project-item .project-link .statusWrapper .offline {
   background-color: #1a1a1a;
+}
+#project-section .project-item .project-link .statusWrapper .complete {
+  background-color: #0055ff;
+}
+#project-section .project-item .project-link .statusWrapper .developing {
+  background-color: #ffa600;
+}
+#project-section .project-item .project-link .statusWrapper .break {
+  background-color: #ff00bf;
 }
 #project-section .project-item:hover .project-image {
   transform: scale(1.03);
@@ -660,38 +668,38 @@ section .section-head {
   margin-bottom: 20px;
   color: #666 !important;
 }
-#blog-section .infomation {
+#blog-section .information {
   max-width: 700px;
   width: 100%;
   padding: 0 15px;
 }
-#blog-section .infomation .paragraph, #blog-section .infomation .codePreview, #blog-section .infomation .quote, #blog-section .infomation .tablePOs, #blog-section .infomation .illustrate {
+#blog-section .information .paragraph, #blog-section .information .codePreview, #blog-section .information .quote, #blog-section .information .tablePOs, #blog-section .information .illustrate {
   margin: 30px 0;
 }
-#blog-section .infomation .paragraph, #blog-section .infomation .codePreview, #blog-section .infomation .quote, #blog-section .infomation .headline, #blog-section .infomation .tablePOs, #blog-section .infomation .orderList, #blog-section .infomation .unorderList, #blog-section .infomation .math {
+#blog-section .information .paragraph, #blog-section .information .codePreview, #blog-section .information .quote, #blog-section .information .headline, #blog-section .information .tablePOs, #blog-section .information .orderList, #blog-section .information .unorderList, #blog-section .information .math {
   color: #666 !important;
 }
-#blog-section .infomation .paragraph.invert, #blog-section .infomation .codePreview.invert, #blog-section .infomation .quote.invert, #blog-section .infomation .headline.invert, #blog-section .infomation .tablePOs.invert, #blog-section .infomation .orderList.invert, #blog-section .infomation .unorderList.invert, #blog-section .infomation .math.invert {
+#blog-section .information .paragraph.invert, #blog-section .information .codePreview.invert, #blog-section .information .quote.invert, #blog-section .information .headline.invert, #blog-section .information .tablePOs.invert, #blog-section .information .orderList.invert, #blog-section .information .unorderList.invert, #blog-section .information .math.invert {
   color: #ddd !important;
 }
-#blog-section .infomation .paragraph {
+#blog-section .information .paragraph {
   line-height: 2em;
 }
-#blog-section .infomation .bigo {
+#blog-section .information .bigo {
   width: 100%;
   padding-bottom: 30px;
 }
-#blog-section .infomation .headline {
+#blog-section .information .headline {
   margin-top: 60px;
 }
-#blog-section .infomation .illustrate {
+#blog-section .information .illustrate {
   text-align: center;
   background-color: white;
 }
-#blog-section .infomation .illustrate img {
+#blog-section .information .illustrate img {
   width: 100%;
 }
-#blog-section .infomation .illustrate .credit {
+#blog-section .information .illustrate .credit {
   color: #666;
   padding: 5px;
   border-top-right-radius: 2px;
@@ -699,114 +707,114 @@ section .section-head {
   width: 100%;
   word-break: break-all;
 }
-#blog-section .infomation .raw.invert, #blog-section .infomation .quote.invert, #blog-section .infomation .codePreview.invert {
+#blog-section .information .raw.invert, #blog-section .information .quote.invert, #blog-section .information .codePreview.invert {
   background-color: #333;
   color: #ddd !important;
 }
-#blog-section .infomation .raw {
+#blog-section .information .raw {
   background-color: #eee;
   padding: 5px 10px;
   border-radius: 3px;
   white-space: nowrap;
   font-style: italic;
 }
-#blog-section .infomation .quote {
+#blog-section .information .quote {
   background-color: #f7f7f7;
   padding: 30px;
   border-radius: 10px;
   line-height: 2em;
 }
-#blog-section .infomation .codePreview {
+#blog-section .information .codePreview {
   background-color: #f7f7f7;
   padding: 30px;
   border-radius: 10px;
   overflow-x: scroll;
   line-height: 1.5em;
 }
-#blog-section .infomation .codePreview img {
+#blog-section .information .codePreview img {
   max-width: 500px;
 }
-#blog-section .infomation .codePreview::-webkit-scrollbar {
+#blog-section .information .codePreview::-webkit-scrollbar {
   display: none;
 }
-#blog-section .infomation .tablePOs thead tr th {
+#blog-section .information .tablePOs thead tr th {
   font-size: small;
 }
-#blog-section .infomation .tablePOs thead tr th.alignCenter {
+#blog-section .information .tablePOs thead tr th.alignCenter {
   text-align: center;
 }
-#blog-section .infomation .tablePOs tbody tr td.alignCenter {
+#blog-section .information .tablePOs tbody tr td.alignCenter {
   text-align: center;
 }
-#blog-section .infomation .tablePOs tr th, #blog-section .infomation .tablePOs tr td {
+#blog-section .information .tablePOs tr th, #blog-section .information .tablePOs tr td {
   border: 1px solid #bebebe !important;
   white-space: nowrap;
   padding: 10px;
   color: #666;
 }
-#blog-section .infomation .tablePOs.invert tr th, #blog-section .infomation .tablePOs.invert tr td {
+#blog-section .information .tablePOs.invert tr th, #blog-section .information .tablePOs.invert tr td {
   border: 1px solid #666 !important;
   color: #ddd;
 }
-#blog-section .infomation .unorderList .ulItem {
+#blog-section .information .unorderList .ulItem {
   list-style-type: disc;
   line-height: 2em;
   margin-left: 15px;
 }
-#blog-section .infomation .unorderList .ulItem .unorderList .ulItem {
+#blog-section .information .unorderList .ulItem .unorderList .ulItem {
   list-style-type: circle;
   line-height: 2em;
   margin-left: 15px;
 }
-#blog-section .infomation .unorderList .ulItem .unorderList .ulItem .unorderList .ulItem {
+#blog-section .information .unorderList .ulItem .unorderList .ulItem .unorderList .ulItem {
   list-style-type: "- ";
   line-height: 2em;
   margin-left: 15px;
 }
-#blog-section .infomation .orderList .olItem {
+#blog-section .information .orderList .olItem {
   list-style-type: decimal;
   line-height: 2em;
   margin-left: 15px;
 }
-#blog-section .infomation .orderList .olItem .orderList .olItem {
+#blog-section .information .orderList .olItem .orderList .olItem {
   list-style-type: lower-greek;
   line-height: 2em;
   margin-left: 15px;
 }
-#blog-section .infomation .orderList .olItem .orderList .olItem .orderList .olItem {
+#blog-section .information .orderList .olItem .orderList .olItem .orderList .olItem {
   list-style-type: decimal-leading-zero;
   line-height: 2em;
   margin-left: 15px;
 }
-#blog-section .infomation .initialValue {
+#blog-section .information .initialValue {
   color: #00bd06;
 }
-#blog-section .infomation .condition {
+#blog-section .information .condition {
   color: #001deb;
 }
-#blog-section .infomation .updation {
+#blog-section .information .updation {
   color: #f27d07;
 }
-#blog-section .infomation .constantPOs {
+#blog-section .information .constantPOs {
   color: #ff2277;
 }
-#blog-section .infomation .small {
+#blog-section .information .small {
   font-size: 0.7em;
 }
-#blog-section .infomation .math.inline {
+#blog-section .information .math.inline {
   display: inline-block;
 }
-#blog-section .infomation .math .katex-display .katex {
+#blog-section .information .math .katex-display .katex {
   width: auto;
   white-space: normal;
 }
-#blog-section .infomation .math .katex-display .katex .katex-html {
+#blog-section .information .math .katex-display .katex .katex-html {
   overflow-x: scroll;
 }
-#blog-section .infomation .math .katex-display .katex .katex-html::-webkit-scrollbar {
+#blog-section .information .math .katex-display .katex .katex-html::-webkit-scrollbar {
   display: none;
 }
-#blog-section .infomation .math.noMargin {
+#blog-section .information .math.noMargin {
   margin: 0 10px;
 }
 #blog-section .quickTo {

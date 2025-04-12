@@ -28,12 +28,12 @@
                                     <img src="../../src/img/icon/zmlogo-page-15.png" alt="logo zixma">
                                 </div>
                                 <div class="switchWrapper">
-                                    <input type="checkbox" name="toggleBrightDark" class="toggleBrightDark"
-                                        id="toggleBrightDark"></input>
+                                    <input type="checkbox" name="toggleBrightDark" class="toggleBrightDark" id="toggleBrightDark"></input>
                                     <div class="iconSwitchUI" id="iconSwitchUI">
                                         <span>
                                             <svg viewBox="0 0 36 36" aria-hidden="true" width="30" height="30" id="sunMoon">
-                                                <path id="sun" d="
+                                                <path id="sun"
+                                                    d="
                                                     M28 18
                                                     A10 10 0 0 0 18 8
                                                     A10 10 0 0 0 8 18
@@ -66,6 +66,95 @@
                             <div class="illustrate">
                                 <img src="./img1.png" alt="git branching">
                             </div>
+                            <h1 class="headline">What is Git ?</h1>
+                            <p class="paragraph">
+                                Git is version control for manage your changes history each version (commit) of your file.<br>
+                            </p>
+                            <h1 class="headline">How it works ?</h1>
+                            <p class="paragraph">
+                                Git create new file instead let you create new file with the whole same data again,<br>
+                                so every commit Git will create new file then records only where file it changes (difference, delta) from previous commit state,<br>
+                                then each commit is given a unique reference (a commit hash) of each commit to you.<br>
+                            </p>
+<pre class="codePreview">
+POV
+firstDraft.ps
+secondDraft.ps
+secondFinal.ps
+secondFinalV1.ps
+secondFinalllllV2.ps
+secondFinalOfFinalV1.ps
+
+// Your karma: I think first draft is perfect. Develop from that version.
+</pre>
+                            <p class="paragraph">
+                                At POV you will notice that, Git control version is something like this but instead you create a new file again and again,<br>
+                                Git will manage that instead of you let make you do not create a new file again and again.
+                            </p>
+                            <h1 class="headline">Where Git locate ?</h1>
+                            <div class="illustrate">
+                                <img src="./locateGit.jpg" alt="locate Git">
+                            </div>
+                            <p class="paragraph">
+                                After you run command to start git <code class="raw">git init</code><br>
+                                <code class="raw">.git folder</code> was created and <i>hidden folder.</i><br>
+                                <code class="raw">.git folder</code> will stores all the data for your repository, including commit history, in the .git folder.<br>
+                                <code class="raw">Note</code> .git folder must locate at root project folder
+                            </p>
+<pre class="codePreview">
+<b>Can have multiple .git folder at same project</b>
+Ans. No
+
+But you can have nested .git folders (NOT RECOMMENDED). As I mentioned above, the .git folder must be in the root project.
+That means you can have subprojects within the main project that have their own .git folders.
+For example:
+    Project1/.git1 (and another file)            (Root for Project1)
+    Manages the entire Project1 folder, including Module.
+
+    Project1/Module/.git2 (and another file)     (Root for Module within Project1)
+    Manages only the Module folder as its own independent project.
+
+Scenario:
+    - If file in Module folder has changes .git1 and .git2 will save those changes
+    - If file in Project1 folder (file in Module folder not changes any) has changes .git1 will save this changes
+    - If roll back at Project1 folder, Module folder will be affect too, that mean if Module folder do something new, it will be lose
+    - If roll back at Module folder it will not affect to Project1 folder because it independent from parent
+</pre>
+                            <h1 class="headline">What is Git Branch ?</h1>
+                            <p class="paragraph">
+                                <blockquote class="quote">Branching means you diverge from the main line of development and continue to do work without messing with that main line : <a href="https://git-scm.com/book/en/v2/Git-Branching-Branches-in-a-Nutshell">Git-scm</a></blockquote>
+                            </p>
+                            <h1 class="headline">Start Git (Windows)</h1>
+                            <ol class="orderList">
+                                <div class="item">
+                                    <li class="olItem">Install <a href="https://git-scm.com/downloads">Git bash</a></li>
+                                </div>
+                                <div class="item">
+                                    <li class="olItem">Open CMD or Git bash, check that completely installation
+<pre class="codePreview" style="margin-top: 0px;">
+command <code class="raw">git -v</code> Expected result version of git
+> git version 2.49.0.windows.1
+</pre>
+                                    </li>
+                                </div>
+                                <div class="item">
+                                    <li class="olItem">Change diretory to your project. Or open in code editor then open terminal.
+<pre class="codePreview" style="margin-top: 0px;">
+command <code class="raw">git init</code>
+you will see <code class="raw">.git</code> folder (Disable hidden attributes folder first)
+</pre>
+                                    </li>
+                                </div>
+                                <div class="item">
+                                    <li class="olItem">
+                                        In code editor like VSCODE has extension that help you track branching easily <code class="raw">Git graph</code><br>
+                                        In addition, it is also necessary to practice viewing Git logs and status.
+                                    </li>
+                                    <div class="illustrate">
+                                        <img src="./extension.jpg" alt="extension git graph">
+                                    </div>
+                                </div>
+                            </ol>
                         </div>
                     </div>
                 </div>
@@ -80,16 +169,16 @@
         import Sidemenu from '../../../src/scripts/Components/Sidemenu.js'
         
         await Sidemenu('../../../')
-          .then(html => {
-              document.querySelector('#sideMenu').innerHTML += html
-          })
-          .then(res => {
-              sidemenu()
-          })
+            .then(html => {
+                document.querySelector('#sideMenu').innerHTML += html
+            })
+            .then(res => {
+                sidemenu()
+            })
 
-          const footer = document.getElementById('footer');
-          footer.innerHTML = Footer();
-      </script>
+        const footer = document.getElementById('footer');
+        footer.innerHTML = Footer();
+    </script>
     <script src="../../src/scripts/stylingtag.js" defer></script>
     <script src="../../src/scripts/sidemenu.js" defer></script>
     <script src="../../src/scripts/totop.js" defer></script>
