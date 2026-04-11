@@ -297,13 +297,13 @@ section{
         &.linkedin{
             background-color: rgb(0, 70, 128);
         }
-        &.wordpress{
-            background-color: rgb(0, 155, 226);
+        &.behance{
+            background-color: rgb(5, 62, 255);
         }
         &.facebook:hover .icon-socials,
         &.github:hover .icon-socials,
         &.linkedin:hover .icon-socials,
-        &.wordpress:hover .icon-socials{
+        &.behance:hover .icon-socials{
             transform: scale(1.4);
         }
     }

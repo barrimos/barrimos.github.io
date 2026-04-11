@@ -285,10 +285,10 @@ section .section-head {
 #social-section .socials.linkedin {
   background-color: #004680;
 }
-#social-section .socials.wordpress {
-  background-color: #009be2;
+#social-section .socials.behance {
+  background-color: #053eff;
 }
-#social-section .socials.facebook:hover .icon-socials, #social-section .socials.github:hover .icon-socials, #social-section .socials.linkedin:hover .icon-socials, #social-section .socials.wordpress:hover .icon-socials {
+#social-section .socials.facebook:hover .icon-socials, #social-section .socials.github:hover .icon-socials, #social-section .socials.linkedin:hover .icon-socials, #social-section .socials.behance:hover .icon-socials {
   transform: scale(1.4);
 }
 

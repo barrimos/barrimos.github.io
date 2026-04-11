@@ -11,7 +11,7 @@ const Footer = () => {
           <p>All rights reserved &copy; Copy Right 2022 - ${new Date().getFullYear()}</p>
           <p>Prapas Khong-attagarn</p>
           <p>Bangkok, Thailand</p>
-          <p>prapas.k13@hotmail.com</p>
+          <p>prapas.hkr@gmail.com</p>
       </div>
       <div class="col-12 col-md-9">
           <section class="social-section" id="social-section">${Socialsection()}</section>

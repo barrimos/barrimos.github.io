@@ -14,8 +14,8 @@ const Socialsection = () => {
       <div class="col-6 col-md-3 socials linkedin">
           <a href="https://www.linkedin.com/in/prapas-k/" class="social-link"><i class="fa-brands fa-linkedin icon-socials"></i></a>
       </div>
-      <div class="col-6 col-md-3 socials wordpress">
-          <a href="https://prapask.wordpress.com/" class="social-link"><i class="fa-brands fa-wordpress icon-socials"></i></a>
+      <div class="col-6 col-md-3 socials behance">
+          <a href="https://www.behance.net/prapask" class="social-link"><i class="fa-brands fa-behance icon-socials"></i></a>
       </div>
   </div>
 </div>`
