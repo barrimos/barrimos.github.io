@@ -9,6 +9,7 @@
     <link rel="shortcut icon" href="./src/img/icon/zmlogo-page-03.png" type="image/x-icon">
     <link rel="stylesheet" href="./src/style/main.css">
     <link rel="stylesheet" href="./src/dist/style.css">
+    <link rel="stylesheet" href="./src/dist/portfolio.css">
     <link rel="stylesheet" href="./src/dist/sidemenu.css">
     <link rel="stylesheet" href="./src/dist/totop.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
@@ -16,7 +17,31 @@
 <body>
     <script type="module">
         import layout from './src/scripts/Components/layout.js'
-        const children = ''
+        const vid = () => {
+            let x = ''
+            for (let i = 1; i <= 36; i++) {
+                x += `<div class="col-4">
+                        <video controls width="100%">
+                            <source src="./src/reels/portfolio/vid (${i}).mp4" type="video/mp4" />
+                        </video>
+                    </div>`
+            }
+            return x
+        }
+        const children = `
+        <div class="container">
+            <div class="row">
+                <div class="col-auto">
+                    <div class="portfolio-wrapper">
+                        <img src="./src/img/portfolio/portfolio_graphic_design-01.jpg" class="port-img" alt="portfolio-graphic-design"/>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                ${vid()}
+            </div>
+        </div>
+        `
         layout(children)
             .then(html => {
                 document.body.innerHTML += html

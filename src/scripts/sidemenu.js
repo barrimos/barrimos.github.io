@@ -136,6 +136,10 @@ const sidemenu = () => {
 
             treeView = document.querySelectorAll(`[data-page=${subPage}]`)[0].parentElement;
             treeView.style.backgroundColor = 'rgba(0, 0, 0, .05)';
+        } else if (currentPage === 'portfolio') {
+            activePage = document.getElementById('portfolio');
+            linkIcon = document.querySelector('[data-icon=portfolio]');
+            linkText = document.querySelector('[data-text=portfolio]');
         } else {
             activePage = document.getElementById(currentPage);
             linkIcon = document.querySelector(`[data-icon=${currentPage}]`);

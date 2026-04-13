@@ -31,6 +31,14 @@ const Sidemenu = async (rootSrc = './') => {
                 <span class="nav-text" data-text="profile">PROFILE</span>
             </a>
         </li>
+        <li class="list-item data-list-url">
+            <a href="../../portfolio.html" class="nav-link" title="portfolio" id="portfolio">
+                <div class="nav-icon" data-icon="portfolio">
+                    <img src="${rootSrc}src/img/icon/social-29.svg" alt="portfolio">
+                </div>
+                <span class="nav-text" data-text="portfolio">PORTFOLIO</span>
+            </a>
+        </li>
         <li class="list-item has-treeview data-list-url">
             <a href="javascript:void(0)" class="nav-link btnDropmenu" title="Zxsandbox" id="zxsandbox">
                 <div class="nav-icon" data-icon="zxsandbox">
@@ -65,11 +73,11 @@ const Sidemenu = async (rootSrc = './') => {
             </a>
         </li>
         <li class="list-item has-treeview data-list-url">
-            <a href="javascript:void(0)" class="nav-link btnDropmenu" title="Resume">
+            <a href="javascript:void(0)" class="nav-link btnDropmenu" title="CV">
                 <div class="nav-icon">
                     <img src="${rootSrc}src/img/icon/social-31.svg" alt="Service">
                 </div>
-                <span class="nav-text">RESUME</span>
+                <span class="nav-text">DOWNLOAD CV</span>
                 <div class="iconArrowdrop">
                     <svg viewbox="0 0 40 40" width="15" heigth="15">
                         <path 
@@ -82,19 +90,19 @@ const Sidemenu = async (rootSrc = './') => {
             </a>
             <ul class="underlist">
                 <li class="list-item list-treeview">
-                    <a href="${rootSrc}src/download/Prapas_Resume_2025_EN.pdf" title="Download Resume" class="nav-link dlbtn-wraper" download>
+                    <a href="${rootSrc}src/download/Prapas_CV_2026_EN.pdf" title="Download CV" class="nav-link dlbtn-wraper" download>
                         <div class="nav-icon">
-                            <img src="${rootSrc}src/img/icon/zmlogo-page-03.png" alt="Resume EN">
+                            <img src="${rootSrc}src/img/icon/zmlogo-page-03.png" alt="CV EN">
                         </div>
-                        <span class="nav-text">RESUME EN</span>
+                        <span class="nav-text">CV EN</span>
                     </a>
                 </li>
                 <li class="list-item list-treeview">
-                    <a href="${rootSrc}src/download/Prapas_Resume_2025_TH.pdf" title="Download Resume" class="nav-link dlbtn-wraper" download>
+                    <a href="${rootSrc}src/download/Prapas_CV_2026_TH.pdf" title="Download CV" class="nav-link dlbtn-wraper" download>
                         <div class="nav-icon">
-                            <img src="${rootSrc}src/img/icon/zmlogo-page-03.png" alt="Resume TH">
+                            <img src="${rootSrc}src/img/icon/zmlogo-page-03.png" alt="CV TH">
                         </div>
-                        <span class="nav-text">RESUME TH</span>
+                        <span class="nav-text">CV TH</span>
                     </a>
                 </li>
             </ul>

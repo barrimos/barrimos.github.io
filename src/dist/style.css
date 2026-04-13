@@ -12,9 +12,6 @@ body {
   position: relative;
   background-color: #fcfcfc;
 }
-body::-webkit-scrollbar {
-  display: none;
-}
 
 .wrapper {
   min-height: 100%;
@@ -59,12 +56,12 @@ section .section-head {
   background-color: white;
   z-index: 999999;
 }
-#topNav-section .nav-menu .btn .Downloadresume {
+#topNav-section .nav-menu .btn .DownloadCV {
   padding: 10px 20px;
   display: block;
   color: red;
 }
-#topNav-section .nav-menu .btn .Downloadresume:active {
+#topNav-section .nav-menu .btn .DownloadCV:active {
   color: #0c007c;
 }
 #topNav-section .nav-menu .btn:hover {
