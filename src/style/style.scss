@@ -31,6 +31,84 @@ body{
         height: 120px;
     }
 }
+.infoWrapper{
+    width: auto;
+    height: 60px;
+    position: fixed;
+    top: 10px;
+    right: 35px;
+    z-index: 99;
+    display: none;
+    @media screen and(max-width: 576px) {
+        display: block;
+    }
+    .checkboxToggleInfo{
+        position: absolute;
+        top: 0;
+        right: -25px;
+        width: 15px;
+        height: 15px;
+        z-index: 9;
+        visibility: hidden;
+        color: #aaa;
+        cursor: pointer;
+        &:checked{
+            &~.infoBox{
+                opacity: 1;
+            }
+        }
+        &::after{
+            content: "i";
+            font-weight: 600;
+            font-size: .9em;
+            width: 10px;
+            height: 10px;
+            text-align: center;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-top: 3px;
+            position: absolute;
+            right: 2.5px;
+            clear: both;
+            visibility: visible;
+        }
+        &::before{
+            visibility: visible;
+            content: "";
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            border: 1.5px solid #aaa;
+            clear: both;
+            border-radius: 50%;
+        }
+    }
+    .infoBox{
+        color: #8b8b8b;
+        font-size: .8em;
+        line-height: 1.5em;
+        padding: 5px;
+        border-radius: 5px;
+        background-color: white;
+        opacity: 0;
+        transition: opacity .2s ease;
+        filter: drop-shadow(2px 2px 5px rgba(0, 0, 0, .1));
+        &::after{
+            content: "";
+            position: absolute;
+            top: 8px;
+            right: -7px;
+            width: 10px;
+            height: 10px;
+            border-style: solid;
+            border-width: 0 15px 10px 10px;
+            border-color: transparent transparent transparent white;
+            transform: rotate(135deg);
+            filter: drop-shadow(2px 2px 5px rgba(0, 0, 0, .1));
+        }
+    }
+}
 section{
     margin-bottom: 60px;
     .section-head{

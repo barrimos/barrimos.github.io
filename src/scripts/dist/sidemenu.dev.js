@@ -64,11 +64,11 @@ var sidemenu = function sidemenu() {
     if (window.innerWidth > 767) {
       return;
     } else {
-      if (deltaX >= 200) {
+      if (deltaX >= 70) {
         sideMenu.style.left = '0';
       }
 
-      if (deltaX < -100) {
+      if (deltaX < -70) {
         sideMenu.style.left = '-70px';
 
         if (!sideMenu.classList.contains('active')) {
