@@ -77,7 +77,7 @@ const Sidemenu = async (rootSrc = './') => {
                 <div class="nav-icon">
                     <img src="${rootSrc}src/img/icon/social-31.svg" alt="Service">
                 </div>
-                <span class="nav-text">DOWNLOAD CV</span>
+                <span class="nav-text">DOWNLOAD</span>
                 <div class="iconArrowdrop">
                     <svg viewbox="0 0 40 40" width="15" heigth="15">
                         <path 
@@ -103,6 +103,22 @@ const Sidemenu = async (rootSrc = './') => {
                             <img src="${rootSrc}src/img/icon/zmlogo-page-03.png" alt="CV TH">
                         </div>
                         <span class="nav-text">CV TH</span>
+                    </a>
+                </li>
+                <li class="list-item list-treeview">
+                    <a href="${rootSrc}src/download/Prapas_Resume_2026_EN.pdf" title="Download Resume" class="nav-link dlbtn-wraper" download>
+                        <div class="nav-icon">
+                            <img src="${rootSrc}src/img/icon/zmlogo-page-03.png" alt="Resume EN">
+                        </div>
+                        <span class="nav-text">Resume EN</span>
+                    </a>
+                </li>
+                <li class="list-item list-treeview">
+                    <a href="${rootSrc}src/download/Prapas_Resume_2026_TH.pdf" title="Download Resume" class="nav-link dlbtn-wraper" download>
+                        <div class="nav-icon">
+                            <img src="${rootSrc}src/img/icon/zmlogo-page-03.png" alt="Resume TH">
+                        </div>
+                        <span class="nav-text">Resume TH</span>
                     </a>
                 </li>
             </ul>

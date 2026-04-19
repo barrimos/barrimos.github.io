@@ -1,5 +1,6 @@
 import Sidemenu from "./Sidemenu.js"
 import Footer from "./Footer.js"
+import DownloadButton from "./DownloadButton.js"
 
 
 const layout = async (children, rootSrc = './') => {
@@ -22,9 +23,13 @@ const layout = async (children, rootSrc = './') => {
                                 <div class="topLogo">
                                     <img src="./src/img/icon/zmlogo-page-15.png" alt="logo zixma">
                                 </div>
-                                <div class="btn d-none d-md-block">
-                                    <a href="./src/download/Prapas_CV_2026_EN.pdf" class="DownloadCV" download>Download CV</a>
+                                <div class="hamburger hide-md-query">
+                                    <input type="checkbox" class="toggler" id="btnToggle" autocomplete="off">
+                                    <div class="bars">
+                                        <div class="ham-icon" id="ham-icon"></div>
+                                    </div>
                                 </div>
+                                ${DownloadButton()}
                             </div>
                         </div>
                     </div>

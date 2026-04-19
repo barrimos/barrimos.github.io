@@ -9,6 +9,8 @@ var _Sidemenu = _interopRequireDefault(require("./Sidemenu.js"));
 
 var _Footer = _interopRequireDefault(require("./Footer.js"));
 
+var _DownloadButton = _interopRequireDefault(require("./DownloadButton.js"));
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 
 var layout = function layout(children) {
@@ -27,11 +29,12 @@ var layout = function layout(children) {
 
         case 4:
           _context.t1 = _context.sent;
-          _context.t2 = children;
-          _context.t3 = (0, _Footer["default"])();
-          return _context.abrupt("return", _context.t0.concat.call(_context.t0, _context.t1, "\n        </nav>\n        \n        <main class=\"main\">\n            <div class=\"topNav-section\" id=\"topNav-section\">\n                <div class=\"container\">\n                    <div class=\"row\">\n                        <div class=\"col-12\">\n                            <div class=\"nav-menu\">\n                                <div class=\"topLogo\">\n                                    <img src=\"./src/img/icon/zmlogo-page-15.png\" alt=\"logo zixma\">\n                                </div>\n                                <div class=\"btn d-none d-md-block\">\n                                    <a href=\"./src/download/Prapas_CV_2026_EN.pdf\" class=\"DownloadCV\" download>Download CV</a>\n                                </div>\n                            </div>\n                        </div>\n                    </div>\n                </div>\n            </div>\n            ").concat(_context.t2, "\n        </main>\n        <div class=\"push\"></div>\n    </div>\n    <footer id=\"footer\">").concat(_context.t3, "</footer>"));
+          _context.t2 = (0, _DownloadButton["default"])();
+          _context.t3 = children;
+          _context.t4 = (0, _Footer["default"])();
+          return _context.abrupt("return", _context.t0.concat.call(_context.t0, _context.t1, "\n        </nav>\n        \n        <main class=\"main\">\n            <div class=\"topNav-section\" id=\"topNav-section\">\n                <div class=\"container\">\n                    <div class=\"row\">\n                        <div class=\"col-12\">\n                            <div class=\"nav-menu\">\n                                <div class=\"topLogo\">\n                                    <img src=\"./src/img/icon/zmlogo-page-15.png\" alt=\"logo zixma\">\n                                </div>\n                                <div class=\"hamburger hide-md-query\">\n                                    <input type=\"checkbox\" class=\"toggler\" id=\"btnToggle\" autocomplete=\"off\">\n                                    <div class=\"bars\">\n                                        <div class=\"ham-icon\" id=\"ham-icon\"></div>\n                                    </div>\n                                </div>\n                                ").concat(_context.t2, "\n                            </div>\n                        </div>\n                    </div>\n                </div>\n            </div>\n            ").concat(_context.t3, "\n        </main>\n        <div class=\"push\"></div>\n    </div>\n    <footer id=\"footer\">").concat(_context.t4, "</footer>"));
 
-        case 8:
+        case 9:
         case "end":
           return _context.stop();
       }

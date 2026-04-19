@@ -34,59 +34,6 @@
 #sideMenu.active {
   width: 200px;
 }
-#sideMenu .hamburger {
-  display: inline-flex;
-  align-items: center;
-  margin: 10px 18px;
-}
-#sideMenu .hamburger .toggler {
-  width: 30px;
-  height: 30px;
-  opacity: 0;
-  z-index: 101;
-  cursor: pointer;
-  position: relative;
-}
-#sideMenu .hamburger .toggler:checked + .bars {
-  transform: rotate(45deg);
-}
-#sideMenu .hamburger .toggler:checked + .bars > .ham-icon {
-  background-color: transparent;
-}
-#sideMenu .hamburger .toggler:checked + .bars > .ham-icon::after {
-  transform: rotate(180deg);
-}
-#sideMenu .hamburger .toggler:checked + .bars > .ham-icon::before {
-  transform: rotate(-90deg);
-}
-#sideMenu .hamburger .bars {
-  position: absolute;
-  cursor: pointer;
-  margin: 10px 0;
-  transition: 0.2s ease-in-out;
-}
-#sideMenu .hamburger .bars .ham-icon {
-  width: 30px;
-  height: 3px;
-  background-color: var(--black);
-  margin: 5px 0;
-  border-radius: 50px;
-}
-#sideMenu .hamburger .bars .ham-icon::after, #sideMenu .hamburger .bars .ham-icon::before {
-  content: "";
-  position: absolute;
-  width: 30px;
-  height: 3px;
-  border-radius: 50px;
-  background-color: var(--black);
-  transition: 0.2s ease-in-out;
-}
-#sideMenu .hamburger .bars .ham-icon::after {
-  transform: translateY(7px);
-}
-#sideMenu .hamburger .bars .ham-icon::before {
-  transform: translateY(-7px);
-}
 #sideMenu .nav-side-menu {
   padding: 5px;
 }
@@ -141,11 +88,10 @@
 }
 #sideMenu .nav-side-menu .underlist .list-item .nav-link .iconArrowdrop {
   stroke: var(--black);
-  transform: rotate(-90deg);
   transition: 0.1s ease-in-out;
 }
 #sideMenu .nav-side-menu .underlist .list-item .nav-link .iconArrowdrop.open {
-  transform: rotate(0deg);
+  transform: rotate(180deg);
 }
 #sideMenu .nav-side-menu .underlist .list-item .nav-link:active {
   background-color: rgba(0, 78, 245, 0.719);

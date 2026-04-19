@@ -55,7 +55,77 @@ section{
                 padding: 20px 0;
             }
         }
-        .btn{
+        .dropdownDownloadCVBtn{
+            width: 120px;
+            font-weight: 600;
+            font-size: .8em;
+            position: relative;
+            .btnDownload{
+                width: 100%;
+                height: 30px;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                border-radius: 5px;
+                color: #8b8b8b;
+            }
+            .triangleDownIconBtnDownload{
+                margin: 3px 5px;
+                width: 9px;
+                height: 9px;
+            }
+            .dropdown-toggle{
+                cursor: pointer;
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                opacity: 0;
+                transition: .2s ease;
+                &:checked{
+                    &~.dropdown-menu{
+                        height: 60px;
+                    }
+                }
+                &:hover{
+                    &~.btnDownload{
+                        color: #333;
+                    }
+                }
+            }
+
+            .dropdown-menu{
+                cursor: pointer;
+                width: 100%;
+                height: 0;
+                display: flex;
+                flex-direction: column;
+                overflow: hidden;
+                position: absolute;
+                transition: .2s ease;
+                .dropdown-item{
+                    color: red;
+                    width: 100%;
+                    height: 30px;
+                    padding: 5px;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    background-color: white;
+                    transition: 0.2s ease;
+                    border-radius: 15px;
+                    &:hover{
+                        background-color: red;
+                        color: white;
+                    }
+                    &+.dropdown-item{
+                        margin-top: 5px;
+                    }
+                }
+            }
+        }
+        .btnDownloadResumeCV{
             font-size: .8em;
             box-shadow: 0 0 8px -4px rgba($color: $primary-text, $alpha: .7);
             border-radius: 5px;
@@ -63,16 +133,23 @@ section{
             transition: .2s ease;
             background-color: white;
             z-index: 999999;
-            .DownloadCV{
-                padding: 10px 20px;
-                display: block;
-                color: red;
-                &:active{
-                    color: rgb(12, 0, 124);
+            .download{
+                width: 120px;
+                text-align: center;
+                &.cv, &.resume{
+                    padding: 10px 20px;
+                    display: block;
+                    color: red;
+                    &:active{
+                        color: rgb(12, 0, 124);
+                    }
                 }
             }
+            &+.btnDownloadResumeCV{
+                margin-left: 10px;
+            }
             &:hover{
-                a{
+                .download{
                     color: white;
                 }
                 background-color: red;
@@ -182,6 +259,9 @@ section{
                     justify-content: center;
                     align-items: center;
                     padding: 15px;
+                    @media screen and (max-width: 768px){
+                        height: auto;
+                    }
                     .st-top{
                         margin-bottom: 12px;
                         font-weight: 600;
@@ -969,7 +1049,7 @@ section{
 .showHintWrapper{
     position: fixed;
     top: 10px;
-    right: 10px;
+    left: 10px;
     width: auto;
     height: auto;
     z-index: 999;
