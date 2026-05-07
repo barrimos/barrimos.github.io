@@ -5,7 +5,7 @@
  */
 const BlogItem = item => {
     return `<div class="topic-item" data-item=${item.number}>
-        <a href="./blog/${item.name}/" class="topic-link">
+        <a ${item.online ? `href=${`./blog/${item.name}/`}` : ""} class="topic-link">
             <div class="topic-l">
                 <img src="./src/img/cover/${item.name}.jpg" alt="${item.name}" class="topic-cover">
             </div>

@@ -719,9 +719,9 @@ section{
                     white-space: wrap;
                 }
             }
-            &:hover{
-                background-color: rgb(245, 245, 245);
-            }
+            // &:hover{
+            //     background-color: rgb(245, 245, 245);
+            // }
         }
         @media screen and(min-width: 992px){
             .topic-link{
