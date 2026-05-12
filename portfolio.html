@@ -7,6 +7,7 @@
     <meta name="description" content="Freelance, Graphic, Web application, Algorithm, Frontend, Backend, Full-Stack, Developer, MERN stack, MongoDB, Express, React, NodeJS, UXUI">
     <title>zixma - All the sum</title>
     <link rel="shortcut icon" href="./src/img/icon/zmlogo-page-03.png" type="image/x-icon">
+    <link rel="stylesheet" href="./src/dist/stylingtag.css">
     <link rel="stylesheet" href="./src/style/main.css">
     <link rel="stylesheet" href="./src/dist/style.css">
     <link rel="stylesheet" href="./src/dist/portfolio.css">
@@ -18,6 +19,13 @@
 <body>
     <script type="module">
         import layout from './src/scripts/Components/layout.js'
+        const imgs = () => {
+            let x = ''
+            for (let i = 1; i <= 13; i++) {
+                x += `<img src="./src/img/portfolio/low-portfolio_graphic_design-${i}.jpg" class="port-img" alt="portfolio-graphic-design"/>`
+            }
+            return x
+        }
         const vid = () => {
             let x = ''
             for (let i = 1; i <= 36; i++) {
@@ -31,24 +39,62 @@
         }
         const children = `
         <div class="container">
-            <div class="row">
+            <p class="tagLists">graphic-design, motion-graphic</p>
+            <div class="filterPortfolioBtnWrapper">
+                <button type="button" id="filterPhotoBtn" name="filterPhotoBtn" class="filterPortBtn">Photos</button>
+                <button type="button" id="filterMotionBtn" name="filterMotionBtn" class="filterPortBtn">Motion</button>
+                <button type="reset" id="resetFilterBtn" name="resetFilterBtn" class="resetFilterBtn">Reset</button>
+            </div>
+            <div class="row" id="portImage" class>
                 <div class="col-auto">
                     <div class="portfolio-wrapper">
-                        <img src="./src/img/portfolio/portfolio_graphic_design-01.jpg" class="port-img" alt="portfolio-graphic-design"/>
+                        ${await imgs()}
                     </div>
                 </div>
             </div>
-            <div class="row">
-                ${vid()}
+            <div class="row" id="portVid" class>
+                ${await vid()}
             </div>
         </div>
         `
         layout(children)
-            .then(html => {
-                document.body.innerHTML += html
+            .then(async html => {
+                document.body.innerHTML += await html
+                const filterPhotoBtn = await document.getElementById('filterPhotoBtn')
+                const filterMotionBtn = await document.getElementById('filterMotionBtn')
+                const resetFilterBtn = await document.getElementById('resetFilterBtn')
+                const portImage = await document.getElementById('portImage')
+                const portVid = await document.getElementById('portVid')
+
+                filterPhotoBtn.addEventListener('click', e => {
+                    portVid.classList.add('hidePort')
+                    portImage.classList.remove('hidePort')
+                    e.target.classList.add('active')
+                    filterMotionBtn.classList.remove('active')
+                })
+                filterMotionBtn.addEventListener('click', e => {
+                    portImage.classList.add('hidePort')
+                    portVid.classList.remove('hidePort')
+                    e.target.classList.add('active')
+                    filterPhotoBtn.classList.remove('active')
+                })
+                resetFilterBtn.addEventListener('click', e => {
+                    portVid.classList.remove('hidePort')
+                    portImage.classList.remove('hidePort')
+                    filterPhotoBtn.classList.remove('active')
+                    filterMotionBtn.classList.remove('active')
+                })
             })
             .then(res => {
                 sidemenu()
+                new Promise((resolve, reject) => {
+                    const script = document.createElement('script')
+                    script.src = './src/scripts/stylingtag.js'
+                    script.defer = true
+                    script.onload = resolve
+                    script.onerror = reject
+                    document.body.appendChild(script)
+                })
             })
     </script>
     <script src="./src/scripts/sidemenu.js" defer></script>

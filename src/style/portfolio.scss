@@ -5,3 +5,37 @@
         width: 100%
     }
 }
+.filterPortfolioBtnWrapper{
+    position: sticky;
+    top: 3px;
+    z-index: 99;
+    padding: 10px 0;
+    margin: 0 auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 300px;
+    .filterPortBtn, .resetFilterBtn{
+        font-size: .9em;
+        font-weight: 600;
+        width: 100px;
+        height: 40px;
+        padding: 5px;
+        margin: 0 5px;
+        border-radius: 20px;
+        border: none;
+        border: 1px solid rgba(255, 255, 255, 0.8);
+        box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+        background-color: white;
+        color: #333;
+        &.active{
+            border: 2px solid rgb(22, 82, 192);
+            box-shadow: 0 0 5px rgb(39, 133, 255);
+        }
+    }
+}
+#portImage, #portVid{
+    &.hidePort{
+        display: none;
+    }
+}

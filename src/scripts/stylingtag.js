@@ -63,6 +63,26 @@ const COLORTAGSHSL = {
 		background: 'hsl(247, 100%, 90%)',
 		text: 'hsl(247, 100%, 30%)',
 	},
+	graphic: {
+		background: 'hsl(10, 100%, 90%)',
+		text: 'hsl(10, 100%, 30%)',
+	},
+	"graphic-design": {
+		background: 'hsl(198, 100%, 90%)',
+		text: 'hsl(198, 100%, 30%)',
+	},
+	motion: {
+		background: 'hsl(190, 100%, 90%)',
+		text: 'hsl(190, 100%, 30%)',
+	},
+	"motion-graphic": {
+		background: 'hsl(280, 100%, 90%)',
+		text: 'hsl(280, 100%, 30%)',
+	},
+	"3d": {
+		background: 'hsl(51, 100%, 90%)',
+		text: 'hsl(51, 100%, 30%)',
+	},
 	sample: {
 		background: 'hsl(38, 100%, 90%)',
 		text: 'hsl(38, 100%, 30%)',

@@ -5,3 +5,37 @@
 .portfolio-wrapper .port-img {
   width: 100%;
 }
+
+.filterPortfolioBtnWrapper {
+  position: sticky;
+  top: 3px;
+  z-index: 99;
+  padding: 10px 0;
+  margin: 0 auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 300px;
+}
+.filterPortfolioBtnWrapper .filterPortBtn, .filterPortfolioBtnWrapper .resetFilterBtn {
+  font-size: 0.9em;
+  font-weight: 600;
+  width: 100px;
+  height: 40px;
+  padding: 5px;
+  margin: 0 5px;
+  border-radius: 20px;
+  border: none;
+  border: 1px solid rgba(255, 255, 255, 0.8);
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+  background-color: white;
+  color: #333;
+}
+.filterPortfolioBtnWrapper .filterPortBtn.active, .filterPortfolioBtnWrapper .resetFilterBtn.active {
+  border: 2px solid #1652c0;
+  box-shadow: 0 0 5px #2785ff;
+}
+
+#portImage.hidePort, #portVid.hidePort {
+  display: none;
+}

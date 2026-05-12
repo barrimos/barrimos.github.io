@@ -50,5 +50,25 @@
     "sample" : {
         "background" : "#FFECCC",
         "text" : "#996100"
-    }
+    },
+    "graphic": {
+		"background": "#ffd5cc",
+		"text": "#991900"
+	},
+	"graphic-design": {
+		"background": "#ccf0ff",
+		"text": "#006b99"
+	},
+	"motion": {
+		"background": "#ccf6ff",
+		"text": "#007f99"
+	},
+	"motion-graphic": {
+		"background": "#eeccff",
+		"text": "#660099"
+	},
+	"3d": {
+		"background": "#fff7cc",
+		"text": "#998200"
+	}
 }
