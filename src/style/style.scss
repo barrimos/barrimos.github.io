@@ -163,7 +163,7 @@ section{
                 transition: .2s ease;
                 &:checked{
                     &~.dropdown-menu{
-                        height: 60px;
+                        height: 90px;
                     }
                 }
                 &:hover{
@@ -904,9 +904,13 @@ section{
             }
         }
         .paragraph{
-            line-height: 2em;;
+            line-height: 2em;
         }
-
+        .subcontent{
+            margin-top: 10px;
+            margin-left: 30px;
+            margin-bottom: 10px;
+        }
         .bigo{
             width: 100%;
             padding-bottom: 30px;
