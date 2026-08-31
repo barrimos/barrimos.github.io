@@ -57,11 +57,11 @@
             <section class="blog-section" id="blog-section">
                 <div class="container">
                     <div class="d-flex align-items-center">
-                        <h1 class="head-title">Git branching (RESEARCHING)</h1>
+                        <h1 class="head-title">Git branching</h1>
                         <!-- <a class="downloadBtn" href="./time_complexity.pdf" download><i class="fa-solid fa-download"></i> Download PDF</a> -->
                     </div>
                     <span class="tagLists">Git, Branching, Version control</span>
-                    <h4 class="writer">Prapas K : 2025, 1 JAN</h4>
+                    <h4 class="writer">Prapas K : 2026, 31 AUG</h4>
                     <div class="row justify-content-center">
                         <div class="information">
                             <div class="illustrate">
@@ -71,33 +71,147 @@
                             <p class="paragraph">
                                 Git is version control for manage your changes history each version (commit) of your file.<br>
                             </p>
-                            <h1 class="headline">How it works ?</h1>
+                            <h1 class="headline">Part 1: How Git Works Internally</h1>
                             <p class="paragraph">
-                                Git create new file instead let you create new file with the whole same data again,<br>
-                                so every commit Git will create new file then records only where file it changes (difference, delta) from previous commit state,<br>
-                                then each commit is given a unique reference (a commit hash) of each commit to you.<br>
+                                <b>It uses a snapshot model.</b>
+                                When you commit, <b>Git takes a "picture"</b> of what all your files look like at that moment.
+                                If a file hasn't changed, Git doesn't create a new copy; it simply creates a link
+                                to the exact same file (the "blob") it already has stored from a previous commit.<br>
+                                <b>It is a Content-Addressable File System.</b>
                             </p>
 <pre class="codePreview">
-POV
-firstDraft.ps
-secondDraft.ps
-secondFinal.ps
-secondFinalV1.ps
-secondFinalllllV2.ps
-secondFinalOfFinalV1.ps
+Scenario
+    - firstDraft.ai -----> edit text
+    - secondDraft.ai -----> change color
+    - secondFinal.ai -----> change color
+    - secondFinalV1.ai -----> change layout
+    - secondFinalllllV2.ai -----> bigger text
+    - secondFinalOfFinalV1.ai -----> move image to left a bit
 
 // Your karma: I think first draft is perfect. Develop from that version.
 </pre>
                             <p class="paragraph">
-                                At POV you will notice that, Git control version is something like this but instead you create a new file again and again,<br>
-                                Git will manage that instead of you let make you do not create a new file again and again.
+                                From scenario you will notice that, Git control version is something like this but instead of you create a new file again and again,<br>
+                                Git will manage that instead of you, let make you do not create a new file again and again.<br>
+                                Git lets you keep only one latest file with one name. When you make changes,<br>
+                                you just <b>"save" a snapshot (called a commit)</b>.
                             </p>
+                            <h1 class="headline">Deep Dive into the Vocabulary</h1>
+                            <table class="tablePOs" style="width: fit-content;">
+                                <tr>
+                                    <th>Term</th>
+                                    <th>Deep Description</th>
+                                </tr>
+                                <tr>
+                                    <td><b>Commit</b></td>
+                                    <td>A commit is not a file; it is a commit object.
+                                        <p class="paragraph">
+                                            It is a database entry that holds:<br>
+                                            1&#41; A pointer to the "Tree" (the list of all files in this snapshot),<br>
+                                            2&#41; A pointer to the parent commit (connecting it to history),<br>
+                                            3&#41; Metadata (Author, Date), and<br>
+                                            4&#41; The Commit Message. It is a node in a linked list (or DAG).
+                                        </p>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td><b>Remote</b></td>
+                                    <td>
+                                        <p class="paragraph">
+                                            Git is local-first. A "Remote" is simply a text string in your config file (<code class="raw">.git/config</code>)<br>
+                                            that maps a nickname (like <code class="raw">origin</code>) to a network URL. It is not a live connection;<br>
+                                            it's just a bookmark to where you can fetch/push data.
+                                        </p>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td><b>Branch</b></td>
+                                    <td>
+                                        <p class="paragraph">
+                                            A branch is <b>not a folder</b> containing files.<br>
+                                            It is a <b>single line of text</b> in a file (<code class="raw">.git/refs/heads/feature</code>).<br>
+                                            That line contains a SHA-1 hash (a pointer). When you switch branches,<br>
+                                            you aren't moving files; you are just changing which hash the pointer points to.
+                                        </p>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td><b>Origin</b></td>
+                                    <td>
+                                        <p class="paragraph">
+                                            This is simply the default name you give to a remote when you run <code class="raw">git clone</code>.<br>
+                                            It is a convention, not a technical requirement.<br>
+                                            You can have <code class="raw">origin</code>, <code class="raw">upstream</code>, <code class="raw">work</code>, etc.
+                                        </p>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td><b>HEAD</b></td>
+                                    <td>
+                                        <p class="paragraph">
+                                            <code class="raw">HEAD</code> is the name of your <b>current branch pointer</b>. In a normal workflow,<br>
+                                            <code class="raw">HEAD</code> points to the current branch (e.g., <code class="raw">refs/heads/main</code>).<br>
+                                            If <code class="raw">HEAD</code> points directly to a commit hash (e.g., <code class="raw">abc123</code>)<br>
+                                            instead of a branch name, you are in a <b>Detached HEAD</b> state.
+                                        </p>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td><b>Upstream</b></td>
+                                    <td>
+                                        <p class="paragraph">
+                                            This is the specific remote branch that your local branch is tracking.<br>
+                                            When you run <code class="raw">git pull</code>, Git looks at your "Upstream" to see if there are new commits<br>
+                                            there that aren't on your local branch.
+                                        </p>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td><b>Loose Blob</b></td>
+                                    <td>
+                                        <p class="paragraph">
+                                            The raw, uncompressed (but zlib-compressed), individual object file sitting in <code class="raw">.git/objects/xx/yyyy</code>.<br>
+                                            It is the "unpacked" state of a file before it is optimized into a packfile.
+                                        </p>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td><b>Detached</b></td>
+                                    <td>
+                                        <p class="paragraph">
+                                            A state where <code class="raw">HEAD</code> is not attached to a named branch. You are looking at a specific commit in history.<br>
+                                            If you make changes and commit here, you create a new branch off that point,<br>
+                                            but the current "pointer" (<code class="raw">HEAD</code>) is no longer following a branch name. It is fragile;<br>
+                                            if you switch branches, the "Detached" commit becomes unreachable (and eventually garbage collected)<br>
+                                            unless you create a branch from it.
+                                        </p>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td><b>Deltas / Diff</b></td>
+                                    <td>
+                                        <p class="paragraph">
+                                            The difference between two blobs. A Delta is a set of instructions (e.g., "Line 10: delete 'foo', insert 'bar'").<br>
+                                            In a packfile, this is the actual mechanism used to save space.<br>
+                                            In user space, <code class="raw">git diff</code> calculates this on the fly to show you what changed.
+                                        </p>
+                                    </td>
+                                </tr>
+                            </table>
+                            <h2 class="headline">Summary of the Workflow</h2>                            
+                            <p class="paragraph subcontent"><b>1&#41;</b> You edit a file in your <b>Working Directory</b>.</p>
+                            <p class="paragraph subcontent"><b>2&#41;</b> You run <code class="raw">git add</code>: The file is copied to the <b>Index</b> (Staging Area). It is hashed and compressed.</p>
+                            <p class="paragraph subcontent"><b>3&#41;</b> You run <code class="raw">git commit</code>: The Index is hashed into a new <b>Commit</b> Object, which points to a new <b>Tree</b>, which points to <b>Blobs</b>.</p>
+                            <p class="paragraph subcontent"><b>4&#41;</b> <b>Deduplication</b> kicks in: If the content is identical to a previous blob, the new commit just points to the old blob.</p>
+                            <p class="paragraph subcontent"><b>5&#41;</b> <b>Packing</b> (later): Loose objects are gathered into <b>Packfiles</b> using <b>Deltas</b> to minimize disk usage.</p>
+                            <p class="paragraph subcontent"><b>6&#41;</b> <b>Branches</b> (pointers) move around these objects, allowing you to switch contexts instantly without copying data.</p>
+
                             <h1 class="headline">Where Git locate ?</h1>
                             <div class="illustrate">
                                 <img src="./locateGit.jpg" alt="locate Git">
                             </div>
                             <p class="paragraph">
-                                After you run command to start git <code class="raw">git init</code><br>
+                                After you run command <code class="raw">git init</code> inside root of project folder.<br>
                                 <code class="raw">.git folder</code> was created and <i>hidden folder.</i><br>
                                 <code class="raw">.git folder</code> will stores all the data for your repository, including commit history, in the .git folder.<br>
                                 <code class="raw">Note</code> .git folder must locate at root project folder
@@ -148,23 +262,428 @@ you will see <code class="raw">.git</code> folder (Disable hidden attributes fol
                                 </div>
                                 <div class="item">
                                     <li class="olItem">
-                                        In code editor like VSCODE has extension that help you track branching easily <code class="raw">Git graph</code><br>
+                                        In code editor like VSCODE has <code class="raw">extension</code> that help you track branching easily <code class="raw">Git graph</code><br>
                                         In addition, it is also necessary to practice viewing Git logs and status.
                                     </li>
                                     <div class="illustrate">
-                                        <img src="./img1.png" alt="extension git graph">
+                                        <img src="./extension.jpg" alt="extension git graph">
                                     </div>
-                                    <h3>Explain</h3>
-                                    <ul>
-                                        <li>- <b>each line</b> is a diffent branch</li>
-                                        <li>- <b>commit timeline</b> (newest is top)</li>
-                                        <li>- <b>commit comment</b></li>
-                                        <li>- <b>badge</b> front of commit comment is bracnh name</li>
-                                        <li>- <b>date commit</b></li>
-                                        <li>- <b>who has commit</b></li>
-                                        <li>- <b>commit reference hash</b></li>
-                                    </ul>
                                 </div>
+                            </ol>
+
+                            <h1 class="headline">Part 1: How Git Works Internally</h1>
+                            <p class="paragraph">Git is not a version control system that saves differences (patches); it is a <b>Content-Addressable File System</b>. This fundamental design choice dictates how it stores data, saves space, and handles history.</p>
+                            <h2 class="headline">1. Snapshots, Not Deltas (The Core Philosophy)</h2>
+                            <p class="paragraph">
+                                Unlike SVN or CVS, which store a file and then a patch (e.g., "line 4 changed from 'A' to 'B'"),<br>
+                                Git treats every commit as a complete snapshot of the entire project state at that moment.
+                                <blockquote class="quote">
+                                    <b>• The Tree Structure:</b> Every commit contains a root "Tree" object. This tree is a directory listing of every file in the project at that specific point in time.<br>
+                                </blockquote>
+                                <blockquote class="quote">
+                                    <b>• The Blob:</b> Each file in the tree points to a "Blob" (Binary Large Object), which is the raw content of the file.<br>
+                                </blockquote>
+                                <blockquote class="quote">
+                                    <b>• The Commit:</b> The commit object is a pointer to a Tree, a parent Commit (the previous snapshot), metadata (author, date), and a message.
+                                </blockquote>
+                                <h2 class="headline">Why this matters:</h2>
+                                <p class="paragraph">
+                                    Because the entire project is saved every time,
+                                    <b>you can jump to any point in history,</b>
+                                    check out a file from 6 months ago,
+                                    and have a perfectly valid, runnable version of the project instantly.
+                                    <code class="raw">No "merge" logic is needed</code> to reconstruct a file;
+                                    the file simply exists in that commit's tree.
+                                </p>
+                            </p>
+                            <h2 class="headline">2. Deduplication (The Space Saver)</h2>
+                            <p class="paragraph">
+                                Since Git stores <b>full snapshots (blobs)</b> for every version of every file,
+                                a naive approach would fill your disk with massive redundancy.
+                                If you modify a 50MB image file just once,
+                                a naive system would store the original 50MB + the changed 50MB = <b>100MB</b> of data.
+                                <p class="paragraph">
+                                    Git solves this using <b>Content-Addressable Storage</b> combined with a strict <b>Deduplication</b> rule:
+                                </p>
+                                <blockquote class="quote">
+                                    <b>• The SHA-1 Hash:</b> Every blob (file content) is hashed using the SHA-1 algorithm. This produces a 40-character hexadecimal string (e.g. <code class="raw">a1b2c3d4...</code>).
+                                </blockquote>
+                                <blockquote class="quote">
+                                    <b>• The Uniqueness Rule:</b> If Git encounters a file with a hash that <b>already exists</b> in the object database, it does <b>not</b> copy the data again. It simply points the new reference to the existing blob object.
+                                </blockquote>
+                                <blockquote class="quote">
+                                    <b>• The Result:</b> Git stores the content <b>only once.</b> Both the old version and the new version of that file point to the same blob object.
+                                    If you rename a file but don't change its content, Git simply updates the pointer in the tree from
+                                    <code class="raw">File1.txt -> BlobA</code> to <code class="raw">File2.txt -> BlobA</code>. The actual data on disk remains unchanged.
+                                    <div class="subcontent">
+                                        <p class="paragraph"><b>Identical Files</b>: If you have two files with the exact same content, they both point to the same single blob on disk.</p>
+                                    </div>
+                                    <div class="subcontent">
+                                        <p class="paragraph"><b>Moved / Renamed Files</b>: If you rename old.txt to new.txt without changing the content, Git does not store a second copy. It just updates the directory tree to point to the existing blob.</p>
+                                    </div>
+                                    <div class="subcontent">
+                                        <p class="paragraph"><b>Overlapping Versions</b>: If you have a file that is 99% the same as its previous version, Git only stores the full content of the first version. The second version is stored as a tiny "patch" (delta) applied to the first.</p>
+                                    </div>
+                                </blockquote>
+                                <p class="paragraph">
+                                    <b>Analogy</b>: Imagine a library where every book has a unique ISBN (Hash).
+                                    If a patron returns a book and brings a new copy with the exact same ISBN,
+                                    the librarian doesn't buy a new physical book. They simply update the catalog to say,
+                                    "The second copy is the same as the first one." The physical space remains unchanged.
+                                </p>
+                            </p>
+                            <h2 class="headline">3. Loose Blobs vs. Packfiles (Storage Optimization)</h2>
+                            <p class="paragraph">
+                                When you run <code class="raw">git add</code>, Git creates a <b>Loose Blob</b>. This is a small file (stored in <code class="raw">.git/objects/xx/yyy</code>) containing a header and the compressed file data.</b>
+                                <blockquote class="quote">
+                                    <b>• Problem:</b> Storing hundreds of loose objects for every file in your history consumes too much disk space and makes scanning for objects slow.<br>
+                                </blockquote>
+                                <blockquote class="quote">
+                                    <b>• Solution: Packing:</b> If two files have the exact same content, they produce the exact same hash.<br>
+                                    <div class="subcontent">
+                                        <b>• Deltification:</b> Git groups similar blobs together. It takes a full file and a slightly different version of it.
+                                        Instead of storing both fully, it stores the full file and a small "delta" (a patch)
+                                        that describes how to transform the full file into the second version.
+                                    </div>
+                                    <div class="subcontent">
+                                        <b>• Packfiles:</b> These deltas are compressed and written into a single binary file called a <b>Packfile</b> (<code class="raw">.pack</code>).
+                                    </div>
+                                    <div class="subcontent">
+                                        <b>• Index <code class="raw">.idx</code>:</b> An index file is generated alongside the packfile, acting as a map to quickly find objects within the pack.
+                                    </div>
+                                </blockquote>
+                                <blockquote class="quote">
+                                    <b>• Lifecycle:</b> As you commit, you have "loose" objects. Eventually, <code class="raw">git gc</code> (garbage collection) or <code class="raw">git push</code> packs these loose objects into packfiles.
+                                    This is why your repository feels light until you've made many commits, at which point the packfiles take over the load.
+                                </blockquote>
+                            </p>
+                            <ol class="orderList">
+                                <h1 class="headline">Part 2: Deep Dive into Git Commands</h1>
+                                <p class="paragraph"><b>what it does, how it works internally, and when to use it.</b></p>
+
+                                <!-- 1 -->
+                                <h2 class="headline">1. Initialization & Cloning</h2>
+                                <p class="paragraph">
+                                    <code class="raw">git init</code><br>
+                                    <b>• Action:</b> Initializes a new Git repository in the current directory.<br>
+                                    <b>• Internal Logic:</b> Creates the <code class="raw">.git</code> hidden directory containing the <code class="raw">objects</code> (blobs, commits, trees),
+                                    <code class="raw">refs</code> (pointers to branches), <code class="raw">config</code> (settings), and <code class="raw">HEAD</code> (pointer to the current branch).<br>
+                                    <b>• Use Case:</b> The very first step in creating a new project locally.
+                                </p>
+                                <p class="paragraph">
+                                    <code class="raw">git clone &lt;repo-url&gt; [&lt;directory&gt;]</code><br>
+                                    <b>• Action:</b> Copies an existing remote repository to your local machine.<br>
+                                    <b>• Internal Logic:</b>
+                                    <p class="paragraph">
+                                        <p class="paragraph subcontent">1 Downloads all loose objects and packfiles from the remote.</p>
+                                        <p class="paragraph subcontent">2 Creates a bare local copy of the remote's object database.</p>
+                                        <p class="paragraph subcontent">3 Creates a working directory (checkout of the default branch, usually <code class="raw">main</code> or <code class="raw">master</code>).</p>
+                                        <p class="paragraph subcontent">4 Sets up a <code class="raw">remote</code> named <code class="raw">origin</code> pointing to the URL.</p>
+                                        <p class="paragraph subcontent">5 Sets up a <code class="raw">tracking</code> branch (e.g., <code class="raw">main</code> tracks <code class="raw">origin/main</code>).</p>
+                                    </p>
+                                    <br>
+                                </p>
+                                <p class="paragraph">
+                                    <b>• Use Case:</b> The very first step in creating a new project locally.
+                                </p>
+
+                                <!-- 2 -->
+                                <h2 class="headline">2. Branching & Pointers</h2>
+                                <!-- git branch -->
+                                <p class="paragraph">
+                                    <code class="raw">git branch</code><br>
+                                    <b>• Action:</b> Lists, creates, or deletes branches.<br>
+                                    <b>• Deep Dive:</b>
+                                    <p class="paragraph">
+                                        <p class="paragraph subcontent">• <b>Branches are pointers.</b> They are not separate directories. A branch named <code class="raw">feature-x</code> is simply a file in
+                                            <code class="raw">.git/refs/heads/feature-x</code> containing a SHA-1 hash (a pointer to a specific commit).
+                                        </p>
+                                        <p class="paragraph subcontent">• <b>Creating:</b> <code class="raw">git branch &lt;name&gt;</code> creates a new pointer referencing the current HEAD's commit.</p>
+                                        <p class="paragraph subcontent">• <code class="raw">-a</code>: Lists all local and remote-tracking branches.</p>
+                                        <p class="paragraph subcontent">• <code class="raw">-d</code>: Deletes the branch pointer. It fails if the branch has unmerged changes (to prevent data loss).</p>
+                                        <p class="paragraph subcontent">• <code class="raw">-m</code>: Moves the pointer to a new name.</p>
+                                    </p>
+                                    <br>
+                                </p>
+
+                                <!-- git checkout -->
+                                <p class="paragraph">
+                                    <code class="raw">git checkout &lt;branch&gt;</code><br>
+                                    <b>• Action:</b> Switches the current working directory and index to a specific branch.<br>
+                                    <b>• Internal Logic:</b>
+                                    <p class="paragraph">
+                                        <p class="paragraph subcontent">1 Moves <code class="raw">HEAD</code> to point to the target branch's commit.</p>
+                                        <p class="paragraph subcontent">2 Deletes the local working tree files (or renames them).</p>
+                                        <p class="paragraph subcontent">3 Copies the files from the target commit's Tree object into your working directory.</p>
+                                    </p>
+                                    <br>
+                                    <b>• <code class="raw">-b</code></b>: Creates the branch pointer first, then switches to it.
+                                </p>
+
+                                <!-- git fetch -->
+                                <p class="paragraph">
+                                    <code class="raw">git fetch [url]</code><br>
+                                    <b>• Action:</b> Downloads objects from a remote repository without merging them.<br>
+                                    <b>• Internal Logic:</b>
+                                    <p class="paragraph">
+                                        <p class="paragraph subcontent">1 Connects to the remote.</p>
+                                        <p class="paragraph subcontent">2 Compares your local refs with the remote refs to find missing objects.</p>
+                                        <p class="paragraph subcontent">3 Downloads those objects (blobs, commits, trees) into your local <code class="raw">.git/objects.</code></p>
+                                        <p class="paragraph subcontent">4 <b>Crucially: It updates the remote-tracking branches</b> (e.g., <code class="raw">origin/main</code>) to point to the new commits.</p>
+                                        <p class="paragraph subcontent">5 <b>It does NOT</b> touch your local <code class="raw">main</code> branch or your working files.</p>
+                                    </p>
+                                    <br>
+                                    <b>• Why use it?</b>: It is safe. You can fetch, look at the new code, test it, and decide later whether to merge it.
+                                </p>
+
+                                <!-- git pull -->
+                                <p class="paragraph">
+                                    <code class="raw">git pull [url]</code><br>
+                                    <b>• Action:</b> Fetches from the remote and merges the results into your current branch.<br>
+                                    <b>• Internal Logic:</b> It is essentially a shortcut for:
+<pre class="codePreview">
+    git fetch origin
+    git merge origin/&lt;current-branch-name&gt;
+</pre>
+                                    <p class="paragraph">
+                                        <b>• Difference from Fetch</b>: <code class="raw">fetch</code> is passive (download only); <code class="raw">pull</code> is aggressive (download + integrate + potentially create a merge commit).
+                                    </p>
+                                </p>
+
+                                <!-- 3 -->
+                                 <h2 class="headline">3. Merging & Replaying</h2>
+                                <!-- git merge branch -->
+                                <p class="paragraph">
+                                    <code class="raw">git merge &lt;branch&gt;</code><br>
+                                    <b>• Action:</b> Combines the history of two branches.<br>
+                                    <b>• Deep Dive:</b>
+                                    <p class="paragraph">
+                                        <p class="paragraph subcontent">• <b>Fast-Forward:</b> If <code class="raw">current</code> is an ancestor of <code class="raw">target</code> (you fell behind),
+                                            Git simply moves the <code class="raw">current</code> pointer to <code class="raw">target</code>. No new object is created.
+                                        </p>
+                                        <p class="paragraph subcontent">• <b>Three-Way Merge:</b> If both branches have diverged (commits exist on both sides),
+                                            Git calculates a Merge Base (the last common ancestor). It then diffs <code class="raw">Base -> Current</code> and <code class="raw">Base -> Target</code>.
+                                            If changes don't overlap, it creates a new commit pointing to a new Tree that combines both changes.
+                                        </p>
+                                        <p class="paragraph subcontent">• <b>Conflict:</b> If two branches edited the same line differently,
+                                            Git cannot auto-resolve. It marks the file with conflict markers (<code class="raw">&lt;&lt;&lt;&lt;&lt;&lt;&lt;</code> <code class="raw">=======</code>, <code class="raw">>>>>>>></code>) and halts.
+                                            You must edit the file, stage it (<code class="raw">git add</code>), and complete the merge (<code class="raw">git commit</code>).
+                                        </p>
+                                    </p>
+                                    <br>
+                                </p>
+
+                                <!-- git cherry-pick commit-hash -->
+                                <p class="paragraph">
+                                    <code class="raw">git cherry-pick &lt;commit-hash&gt;</code><br>
+                                    <b>• Action:</b> Takes a specific commit from another branch and creates a new commit on the current branch that looks identical.<br>
+                                    <b>• Internal Logic:</b>
+                                    <p class="paragraph">
+                                        <p class="paragraph subcontent">1 Computes the difference between the commit being picked and the commit before it (<code class="raw">^</code>).</p>
+                                        <p class="paragraph subcontent">2 Applies that diff to the current branch's state.</p>
+                                        <p class="paragraph subcontent">3 Creates a new commit object with the same file changes but a new author/date (unless <code class="raw">--no-commit</code> is used).</p>
+                                    </p>
+                                    <br>
+                                    <p class="paragraph">
+                                        <b>• Use Case:</b> When you need a specific bug fix from a feature branch but don't want to merge the entire feature branch.
+                                        <b>Warning</b>: It breaks the linear history connection, making the two commits independent.
+                                    </p>
+                                </p>
+
+                                <!-- git rebase -->
+                                <p class="paragraph">
+                                    <code class="raw">git rebase [upstream]</code><br>
+                                    <b>• Action:</b> Rewrites history by moving your current branch to start from a different point.<br>
+                                    <b>• Deep Dive:</b>
+                                    <p class="paragraph">
+                                        <p class="paragraph subcontent">1 Identifies the current tip of your branch and the tip of the upstream branch.</p>
+                                        <p class="paragraph subcontent">2 Takes every commit on your branch and "replays" it onto the new upstream base.</p>
+                                        <p class="paragraph subcontent">3 Creates new commit objects (with new hashes) for each step.</p>
+                                    </p>
+                                    <br>
+                                    <b>Visual:</b>
+                                    <p class="paragraph">
+                                        <div class="subcontent">• Before: <code class="raw">---A---B---C</code> (master)</div>
+                                        <div class="subcontent">• Before: <code class="raw">-----X---Y---Z</code> (feature)</div>
+                                        <div class="subcontent">• After: <code class="raw">---A---B---C</code> (master)</div>
+                                        <div class="subcontent">• After: <code class="raw">-----C---X'---Y'---Z'</code> (feature, now based on C)</div>
+                                    </p>
+                                    <br>
+                                    <p class="paragraph">
+                                        <b>• <code class="raw">-i</code> (Interactive)</b>: Allows you to stop at each step of the rebase to edit,
+                                        squash (combine), drop, or reorder commits before applying them to the new base.
+                                    </p>
+                                    <p class="paragraph">
+                                        <b>• Warning: Never rebase public history</b>. If you rebase and push, you are lying about history.
+                                        Others will see "ghost" commits and conflict. Only rebase private/local branches before merging them.
+                                    </p>
+                                </p>
+                                
+                                <!-- 4 -->
+                                 <h2 class="headline">4. Restoration & Reverting</h2>
+                                <!-- git restore -->
+                                <p class="paragraph">
+                                    <code class="raw">git restore</code><br>
+                                    <b>• Action:</b> Restores files in the working directory to match the index (staging area) or a specific commit.<br>
+                                    <b>• Deep Dive:</b>
+                                    <p class="paragraph">
+                                        <p class="paragraph subcontent">• <b><code class="raw">git restore --staged &lt;file&gt;</code>:</b> Moves a file from the Index back to the Working Directory.
+                                            <div style="margin-left: 60px;">• Scenario: You staged a file with git add, realized you made a mistake, but want to keep your unsaved edits in the working directory.</div>
+                                        </p>
+                                        <p class="paragraph subcontent">• <b><code class="raw">git restore --source=&lt;commit&gt; &lt;file&gt;</code>:</b> Restores a file from a specific commit into the working directory.
+                                            <div style="margin-left: 60px;">• Scenario: "I broke this file yesterday, how do I get it back exactly as it was yesterday?"</div>
+                                        </p>
+                                        <p class="paragraph subcontent">• <b><code class="raw">git restore .</code>:</b> Restores the entire working directory to match the current HEAD (undoes all uncommitted changes).</p>
+                                    </p>
+                                    <br>
+                                </p>
+                                <!-- git reset -->
+                                <p class="paragraph">
+                                    <code class="raw">git reset</code><br>
+                                    <b>• Action:</b> Moves the <code class="raw">HEAD</code> pointer (and optionally the index and working tree) to a specific commit. <b>This rewrites history.</b><br>
+                                    <b>• Deep Dive:</b>
+                                    <p class="paragraph">
+                                        <p class="paragraph subcontent">• <b><code class="raw">--soft</code>:</b> Moves HEAD. <b>Index and Working Directory are untouched.</b> (Useful for "oops, I committed too early, I'll recommit everything").</p>
+                                        <p class="paragraph subcontent">• <b><code class="raw">--mixed</code> (Default):</b> Moves HEAD. <b>Index is reset</b> to match HEAD. Working Directory remains untouched (your uncommitted edits stay on disk but are no longer staged).</p>
+                                        <p class="paragraph subcontent">• <b><code class="raw">--hard:</code></b> Moves HEAD. <b>Index and Working Directory are reset.</b> All uncommitted changes are <b>deleted.</b></p>
+                                        <p class="paragraph subcontent">• <b><code class="raw">--HEAD~1:</code></b> A relative reference meaning "the commit immediately before the current HEAD".</p>
+                                        <p class="paragraph subcontent">• <b><code class="raw">--HEAD@{n}:</code></b> A reflog reference meaning "where HEAD was n moves ago".</p>
+                                    </p>
+                                    <br>
+                                </p>
+                                
+                                <!-- 5 -->
+                                 <h2 class="headline">5. Stashing & Diffs</h2>
+                                <!-- git stash -->
+                                <p class="paragraph">
+                                    <code class="raw">git stash</code><br>
+                                    <b>• Action:</b> Temporarily hides (shelves) your uncommitted changes and switches you to a clean state.<br>
+                                    <b>• Internal Logic:</b>
+                                    <p class="paragraph">
+                                        <p class="paragraph subcontent">1 Takes all modified and new files from the working directory.</p>
+                                        <p class="paragraph subcontent">2 Removes them from the index and working tree.</p>
+                                        <p class="paragraph subcontent">3 Creates a new commit in the <b>stash reflog</b> (a special stack of commits not linked to any branch).</p>
+                                        <p class="paragraph subcontent">4 Switches you back to the previous branch/commit.</p>
+                                    </p>
+                                    <br>
+                                    <p class="paragraph">
+                                        <b>• <code class="raw">git stash list</code>:</b> Shows the stack of stashed commits (FIFO structure).<br>
+                                    </p>
+                                    <p class="paragraph">
+                                        <b>• <code class="raw">git stash pop</code>:</b> Removes the top item from the stash stack and applies it back to the current working directory.<br>
+                                    </p>
+                                    <p class="paragraph">
+                                        <b>• Use Case:</b> You are working on Task A, realize you need to do Task B (which requires a clean working tree), stash Task A, do Task B, then pop Task A back.<br>
+                                    </p>
+                                    <br>
+                                </p>
+                                <!-- git diff -->
+                                <p class="paragraph">
+                                    <code class="raw">git diff</code><br>
+                                    <b>• Action:</b> Shows the difference between two points.<br>
+                                    <b>• Deep Dive:</b>
+                                    <p class="paragraph">
+                                        <p class="paragraph subcontent">• <b><code class="raw">git diff</code>:</b> Compares the <b>Working Directory</b> vs. the <b>Index.</b> (What is staged but not yet committed).</p>
+                                        <p class="paragraph subcontent">• <b><code class="raw">git diff --cached</code>:</b> Compares the <b>Index</b> vs. <b>HEAD</b>. (What is in the staging area).</p>
+                                        <p class="paragraph subcontent">• <b><code class="raw">git diff &lt;branch1&gt; &lt;branch2&gt;</code>:</b> Compares two commits/branches.</p>
+                                        <p class="paragraph subcontent">• <b>Output:</b> Shows added lines (<code class="raw">+</code>), deleted lines (<code class="raw">-</code>), and context (<code class="raw"> </code>).</p>
+                                    </p>
+                                    <br>
+                                </p>
+                                <!-- git show -->
+                                <p class="paragraph">
+                                    <code class="raw">git show</code><br>
+                                    <b>• Action:</b> Displays the contents of a commit, its tree, its parent, and the diff between it and its parent.<br>
+                                    <p class="paragraph">
+                                        <b>• Use Case:</b> "Show me the actual code changes in commit <code class="raw">abc123</code>." It is a one-off view of a commit object.<br>
+                                    </p>
+                                    <br>
+                                </p>
+                                <!-- git log -->
+                                <p class="paragraph">
+                                    <code class="raw">git log</code><br>
+                                    <b>• Action:</b> Lists the commit history.<br>
+                                    <b>• Deep Dive:</b>
+                                    <p class="paragraph">
+                                        <p class="paragraph subcontent">• <b>By default:</b> it lists commits from HEAD backwards.</p>
+                                        <p class="paragraph subcontent">• <b><code class="raw">--oneline</code>:</b> Compresses the output to one line per commit (hash + subject).</p>
+                                        <p class="paragraph subcontent">• <b><code class="raw">--graph</code>:</b> Shows the topology of branches and merges visually.</p>
+                                        <p class="paragraph subcontent">• <b><code class="raw">--stat</code>:</b> Shows the amount of lines added/removed per commit.</p>
+                                        <p class="paragraph subcontent">• <b><code class="raw">--all</code>:</b> Shows history of all branches.</p>
+                                        <p class="paragraph subcontent">• <b><code class="raw">--decorate</code>:</b> Shows branch names next to the commits.</p>
+                                    </p>
+                                    <br>
+                                </p>
+                                <!-- git status -->
+                                <p class="paragraph">
+                                    <code class="raw">git status</code><br>
+                                    <b>• Action:</b> Reports the state of the working directory and staging area.<br>
+                                    <b>• Deep Dive:</b>
+                                    <p class="paragraph">
+                                        <p class="paragraph subcontent">• <b>Modified:</b> Changes in the working directory not yet staged.</p>
+                                        <p class="paragraph subcontent">• <b>Untracked:</b> New files Git doesn't know about.</p>
+                                        <p class="paragraph subcontent">• <b>Changes to be committed:</b> Files already added to the index.</p>
+                                        <p class="paragraph subcontent">• It helps you decide what to do next (e.g., git add, git restore, or git stash).</p>
+                                    </p>
+                                    <br>
+                                </p>
+
+                                <!-- 6 -->
+                                 <h2 class="headline">6. Pushing & References</h2>
+                                <!-- git push -->
+                                <p class="paragraph">
+                                    <code class="raw">git push</code><br>
+                                    <b>• Action:</b> Uploads local commits to a remote repository.<br>
+                                    <b>• Deep Dive:</b>
+                                    <p class="paragraph">
+                                        <p class="paragraph subcontent">• <b><code class="raw">git push origin main</code>:</b> Uploads the local <code class="raw">main</code> branch to the remote's <code class="raw">main</code> branch.</p>
+                                        <p class="paragraph subcontent">• <b><code class="raw">-u</code> (Set Upstream):</b> Tells Git: "This local branch will always track this remote branch."</p>
+                                        <p class="paragraph subcontent">• Effect: Subsequent pushes/pulls will automatically default to this remote branch without needing to type the name again.</p>
+                                        <p class="paragraph subcontent">• <b>Force Push (<code class="raw">-f</code>)</b> Forcefully overwrites the remote history with your local history. <b>Use with extreme caution</b> (only use if you are the only one working on the repo or have coordinated with the team).</p>
+                                    </p>
+                                    <br>
+                                <!-- git remote -->
+                                <p class="paragraph">
+                                    <code class="raw">git remote</code><br>
+                                    <b>• Action:</b> Manages remote URLs.<br>
+                                    <p class="paragraph">
+                                        <p class="paragraph subcontent">• <b><code class="raw">git remote add &lt;name&gt; &lt;url&gt;</code>:</b> Adds a new remote.</p>
+                                        <p class="paragraph subcontent">• <b><code class="raw">git remote add -v</code>:</b> Lists all remotes and their fetch/push URLs.</p>
+                                        <p class="paragraph subcontent">• <b><code class="raw">git remote add -v</code>:</b> Updates all remote-tracking branches (equivalent to running <code class="raw">fetch</code> on all remotes).</p>
+                                    </p>
+                                    <br>
+                                </p>
+                                <!-- git reflog -->
+                                <p class="paragraph">
+                                    <code class="raw">git reflog</code><br>
+                                    <b>• Action:</b> Records a log of every change to <code class="raw">HEAD</code>, regardless of whether a branch was checked out.<br>
+                                    <p class="paragraph">
+                                        <p class="paragraph subcontent">• It is the <b>safety net</b>. If you accidentally did <code class="raw">git reset --hard</code> or <code class="raw">git push -f</code>, <code class="raw">HEAD</code> moved to a new place, but <code class="raw">reflog</code> remembers where it was.</p>
+                                        <p class="paragraph subcontent">• <code class="raw">git reflog show</code>: Shows the full log.</p>
+                                        <p class="paragraph subcontent">• <code class="raw">git reflog show HEAD</code>: Shows the history of the current branch.</p>
+                                        <p class="paragraph subcontent">• <b>Recovery</b>: You can run <code class="raw">git reset --hard &lt;commit-hash-from-reflog&gt;</code> to bring your branch back to a previous safe state.</p>
+                                    </p>
+                                    <br>
+                                </p>
+
+                                <!-- 7 -->
+                                 <h2 class="headline">7. Staging</h2>
+                                <!-- git add -->
+                                <p class="paragraph">
+                                    <code class="raw">git add</code><br>
+                                    <b>• Action:</b> Copies changes from the Working Directory into the Index (Staging Area).<br>
+                                    <b>• Deep Dive:</b>
+                                    <p class="paragraph">
+                                        <p class="paragraph subcontent">• <b><code class="raw">git add &lt;file&gt;</code>:</b> Stages only the specified file.</p>
+                                        <p class="paragraph subcontent">• <b><code class="raw">git add &lt;directory&gt;</code>:</b> Stages all modified/new files inside that folder.</p>
+                                        <p class="paragraph subcontent">• <b><code class="raw">git add .</code>:</b> Stages <b>everything</b> in the current directory (new, modified, deleted).</p>
+                                        <p class="paragraph subcontent">• <b><code class="raw">git add -p</code> (Patch):</b> Allows you to pick and choose specific hunks of a file to stage, rather than staging the whole file.</p>
+                                    </p>
+                                    <br>
+                                    <p class="paragraph">
+                                        <b>• Internal Logic:</b> It doesn't copy data; it updates the <b>Index file</b> (<code class="raw">.git/index</code>), which is essentially a snapshot of the tree for the next commit.
+                                    </p>
+                                </p>
                             </ol>
                         </div>
                     </div>
