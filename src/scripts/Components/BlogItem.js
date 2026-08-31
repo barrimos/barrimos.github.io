@@ -4,7 +4,7 @@
  * @returns 
  */
 const BlogItem = item => {
-    return `<div class="topic-item" data-item=${item.number}>
+    return `${item.online ? `${`<div class="topic-item" data-item=${item.number}>
         <a ${item.online ? `href=${`./blog/${item.name}/`}` : ""} class="topic-link">
             <div class="topic-l">
                 <img src="./src/img/cover/${item.name}.jpg" alt="${item.name}" class="topic-cover">
@@ -15,7 +15,7 @@ const BlogItem = item => {
                 <small class="topic-date">1 Jan 2025 : Prapas k, Writer</small>
             </div>
         </a>
-    </div>`
+    </div>`}` : ''}`
 }
 
 export default BlogItem;

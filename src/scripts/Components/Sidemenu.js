@@ -121,6 +121,14 @@ const Sidemenu = async (rootSrc = './') => {
                         <span class="nav-text">Resume TH</span>
                     </a>
                 </li>
+                <li class="list-item list-treeview">
+                    <a href="${rootSrc}src/download/portfolio_graphic_design.pdf" title="Download Portfolio" class="nav-link dlbtn-wraper" download>
+                        <div class="nav-icon">
+                            <img src="${rootSrc}src/img/icon/zmlogo-page-03.png" alt="Portfolio Graphic">
+                        </div>
+                        <span class="nav-text">Portfolio</span>
+                    </a>
+                </li>
             </ul>
         </li>
     </ul>

@@ -8,6 +8,7 @@ const DownloadButton = () => {
                 <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                     <a href="./src/download/Prapas_Resume_2026_EN.pdf" class="dropdown-item download resume" download>Resume</a>
                     <a href="./src/download/Prapas_CV_2026_EN.pdf" class="dropdown-item download cv" download>CV</a>
+                    <a href="./src/download/portfolio_graphic_design.pdf" class="dropdown-item download cv" download>Portfolio</a>
                 </div>
             </div>
         </div>

@@ -5,7 +5,7 @@
  */
 
 const WhatIveLearned = item => {
-    return `<div class="col-12 col-md-4 col-xl-3 mt-10">
+    return `${item.online ? `<div class="col-12 col-md-4 col-xl-3 mt-10">
         <div class="blog-item">
             <a ${item.online ? `href=${`./blog/${item.name}/`}` : ""}>
                 <img class="blogCover" src="./src/img/cover/${item.name}.jpg" alt="${item.name}">
@@ -16,7 +16,7 @@ const WhatIveLearned = item => {
             </a>
             <span class="tagLists">${item.tags}</li></span>
         </div>
-    </div>`
+    </div>` : ''}`
 }
 
 export default WhatIveLearned
