@@ -157,7 +157,7 @@ section .section-head {
   transition: 0.2s ease;
 }
 #topNav-section .nav-menu .dropdownDownloadCVBtn .dropdown-toggle:checked ~ .dropdown-menu {
-  height: 60px;
+  height: 90px;
 }
 #topNav-section .nav-menu .dropdownDownloadCVBtn .dropdown-toggle:hover ~ .btnDownload {
   color: #333;
@@ -834,6 +834,11 @@ section .section-head {
 }
 #blog-section .information .paragraph {
   line-height: 2em;
+}
+#blog-section .information .subcontent {
+  margin-top: 10px;
+  margin-left: 30px;
+  margin-bottom: 10px;
 }
 #blog-section .information .bigo {
   width: 100%;
